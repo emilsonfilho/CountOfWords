@@ -10,5 +10,14 @@ int main() {
 	avl.insert("Emanuel", 7);
 	avl.print();
 
+	int out = 0;
+	std::string name = "Willian";
+	if (avl.find(name, out)) {
+		std::cout << "elemento " << name << " está na lista? " << std::boolalpha << true << std::endl;
+		std::cout << "valor: " << out << std::endl;
+	} else {
+		std::cout << "elemento " << name << " não está na lista" << std::endl;
+	}
+
 	return 0;
 }

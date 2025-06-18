@@ -49,13 +49,14 @@ private:
     Node* fixupNode(Node* node);
 
     Node* insert(const Key& key, const Value& value, Node* node);
+    bool find(const Key& key, Value& outValue, Node* node);
 public:
     static const int IMBALANCE = 2;
 
     AVLTree();
 
     void insert(const Key& key, const Value& value) override;
-    bool find(const Key& key, Value& outValue) override {return false;};
+    bool find(const Key& key, Value& outValue) override;
     void update(const Key& key, const Value& value) override {};
     void remove(const Key& key) override {};
     void clear() override {};

@@ -84,9 +84,31 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::insert(cons
 	return fixupNode(node);
 }
 
+template  <typename Key, typename Value, typename Hash>
+bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue, Node* node) {
+	if (!node) return false;
+
+	if (key < node->data.first) {
+		comparisonsCount++;
+		return find(key, outValue, node->left);
+	} else if (key > node->data.first) {
+		comparisonsCount++;
+		return find(key, outValue, node->right);
+	}
+
+	outValue = node->data.second;
+	comparisonsCount++;
+	return true;
+}
+
 template <typename Key, typename Value, typename Hash>
 void AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value) {
 	root = insert(key, value, root);
+}
+
+template  <typename Key, typename Value, typename Hash>
+bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue) {
+	return find(key, outValue, root);
 }
 
 template <typename Key, typename Value, typename Hash>
