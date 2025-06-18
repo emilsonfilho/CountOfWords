@@ -1,8 +1,10 @@
-#ifndef DICTIONARY_HPP
-#define DICTIONARY_HPP
+#ifndef IDICTIONARY_HPP
+#define IDICTIONARY_HPP
+
+#include <sstream>
 
 template<typename Key, typename Value>
-class Dictionary {
+class IDictionary {
 public:
     virtual void insert(const Key& key, const Value& value) = 0;
     virtual bool find(const Key& key, Value& outValue) = 0;
@@ -11,7 +13,7 @@ public:
     virtual void clear() = 0;
     virtual void printInOrder(std::ostream& out) = 0;
     virtual size_t getComparisonsCount() const = 0;
-    virtual ~Dictionary() = default;
+    virtual ~IDictionary() = default;
 };
 
 #endif
