@@ -102,6 +102,21 @@ bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue, Node* node
 }
 
 template <typename Key, typename Value, typename Hash>
+typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::update(const Key& key, const Value& value, Node* node) {
+	if (!node) return new Node(key, value);
+
+	if (key < node->data.first) {
+		node->left = update(key, value, node->left);
+	} else if (key > node->data.first) {
+		node->right = update(key, value, node->right);
+	} else {
+		node->data.second = value;
+	}
+
+	return fixupNode(node);
+}
+
+template <typename Key, typename Value, typename Hash>
 void AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value) {
 	root = insert(key, value, root);
 }
@@ -109,6 +124,11 @@ void AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value) {
 template  <typename Key, typename Value, typename Hash>
 bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue) {
 	return find(key, outValue, root);
+}
+
+template <typename Key, typename Value, typename Hash>
+void AVLTree<Key, Value, Hash>::update(const Key& key, const Value& value) {
+	root = update(key, value, root);
 }
 
 template <typename Key, typename Value, typename Hash>

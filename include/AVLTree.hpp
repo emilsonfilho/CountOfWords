@@ -50,6 +50,7 @@ private:
 
     Node* insert(const Key& key, const Value& value, Node* node);
     bool find(const Key& key, Value& outValue, Node* node);
+    Node* update(const Key& key, const Value& value, Node* node);
 public:
     static const int IMBALANCE = 2;
 
@@ -57,8 +58,8 @@ public:
 
     void insert(const Key& key, const Value& value) override;
     bool find(const Key& key, Value& outValue) override;
-    void update(const Key& key, const Value& value) override {};
-    void remove(const Key& key) override {};
+    void update(const Key& key, const Value& value) override;
+    void remove(const Key& key) override;
     void clear() override {};
     void printInOrder(std::ostream& out) override {};
     size_t getComparisonsCount() const override { return 0; };

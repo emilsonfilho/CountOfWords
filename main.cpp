@@ -8,6 +8,8 @@ int main() {
 	avl.insert("Karen", 5);
 	avl.insert("Emilly", 6);
 	avl.insert("Emanuel", 7);
+	avl.update("Willian", 7);
+	avl.update("Calebe", 6);
 	avl.print();
 
 	int out = 0;
@@ -18,6 +20,7 @@ int main() {
 	} else {
 		std::cout << "elemento " << name << " não está na lista" << std::endl;
 	}
+
 
 	return 0;
 }
