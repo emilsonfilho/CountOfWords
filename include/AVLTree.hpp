@@ -212,6 +212,8 @@ private:
     * @return A pointer to the updated subtree after the removal operation.
     */
     Node* remove(const Key& key, Node* node);
+
+    void clear(Node* node);
 public:
     static const int IMBALANCE = 2;
 
@@ -269,7 +271,8 @@ public:
     * @param key The key of the node to be removed.
     */
     void remove(const Key& key) override;
-    void clear() override {};
+
+    void clear() override;
     void printInOrder(std::ostream& out) override {};
     size_t getComparisonsCount() const override { return 0; };
 

@@ -133,7 +133,7 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::insert(cons
 	}
 
 	comparisonsCount++;
-	
+
 	return fixupNode(node);
 }
 
@@ -191,6 +191,15 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::remove(cons
 }
 
 template <typename Key, typename Value, typename Hash>
+void AVLTree<Key, Value, Hash>::clear(Node* node) {
+	if (node) {
+		clear(node->left);
+		clear(node->right);
+		delete node;
+	}
+}
+
+template <typename Key, typename Value, typename Hash>
 AVLTree<Key, Value, Hash>::AVLTree(): root(nullptr), comparisonsCount(0) {}
 
 template <typename Key, typename Value, typename Hash>
@@ -211,6 +220,12 @@ void AVLTree<Key, Value, Hash>::update(const Key& key, const Value& value) {
 template <typename Key, typename Value, typename Hash>
 void AVLTree<Key, Value, Hash>::remove(const Key& key) {
 	root = remove(key, root);
+}
+
+template <typename Key, typename Value, typename Hash>
+void AVLTree<Key, Value, Hash>::clear() {
+	clear(root);
+	root = nullptr;
 }
 
 template <typename Key, typename Value, typename Hash>
