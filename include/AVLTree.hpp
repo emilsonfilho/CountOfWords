@@ -40,6 +40,15 @@ private:
         return height(node->right) - height(node->left);
     }
 
+    bool isLeaf(Node* node) const {
+        return !node->left and !node->right;
+    }
+
+    Node* minimum(Node* node) const {
+        if (!node->left) return node;
+        return minimum(node->left);
+    }
+
     void printTree(Node* node, size_t depth = 0) const;
 
     Node* rotateLeft(Node*& y);
@@ -48,9 +57,12 @@ private:
 
     Node* fixupNode(Node* node);
 
+    Node* removeSuccessor(Node* root, Node* node);
+
     Node* insert(const Key& key, const Value& value, Node* node);
     bool find(const Key& key, Value& outValue, Node* node);
     Node* update(const Key& key, const Value& value, Node* node);
+    Node* remove(const Key& key, Node* node);
 public:
     static const int IMBALANCE = 2;
 

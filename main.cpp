@@ -10,6 +10,7 @@ int main() {
 	avl.insert("Emanuel", 7);
 	avl.update("Willian", 7);
 	avl.update("Calebe", 6);
+	avl.remove("Iago");
 	avl.print();
 
 	int out = 0;

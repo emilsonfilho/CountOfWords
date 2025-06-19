@@ -67,6 +67,20 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::fixupNode(N
 }
 
 template <typename Key, typename Value, typename Hash>
+typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::removeSuccessor(Node* root, Node* node) {
+	if (node->left) {
+		node->left = removeSuccessor(root, node->left);
+	} else {
+		root->data.first = node->data.first;
+		Node* aux = node->right;
+		delete node;
+		return aux;
+	}
+
+	return fixupNode(node);
+}
+
+template <typename Key, typename Value, typename Hash>
 typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value, Node* node) {
 	// It'll never be called w/ root == nullptr
 	if (!node)
@@ -117,6 +131,25 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::update(cons
 }
 
 template <typename Key, typename Value, typename Hash>
+typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::remove(const Key& key, Node* node) {
+	if (!node) return nullptr;
+
+	if (key < node->data.first) {
+		node->left = remove(key, node->left);
+	} else if (key > node->data.first) {
+		node->right = remove(key, node->right);
+	} else if (!node->right) {
+		Node* aux = node;
+		delete node;
+		return aux->left;
+	} else {
+		node->right = removeSuccessor(node, node->right);
+	}
+
+	return fixupNode(node);
+}
+
+template <typename Key, typename Value, typename Hash>
 void AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value) {
 	root = insert(key, value, root);
 }
@@ -129,6 +162,11 @@ bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue) {
 template <typename Key, typename Value, typename Hash>
 void AVLTree<Key, Value, Hash>::update(const Key& key, const Value& value) {
 	root = update(key, value, root);
+}
+
+template <typename Key, typename Value, typename Hash>
+void AVLTree<Key, Value, Hash>::remove(const Key& key) {
+	root = remove(key, root);
 }
 
 template <typename Key, typename Value, typename Hash>
