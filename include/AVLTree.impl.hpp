@@ -132,6 +132,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::insert(cons
 		return node;
 	}
 
+	comparisonsCount++;
+	
 	return fixupNode(node);
 }
 
@@ -163,6 +165,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::update(cons
 	} else {
 		node->data.second = value;
 	}
+
+	comparisonsCount++;
 
 	return fixupNode(node);
 }
