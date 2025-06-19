@@ -1,0 +1,17 @@
+{
+	
+	"Template KVH": {
+		"prefix": "templatekv",
+		"body": [
+			"template <typename Key, typename Value>"
+		],
+		"description": "Template declaration with key and value"
+	},
+	"Tree prefix": {
+		"prefix": "treeprefix",
+		"body": [
+			"${1:TreeName}<Key, Value>::"
+		],
+		"description": "Prefix for member function definition in generic trees"
+	}
+}
