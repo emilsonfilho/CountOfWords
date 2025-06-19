@@ -1,4 +1,4 @@
-#include "AVLTree.hpp"
+#include "AVLTree/AVLTree.hpp"
 
 int main() {
 	AVLTree<std::string, int> avl;

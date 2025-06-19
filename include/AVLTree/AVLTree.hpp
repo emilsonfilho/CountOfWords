@@ -336,6 +336,6 @@ public:
     void print() const;
 };
 
-#include "AVLTree.impl.hpp"
+#include "AVLTree/AVLTree.impl.hpp"
 
 #endif
