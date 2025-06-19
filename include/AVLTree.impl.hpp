@@ -48,9 +48,6 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::minimum(Nod
 }
 
 template <typename Key, typename Value, typename Hash>
-AVLTree<Key, Value, Hash>::AVLTree(): root(nullptr), comparisonsCount(0) {}
-
-template <typename Key, typename Value, typename Hash>
 typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::rotateLeft(Node*& y) {
 	Node* x = y->right;
 
@@ -118,6 +115,7 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::removeSucce
 
 	return fixupNode(node);
 }
+
 
 template <typename Key, typename Value, typename Hash>
 typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value, Node* node) {
@@ -187,6 +185,9 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::remove(cons
 
 	return fixupNode(node);
 }
+
+template <typename Key, typename Value, typename Hash>
+AVLTree<Key, Value, Hash>::AVLTree(): root(nullptr), comparisonsCount(0) {}
 
 template <typename Key, typename Value, typename Hash>
 void AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value) {
