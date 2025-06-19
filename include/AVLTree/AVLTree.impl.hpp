@@ -3,30 +3,18 @@
 #include <iostream>
 #include <cmath>
 
-#include "utils/Utils.hpp"
+template <typename Key, typename Value>
+AVLTree<Key, Value>::AVLNode::AVLNode(const Key& k, const Value& v): Node<Key, Value>(k, v), left(nullptr), right(nullptr), height(1) {}
 
 template <typename Key, typename Value>
-AVLTree<Key, Value>::Node::Node(const Key& k, const Value& v): data({k, v}), left(nullptr), right(nullptr), height(1) {}
-
-template <typename Key, typename Value>
-const Key& AVLTree<Key, Value>::Node::getKey() const {
-	return data.first;
-}
-
-template <typename Key, typename Value>
-void AVLTree<Key, Value>::Node::setKey(const Key& key) {
-	data.first = key;
-}
-
-template <typename Key, typename Value>
-size_t AVLTree<Key, Value>::height(Node* node) const {
+size_t AVLTree<Key, Value>::height(AVLNode* node) const {
 	if (!node) return 0;
 
     return node->height;
 }
 
 template <typename Key, typename Value>
-size_t AVLTree<Key, Value>::calcHeight(Node* node) const {
+size_t AVLTree<Key, Value>::calcHeight(AVLNode* node) const {
     if (!node) return 0;
 
     size_t leftHeight = height(node->left),
@@ -36,20 +24,20 @@ size_t AVLTree<Key, Value>::calcHeight(Node* node) const {
 }
 
 template <typename Key, typename Value>
-int AVLTree<Key, Value>::getBalanceFactor(Node* node) const {
+int AVLTree<Key, Value>::getBalanceFactor(AVLNode* node) const {
     if (!node) return 0;
     return height(node->right) - height(node->left);
 }
 
 template <typename Key, typename Value>
-typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::minimum(Node* node) const {
+typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::minimum(AVLNode* node) const {
     if (!node->left) return node;
     return minimum(node->left);
 }
 
 template <typename Key, typename Value>
-typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::rotateLeft(Node*& y) {
-	Node* x = y->right;
+typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::rotateLeft(AVLNode*& y) {
+	AVLNode* x = y->right;
 
 	y->right = x->left;
 	x->left = y;
@@ -61,8 +49,8 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::rotateLeft(Node*& y) {
 }
 
 template <typename Key, typename Value>
-typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::rotateRight(Node*& y) {
-	Node* x = y->left;
+typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::rotateRight(AVLNode*& y) {
+	AVLNode* x = y->left;
 
 	y->left = x->right;
 	x->right = y;
@@ -74,7 +62,7 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::rotateRight(Node*& y) {
 }
 
 template <typename Key, typename Value>
-typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::fixupNode(Node* y) {
+typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::fixupNode(AVLNode* y) {
 	if (!y) return nullptr;
 
 	int balanceFactor = getBalanceFactor(y);
@@ -103,13 +91,13 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::fixupNode(Node* y) {
 }
 
 template <typename Key, typename Value>
-typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::removeSuccessor(Node* root, Node* node) {
+typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::removeSuccessor(AVLNode* root, AVLNode* node) {
 	if (node->left) {
 		node->left = removeSuccessor(root, node->left);
 	} else {
 		root->setKey(node->getKey());
-		root->data.second = node->data.second;
-		Node* aux = node->right;
+		root->setValue(node->getValue());
+		AVLNode* aux = node->right;
 		delete node;
 		return aux;
 	}
@@ -119,10 +107,10 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::removeSuccessor(Node* r
 
 
 template <typename Key, typename Value>
-typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::insert(const Key& key, const Value& value, Node* node) {
+typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::insert(const Key& key, const Value& value, AVLNode* node) {
 	// It'll never be called w/ root == nullptr
 	if (!node)
-		return new Node(key, value);
+		return new AVLNode(key, value);
 
 	if (key < node->getKey()) {
 		node->left = insert(key, value, node->left);
@@ -139,7 +127,7 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::insert(const Key& key, 
 }
 
 template  <typename Key, typename Value>
-bool AVLTree<Key, Value>::find(const Key& key, Value& outValue, Node* node) {
+bool AVLTree<Key, Value>::find(const Key& key, Value& outValue, AVLNode* node) {
 	if (!node) return false;
 
 	if (key < node->getKey()) {
@@ -150,21 +138,21 @@ bool AVLTree<Key, Value>::find(const Key& key, Value& outValue, Node* node) {
 		return find(key, outValue, node->right);
 	}
 
-	outValue = node->data.second;
+	outValue = node->getValue();
 	comparisonsCount++;
 	return true;
 }
 
 template <typename Key, typename Value>
-typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::update(const Key& key, const Value& value, Node* node) {
-	if (!node) return new Node(key, value);
+typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::update(const Key& key, const Value& value, AVLNode* node) {
+	if (!node) return new AVLNode(key, value);
 
 	if (key < node->getKey()) {
 		node->left = update(key, value, node->left);
 	} else if (key > node->getKey()) {
 		node->right = update(key, value, node->right);
 	} else {
-		node->data.second = value;
+		node->setValue(value);
 	}
 
 	comparisonsCount++;
@@ -173,7 +161,7 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::update(const Key& key, 
 }
 
 template <typename Key, typename Value>
-typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::remove(const Key& key, Node* node) {
+typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::remove(const Key& key, AVLNode* node) {
 	if (!node) return nullptr;
 
 	if (key < node->getKey()) {
@@ -181,7 +169,7 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::remove(const Key& key, 
 	} else if (key > node->getKey()) {
 		node->right = remove(key, node->right);
 	} else if (!node->right) {
-		Node* leftChild = node->left;
+		AVLNode* leftChild = node->left;
 		delete node;
 		return leftChild;
 	} else {
@@ -192,7 +180,7 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::remove(const Key& key, 
 }
 
 template <typename Key, typename Value>
-void AVLTree<Key, Value>::clear(Node* node) {
+void AVLTree<Key, Value>::clear(AVLNode* node) {
 	if (node) {
 		clear(node->left);
 		clear(node->right);
@@ -201,11 +189,11 @@ void AVLTree<Key, Value>::clear(Node* node) {
 }
 
 template <typename Key, typename Value>
-void AVLTree<Key, Value>::printInOrder(std::ostream& out, Node* node) const {
+void AVLTree<Key, Value>::printInOrder(std::ostream& out, AVLNode* node) const {
 	if (node) {
 		printInOrder(out, node->left);
 
-		out << Utils::displayPair(node->data) << '\n';
+		out << node->show() << '\n';
 
 		printInOrder(out, node->right);
 	}
@@ -244,14 +232,14 @@ void AVLTree<Key, Value>::clear() {
 }
 
 template <typename Key, typename Value>
-void AVLTree<Key, Value>::printTree(Node* node, size_t depth) const {
+void AVLTree<Key, Value>::printTree(AVLNode* node, size_t depth) const {
 	if (!node) return;
 
 	printTree(node->right, depth+1);
 
 	for (int i = 0; i < depth; i++)
 		std::cout << "    ";
-	std::cout << Utils::displayPair(node->data) << std::endl;
+	std::cout << node->show() << std::endl;
 
 	printTree(node->left, depth+1);
 }
