@@ -38,7 +38,7 @@ public:
     };
 private:
     Node* root;
-    int comparisonsCount;
+    size_t comparisonsCount;
 
     /**
     * @brief Computes the height of a given node in the AVL tree.
