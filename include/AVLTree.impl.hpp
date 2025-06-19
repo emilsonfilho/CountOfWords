@@ -108,6 +108,7 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::removeSuccessor(Node* r
 		node->left = removeSuccessor(root, node->left);
 	} else {
 		root->setKey(node->getKey());
+		root->data.second = node->data.second;
 		Node* aux = node->right;
 		delete node;
 		return aux;
