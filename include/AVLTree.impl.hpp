@@ -181,9 +181,9 @@ typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::remove(const Key& key, 
 	} else if (key > node->getKey()) {
 		node->right = remove(key, node->right);
 	} else if (!node->right) {
-		Node* aux = node;
+		Node* leftChild = node->left;
 		delete node;
-		return aux->left;
+		return leftChild;
 	} else {
 		node->right = removeSuccessor(node, node->right);
 	}
