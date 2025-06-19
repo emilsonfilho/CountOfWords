@@ -6,6 +6,35 @@
 #include "utils/Utils.hpp"
 
 template <typename Key, typename Value, typename Hash>
+size_t AVLTree<Key, Value, Hash>::height(Node* node) const {
+	if (!node) return 0;
+
+    return node->height;
+}
+
+template <typename Key, typename Value, typename Hash>
+size_t AVLTree<Key, Value, Hash>::calcHeight(Node* node) const {
+    if (!node) return 0;
+
+    size_t leftHeight = height(node->left),
+           rightHeight = height(node->right);
+
+    return 1 + std::max(leftHeight, rightHeight);
+}
+
+template <typename Key, typename Value, typename Hash>
+int AVLTree<Key, Value, Hash>::getBalanceFactor(Node* node) const {
+    if (!node) return 0;
+    return height(node->right) - height(node->left);
+}
+
+template <typename Key, typename Value, typename Hash>
+typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::minimum(Node* node) const {
+    if (!node->left) return node;
+    return minimum(node->left);
+}
+
+template <typename Key, typename Value, typename Hash>
 AVLTree<Key, Value, Hash>::Node::Node(const Key& k, const Value& v): data({k, v}), left(nullptr), right(nullptr), height(1) {}
 
 template <typename Key, typename Value, typename Hash>

@@ -20,34 +20,13 @@ private:
     Node* root;
     int comparisonsCount;
 
-    size_t height(Node* node) const {
-        if (!node) return 0;
+    size_t height(Node* node) const;
 
-        return node->height;
-    }
+    size_t calcHeight(Node* node) const;
 
-    size_t calcHeight(Node* node) const {
-        if (!node) return 0;
+    int getBalanceFactor(Node* node) const;
 
-        size_t leftHeight = height(node->left),
-               rightHeight = height(node->right);
-
-        return 1 + std::max(leftHeight, rightHeight);
-    }
-
-    int getBalanceFactor(Node* node) const {
-        if (!node) return 0;
-        return height(node->right) - height(node->left);
-    }
-
-    bool isLeaf(Node* node) const {
-        return !node->left and !node->right;
-    }
-
-    Node* minimum(Node* node) const {
-        if (!node->left) return node;
-        return minimum(node->left);
-    }
+    Node* minimum(Node* node) const;
 
     void printTree(Node* node, size_t depth = 0) const;
 
