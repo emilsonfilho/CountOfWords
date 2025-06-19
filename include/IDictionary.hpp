@@ -1,8 +1,6 @@
 #ifndef IDICTIONARY_HPP
 #define IDICTIONARY_HPP
 
-#include <sstream>
-
 template<typename Key, typename Value>
 class IDictionary {
 public:
