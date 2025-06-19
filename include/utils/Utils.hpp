@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <string>
+#include <utility>
 
 namespace Utils {
 	template <typename First, typename Second>
