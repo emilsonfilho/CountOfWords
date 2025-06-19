@@ -313,7 +313,15 @@ public:
     * @param os The output stream where the in-order traversal result will be written.
     */
     void printInOrder(std::ostream& out) const override;
-
+    
+    /**
+    * @brief Retrieves the count of comparisons made during operations on the AVL tree.
+    * 
+    * This method returns the number of comparisons performed, which can be useful
+    * for analyzing the efficiency of the tree's operations.
+    * 
+    * @return size_t The total number of comparisons made.
+    */
     size_t getComparisonsCount() const override;
 
     void print() const;
