@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "Exceptions/KeyExceptions.hpp"
+
 template <typename Key, typename Value>
 AVLTree<Key, Value>::AVLNode::AVLNode(const Key& k, const Value& v): Node<Key, Value>(k, v), left(nullptr), right(nullptr), height(1) {}
 
@@ -105,7 +107,6 @@ typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::removeSuccessor(AVLN
 	return fixupNode(node);
 }
 
-
 template <typename Key, typename Value>
 typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::insert(const Key& key, const Value& value, AVLNode* node) {
 	// It'll never be called w/ root == nullptr
@@ -117,8 +118,7 @@ typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::insert(const Key& ke
 	} else if (key > node->getKey()) {
 		node->right = insert(key, value, node->right);
 	} else {
-		node->setKey(key);
-		return node;
+		throw KeyAlreadyExistsException();
 	}
 
 	comparisonsCount++;
@@ -145,7 +145,7 @@ bool AVLTree<Key, Value>::find(const Key& key, Value& outValue, AVLNode* node) {
 
 template <typename Key, typename Value>
 typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::update(const Key& key, const Value& value, AVLNode* node) {
-	if (!node) return new AVLNode(key, value);
+	if (!node) throw KeyNotFoundException();
 
 	if (key < node->getKey()) {
 		node->left = update(key, value, node->left);

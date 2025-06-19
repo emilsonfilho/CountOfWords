@@ -135,18 +135,14 @@ private:
     * 
     * @param key The key to insert into the tree.
     * @param value The value associated with the key.
-    * @param node The current node being processed during the insertion.
-    *             This is typically the root of the subtree where the insertion is happening.
+    * @param node The current node in the recursive insertion process.
+    * @return A pointer to the updated node after insertion and balancing.
+    * @throws KeyAlreadyExistsException If the key already exists in the tree.
     * 
-    * @return A pointer to the updated node after insertion and rebalancing.
-    *         If the key already exists, the value is updated and the node is returned.
-    * 
-    * @note This function assumes that it will never be called with a nullptr root node.
-    *       If the key is less than the current node's key, the insertion proceeds to the left subtree.
-    *       If the key is greater, the insertion proceeds to the right subtree.
-    *       If the key matches the current node's key, the value is updated.
-    * 
-    * @warning The caller is responsible for managing the memory of the newly created nodes.
+    * @note This function assumes that it will never be called with a null root node.
+    *       The function recursively traverses the tree to find the correct position
+    *       for the new key-value pair, updates the tree structure, and ensures the
+    *       AVL balance property is maintained.
     */
     AVLNode* insert(const Key& key, const Value& value, AVLNode* node);
 
@@ -167,21 +163,14 @@ private:
     bool find(const Key& key, Value& outValue, AVLNode* node);
 
     /**
-    * @brief Updates the value associated with a given key in the AVL tree. If the key does not exist, 
-    *        a new node is created and inserted into the tree.
+    * Updates the value associated with a given key in the AVL tree.
+    * If the key is not found, a KeyNotFoundException is thrown.
     * 
-    * @param key The key to be updated or inserted into the tree.
-    * @param value The value to be associated with the given key.
-    * @param node The current node being processed in the recursive update operation.
-    * 
-    * @return A pointer to the updated node after the operation, ensuring the AVL tree remains balanced.
-    * 
-    * @details This function performs the following operations:
-    *          - If the node is null, a new node is created with the given key and value.
-    *          - If the key is less than the current node's key, the function recursively updates the left subtree.
-    *          - If the key is greater than the current node's key, the function recursively updates the right subtree.
-    *          - If the key matches the current node's key, the value is updated.
-    *          - After any modification, the node is rebalanced to maintain AVL tree properties.
+    * @param key The key whose associated value is to be updated.
+    * @param value The new value to associate with the given key.
+    * @param node The current node being traversed in the AVL tree.
+    * @return A pointer to the updated AVLNode after fixing up the tree structure.
+    * @throws KeyNotFoundException If the key is not found in the tree.
     */
     AVLNode* update(const Key& key, const Value& value, AVLNode* node);
 
@@ -252,6 +241,7 @@ public:
     * 
     * @param key The key to be inserted into the tree.
     * @param value The value associated with the key.
+    * @throws KeyAlreadyExistsException If the key already exists in the tree.
     */
     void insert(const Key& key, const Value& value) override;
 
@@ -277,6 +267,7 @@ public:
     * 
     * @param key The key whose associated value is to be updated.
     * @param value The new value to associate with the key.
+    * @throws KeyNotFoundException If the key is not found in the tree.
     */
     void update(const Key& key, const Value& value) override;
 
