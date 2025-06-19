@@ -6,6 +6,19 @@
 #include "utils/Utils.hpp"
 
 template <typename Key, typename Value, typename Hash>
+AVLTree<Key, Value, Hash>::Node::Node(const Key& k, const Value& v): data({k, v}), left(nullptr), right(nullptr), height(1) {}
+
+template <typename Key, typename Value, typename Hash>
+const Key& AVLTree<Key, Value, Hash>::Node::getKey() const {
+	return data.first;
+}
+
+template <typename Key, typename Value, typename Hash>
+void AVLTree<Key, Value, Hash>::Node::setKey(const Key& key) {
+	data.first = key;
+}
+
+template <typename Key, typename Value, typename Hash>
 size_t AVLTree<Key, Value, Hash>::height(Node* node) const {
 	if (!node) return 0;
 
@@ -33,9 +46,6 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::minimum(Nod
     if (!node->left) return node;
     return minimum(node->left);
 }
-
-template <typename Key, typename Value, typename Hash>
-AVLTree<Key, Value, Hash>::Node::Node(const Key& k, const Value& v): data({k, v}), left(nullptr), right(nullptr), height(1) {}
 
 template <typename Key, typename Value, typename Hash>
 AVLTree<Key, Value, Hash>::AVLTree(): root(nullptr), comparisonsCount(0) {}
@@ -100,7 +110,7 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::removeSucce
 	if (node->left) {
 		node->left = removeSuccessor(root, node->left);
 	} else {
-		root->data.first = node->data.first;
+		root->setKey(node->getKey());
 		Node* aux = node->right;
 		delete node;
 		return aux;
@@ -115,12 +125,12 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::insert(cons
 	if (!node)
 		return new Node(key, value);
 
-	if (key < node->data.first) {
+	if (key < node->getKey()) {
 		node->left = insert(key, value, node->left);
-	} else if (key > node->data.first) {
+	} else if (key > node->getKey()) {
 		node->right = insert(key, value, node->right);
 	} else {
-		node->data.first = key;
+		node->setKey(key);
 		return node;
 	}
 
@@ -131,10 +141,10 @@ template  <typename Key, typename Value, typename Hash>
 bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue, Node* node) {
 	if (!node) return false;
 
-	if (key < node->data.first) {
+	if (key < node->getKey()) {
 		comparisonsCount++;
 		return find(key, outValue, node->left);
-	} else if (key > node->data.first) {
+	} else if (key > node->getKey()) {
 		comparisonsCount++;
 		return find(key, outValue, node->right);
 	}
@@ -148,9 +158,9 @@ template <typename Key, typename Value, typename Hash>
 typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::update(const Key& key, const Value& value, Node* node) {
 	if (!node) return new Node(key, value);
 
-	if (key < node->data.first) {
+	if (key < node->getKey()) {
 		node->left = update(key, value, node->left);
-	} else if (key > node->data.first) {
+	} else if (key > node->getKey()) {
 		node->right = update(key, value, node->right);
 	} else {
 		node->data.second = value;
@@ -163,9 +173,9 @@ template <typename Key, typename Value, typename Hash>
 typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::remove(const Key& key, Node* node) {
 	if (!node) return nullptr;
 
-	if (key < node->data.first) {
+	if (key < node->getKey()) {
 		node->left = remove(key, node->left);
-	} else if (key > node->data.first) {
+	} else if (key > node->getKey()) {
 		node->right = remove(key, node->right);
 	} else if (!node->right) {
 		Node* aux = node;

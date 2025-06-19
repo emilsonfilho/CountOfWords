@@ -15,6 +15,10 @@ public:
         size_t height;
 
         Node(const Key& k, const Value& v);
+
+        const Key& getKey() const;
+
+        void setKey(const Key& key);
     };
 private:
     Node* root;
