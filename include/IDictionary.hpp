@@ -11,7 +11,7 @@ public:
     virtual void update(const Key& key, const Value& value) = 0;
     virtual void remove(const Key& key) = 0;
     virtual void clear() = 0;
-    virtual void printInOrder(std::ostream& out) = 0;
+    virtual void printInOrder(std::ostream& out) const = 0;
     virtual size_t getComparisonsCount() const = 0;
     virtual ~IDictionary() = default;
 };

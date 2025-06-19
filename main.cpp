@@ -11,7 +11,7 @@ int main() {
 	avl.update("Willian", 7);
 	avl.update("Calebe", 6);
 	avl.remove("Iago");
-	avl.print();
+	avl.printInOrder(std::cout);
 
 	int out = 0;
 	std::string name = "Willian";

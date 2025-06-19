@@ -6,7 +6,7 @@
 
 #include "IDictionary.hpp"
 
-template <typename Key, typename Value, typename Hash = std::hash<Key>>
+template <typename Key, typename Value>
 class AVLTree : public IDictionary<Key, Value> {
 public:
     struct Node {
@@ -213,7 +213,19 @@ private:
     */
     Node* remove(const Key& key, Node* node);
 
+    /**
+    * @brief Recursively clears all nodes in the AVL tree starting from the given node.
+    * 
+    * This function traverses the tree in a post-order manner, deleting all nodes
+    * to free memory. It ensures that both left and right child nodes are cleared
+    * before deleting the current node.
+    * 
+    * @param node Pointer to the current node to be cleared. If the node is nullptr,
+    *             the function does nothing.
+    */
     void clear(Node* node);
+
+    void printInOrder(std::ostream& out, Node* node) const;
 public:
     static const int IMBALANCE = 2;
 
@@ -272,8 +284,16 @@ public:
     */
     void remove(const Key& key) override;
 
+    /**
+    * @brief Clears the AVL tree by deallocating all nodes and resetting the root to nullptr.
+    * 
+    * This function recursively clears all nodes in the tree starting from the root,
+    * effectively removing all key-value pairs stored in the tree. After the operation,
+    * the tree will be empty.
+    */
     void clear() override;
-    void printInOrder(std::ostream& out) override {};
+
+    void printInOrder(std::ostream& out) const override;
     size_t getComparisonsCount() const override { return 0; };
 
     void print() const;

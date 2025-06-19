@@ -5,28 +5,28 @@
 
 #include "utils/Utils.hpp"
 
-template <typename Key, typename Value, typename Hash>
-AVLTree<Key, Value, Hash>::Node::Node(const Key& k, const Value& v): data({k, v}), left(nullptr), right(nullptr), height(1) {}
+template <typename Key, typename Value>
+AVLTree<Key, Value>::Node::Node(const Key& k, const Value& v): data({k, v}), left(nullptr), right(nullptr), height(1) {}
 
-template <typename Key, typename Value, typename Hash>
-const Key& AVLTree<Key, Value, Hash>::Node::getKey() const {
+template <typename Key, typename Value>
+const Key& AVLTree<Key, Value>::Node::getKey() const {
 	return data.first;
 }
 
-template <typename Key, typename Value, typename Hash>
-void AVLTree<Key, Value, Hash>::Node::setKey(const Key& key) {
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::Node::setKey(const Key& key) {
 	data.first = key;
 }
 
-template <typename Key, typename Value, typename Hash>
-size_t AVLTree<Key, Value, Hash>::height(Node* node) const {
+template <typename Key, typename Value>
+size_t AVLTree<Key, Value>::height(Node* node) const {
 	if (!node) return 0;
 
     return node->height;
 }
 
-template <typename Key, typename Value, typename Hash>
-size_t AVLTree<Key, Value, Hash>::calcHeight(Node* node) const {
+template <typename Key, typename Value>
+size_t AVLTree<Key, Value>::calcHeight(Node* node) const {
     if (!node) return 0;
 
     size_t leftHeight = height(node->left),
@@ -35,20 +35,20 @@ size_t AVLTree<Key, Value, Hash>::calcHeight(Node* node) const {
     return 1 + std::max(leftHeight, rightHeight);
 }
 
-template <typename Key, typename Value, typename Hash>
-int AVLTree<Key, Value, Hash>::getBalanceFactor(Node* node) const {
+template <typename Key, typename Value>
+int AVLTree<Key, Value>::getBalanceFactor(Node* node) const {
     if (!node) return 0;
     return height(node->right) - height(node->left);
 }
 
-template <typename Key, typename Value, typename Hash>
-typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::minimum(Node* node) const {
+template <typename Key, typename Value>
+typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::minimum(Node* node) const {
     if (!node->left) return node;
     return minimum(node->left);
 }
 
-template <typename Key, typename Value, typename Hash>
-typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::rotateLeft(Node*& y) {
+template <typename Key, typename Value>
+typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::rotateLeft(Node*& y) {
 	Node* x = y->right;
 
 	y->right = x->left;
@@ -60,8 +60,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::rotateLeft(
 	return x;
 }
 
-template <typename Key, typename Value, typename Hash>
-typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::rotateRight(Node*& y) {
+template <typename Key, typename Value>
+typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::rotateRight(Node*& y) {
 	Node* x = y->left;
 
 	y->left = x->right;
@@ -73,8 +73,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::rotateRight
 	return x;
 }
 
-template <typename Key, typename Value, typename Hash>
-typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::fixupNode(Node* y) {
+template <typename Key, typename Value>
+typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::fixupNode(Node* y) {
 	if (!y) return nullptr;
 
 	int balanceFactor = getBalanceFactor(y);
@@ -102,8 +102,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::fixupNode(N
 	return y;
 }
 
-template <typename Key, typename Value, typename Hash>
-typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::removeSuccessor(Node* root, Node* node) {
+template <typename Key, typename Value>
+typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::removeSuccessor(Node* root, Node* node) {
 	if (node->left) {
 		node->left = removeSuccessor(root, node->left);
 	} else {
@@ -117,8 +117,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::removeSucce
 }
 
 
-template <typename Key, typename Value, typename Hash>
-typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value, Node* node) {
+template <typename Key, typename Value>
+typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::insert(const Key& key, const Value& value, Node* node) {
 	// It'll never be called w/ root == nullptr
 	if (!node)
 		return new Node(key, value);
@@ -137,8 +137,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::insert(cons
 	return fixupNode(node);
 }
 
-template  <typename Key, typename Value, typename Hash>
-bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue, Node* node) {
+template  <typename Key, typename Value>
+bool AVLTree<Key, Value>::find(const Key& key, Value& outValue, Node* node) {
 	if (!node) return false;
 
 	if (key < node->getKey()) {
@@ -154,8 +154,8 @@ bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue, Node* node
 	return true;
 }
 
-template <typename Key, typename Value, typename Hash>
-typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::update(const Key& key, const Value& value, Node* node) {
+template <typename Key, typename Value>
+typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::update(const Key& key, const Value& value, Node* node) {
 	if (!node) return new Node(key, value);
 
 	if (key < node->getKey()) {
@@ -171,8 +171,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::update(cons
 	return fixupNode(node);
 }
 
-template <typename Key, typename Value, typename Hash>
-typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::remove(const Key& key, Node* node) {
+template <typename Key, typename Value>
+typename AVLTree<Key, Value>::Node* AVLTree<Key, Value>::remove(const Key& key, Node* node) {
 	if (!node) return nullptr;
 
 	if (key < node->getKey()) {
@@ -190,8 +190,8 @@ typename AVLTree<Key, Value, Hash>::Node* AVLTree<Key, Value, Hash>::remove(cons
 	return fixupNode(node);
 }
 
-template <typename Key, typename Value, typename Hash>
-void AVLTree<Key, Value, Hash>::clear(Node* node) {
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::clear(Node* node) {
 	if (node) {
 		clear(node->left);
 		clear(node->right);
@@ -199,37 +199,48 @@ void AVLTree<Key, Value, Hash>::clear(Node* node) {
 	}
 }
 
-template <typename Key, typename Value, typename Hash>
-AVLTree<Key, Value, Hash>::AVLTree(): root(nullptr), comparisonsCount(0) {}
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::printInOrder(std::ostream& out, Node* node) const {
+	if (node) {
+		printInOrder(out, node->left);
 
-template <typename Key, typename Value, typename Hash>
-void AVLTree<Key, Value, Hash>::insert(const Key& key, const Value& value) {
+		out << Utils::displayPair(node->data) << '\n';
+
+		printInOrder(out, node->right);
+	}
+}
+
+template <typename Key, typename Value>
+AVLTree<Key, Value>::AVLTree(): root(nullptr), comparisonsCount(0) {}
+
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::insert(const Key& key, const Value& value) {
 	root = insert(key, value, root);
 }
 
-template  <typename Key, typename Value, typename Hash>
-bool AVLTree<Key, Value, Hash>::find(const Key& key, Value& outValue) {
+template  <typename Key, typename Value>
+bool AVLTree<Key, Value>::find(const Key& key, Value& outValue) {
 	return find(key, outValue, root);
 }
 
-template <typename Key, typename Value, typename Hash>
-void AVLTree<Key, Value, Hash>::update(const Key& key, const Value& value) {
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::update(const Key& key, const Value& value) {
 	root = update(key, value, root);
 }
 
-template <typename Key, typename Value, typename Hash>
-void AVLTree<Key, Value, Hash>::remove(const Key& key) {
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::remove(const Key& key) {
 	root = remove(key, root);
 }
 
-template <typename Key, typename Value, typename Hash>
-void AVLTree<Key, Value, Hash>::clear() {
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::clear() {
 	clear(root);
 	root = nullptr;
 }
 
-template <typename Key, typename Value, typename Hash>
-void AVLTree<Key, Value, Hash>::printTree(Node* node, size_t depth) const {
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::printTree(Node* node, size_t depth) const {
 	if (!node) return;
 
 	printTree(node->right, depth+1);
@@ -241,7 +252,12 @@ void AVLTree<Key, Value, Hash>::printTree(Node* node, size_t depth) const {
 	printTree(node->left, depth+1);
 }
 
-template <typename Key, typename Value, typename Hash>
-void AVLTree<Key, Value, Hash>::print() const {
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::print() const {
 	printTree(root);
+}
+
+template <typename Key, typename Value>
+void AVLTree<Key, Value>::printInOrder(std::ostream& os) const {
+	printInOrder(os, root);
 }
