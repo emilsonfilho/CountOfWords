@@ -247,6 +247,15 @@ public:
     * comparisons count initialized to 0.
     */
     AVLTree();
+    
+    /**
+    * @brief Destructor for the AVLTree class.
+    *
+    * This destructor ensures that all dynamically allocated resources
+    * associated with the AVLTree instance are properly released by
+    * calling the `clear()` method to deallocate and clean up the tree.
+    */
+    ~AVLTree();
 
     /**
     * @brief Inserts a key-value pair into the AVL tree.

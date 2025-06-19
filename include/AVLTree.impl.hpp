@@ -215,6 +215,9 @@ template <typename Key, typename Value>
 AVLTree<Key, Value>::AVLTree(): root(nullptr), comparisonsCount(0) {}
 
 template <typename Key, typename Value>
+AVLTree<Key, Value>::~AVLTree() { clear(); }
+
+template <typename Key, typename Value>
 void AVLTree<Key, Value>::insert(const Key& key, const Value& value) {
 	root = insert(key, value, root);
 }
