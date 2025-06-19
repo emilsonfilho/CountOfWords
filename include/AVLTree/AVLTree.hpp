@@ -5,11 +5,12 @@
 #include <iostream>
 
 #include "IDictionary.hpp"
+#include "INode.hpp"
 
 template <typename Key, typename Value>
 class AVLTree : public IDictionary<Key, Value> {
 public:
-    struct Node {
+    struct Node : public INode<Key, Value> {
         std::pair<Key, Value> data;
         Node *left, *right;
         size_t height;
@@ -27,14 +28,14 @@ public:
          * 
          * @return A constant reference to the key of the node.
          */
-        const Key& getKey() const;
+        const Key& getKey() const override;
 
         /**
          * @brief Sets the key for the current node in the AVL tree.
          * 
          * @param key The key value to be assigned to the node.
          */
-        void setKey(const Key& key);
+        void setKey(const Key& key) override;
     };
 private:
     Node* root;
