@@ -22,6 +22,7 @@ int main() {
 		std::cout << "elemento " << name << " não está na lista" << std::endl;
 	}
 
+	std::cout << "numero de comparacoes: " << avl.getComparisonsCount() << std::endl;
 
 	return 0;
 }

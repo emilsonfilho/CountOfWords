@@ -261,3 +261,8 @@ template <typename Key, typename Value>
 void AVLTree<Key, Value>::printInOrder(std::ostream& os) const {
 	printInOrder(os, root);
 }
+
+template <typename Key, typename Value>
+size_t AVLTree<Key, Value>::getComparisonsCount() const {
+	return comparisonsCount;
+}

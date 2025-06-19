@@ -225,6 +225,17 @@ private:
     */
     void clear(Node* node);
 
+    /**
+    * @brief Prints the elements of the AVL tree in in-order traversal.
+    * 
+    * This function recursively traverses the tree in in-order (left subtree, 
+    * current node, right subtree) and outputs the key-value pairs stored in 
+    * the nodes to the provided output stream.
+    * 
+    * @param out The output stream where the key-value pairs will be printed.
+    * @param node The current node being processed in the traversal.
+    *             If the node is nullptr, the function does nothing.
+    */
     void printInOrder(std::ostream& out, Node* node) const;
 public:
     static const int IMBALANCE = 2;
@@ -293,8 +304,17 @@ public:
     */
     void clear() override;
 
+    /**
+    * @brief Prints the elements of the AVL tree in in-order traversal to the specified output stream.
+    * 
+    * This function performs an in-order traversal of the AVL tree, starting from the root node,
+    * and writes the key-value pairs to the provided output stream.
+    * 
+    * @param os The output stream where the in-order traversal result will be written.
+    */
     void printInOrder(std::ostream& out) const override;
-    size_t getComparisonsCount() const override { return 0; };
+
+    size_t getComparisonsCount() const override;
 
     void print() const;
 };
