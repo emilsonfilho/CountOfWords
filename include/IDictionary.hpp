@@ -11,6 +11,8 @@ public:
     virtual void clear() = 0;
     virtual void printInOrder(std::ostream& out) const = 0;
     virtual size_t getComparisonsCount() const = 0;
+    virtual Value& operator[](const Key& key) = 0;
+    virtual const Value& operator[](const Key& key) const = 0;
     virtual ~IDictionary() = default;
 };
 

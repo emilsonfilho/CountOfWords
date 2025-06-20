@@ -258,3 +258,44 @@ template <typename Key, typename Value>
 size_t AVLTree<Key, Value>::getComparisonsCount() const {
 	return comparisonsCount;
 }
+
+template <typename Key, typename Value>
+Value& AVLTree<Key, Value>::operator[](const Key& key) {
+	AVLNode** aux = &root;
+
+	while (*aux) {
+		if (key < (*aux)->getKey()) {
+			comparisonsCount++;
+			aux = &(*aux)->left;
+		} else if (key > (*aux)->getKey()) {
+			comparisonsCount++;
+			aux = &(*aux)->right;
+		} else {
+			comparisonsCount++;
+			return (*aux)->getValue();
+		}
+	}
+
+	*aux = new AVLNode(key, Value());
+	return (*aux)->getValue();
+}
+
+template <typename Key, typename Value>
+const Value& AVLTree<Key, Value>::operator[](const Key& key) const {
+	const AVLNode* aux = root;
+
+	while (aux) {
+		if (key < aux->getKey()) {
+			comparisonsCount++;
+			aux = aux->left;
+		} else if (key > aux->getKey()) {
+			comparisonsCount++;
+			aux = aux->right;
+		} else {
+			comparisonsCount++;
+			return aux->getValue();
+		}
+	}
+
+	throw KeyNotFoundException();
+}

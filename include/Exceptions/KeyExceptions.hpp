@@ -14,6 +14,6 @@ class KeyNotFoundException : public std::runtime_error {
 public:
     explicit KeyNotFoundException()
         : std::runtime_error("Key not found in the dictionary.") {}
-}
+};
 
 #endif

@@ -24,7 +24,7 @@ public:
     };
 private:
     AVLNode* root;
-    size_t comparisonsCount;
+    mutable size_t comparisonsCount;
 
     /**
     * @brief Computes the height of a given node in the AVL tree.
@@ -309,6 +309,9 @@ public:
     * @return size_t The total number of comparisons made.
     */
     size_t getComparisonsCount() const override;
+
+    Value& operator[](const Key& key) override;
+    const Value& operator[](const Key& key) const override;
 
     void print() const;
 };

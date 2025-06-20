@@ -14,6 +14,7 @@ public:
     void setKey(const Key& key) { data.first = key; }
 
     const Value& getValue() const { return data.second; }
+    Value& getValue() { return data.second; }
     void setValue(const Value& value) { data.second = value; }
 
     void update(const Key& key, const Value& value) {
