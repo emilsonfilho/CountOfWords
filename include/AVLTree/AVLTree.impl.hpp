@@ -121,7 +121,7 @@ typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::insert(const Key& ke
 		throw KeyAlreadyExistsException();
 	}
 
-	comparisonsCount++;
+	this->incrementCounter();
 
 	return fixupNode(node);
 }
@@ -131,15 +131,15 @@ bool AVLTree<Key, Value>::find(const Key& key, Value& outValue, AVLNode* node) {
 	if (!node) return false;
 
 	if (key < node->getKey()) {
-		comparisonsCount++;
+		this->incrementCounter();
 		return find(key, outValue, node->left);
 	} else if (key > node->getKey()) {
-		comparisonsCount++;
+		this->incrementCounter();
 		return find(key, outValue, node->right);
 	}
 
 	outValue = node->getValue();
-	comparisonsCount++;
+	this->incrementCounter();
 	return true;
 }
 
@@ -155,7 +155,7 @@ typename AVLTree<Key, Value>::AVLNode* AVLTree<Key, Value>::update(const Key& ke
 		node->setValue(value);
 	}
 
-	comparisonsCount++;
+	this->incrementCounter();
 
 	return fixupNode(node);
 }
@@ -200,7 +200,7 @@ void AVLTree<Key, Value>::printInOrder(std::ostream& out, AVLNode* node) const {
 }
 
 template <typename Key, typename Value>
-AVLTree<Key, Value>::AVLTree(): root(nullptr), comparisonsCount(0) {}
+AVLTree<Key, Value>::AVLTree(): root(nullptr) {}
 
 template <typename Key, typename Value>
 AVLTree<Key, Value>::~AVLTree() { clear(); }
@@ -256,7 +256,7 @@ void AVLTree<Key, Value>::printInOrder(std::ostream& os) const {
 
 template <typename Key, typename Value>
 size_t AVLTree<Key, Value>::getComparisonsCount() const {
-	return comparisonsCount;
+	return this->comparisonsCount;
 }
 
 template <typename Key, typename Value>
@@ -265,13 +265,13 @@ Value& AVLTree<Key, Value>::operator[](const Key& key) {
 
 	while (*aux) {
 		if (key < (*aux)->getKey()) {
-			comparisonsCount++;
+			this->incrementCounter();
 			aux = &(*aux)->left;
 		} else if (key > (*aux)->getKey()) {
-			comparisonsCount++;
+			this->incrementCounter();
 			aux = &(*aux)->right;
 		} else {
-			comparisonsCount++;
+			this->incrementCounter();
 			return (*aux)->getValue();
 		}
 	}
@@ -286,13 +286,13 @@ const Value& AVLTree<Key, Value>::operator[](const Key& key) const {
 
 	while (aux) {
 		if (key < aux->getKey()) {
-			comparisonsCount++;
+			this->incrementCounter();
 			aux = aux->left;
 		} else if (key > aux->getKey()) {
-			comparisonsCount++;
+			this->incrementCounter();
 			aux = aux->right;
 		} else {
-			comparisonsCount++;
+			this->incrementCounter();
 			return aux->getValue();
 		}
 	}

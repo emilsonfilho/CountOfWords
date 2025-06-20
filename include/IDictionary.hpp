@@ -3,6 +3,10 @@
 
 template<typename Key, typename Value>
 class IDictionary {
+protected:
+    mutable size_t comparisonsCount = 0;
+
+    void incrementCounter() const { comparisonsCount++; }
 public:
     virtual void insert(const Key& key, const Value& value) = 0;
     virtual bool find(const Key& key, Value& outValue) = 0;

@@ -24,8 +24,7 @@ public:
     };
 private:
     AVLNode* root;
-    mutable size_t comparisonsCount;
-
+    
     /**
     * @brief Computes the height of a given node in the AVL tree.
     * 
