@@ -139,6 +139,107 @@ void RedBlackTree<Key, Value>::insert(const Key& key, const Value& value) {
 }
 
 template <typename Key, typename Value>
+void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
+    while (x != root and x->color == BLACK) {
+        if (x == x->parent->left) {
+            RedBlackNode<Key, Value>* w = x->parent->right;
+
+            if (w->color == RED) { // Case 1
+                x->parent->color = RED;
+                w->color = BLACK;
+                x->parent = rotateLeft(x->parent);
+                w = x->parent->right;
+            }
+
+            if (w->left->color == BLACK and w->right->color == BLACK) { // Case 2
+                w->color = RED;
+                x = x->parent;
+            } else {
+                if (w->right->color == BLACK) { // Case 3
+                    w->left->color = BLACK;
+                    w->color = RED;
+                    w = rotateRight(w);
+                    w = x->parent->right;
+                }
+
+                // Case 4
+                w->color = x->parent->color;
+                x->parent->color = BLACK;
+                w->right->color = BLACK;
+                w = rotateLeft(x->parent);
+
+                x = root;
+            }
+        } else { // Symetrical case
+            RedBlackNode<Key, Value>* w = x->parent->left;
+
+            if (w->color == RED) { // Case 1
+                x->parent->color = RED;
+                w->color = BLACK;
+                x->parent = rotateRight(x->parent);
+                w = x->parent->left;
+            }
+
+            if (w->right->color == BLACK and w->left->color == BLACK) { // Case 2
+                w->color = RED;
+                x = x->parent;
+            } else {
+                if (w->left->color == BLACK) { // Case 3
+                    w->right->color = BLACK;
+                    w->color = RED;
+                    w = rotateLeft(w);
+                    w = x->parent->left;
+                }
+
+                // Case 4
+                w->color = x->parent->color;
+                x->parent->color = BLACK;
+                w->left->color = BLACK;
+                w = rotateRight(x->parent);
+
+                x = root;
+            }
+        }
+    }
+
+    x->color = BLACK;
+}
+
+template <typename Key, typename Value>
+void RedBlackTree<Key, Value>::deleteNode(RedBlackNode<Key, Value>* z) {
+    RedBlackNode<Key, Value>* y;
+    if (z->left == NIL or z->right == NIL)
+        y = z;
+    else
+        y = this->minimum(z->right);
+    
+    RedBlackNode<Key, Value>* x;
+    if (y->left != NIL)
+        x = y->left;
+    else
+        x = y->right;
+
+    x->parent = y->parent;
+
+    if (y->parent == NIL) {
+        root = x;
+    } else {
+        if (y == y->parent->left)
+            y->parent->left = x;
+        else
+            y->parent->right = x;
+    }
+
+    if (y != z)
+        y->setKey(z->getKey());
+
+    if (y->color == BLACK)
+        deleteFixup(x);
+
+    delete y;
+}
+
+template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::printTree(RedBlackNode<Key, Value>* node, int indent) const {
     if (node != NIL) {
         printTree(node->right, indent + 4);
@@ -189,7 +290,15 @@ void RedBlackTree<Key, Value>::print() const {
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::remove(const Key& key) {
-    // Implementation of remove
+    RedBlackNode<Key, Value>* p = root;
+
+    while (p != NIL and p->getKey() != key) {
+        if (key < p->getKey()) p = p->left;
+        else p = p->right;
+    }
+
+    if (p != NIL)
+        deleteNode(p);
 }
 
 template <typename Key, typename Value>

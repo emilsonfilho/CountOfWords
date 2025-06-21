@@ -57,6 +57,10 @@ private:
      */
     void insertFixup(RedBlackNode<Key, Value>* z);
 
+    void deleteFixup(RedBlackNode<Key, Value>* x);
+
+    void deleteNode(RedBlackNode<Key, Value>* z);
+
     /**
      * @brief Prints the structure of the Red-Black Tree starting from a given node.
      * 
