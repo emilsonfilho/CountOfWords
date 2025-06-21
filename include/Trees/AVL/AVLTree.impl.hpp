@@ -6,6 +6,11 @@
 #include "Exceptions/KeyExceptions.hpp"
 
 template <typename Key, typename Value>
+const AVLNode<Key, Value>* AVLTree<Key, Value>::getRoot() const {
+	return root;
+}
+
+template <typename Key, typename Value>
 size_t AVLTree<Key, Value>::height(AVLNode<Key, Value>* node) const {
 	if (!node) return 0;
 
@@ -192,7 +197,7 @@ void AVLTree<Key, Value>::insert(const Key& key, const Value& value) {
 
 template  <typename Key, typename Value>
 bool AVLTree<Key, Value>::find(const Key& key, Value& outValue) {
-	AVLNode<Key, Value>* node = this->findNode(key);
+	const AVLNode<Key, Value>* node = this->findNode(key);
 
 	if (!node) return false;
 

@@ -14,6 +14,8 @@ class AVLTree : public IDictionary<Key, Value>, public BaseTree<AVLTree<Key, Val
 private:
     AVLNode<Key, Value>* root;
     
+    const AVLNode<Key, Value>* getRoot() const;
+
     /**
     * @brief Computes the height of a given node in the AVL tree.
     * 
@@ -286,6 +288,9 @@ public:
     const Value& operator[](const Key& key) const override;
 
     void print() const;
+
+    template <typename Tree, typename Node, typename K, typename V>
+    friend class BaseTree;
 };
 
 #include "Trees/AVL/AVLTree.impl.hpp"
