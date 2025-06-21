@@ -14,10 +14,22 @@ private:
     RedBlackNode<Key, Value>* root;
     static RedBlackNode<Key, Value>* const NIL;
 
+    const RedBlackNode<Key, Value>* getRoot() const;
+
     RedBlackNode<Key, Value>* rotateLeft(RedBlackNode<Key, Value>* y);
     RedBlackNode<Key, Value>* rotateRight(RedBlackNode<Key, Value>* y);
 
     void insertFixup(RedBlackNode<Key, Value>* z);
+
+    RedBlackNode<Key, Value>* update(const Key& key, const Value& value, RedBlackNode<Key, Value>* node) {
+        if (node == NIL) return node;
+
+        if (key < node->getKey()) {
+            
+        }
+
+        this->incrementCounter();
+    }
 
     void printTree(RedBlackNode<Key, Value>* node, int indent = 0) const;
 public:
@@ -25,7 +37,7 @@ public:
 
     void insert(const Key& key, const Value& value);
     bool find(const Key& key, Value& outValue);
-    void update(const Key& key, const Value& value) {};
+    void update(const Key& key, const Value& value);
     void remove(const Key& key) {};
     void clear() {};
     void printInOrder(std::ostream& out) const {};
@@ -34,6 +46,9 @@ public:
     virtual const Value& operator[](const Key& key) const { return root->getValue(); };
 
     void print() const;
+
+    template <typename Tree, typename Node, typename K, typename V>
+    friend class BaseTree;
 };
 
 #include "Trees/RedBlack/RedBlackTree.impl.hpp"

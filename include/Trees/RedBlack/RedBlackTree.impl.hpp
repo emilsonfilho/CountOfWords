@@ -3,6 +3,11 @@
 #include "Exceptions/KeyExceptions.hpp"
 
 template <typename Key, typename Value>
+const RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::getRoot() const {
+    return root;
+}
+
+template <typename Key, typename Value>
 RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key, Value>* y) {
 	RedBlackNode<Key, Value>* x = y->right;
 
@@ -150,12 +155,31 @@ void RedBlackTree<Key, Value>::printTree(RedBlackNode<Key, Value>* node, int ind
 
 template <typename Key, typename Value>
 bool RedBlackTree<Key, Value>::find(const Key& key, Value& outValue) {
-    RedBlackNode<Key, Value>* node = this->findNode(key);
+    const RedBlackNode<Key, Value>* node = this->findNode(key);
     
     if (!node) return false;
 
     outValue = node->getValue();
     return true;
+}
+
+template <typename Key, typename Value>
+void RedBlackTree<Key, Value>::update(const Key& key, const Value& value) {
+    RedBlackNode<Key, Value>* aux = root;
+    while (aux != NIL) {
+        this->incrementCounter();
+        
+        if (key < aux->getKey()) {
+            aux = aux->left;
+        } else if (key > aux->getKey()) {
+            aux = aux->right;
+        } else {
+            aux->setValue(value);
+            return;
+        }
+    }
+
+    throw KeyNotFoundException();
 }
 
 template <typename Key, typename Value>
