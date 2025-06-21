@@ -186,3 +186,33 @@ template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::print() const {
     printTree(root);
 }
+
+template <typename Key, typename Value>
+void RedBlackTree<Key, Value>::remove(const Key& key) {
+    // Implementation of remove
+}
+
+template <typename Key, typename Value>
+void RedBlackTree<Key, Value>::clear() {
+    // Implementation of clear
+}
+
+template <typename Key, typename Value>
+void RedBlackTree<Key, Value>::printInOrder(std::ostream& os) const {
+    // Implementation of printInOrder
+}
+
+template <typename Key, typename Value>
+size_t RedBlackTree<Key, Value>::getComparisonsCount() const {
+    // Implementation of getComparisonsCount
+}
+
+template <typename Key, typename Value>
+Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
+    // Implementation of operator[]
+}
+
+template <typename Key, typename Value>
+const Value& RedBlackTree<Key, Value>::operator[](const Key& key) const {
+    // Implementation of const operator[]
+}
