@@ -59,14 +59,6 @@ private:
     int getBalanceFactor(AVLNode<Key, Value>* node) const;
 
     /**
-     * @brief Finds the node with the minimum key in a subtree.
-     * 
-     * @param node A pointer to the root of the subtree.
-     * @return A pointer to the node with the minimum key in the subtree.
-     */
-    AVLNode<Key, Value>* minimum(AVLNode<Key, Value>* node) const;
-
-    /**
      * @brief Prints the AVL tree structure starting from a given node.
      * 
      * @param node A pointer to the current node being printed.
