@@ -57,8 +57,32 @@ private:
      */
     void insertFixup(RedBlackNode<Key, Value>* z);
 
+    /**
+     * @brief Restores the Red-Black Tree properties after a node deletion.
+     *
+     * This function ensures that the Red-Black Tree remains balanced and maintains
+     * its properties (e.g., no two consecutive red nodes, equal black height for all paths)
+     * after a node has been deleted. It performs rotations and recoloring as necessary.
+     *
+     * @param x A pointer to the node that replaces the deleted node, or NIL if no replacement exists.
+     *
+     * @note This function assumes that the tree is a valid Red-Black Tree before the deletion
+     * and that the node being fixed up is initially black.
+     */
     void deleteFixup(RedBlackNode<Key, Value>* x);
 
+
+    /**
+     * @brief Deletes a node from the Red-Black Tree.
+     * 
+     * This function removes the specified node from the tree while maintaining
+     * the Red-Black Tree properties. If the node to be deleted has two children,
+     * it is replaced with its in-order successor. The function also ensures that
+     * the tree remains balanced and adheres to the Red-Black Tree rules by calling
+     * the deleteFixup function when necessary.
+     * 
+     * @param z A pointer to the node to be deleted.
+     */
     void deleteNode(RedBlackNode<Key, Value>* z);
 
     /**
