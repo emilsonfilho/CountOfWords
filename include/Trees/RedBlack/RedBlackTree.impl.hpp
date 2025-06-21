@@ -1,15 +1,10 @@
-#include "RedBlackTree/RedBlackTree.hpp"
+#include "Trees/RedBlack/RedBlackTree.hpp"
 
 #include "Exceptions/KeyExceptions.hpp"
 
 template <typename Key, typename Value>
-RedBlackTree<Key, Value>::RedBlackNode::RedBlackNode(
-    const Key& k, const Value& v, RedBlackNode* l, RedBlackNode* r, RedBlackNode* p, Color c
-) : Node<Key, Value>(k, v), left(l), right(r), parent(p), color(c) {}
-
-template <typename Key, typename Value>
-typename RedBlackTree<Key, Value>::RedBlackNode* RedBlackTree<Key, Value>::rotateLeft(RedBlackNode* y) {
-	RedBlackNode* x = y->right;
+RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key, Value>* y) {
+	RedBlackNode<Key, Value>* x = y->right;
 
 	y->right = x->left;
     if (y->right != NIL) y->right->parent = y;
@@ -31,8 +26,8 @@ typename RedBlackTree<Key, Value>::RedBlackNode* RedBlackTree<Key, Value>::rotat
 }
 
 template <typename Key, typename Value>
-typename RedBlackTree<Key, Value>::RedBlackNode* RedBlackTree<Key, Value>::rotateRight(RedBlackNode* y) {
-	RedBlackNode* x = y->left;
+RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::rotateRight(RedBlackNode<Key, Value>* y) {
+	RedBlackNode<Key, Value>* x = y->left;
 
 	y->left = x->right;
     if (y->left != NIL) y->left->parent = y;
@@ -54,7 +49,7 @@ typename RedBlackTree<Key, Value>::RedBlackNode* RedBlackTree<Key, Value>::rotat
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::insertFixup(RedBlackNode* z) {
+void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value>* z) {
     while (z->parent->color == RED) {
         if (z->parent == z->parent->parent->left) {
             if (z->parent->parent->right->color == RED) { // Case 1
@@ -97,8 +92,7 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode* z) {
 }
 
 template <typename Key, typename Value>
-typename RedBlackTree<Key, Value>::RedBlackNode* const 
-RedBlackTree<Key, Value>::NIL = new RedBlackNode(
+RedBlackNode<Key, Value>* const RedBlackTree<Key, Value>::NIL = new RedBlackNode<Key, Value>(
     Key(), Value(), NIL, NIL, NIL, BLACK
 );
 
@@ -107,9 +101,9 @@ RedBlackTree<Key, Value>::RedBlackTree() { root = NIL; }
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::insert(const Key& key, const Value& value) {
-    RedBlackNode *z = new RedBlackNode(key, value, NIL, NIL, NIL, RED);
+    RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, value, NIL, NIL, NIL, RED);
 
-    RedBlackNode *x = root, *y = NIL;
+    RedBlackNode<Key, Value> *x = root, *y = NIL;
     
     while (x != NIL) {
         y = x;
@@ -140,7 +134,7 @@ void RedBlackTree<Key, Value>::insert(const Key& key, const Value& value) {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::printTree(RedBlackNode* node, int indent) const {
+void RedBlackTree<Key, Value>::printTree(RedBlackNode<Key, Value>* node, int indent) const {
     if (node != NIL) {
         printTree(node->right, indent + 4);
 
@@ -152,6 +146,16 @@ void RedBlackTree<Key, Value>::printTree(RedBlackNode* node, int indent) const {
 
         printTree(node->left, indent + 4);
     }
+}
+
+template <typename Key, typename Value>
+bool RedBlackTree<Key, Value>::find(const Key& key, Value& outValue) {
+    RedBlackNode<Key, Value>* node = this->findNode(key);
+    
+    if (!node) return false;
+
+    outValue = node->getValue();
+    return true;
 }
 
 template <typename Key, typename Value>
