@@ -35,8 +35,7 @@ int AVLTree<Key, Value>::getBalanceFactor(AVLNode<Key, Value>* node) const {
 
 template <typename Key, typename Value>
 AVLNode<Key, Value>* AVLTree<Key, Value>::minimum(AVLNode<Key, Value>* node) const {
-    if (!node->left) return node;
-    return minimum(node->left);
+    return this->minimum(node);
 }
 
 template <typename Key, typename Value>

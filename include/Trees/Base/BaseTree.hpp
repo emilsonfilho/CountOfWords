@@ -27,6 +27,11 @@ protected:
 
         return nullptr;        
     }
+
+    Node* minimum(Node* node) const {
+        if (!node->left) return node;
+        return minimum(node->left);
+    }
 };
 
 #endif
