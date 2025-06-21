@@ -13,8 +13,7 @@ protected:
         Node* aux = root;
 
         while (aux) {
-            if (key < aux
-            ->getKey()) {
+            if (key < aux->getKey()) {
                 count();
                 aux = aux->left;
             } else if (key > aux->getKey()) {
