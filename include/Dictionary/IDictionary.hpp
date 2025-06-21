@@ -1,6 +1,8 @@
 #ifndef IDICTIONARY_HPP
 #define IDICTIONARY_HPP
 
+#include "Trees/Base/BaseTree.hpp"
+
 template<typename Key, typename Value>
 class IDictionary {
 protected:
@@ -18,6 +20,9 @@ public:
     virtual Value& operator[](const Key& key) = 0;
     virtual const Value& operator[](const Key& key) const = 0;
     virtual ~IDictionary() = default;
+    
+    template <typename Tree, typename Node, typename K, typename V>
+    friend class BaseTree;
 };
 
 #endif

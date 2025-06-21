@@ -4,26 +4,15 @@
 #include <functional>
 #include <iostream>
 
-#include "IDictionary.hpp"
-#include "Node.hpp"
+#include "Dictionary/IDictionary.hpp"
+#include "Trees/Base/Node.hpp"
+#include "Trees/Base/BaseTree.hpp"
+#include "Trees/AVL/AVLNode.hpp"
 
 template <typename Key, typename Value>
-class AVLTree : public IDictionary<Key, Value> {
-public:
-    struct AVLNode : public Node<Key, Value> {
-        AVLNode *left, *right;
-        size_t height;
-
-        /**
-         * @brief Constructs a Node object with the given key and value.
-         * 
-         * @param k The key associated with the node.
-         * @param v The value associated with the node.
-         */
-        AVLNode(const Key& k, const Value& v);
-    };
+class AVLTree : public IDictionary<Key, Value>, public BaseTree<AVLTree<Key, Value>, AVLNode<Key, Value>, Key, Value> {
 private:
-    AVLNode* root;
+    AVLNode<Key, Value>* root;
     
     /**
     * @brief Computes the height of a given node in the AVL tree.
@@ -34,7 +23,7 @@ private:
     * @param node A pointer to the node whose height is to be computed.
     * @return size_t The height of the node. Returns 0 if the node is null.
     */
-    size_t height(AVLNode* node) const;
+    size_t height(AVLNode<Key, Value>* node) const;
 
     /**
     * @brief Calculates the height of a given node in the AVL tree.
@@ -46,7 +35,7 @@ private:
     * @param node A pointer to the node whose height is to be calculated.
     * @return size_t The height of the subtree rooted at the given node.
     */
-    size_t calcHeight(AVLNode* node) const;
+    size_t calcHeight(AVLNode<Key, Value>* node) const;
 
     /**
     * @brief Calculates the balance factor of a given node in the AVL tree.
@@ -62,7 +51,7 @@ private:
     *         indicates the left subtree is taller, and 0 indicates both subtrees 
     *         have the same height.
     */
-    int getBalanceFactor(AVLNode* node) const;
+    int getBalanceFactor(AVLNode<Key, Value>* node) const;
 
     /**
     * @brief Finds the node with the minimum key in the subtree rooted at the given node.
@@ -74,9 +63,9 @@ private:
     * @return Pointer to the node containing the minimum key in the subtree.
     *         If the given node is nullptr, behavior is undefined.
     */
-    AVLNode* minimum(AVLNode* node) const;
+    AVLNode<Key, Value>* minimum(AVLNode<Key, Value>* node) const;
 
-    void printTree(AVLNode* node, size_t depth = 0) const;
+    void printTree(AVLNode<Key, Value>* node, size_t depth = 0) const;
 
     /**
     * @brief Performs a left rotation on the given node in the AVL tree.
@@ -88,7 +77,7 @@ private:
     * @param y A reference to the pointer of the node to be rotated.
     * @return A pointer to the new root of the subtree after the left rotation.
     */
-    AVLNode* rotateLeft(AVLNode*& y);
+    AVLNode<Key, Value>* rotateLeft(AVLNode<Key, Value>*& y);
 
     /**
     * Performs a right rotation on the given node in the AVL tree.
@@ -100,7 +89,7 @@ private:
     * @param y A reference to the node where the rotation is performed.
     * @return A pointer to the new root of the subtree after the rotation.
     */
-    AVLNode* rotateRight(AVLNode*& y);
+    AVLNode<Key, Value>* rotateRight(AVLNode<Key, Value>*& y);
 
     /**
     * @brief Fixes the balance of a given node in the AVL tree.
@@ -113,7 +102,7 @@ private:
     * @param y Pointer to the node to be fixed up.
     * @return Pointer to the balanced node after rotations and height update.
     */
-    AVLNode* fixupNode(AVLNode* node);
+    AVLNode<Key, Value>* fixupNode(AVLNode<Key, Value>* node);
 
     /**
     * @brief Removes the successor node from the AVL tree and updates the tree structure.
@@ -127,7 +116,7 @@ private:
     * @param node The current node being traversed to find the successor.
     * @return Node* The updated subtree after removing the successor node.
     */
-    AVLNode* removeSuccessor(AVLNode* root, AVLNode* node);
+    AVLNode<Key, Value>* removeSuccessor(AVLNode<Key, Value>* root, AVLNode<Key, Value>* node);
 
     /**
     * Inserts a key-value pair into the AVL tree, maintaining the AVL property.
@@ -143,23 +132,7 @@ private:
     *       for the new key-value pair, updates the tree structure, and ensures the
     *       AVL balance property is maintained.
     */
-    AVLNode* insert(const Key& key, const Value& value, AVLNode* node);
-
-    /**
-    * @brief Searches for a key in the AVL tree and retrieves its associated value.
-    * 
-    * This function performs a recursive search starting from the given node to find
-    * the specified key. If the key is found, the associated value is stored in the
-    * provided output parameter `outValue`. The function also increments the 
-    * `comparisonsCount` variable to track the number of comparisons made during the search.
-    * 
-    * @param key The key to search for in the AVL tree.
-    * @param outValue Reference to a variable where the associated value will be stored if the key is found.
-    * @param node Pointer to the current node in the AVL tree during the recursive search.
-    * @return true If the key is found in the AVL tree.
-    * @return false If the key is not found in the AVL tree.
-    */
-    bool find(const Key& key, Value& outValue, AVLNode* node);
+    AVLNode<Key, Value>* insert(const Key& key, const Value& value, AVLNode<Key, Value>* node);
 
     /**
     * Updates the value associated with a given key in the AVL tree.
@@ -168,10 +141,10 @@ private:
     * @param key The key whose associated value is to be updated.
     * @param value The new value to associate with the given key.
     * @param node The current node being traversed in the AVL tree.
-    * @return A pointer to the updated AVLNode after fixing up the tree structure.
+    * @return A pointer to the updated AVLNode<Key, Value> after fixing up the tree structure.
     * @throws KeyNotFoundException If the key is not found in the tree.
     */
-    AVLNode* update(const Key& key, const Value& value, AVLNode* node);
+    AVLNode<Key, Value>* update(const Key& key, const Value& value, AVLNode<Key, Value>* node);
 
     /**
     * @brief Removes a node with the specified key from the AVL tree.
@@ -185,7 +158,7 @@ private:
     * @param node The current node being examined during the recursive traversal.
     * @return A pointer to the updated subtree after the removal operation.
     */
-    AVLNode* remove(const Key& key, AVLNode* node);
+    AVLNode<Key, Value>* remove(const Key& key, AVLNode<Key, Value>* node);
 
     /**
     * @brief Recursively clears all nodes in the AVL tree starting from the given node.
@@ -197,7 +170,7 @@ private:
     * @param node Pointer to the current node to be cleared. If the node is nullptr,
     *             the function does nothing.
     */
-    void clear(AVLNode* node);
+    void clear(AVLNode<Key, Value>* node);
 
     /**
     * @brief Prints the elements of the AVL tree in in-order traversal.
@@ -210,7 +183,7 @@ private:
     * @param node The current node being processed in the traversal.
     *             If the node is nullptr, the function does nothing.
     */
-    void printInOrder(std::ostream& out, AVLNode* node) const;
+    void printInOrder(std::ostream& out, AVLNode<Key, Value>* node) const;
 public:
     static const int IMBALANCE = 2;
 
@@ -315,6 +288,6 @@ public:
     void print() const;
 };
 
-#include "AVLTree/AVLTree.impl.hpp"
+#include "Trees/AVL/AVLTree.impl.hpp"
 
 #endif
