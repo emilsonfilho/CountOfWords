@@ -21,16 +21,6 @@ private:
 
     void insertFixup(RedBlackNode<Key, Value>* z);
 
-    RedBlackNode<Key, Value>* update(const Key& key, const Value& value, RedBlackNode<Key, Value>* node) {
-        if (node == NIL) return node;
-
-        if (key < node->getKey()) {
-            
-        }
-
-        this->incrementCounter();
-    }
-
     void printTree(RedBlackNode<Key, Value>* node, int indent = 0) const;
 public:
     RedBlackTree();
