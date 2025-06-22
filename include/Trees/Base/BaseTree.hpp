@@ -32,6 +32,14 @@ protected:
         if (!node->left) return node;
         return minimum(node->left);
     }
+
+    void clearNode(Node* node) {
+        if (node) {
+            clearNode(node->left);
+            clearNode(node->right);
+            delete node;
+        }
+    }
 };
 
 #endif

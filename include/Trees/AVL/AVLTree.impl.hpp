@@ -159,15 +159,6 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::remove(const Key& key, AVLNode<Key, Va
 }
 
 template <typename Key, typename Value>
-void AVLTree<Key, Value>::clear(AVLNode<Key, Value>* node) {
-	if (node) {
-		clear(node->left);
-		clear(node->right);
-		delete node;
-	}
-}
-
-template <typename Key, typename Value>
 void AVLTree<Key, Value>::printInOrder(std::ostream& out, AVLNode<Key, Value>* node) const {
 	if (node) {
 		printInOrder(out, node->left);
@@ -211,7 +202,7 @@ void AVLTree<Key, Value>::remove(const Key& key) {
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::clear() {
-	clear(root);
+	this->clearNode(root);
 	root = nullptr;
 }
 

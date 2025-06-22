@@ -135,13 +135,6 @@ private:
     AVLNode<Key, Value>* remove(const Key& key, AVLNode<Key, Value>* node);
 
     /**
-     * @brief Recursively clears all nodes in the AVL tree.
-     * 
-     * @param node A pointer to the current node to be cleared.
-     */
-    void clear(AVLNode<Key, Value>* node);
-
-    /**
      * @brief Prints the elements of the AVL tree in in-order traversal.
      * 
      * @param out The output stream where the key-value pairs will be printed.
