@@ -134,6 +134,7 @@ private:
      */
     AVLNode<Key, Value>* remove(const Key& key, AVLNode<Key, Value>* node);
 
+    AVLNode<Key, Value>* upsert(const Key& key, AVLNode<Key, Value>* node, Value*& outValue);
 public:
     static const int IMBALANCE = 2; ///< The imbalance threshold for the AVL tree.
 

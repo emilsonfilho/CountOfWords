@@ -159,6 +159,28 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::remove(const Key& key, AVLNode<Key, Va
 }
 
 template <typename Key, typename Value>
+AVLNode<Key, Value>* AVLTree<Key, Value>::upsert(const Key& key, AVLNode<Key, Value>* node, Value*& outValue) {
+	if (!node) {
+		AVLNode<Key, Value>* newNode = new AVLNode<Key, Value>(key, Value());
+		outValue = &(newNode->getValue());
+		return newNode;
+	}
+
+	this->incrementCounter();
+
+	if (key < node->getKey()) {
+		node->left = upsert(key, node->left, outValue);
+	} else if (key > node->getKey()) {
+		node->right = upsert(key, node->right, outValue);
+	} else {
+		outValue = &(node->getValue());
+		return node;
+	}
+
+	return fixupNode(node);
+}
+
+template <typename Key, typename Value>
 AVLTree<Key, Value>::AVLTree(): root(nullptr) {}
 
 template <typename Key, typename Value>
@@ -225,23 +247,9 @@ size_t AVLTree<Key, Value>::getComparisonsCount() const {
 
 template <typename Key, typename Value>
 Value& AVLTree<Key, Value>::operator[](const Key& key) {
-	AVLNode<Key, Value>** aux = &root;
-
-	while (*aux) {
-		if (key < (*aux)->getKey()) {
-			this->incrementCounter();
-			aux = &(*aux)->left;
-		} else if (key > (*aux)->getKey()) {
-			this->incrementCounter();
-			aux = &(*aux)->right;
-		} else {
-			this->incrementCounter();
-			return (*aux)->getValue();
-		}
-	}
-
-	*aux = new AVLNode(key, Value());
-	return (*aux)->getValue();
+	Value* insertedValue = nullptr;
+	root = upsert(key, root, insertedValue);
+	return *insertedValue;
 }
 
 template <typename Key, typename Value>
