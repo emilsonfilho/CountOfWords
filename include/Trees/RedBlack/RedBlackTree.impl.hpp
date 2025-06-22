@@ -1,7 +1,5 @@
 #include "Trees/RedBlack/RedBlackTree.hpp"
 
-#include "Exceptions/KeyExceptions.hpp"
-
 template <typename Key, typename Value>
 const RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::getRoot() const {
     return root;
