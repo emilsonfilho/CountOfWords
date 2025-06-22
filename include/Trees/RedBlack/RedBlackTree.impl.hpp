@@ -314,7 +314,7 @@ void RedBlackTree<Key, Value>::printInOrder(std::ostream& os) const {
 
 template <typename Key, typename Value>
 size_t RedBlackTree<Key, Value>::getComparisonsCount() const {
-    // Implementation of getComparisonsCount
+    return comparisonsCount;
 }
 
 template <typename Key, typename Value>

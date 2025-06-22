@@ -23,6 +23,7 @@ class RedBlackTree : public IDictionary<Key, Value>, public BaseTree<RedBlackTre
 private:
     RedBlackNode<Key, Value>* root; ///< Pointer to the root node of the Red-Black Tree.
     static RedBlackNode<Key, Value>* const NIL; ///< Sentinel node representing null leaves.
+    int comparisonsCount;
 
     /**
      * @brief Retrieves the root node of the Red-Black Tree.
