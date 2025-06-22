@@ -102,7 +102,16 @@ public:
      * @throws KeyAlreadyExistsException If the key already exists in the hash table.
      */
     virtual void insert(const Key& key, const Value& value);
-    virtual bool find(const Key& key, Value& outValue) {};
+
+    /**
+     * @brief Searches for a key in the hash table and retrieves its associated value if found.
+     * 
+     * @param key The key to search for in the hash table.
+     * @param outValue A reference to a variable where the associated value will be stored if the key is found.
+     * @return true If the key is found in the hash table.
+     * @return false If the key is not found in the hash table.
+     */
+    virtual bool find(const Key& key, Value& outValue);
     virtual void update(const Key& key, const Value& value) {};
     virtual void remove(const Key& key) {};
     virtual void clear() {};

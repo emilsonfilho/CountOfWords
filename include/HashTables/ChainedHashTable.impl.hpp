@@ -81,3 +81,20 @@ void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& val
     table[slot].push_back({key, value});
     numberOfElements++;
 }
+
+template <typename Key, typename Value, typename Hash>
+bool ChainedHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
+    size_t slot = hashCode(key);
+
+    std::list<std::pair<Key, Value>> lst = table[slot];
+
+    auto el = std::find_if(lst.begin(), lst.end(), [&key](const std::pair<Key, Value>& p) {
+        return p.first == key;
+    });
+
+    bool wasFound = el != lst.end();
+
+    if (wasFound) outValue = el->second;
+    
+    return wasFound;
+}
