@@ -113,11 +113,10 @@ void RedBlackTree<Key, Value>::insert(const Key& key, const Value& value) {
     while (x != NIL) {
         y = x;
 
+        this->incrementCounter();
         if (z->getKey() < x->getKey()) {
-            this->incrementCounter();
             x = x->left;
         } else if (z->getKey() > x->getKey()) {
-            this->incrementCounter();
             x = x->right;
         } else {
             throw KeyNotFoundException();
@@ -319,7 +318,37 @@ size_t RedBlackTree<Key, Value>::getComparisonsCount() const {
 
 template <typename Key, typename Value>
 Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
-    // Implementation of operator[]
+    RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, Value(), NIL, NIL, NIL, RED);
+
+    RedBlackNode<Key, Value> *x = root, *y = NIL;
+    
+    while (x != NIL) {
+        y = x;
+
+        this->incrementCounter();
+        if (z->getKey() < x->getKey()) {
+            x = x->left;
+        } else if (z->getKey() > x->getKey()) {
+            x = x->right;
+        } else {
+            return x->getValue();
+        }
+    }
+
+    z->parent = y;
+    if (y == NIL) 
+        root = z;
+    else if (z->getKey() < y->getKey())
+        y->left = z;
+    else
+        y->right = z;
+
+    // should I increment counter here?
+    this->incrementCounter();
+
+    insertFixup(z);
+
+    return z->getValue();
 }
 
 template <typename Key, typename Value>
