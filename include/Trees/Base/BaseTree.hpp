@@ -33,10 +33,10 @@ protected:
         return minimum(node->left);
     }
 
-    void clearNode(Node* node) {
-        if (node) {
-            clearNode(node->left);
-            clearNode(node->right);
+    void clearNode(Node* node, Node* comp) {
+        if (node != comp) {
+            clearNode(node->left, comp);
+            clearNode(node->right, comp);
             delete node;
         }
     }

@@ -303,7 +303,8 @@ void RedBlackTree<Key, Value>::remove(const Key& key) {
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::clear() {
-    // Implementation of clear
+    this->clearNode(root, NIL);
+    root = NIL;
 }
 
 template <typename Key, typename Value>

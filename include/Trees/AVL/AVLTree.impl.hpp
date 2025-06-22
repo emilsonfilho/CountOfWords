@@ -202,7 +202,7 @@ void AVLTree<Key, Value>::remove(const Key& key) {
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::clear() {
-	this->clearNode(root);
+	this->clearNode(root, nullptr);
 	root = nullptr;
 }
 
