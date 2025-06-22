@@ -353,5 +353,5 @@ Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
 
 template <typename Key, typename Value>
 const Value& RedBlackTree<Key, Value>::operator[](const Key& key) const {
-    // Implementation of const operator[]
+    return this->at(key);
 }
