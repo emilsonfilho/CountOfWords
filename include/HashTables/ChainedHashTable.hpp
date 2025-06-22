@@ -92,12 +92,14 @@ public:
     /**
      * @brief Inserts a key-value pair into the hash table.
      * 
-     * If the key already exists in the hash table, the function does nothing.
-     * If the load factor exceeds the maximum load factor after the insertion,
-     * the hash table is rehashed to a larger size to maintain performance.
+     * If the load factor exceeds the maximum load factor, the hash table will be rehashed
+     * to accommodate more elements. If the key already exists in the hash table, an exception
+     * of type KeyAlreadyExistsException will be thrown.
      * 
-     * @param key The key to be inserted into the hash table.
+     * @param key The key to be inserted.
      * @param value The value associated with the key.
+     * 
+     * @throws KeyAlreadyExistsException If the key already exists in the hash table.
      */
     virtual void insert(const Key& key, const Value& value);
     virtual bool find(const Key& key, Value& outValue) {};

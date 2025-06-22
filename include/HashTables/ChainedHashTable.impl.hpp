@@ -1,8 +1,7 @@
 #include "HashTables/ChainedHashTable.hpp"
 
 #include <cmath>
-
-#define GOLDEN_RATIO 0.6180339887
+#include "Exceptions/KeyExceptions.hpp"
 
 template <typename Key, typename Value, typename Hash>
 ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf) {
@@ -77,7 +76,7 @@ void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& val
     size_t slot = hashCode(key);
     
     for (const auto& p : table[slot])
-        if (p.first == key) return;
+        if (p.first == key) throw KeyAlreadyExistsException();
 
     table[slot].push_back({key, value});
     numberOfElements++;
