@@ -254,20 +254,5 @@ Value& AVLTree<Key, Value>::operator[](const Key& key) {
 
 template <typename Key, typename Value>
 const Value& AVLTree<Key, Value>::operator[](const Key& key) const {
-	const AVLNode<Key, Value>* aux = root;
-
-	while (aux) {
-		if (key < aux->getKey()) {
-			this->incrementCounter();
-			aux = aux->left;
-		} else if (key > aux->getKey()) {
-			this->incrementCounter();
-			aux = aux->right;
-		} else {
-			this->incrementCounter();
-			return aux->getValue();
-		}
-	}
-
-	throw KeyNotFoundException();
+	return this->at(key);
 }
