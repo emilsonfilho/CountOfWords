@@ -18,9 +18,9 @@ RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key,
     
     if (x->parent != NIL) {
         if (x->getKey() < x->parent->getKey())
-            x->parent->right = x;
-        else
             x->parent->left = x;
+        else
+            x->parent->right = x;
     } else {
         root = x;
     }
