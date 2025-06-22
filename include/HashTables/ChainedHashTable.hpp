@@ -16,6 +16,14 @@ class ChainedHashTable : public IDictionary<Key, Value> {
     size_t numberOfElements;
     Hash hashing;
 
+    struct FindResult {
+        typename std::list<std::pair<Key, Value>>::iterator iterator;
+        const std::list<std::pair<Key, Value>>& bucketRef;
+
+        FindResult(typename std::list<std::pair<Key, Value>>::iterator it, const std::list<std::pair<Key, Value>>& bRef)
+            : iterator(it), bucketRef(bRef) {}
+    };
+
     /**
      * @brief Finds the next prime number greater than or equal to the given number.
      * 
@@ -75,6 +83,8 @@ class ChainedHashTable : public IDictionary<Key, Value> {
      *          the next prime number greater than or equal to `m`.
      */
     void rehash(size_t m);
+
+    FindResult findPairIterator(const Key& key);
 public:
     /**
      * @class ChainedHashTable
@@ -112,7 +122,9 @@ public:
      * @return false If the key is not found in the hash table.
      */
     virtual bool find(const Key& key, Value& outValue);
-    virtual void update(const Key& key, const Value& value) {};
+
+    virtual void update(const Key& key, const Value& value);
+
     virtual void remove(const Key& key) {};
     virtual void clear() {};
     virtual void printInOrder(std::ostream& out) const {
@@ -123,8 +135,6 @@ public:
             }
             out << '\n';
         }
-
-        out << getNextPrime(39733614) << '\n'; 
     };
     virtual size_t getComparisonsCount() const {};
     virtual Value& operator[](const Key& key) {};

@@ -69,6 +69,19 @@ void ChainedHashTable<Key, Value, Hash>::rehash(size_t m) {
 }
 
 template <typename Key, typename Value, typename Hash>
+typename ChainedHashTable<Key, Value, Hash>::FindResult ChainedHashTable<Key, Value, Hash>::findPairIterator(const Key& key) {
+    size_t slot = hashCode(key);
+
+    std::list<std::pair<Key, Value>>& lst = table[slot];
+
+    auto it = std::find_if(lst.begin(), lst.end(), [&key](const std::pair<Key, Value>& p) {
+        return p.first == key;
+    });
+
+    return FindResult(it, lst);
+}
+
+template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& value) {
     if (getLoadFactor() >= maxLoadFactor)
         rehash(2 * tableSize);
@@ -84,17 +97,20 @@ void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& val
 
 template <typename Key, typename Value, typename Hash>
 bool ChainedHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
-    size_t slot = hashCode(key);
+    FindResult response = findPairIterator(key);
 
-    std::list<std::pair<Key, Value>> lst = table[slot];
+    bool wasFound = response.iterator != response.bucketRef.end();
 
-    auto el = std::find_if(lst.begin(), lst.end(), [&key](const std::pair<Key, Value>& p) {
-        return p.first == key;
-    });
-
-    bool wasFound = el != lst.end();
-
-    if (wasFound) outValue = el->second;
+    if (wasFound) outValue = response.iterator->second;
     
     return wasFound;
+}
+
+template <typename Key, typename Value, typename Hash>
+void ChainedHashTable<Key, Value, Hash>::update(const Key& key, const Value& value) {
+    FindResult response = findPairIterator(key);
+
+    if (response.iterator == response.bucketRef.end()) throw KeyNotFoundException();
+
+    response.iterator->second = value;
 }
