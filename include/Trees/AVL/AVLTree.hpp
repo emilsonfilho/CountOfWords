@@ -134,14 +134,6 @@ private:
      */
     AVLNode<Key, Value>* remove(const Key& key, AVLNode<Key, Value>* node);
 
-    /**
-     * @brief Prints the elements of the AVL tree in in-order traversal.
-     * 
-     * @param out The output stream where the key-value pairs will be printed.
-     * @param node The current node being processed in the traversal.
-     */
-    void printInOrder(std::ostream& out, AVLNode<Key, Value>* node) const;
-
 public:
     static const int IMBALANCE = 2; ///< The imbalance threshold for the AVL tree.
 
