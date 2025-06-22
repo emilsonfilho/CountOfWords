@@ -20,6 +20,16 @@ class ChainedHashTable : public IDictionary<Key, Value> {
         typename std::list<std::pair<Key, Value>>::iterator iterator;
         const std::list<std::pair<Key, Value>>& bucketRef;
 
+        /**
+         * @brief Represents the result of a search operation in a chained hash table.
+         * 
+         * This structure holds an iterator pointing to the found element in the bucket
+         * and a reference to the bucket where the search was performed.
+         * 
+         * @param it An iterator pointing to the found key-value pair in the bucket.
+         * @param bRef A constant reference to the bucket (a list of key-value pairs) 
+         *             where the search was conducted.
+         */
         FindResult(typename std::list<std::pair<Key, Value>>::iterator it, const std::list<std::pair<Key, Value>>& bRef)
             : iterator(it), bucketRef(bRef) {}
     };
@@ -123,6 +133,18 @@ public:
      */
     virtual bool find(const Key& key, Value& outValue);
 
+    /**
+     * @brief Updates the value associated with a given key in the hash table.
+     * 
+     * If the key exists in the hash table, its associated value is updated
+     * to the provided value. If the key does not exist, a KeyNotFoundException
+     * is thrown.
+     * 
+     * @param key The key whose associated value is to be updated.
+     * @param value The new value to associate with the given key.
+     * 
+     * @throws KeyNotFoundException If the key does not exist in the hash table.
+     */
     virtual void update(const Key& key, const Value& value);
 
     virtual void remove(const Key& key) {};
