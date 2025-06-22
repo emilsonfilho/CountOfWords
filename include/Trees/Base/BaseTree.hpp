@@ -40,6 +40,16 @@ protected:
             delete node;
         }
     }
+
+    void inOrderTransversal(std::ostream& out, Node* node, Node* comp) const {
+        if (node != comp) {
+            inOrderTransversal(out, node->left, comp);
+
+            out << node->show() << '\n';
+
+            inOrderTransversal(out, node->right, comp);
+        }
+    }
 };
 
 #endif

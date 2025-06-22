@@ -160,13 +160,7 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::remove(const Key& key, AVLNode<Key, Va
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::printInOrder(std::ostream& out, AVLNode<Key, Value>* node) const {
-	if (node) {
-		printInOrder(out, node->left);
-
-		out << node->show() << '\n';
-
-		printInOrder(out, node->right);
-	}
+	this->inOrderTransversal(out, root, nullptr);
 }
 
 template <typename Key, typename Value>
