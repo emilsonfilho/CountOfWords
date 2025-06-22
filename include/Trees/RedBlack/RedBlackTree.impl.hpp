@@ -309,7 +309,7 @@ void RedBlackTree<Key, Value>::clear() {
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::printInOrder(std::ostream& os) const {
-    // Implementation of printInOrder
+    this->inOrderTransversal(os, root, NIL);
 }
 
 template <typename Key, typename Value>
