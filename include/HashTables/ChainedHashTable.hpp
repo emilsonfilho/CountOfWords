@@ -18,7 +18,7 @@ class ChainedHashTable : public IDictionary<Key, Value> {
 
     struct FindResult {
         typename std::list<std::pair<Key, Value>>::iterator iterator;
-        const std::list<std::pair<Key, Value>>& bucketRef;
+        std::list<std::pair<Key, Value>>& bucketRef;
 
         /**
          * @brief Represents the result of a search operation in a chained hash table.
@@ -30,8 +30,18 @@ class ChainedHashTable : public IDictionary<Key, Value> {
          * @param bRef A constant reference to the bucket (a list of key-value pairs) 
          *             where the search was conducted.
          */
-        FindResult(typename std::list<std::pair<Key, Value>>::iterator it, const std::list<std::pair<Key, Value>>& bRef)
+        FindResult(typename std::list<std::pair<Key, Value>>::iterator it, std::list<std::pair<Key, Value>>& bRef)
             : iterator(it), bucketRef(bRef) {}
+
+        /**
+         * @brief Checks if an element was found in the hash table bucket.
+         * 
+         * This function determines whether the iterator is not at the end of the bucket,
+         * indicating that an element matching the search criteria exists in the bucket.
+         * 
+         * @return true if the element was found, false otherwise.
+         */
+        bool wasElementFound() const { return iterator != bucketRef.end(); }
     };
 
     /**
@@ -147,8 +157,19 @@ public:
      */
     virtual void update(const Key& key, const Value& value);
 
-    virtual void remove(const Key& key) {};
-    virtual void clear() {};
+    /**
+     * @brief Removes the key-value pair associated with the given key from the hash table.
+     * 
+     * If the key exists in the hash table, the corresponding key-value pair is removed.
+     * If the key does not exist, no action is taken.
+     * 
+     * @param key The key of the key-value pair to be removed.
+     * 
+     * @throws None
+     */
+    virtual void remove(const Key& key);
+
+    virtual void clear();
     virtual void printInOrder(std::ostream& out) const {
         for (size_t i = 0; i < tableSize; i++) {
             out << i << ": ";

@@ -99,7 +99,7 @@ template <typename Key, typename Value, typename Hash>
 bool ChainedHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
     FindResult response = findPairIterator(key);
 
-    bool wasFound = response.iterator != response.bucketRef.end();
+    bool wasFound = response.wasElementFound();
 
     if (wasFound) outValue = response.iterator->second;
     
@@ -110,7 +110,24 @@ template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::update(const Key& key, const Value& value) {
     FindResult response = findPairIterator(key);
 
-    if (response.iterator == response.bucketRef.end()) throw KeyNotFoundException();
+    if (!response.wasElementFound()) throw KeyNotFoundException();
 
     response.iterator->second = value;
+}
+
+template <typename Key, typename Value, typename Hash>
+void ChainedHashTable<Key, Value, Hash>::remove(const Key& key) {
+    FindResult response = findPairIterator(key);
+
+    if (response.wasElementFound()) {
+        response.bucketRef.erase(response.iterator);
+        numberOfElements--;
+    }
+}
+
+template <typename Key, typename Value, typename Hash>
+void ChainedHashTable<Key, Value, Hash>::clear() {
+    table.clear();
+    table.resize(tableSize);
+    numberOfElements = 0;
 }
