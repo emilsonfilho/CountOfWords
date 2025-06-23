@@ -178,6 +178,22 @@ public:
      */
     virtual void clear();
 
+    /**
+     * @brief Prints the key-value pairs in the hash table to the output stream in ascending order of keys.
+     *
+     * This function iterates through all elements in the hash table, stores them in a
+     * temporary vector, sorts the vector based on the keys, and then prints each
+     * key-value pair to the provided output stream. The output is formatted such that
+     * keys and values are right-aligned within a field whose width is determined by
+     * the maximum length of the keys and values, respectively, plus 2 for padding.
+     *
+     * @param out The output stream to which the key-value pairs will be printed.
+     * Typically `std::cout` or a file stream.
+     * @note This function requires `StringHandler::toString()` to be defined for `Key`
+     * and `Value` types to correctly calculate string lengths for formatting.
+     * It also assumes that the `Key` type supports the less-than operator (`<`)
+     * for sorting.
+     */
     virtual void printInOrder(std::ostream& out) const;
     virtual size_t getComparisonsCount() const {};
     virtual Value& operator[](const Key& key) {};
