@@ -78,7 +78,7 @@ class ChainedHashTable : public IDictionary<Key, Value> {
      * 
      * @return size_t The current load factor as a floating-point value.
      */
-    size_t getLoadFactor() const;
+    float getLoadFactor() const;
 
     /**
      * @brief Retrieves the maximum load factor of the hash table.

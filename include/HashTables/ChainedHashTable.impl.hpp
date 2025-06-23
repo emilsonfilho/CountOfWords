@@ -44,7 +44,7 @@ size_t ChainedHashTable<Key, Value, Hash>::hashCode(const Key& key) const {
 }
 
 template <typename Key, typename Value, typename Hash>
-size_t ChainedHashTable<Key, Value, Hash>::getLoadFactor() const {
+float ChainedHashTable<Key, Value, Hash>::getLoadFactor() const {
     return static_cast<float>(numberOfElements) / tableSize;
 }
 
