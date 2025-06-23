@@ -168,3 +168,15 @@ template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::getComparisonsCount() const {
     return comparisonsCount;
 }
+
+template <typename Key, typename Value, typename Hash>
+Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) {
+    FindResult response = findPairIterator(key);
+
+    if (!response.wasElementFound()) {
+        response.bucketRef.push_back({key, Value()});
+        return response.bucketRef.back().second;
+    } else {
+        return response.iterator->second;
+    }
+}

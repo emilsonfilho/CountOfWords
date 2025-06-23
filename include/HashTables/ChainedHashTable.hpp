@@ -197,8 +197,18 @@ public:
      */
     void printInOrder(std::ostream& out) const override;
 
+    /**
+     * @brief Returns the current value of the comparisons count.
+     *
+     * This function provides access to the `comparisonsCount` attribute,
+     * which is expected to track the number of key comparisons performed
+     * by certain operations within the hash table (e.g., search, insertion).
+     *
+     * @return The current number of comparisons as a `size_t`.
+     */
     size_t getComparisonsCount() const override;
-    Value& operator[](const Key& key) override {};
+
+    Value& operator[](const Key& key) override;
     const Value& operator[](const Key& key) const override {};
 
     void printSlots(std::ostream& out) const {
