@@ -246,33 +246,6 @@ public:
      * found element).
      */
     const Value& operator[](const Key& key) const override;
-
-    void printSlots(std::ostream& out) const {
-        // Iterate through each bucket (slot) in the hash table's underlying storage.
-        // 'table' is assumed to be a container like std::vector<std::list<...>> or similar.
-        for (size_t i = 0; i < tableSize; ++i) {
-            // Print the current slot number.
-            out << "Slot " << i << ": ";
-
-            // Check if the current slot is empty.
-            if (table[i].empty()) {
-                out << "Empty\n"; // If empty, indicate it.
-            } else {
-                // If not empty, iterate through all key-value pairs in this slot.
-                bool firstElement = true; // Flag to handle comma separation.
-                for (const auto& p : table[i]) {
-                    if (!firstElement) {
-                        out << ", "; // Add a comma separator for multiple elements in a slot.
-                    }
-                    // Print the key-value pair.
-                    out << "(" << p.first << ", " << p.second << ")";
-                    firstElement = false;
-                }
-                out << "\n"; // Newline after printing all elements in the current slot.
-            }
-        }
-    }
-
 };
 
 #include "HashTables/ChainedHashTable.impl.hpp"
