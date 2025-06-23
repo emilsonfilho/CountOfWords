@@ -3,7 +3,7 @@
 	"Template KVH": {
 		"prefix": "templatekv",
 		"body": [
-			"template <typename Key, typename Value>"
+			"template <typename Key, typename Value, typename Hash>"
 		],
 		"description": "Template declaration with key and value"
 	},
@@ -13,5 +13,12 @@
 			"${1:TreeName}<Key, Value>::"
 		],
 		"description": "Prefix for member function definition in generic trees"
+	},
+	"Hash Table Preffix": {
+		"prefix": "htprefix",
+		"body": [
+			"${1:Type}HashTable<Key, Value, Hash>::"
+		],
+		"description": "Prefix for member function definition in generic hash tables"
 	}
 }

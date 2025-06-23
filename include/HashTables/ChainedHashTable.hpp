@@ -15,35 +15,26 @@ class ChainedHashTable : public IDictionary<Key, Value> {
     float maxLoadFactor;
     size_t numberOfElements;
     Hash hashing;
-    int comparisonsCount;
+    mutable int comparisonsCount;
 
-    struct FindResult {
-        typename std::list<std::pair<Key, Value>>::iterator iterator;
-        std::list<std::pair<Key, Value>>& bucketRef;
-
-        /**
-         * @brief Represents the result of a search operation in a chained hash table.
-         * 
-         * This structure holds an iterator pointing to the found element in the bucket
-         * and a reference to the bucket where the search was performed.
-         * 
-         * @param it An iterator pointing to the found key-value pair in the bucket.
-         * @param bRef A constant reference to the bucket (a list of key-value pairs) 
-         *             where the search was conducted.
-         */
-        FindResult(typename std::list<std::pair<Key, Value>>::iterator it, std::list<std::pair<Key, Value>>& bRef)
+    template <typename Iterator, typename BucketRef>
+    struct GenericFindResult {
+        Iterator iterator;
+        BucketRef bucketRef;
+        
+        GenericFindResult(Iterator it, BucketRef bRef)
             : iterator(it), bucketRef(bRef) {}
 
-        /**
-         * @brief Checks if an element was found in the hash table bucket.
-         * 
-         * This function determines whether the iterator is not at the end of the bucket,
-         * indicating that an element matching the search criteria exists in the bucket.
-         * 
-         * @return true if the element was found, false otherwise.
-         */
         bool wasElementFound() const { return iterator != bucketRef.end(); }
     };
+
+    using FindResult = GenericFindResult<
+        typename std::list<std::pair<Key, Value>>::iterator,
+        std::list<std::pair<Key, Value>>&>;
+
+    using ConstFindResult = GenericFindResult<
+        typename std::list<std::pair<Key, Value>>::const_iterator,
+        const std::list<std::pair<Key, Value>>&>;
 
     /**
      * @brief Finds the next prime number greater than or equal to the given number.
@@ -106,6 +97,7 @@ class ChainedHashTable : public IDictionary<Key, Value> {
     void rehash(size_t m);
 
     FindResult findPairIterator(const Key& key);
+    ConstFindResult findConstPairIterator(const Key& key) const;
 public:
     /**
      * @class ChainedHashTable

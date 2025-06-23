@@ -87,6 +87,20 @@ typename ChainedHashTable<Key, Value, Hash>::FindResult ChainedHashTable<Key, Va
 }
 
 template <typename Key, typename Value, typename Hash>
+typename ChainedHashTable<Key, Value, Hash>::ConstFindResult ChainedHashTable<Key, Value, Hash>::findConstPairIterator(const Key& key) const {
+    size_t slot = hashCode(key);
+
+    const std::list<std::pair<Key, Value>>& lst = table[slot];
+
+    auto it = std::find_if(lst.begin(), lst.end(), [this, &key](const std::pair<Key, Value>& p) {
+        comparisonsCount++;
+        return p.first == key;
+    });
+
+    return ConstFindResult(it, lst);
+}
+
+template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& value) {
     if (getLoadFactor() >= maxLoadFactor)
         rehash(2 * tableSize);
@@ -142,8 +156,7 @@ void ChainedHashTable<Key, Value, Hash>::clear() {
 template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
     size_t maxKeyLen = 0, maxValLen = 0;
-    std::vector<std::pair<Key, Value>> vec;
-    vec.resize(numberOfElements);
+    std::vector<std::pair<Key, Value>> vec(numberOfElements);
 
     int i = 0;
     for (const auto& line : table) {
@@ -158,6 +171,7 @@ void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
     std::sort(vec.begin(), vec.end(), [](const auto& pa, const auto& pb) {
         return pa.first < pb.first;
     });
+
 
     for (const auto& p : vec) {
         out << std::setw(maxKeyLen + 2) << p.first << " | " << std::setw(maxValLen + 2) << p.second << "\n";
@@ -175,6 +189,7 @@ Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) {
 
     if (!response.wasElementFound()) {
         response.bucketRef.push_back({key, Value()});
+        numberOfElements++;
         return response.bucketRef.back().second;
     } else {
         return response.iterator->second;
@@ -183,7 +198,7 @@ Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) {
 
 template <typename Key, typename Value, typename Hash>
 const Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) const {
-    FindResult response = findPairIterator(key);
+    ConstFindResult response = findConstPairIterator(key);
 
     if (!response.wasElementFound()) {
         throw KeyNotFoundException();
