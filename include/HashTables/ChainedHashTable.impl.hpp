@@ -12,6 +12,7 @@ ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf) {
     table.resize(tableSize);
     maxLoadFactor = mlf <= 0 ? 1.0 : mlf;
     numberOfElements = 0;
+    comparisonsCount = 0;
 }
 
 template <typename Key, typename Value, typename Hash>
@@ -77,7 +78,8 @@ typename ChainedHashTable<Key, Value, Hash>::FindResult ChainedHashTable<Key, Va
 
     std::list<std::pair<Key, Value>>& lst = table[slot];
 
-    auto it = std::find_if(lst.begin(), lst.end(), [&key](const std::pair<Key, Value>& p) {
+    auto it = std::find_if(lst.begin(), lst.end(), [this, &key](const std::pair<Key, Value>& p) {
+        comparisonsCount++;
         return p.first == key;
     });
 
@@ -91,8 +93,10 @@ void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& val
 
     size_t slot = hashCode(key);
     
-    for (const auto& p : table[slot])
+    for (const auto& p : table[slot]) {
+        comparisonsCount++;
         if (p.first == key) throw KeyAlreadyExistsException();
+    }
 
     table[slot].push_back({key, value});
     numberOfElements++;
@@ -158,4 +162,9 @@ void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
     for (const auto& p : vec) {
         out << std::setw(maxKeyLen + 2) << p.first << " | " << std::setw(maxValLen + 2) << p.second << "\n";
     }
+}
+
+template <typename Key, typename Value, typename Hash>
+size_t ChainedHashTable<Key, Value, Hash>::getComparisonsCount() const {
+    return comparisonsCount;
 }

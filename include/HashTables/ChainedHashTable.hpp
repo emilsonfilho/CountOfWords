@@ -15,6 +15,7 @@ class ChainedHashTable : public IDictionary<Key, Value> {
     float maxLoadFactor;
     size_t numberOfElements;
     Hash hashing;
+    int comparisonsCount;
 
     struct FindResult {
         typename std::list<std::pair<Key, Value>>::iterator iterator;
@@ -131,7 +132,7 @@ public:
      * 
      * @throws KeyAlreadyExistsException If the key already exists in the hash table.
      */
-    virtual void insert(const Key& key, const Value& value);
+    void insert(const Key& key, const Value& value) override;
 
     /**
      * @brief Searches for a key in the hash table and retrieves its associated value if found.
@@ -141,7 +142,7 @@ public:
      * @return true If the key is found in the hash table.
      * @return false If the key is not found in the hash table.
      */
-    virtual bool find(const Key& key, Value& outValue);
+    bool find(const Key& key, Value& outValue) override;
 
     /**
      * @brief Updates the value associated with a given key in the hash table.
@@ -155,7 +156,7 @@ public:
      * 
      * @throws KeyNotFoundException If the key does not exist in the hash table.
      */
-    virtual void update(const Key& key, const Value& value);
+    void update(const Key& key, const Value& value) override;
 
     /**
      * @brief Removes the key-value pair associated with the given key from the hash table.
@@ -167,7 +168,7 @@ public:
      * 
      * @throws None
      */
-    virtual void remove(const Key& key);
+    void remove(const Key& key) override;
 
     /**
      * @brief Clears the hash table by removing all elements.
@@ -176,7 +177,7 @@ public:
      * buckets and resizing the table to its current size. The number of elements
      * in the table is also reset to zero.
      */
-    virtual void clear();
+    void clear() override;
 
     /**
      * @brief Prints the key-value pairs in the hash table to the output stream in ascending order of keys.
@@ -194,10 +195,38 @@ public:
      * It also assumes that the `Key` type supports the less-than operator (`<`)
      * for sorting.
      */
-    virtual void printInOrder(std::ostream& out) const;
-    virtual size_t getComparisonsCount() const {};
-    virtual Value& operator[](const Key& key) {};
-    virtual const Value& operator[](const Key& key) const {};
+    void printInOrder(std::ostream& out) const override;
+
+    size_t getComparisonsCount() const override;
+    Value& operator[](const Key& key) override {};
+    const Value& operator[](const Key& key) const override {};
+
+    void printSlots(std::ostream& out) const {
+        // Iterate through each bucket (slot) in the hash table's underlying storage.
+        // 'table' is assumed to be a container like std::vector<std::list<...>> or similar.
+        for (size_t i = 0; i < tableSize; ++i) {
+            // Print the current slot number.
+            out << "Slot " << i << ": ";
+
+            // Check if the current slot is empty.
+            if (table[i].empty()) {
+                out << "Empty\n"; // If empty, indicate it.
+            } else {
+                // If not empty, iterate through all key-value pairs in this slot.
+                bool firstElement = true; // Flag to handle comma separation.
+                for (const auto& p : table[i]) {
+                    if (!firstElement) {
+                        out << ", "; // Add a comma separator for multiple elements in a slot.
+                    }
+                    // Print the key-value pair.
+                    out << "(" << p.first << ", " << p.second << ")";
+                    firstElement = false;
+                }
+                out << "\n"; // Newline after printing all elements in the current slot.
+            }
+        }
+    }
+
 };
 
 #include "HashTables/ChainedHashTable.impl.hpp"
