@@ -228,8 +228,24 @@ public:
      */
     Value& operator[](const Key& key) override;
 
-    
-    const Value& operator[](const Key& key) const override {};
+    /**
+     * @brief Provides read-only access to the value associated with the given key (const version).
+     *
+     * If the key exists in the hash table, this operator returns a constant
+     * reference to the existing value. This version of the operator is used
+     * when the hash table object itself is constant, preventing accidental
+     * modification of its contents. If the key is not found, it throws a
+     * `KeyNotFoundException`.
+     *
+     * @param key The key whose associated value is to be accessed.
+     * @return A const reference to the value associated with the key.
+     * @throws KeyNotFoundException If the key does not exist in the hash table.
+     * @note This operator assumes the existence of a `findPairIterator` member
+     * function (or a `const` overloaded version of it) that returns a `FindResult`
+     * struct/object with `wasElementFound()` and `iterator` (an iterator to the
+     * found element).
+     */
+    const Value& operator[](const Key& key) const override;
 
     void printSlots(std::ostream& out) const {
         // Iterate through each bucket (slot) in the hash table's underlying storage.

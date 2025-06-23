@@ -180,3 +180,14 @@ Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) {
         return response.iterator->second;
     }
 }
+
+template <typename Key, typename Value, typename Hash>
+const Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) const {
+    FindResult response = findPairIterator(key);
+
+    if (!response.wasElementFound()) {
+        throw KeyNotFoundException();
+    } else {
+        return response.iterator->second;
+    }
+}
