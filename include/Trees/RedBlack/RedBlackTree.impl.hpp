@@ -100,10 +100,18 @@ RedBlackNode<Key, Value>* const RedBlackTree<Key, Value>::NIL = new RedBlackNode
 );
 
 template <typename Key, typename Value>
-RedBlackTree<Key, Value>::RedBlackTree() { root = NIL; }
+RedBlackTree<Key, Value>::RedBlackTree() {
+    root = NIL;
+    comparisonsCount = 0;
+    maxKeyLen = 0;
+    maxValLen = 0;
+}
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::insert(const Key& key, const Value& value) {
+    maxKeyLen = std::max(maxKeyLen, StringHandler::size(key));
+	maxValLen = std::max(maxValLen, StringHandler::size(value));
+
     RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, value, NIL, NIL, NIL, RED);
 
     RedBlackNode<Key, Value> *x = root, *y = NIL;
@@ -316,6 +324,8 @@ size_t RedBlackTree<Key, Value>::getComparisonsCount() const {
 
 template <typename Key, typename Value>
 Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
+    maxKeyLen = std::max(maxKeyLen, StringHandler::size(key));
+
     RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, Value(), NIL, NIL, NIL, RED);
 
     RedBlackNode<Key, Value> *x = root, *y = NIL;
@@ -329,9 +339,12 @@ Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
         } else if (z->getKey() > x->getKey()) {
             x = x->right;
         } else {
+            maxValLen = std::max(maxValLen, StringHandler::size(x->getValue()));
             return x->getValue();
         }
     }
+
+    maxValLen = std::max(maxValLen, StringHandler::size(z->getValue()));
 
     z->parent = y;
     if (y == NIL) 
@@ -341,7 +354,6 @@ Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
     else
         y->right = z;
 
-    // should I increment counter here?
     this->incrementCounter();
 
     insertFixup(z);
