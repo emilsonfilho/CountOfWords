@@ -169,16 +169,16 @@ public:
      */
     virtual void remove(const Key& key);
 
+    /**
+     * @brief Clears the hash table by removing all elements.
+     * 
+     * This function resets the hash table to its initial state by clearing all
+     * buckets and resizing the table to its current size. The number of elements
+     * in the table is also reset to zero.
+     */
     virtual void clear();
-    virtual void printInOrder(std::ostream& out) const {
-        for (size_t i = 0; i < tableSize; i++) {
-            out << i << ": ";
-            for (const auto& p : table[i]) {
-                out << "(" << p.first << ", " << p.second << ") ";
-            }
-            out << '\n';
-        }
-    };
+
+    virtual void printInOrder(std::ostream& out) const;
     virtual size_t getComparisonsCount() const {};
     virtual Value& operator[](const Key& key) {};
     virtual const Value& operator[](const Key& key) const {};

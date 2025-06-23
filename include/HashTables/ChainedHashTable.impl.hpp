@@ -1,7 +1,10 @@
 #include "HashTables/ChainedHashTable.hpp"
 
 #include <cmath>
+#include <iomanip>
+
 #include "Exceptions/KeyExceptions.hpp"
+#include "Utils/StringHandler.hpp"
 
 template <typename Key, typename Value, typename Hash>
 ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf) {
@@ -130,4 +133,29 @@ void ChainedHashTable<Key, Value, Hash>::clear() {
     table.clear();
     table.resize(tableSize);
     numberOfElements = 0;
+}
+
+template <typename Key, typename Value, typename Hash>
+void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
+    size_t maxKeyLen = 0, maxValLen = 0;
+    std::vector<std::pair<Key, Value>> vec;
+    vec.resize(numberOfElements);
+
+    int i = 0;
+    for (const auto& line : table) {
+        for (const auto& p : line) {
+            maxKeyLen = std::max(maxKeyLen, StringHandler::toString(p.first).length());
+            maxValLen = std::max(maxValLen, StringHandler::toString(p.second).length());
+
+            vec[i++] = p;
+        }
+    }
+
+    std::sort(vec.begin(), vec.end(), [](const auto& pa, const auto& pb) {
+        return pa.first < pb.first;
+    });
+
+    for (const auto& p : vec) {
+        out << std::setw(maxKeyLen + 2) << p.first << " | " << std::setw(maxValLen + 2) << p.second << "\n";
+    }
 }
