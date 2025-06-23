@@ -208,7 +208,27 @@ public:
      */
     size_t getComparisonsCount() const override;
 
+    /**
+     * @brief Provides read/write access to the value associated with the given key.
+     *
+     * If the key already exists in the hash table, this operator returns a
+     * reference to the existing value, allowing it to be modified.
+     * If the key does not exist, a new key-value pair is inserted into the
+     * hash table with the provided key and a default-constructed value,
+     * and a reference to this new value is returned.
+     *
+     * @param key The key whose associated value is to be accessed or inserted.
+     * @return A reference to the value associated with the key.
+     * @note This operator modifies the hash table if the key does not exist.
+     * It assumes the existence of `findPairIterator` member function that
+     * returns a `FindResult` struct/object with `wasElementFound()` and
+     * `bucketRef` (a reference to the bucket list/vector) and `iterator`
+     * (an iterator to the found element). It also assumes `Value` is
+     * default-constructible.
+     */
     Value& operator[](const Key& key) override;
+
+    
     const Value& operator[](const Key& key) const override {};
 
     void printSlots(std::ostream& out) const {
