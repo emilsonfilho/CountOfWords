@@ -158,11 +158,11 @@ void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
     size_t maxKeyLen = 0, maxValLen = 0;
     std::vector<std::pair<Key, Value>> vec(numberOfElements);
 
-    int i = 0;
+    size_t i = 0;
     for (const auto& line : table) {
         for (const auto& p : line) {
-            maxKeyLen = std::max(maxKeyLen, StringHandler::toString(p.first).length());
-            maxValLen = std::max(maxValLen, StringHandler::toString(p.second).length());
+            maxKeyLen = std::max(maxKeyLen, StringHandler::size(p.first));
+            maxValLen = std::max(maxValLen, StringHandler::size(p.second));
 
             vec[i++] = p;
         }
@@ -174,7 +174,7 @@ void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
 
 
     for (const auto& p : vec) {
-        out << std::setw(maxKeyLen + 2) << p.first << " | " << std::setw(maxValLen + 2) << p.second << "\n";
+        out << StringHandler::SetWidthAtLeft(p.first, maxKeyLen) << " | " << std::setw(maxValLen) << p.second << "\n";
     }
 }
 

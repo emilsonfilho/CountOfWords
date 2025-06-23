@@ -3,15 +3,18 @@
 int main() {
     ChainedHashTable<std::string, int> cht;
     
-    cht.insert("Emilson", 7);
+    cht.insert("Érica", 7);
+    cht.insert("Paulo", 7);
+    cht.insert("Paula", 7);
+    cht.insert("Lucas", 7);
+    cht.insert("Bruna", 7);
+    cht["Mislayne"] = 9;
     cht.insert("Calebe", 6);
     cht.insert("Isadora", 7);
-    cht.insert("Mislayne", 7);
     cht.insert("Karen", 5);
     cht.insert("Emilly", 6);
     cht.insert("Emanuel", 7);
 
-    cht.update("Emilson", 10);
     cht.update("Emilly", 9);
 
     int val = 0;
