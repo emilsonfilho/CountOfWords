@@ -3,6 +3,8 @@
 
 #include "Trees/Base/BaseTree.hpp" 
 
+#include <cmath>
+
 #include "Utils/StringHandler.hpp"
 
 template <typename Tree, typename Node, typename Key, typename Value>
@@ -87,6 +89,16 @@ const Value& BaseTree<Tree, Node, Key, Value>::at(const Key& key) const {
     }
 
     throw KeyNotFoundException();
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+void BaseTree<Tree, Node, Key, Value>::setMaxKeyLen(const Key& key) {
+    static_cast<Tree*>(this)->maxKeyLen = std::max(getMaxKeyLen(), StringHandler::size(key));
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+void BaseTree<Tree, Node, Key, Value>::setMaxValLen(const Value& value) {
+    static_cast<Tree*>(this)->maxValLen = std::max(getMaxValLen(), StringHandler::size(value));
 }
 
 #endif 

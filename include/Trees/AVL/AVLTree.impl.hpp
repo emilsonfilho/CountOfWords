@@ -160,12 +160,12 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::remove(const Key& key, AVLNode<Key, Va
 
 template <typename Key, typename Value>
 AVLNode<Key, Value>* AVLTree<Key, Value>::upsert(const Key& key, AVLNode<Key, Value>* node, Value*& outValue) {
-	maxKeyLen = std::max(maxKeyLen, StringHandler::size(key));
+	this->setMaxKeyLen(key);
 
 	if (!node) {
 		AVLNode<Key, Value>* newNode = new AVLNode<Key, Value>(key, Value());
 		outValue = &(newNode->getValue());
-		maxValLen = std::max(maxValLen, StringHandler::size(outValue));
+		this->setMaxValLen(*outValue);
 		return newNode;
 	}
 
@@ -177,7 +177,7 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::upsert(const Key& key, AVLNode<Key, Va
 		node->right = upsert(key, node->right, outValue);
 	} else {
 		outValue = &(node->getValue());
-		maxValLen = std::max(maxValLen, StringHandler::size(outValue));
+		this->setMaxValLen(*outValue);
 		return node;
 	}
 
@@ -193,8 +193,8 @@ AVLTree<Key, Value>::~AVLTree() { clear(); }
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::insert(const Key& key, const Value& value) {
 	root = insert(key, value, root);
-	maxKeyLen = std::max(maxKeyLen, StringHandler::size(key));
-	maxValLen = std::max(maxValLen, StringHandler::size(value));
+	this->setMaxKeyLen(key);
+	this->setMaxValLen(value);
 }
 
 template  <typename Key, typename Value>

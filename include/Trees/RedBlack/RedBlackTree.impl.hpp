@@ -109,7 +109,7 @@ RedBlackTree<Key, Value>::RedBlackTree() {
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::insert(const Key& key, const Value& value) {
-    maxKeyLen = std::max(maxKeyLen, StringHandler::size(key));
+    this->setMaxKeyLen(key);
 	maxValLen = std::max(maxValLen, StringHandler::size(value));
 
     RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, value, NIL, NIL, NIL, RED);
@@ -324,7 +324,7 @@ size_t RedBlackTree<Key, Value>::getComparisonsCount() const {
 
 template <typename Key, typename Value>
 Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
-    maxKeyLen = std::max(maxKeyLen, StringHandler::size(key));
+    this->setMaxKeyLen(key);
 
     RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, Value(), NIL, NIL, NIL, RED);
 
@@ -339,12 +339,12 @@ Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
         } else if (z->getKey() > x->getKey()) {
             x = x->right;
         } else {
-            maxValLen = std::max(maxValLen, StringHandler::size(x->getValue()));
+            this->setMaxValLen(x->getValue());        
             return x->getValue();
         }
     }
 
-    maxValLen = std::max(maxValLen, StringHandler::size(z->getValue()));
+    this->setMaxValLen(z->getValue());
 
     z->parent = y;
     if (y == NIL) 

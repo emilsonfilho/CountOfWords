@@ -46,7 +46,6 @@ class BaseTree {
      * @return The maximum display length of values encountered in the tree.
      */
     const size_t getMaxValLen() const;
-
 protected:
     /**
      * @brief Finds a node with the specified key in the tree.
@@ -85,6 +84,10 @@ protected:
      * @throws KeyNotFoundException If the key is not found in the tree.
      */
     const Value& at(const Key& key) const;
+
+    void setMaxKeyLen(const Key& key);
+
+    void setMaxValLen(const Value& value);
 };
 
 // Include the implementation file to provide the definitions for the template methods.
