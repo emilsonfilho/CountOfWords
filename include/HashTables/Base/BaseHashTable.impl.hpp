@@ -26,9 +26,20 @@ size_t BaseHashTable<HashTable, Collection, Key, Value, Hash>::getNextPrime(size
 }
 
 template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
+void BaseHashTable<HashTable, Collection, Key, Value, Hash>::checkAndRehash() {
+    if (getLoadFactor() >= maxLoadFactor)
+        static_cast<HashTable*>(this)->rehash(2 * tableSize);
+}
+
+template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
 BaseHashTable<HashTable, Collection, Key, Value, Hash>::BaseHashTable(size_t size, float mlf) {
     tableSize = getNextPrime(size);
     table.resize(tableSize);
     maxLoadFactor = mlf <= 0 ? 0.7 : mlf;
     numberOfElements = 0;
+}
+
+template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
+float BaseHashTable<HashTable, Collection, Key, Value, Hash>::getLoadFactor() const {
+    return static_cast<float>(this->numberOfElements) / this->tableSize;
 }

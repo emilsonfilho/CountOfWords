@@ -219,6 +219,9 @@ public:
      * found element).
      */
     const Value& operator[](const Key& key) const override;
+
+    template <typename HashTable, typename Collection, typename K, typename V, typename H>
+    friend class BaseHashTable;
 };
 
 #include "HashTables/Chained/ChainedHashTable.impl.hpp"

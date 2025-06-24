@@ -13,8 +13,20 @@ protected:
     Hash hashing;
     
     size_t getNextPrime(size_t num) const;
+
+    void checkAndRehash();
 public:
     BaseHashTable(size_t size = 7, float mlf = 0.7);
+
+    /**
+     * @brief Calculates and returns the current load factor of the hash table.
+     * 
+     * The load factor is defined as the ratio of the number of elements
+     * stored in the hash table to the total number of slots (buckets) in the table.
+     * 
+     * @return size_t The current load factor as a floating-point value.
+     */
+    float getLoadFactor() const;
 };
 
 #include "HashTables/Base/BaseHashTable.impl.hpp"

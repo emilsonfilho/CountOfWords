@@ -16,11 +16,6 @@ size_t ChainedHashTable<Key, Value, Hash>::hashCode(const Key& key) const {
 }
 
 template <typename Key, typename Value, typename Hash>
-float ChainedHashTable<Key, Value, Hash>::getLoadFactor() const {
-    return static_cast<float>(this->numberOfElements) / this->tableSize;
-}
-
-template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::getMaxLoadFactor() const {
     return this->maxLoadFactor;
 }
@@ -74,8 +69,7 @@ typename ChainedHashTable<Key, Value, Hash>::ConstFindResult ChainedHashTable<Ke
 
 template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& value) {
-    if (getLoadFactor() >= this->maxLoadFactor)
-        rehash(2 * this->tableSize);
+    this->checkAndRehash();
 
     size_t slot = hashCode(key);
     
@@ -160,6 +154,8 @@ Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) {
     FindResult response = findPairIterator(key);
 
     if (!response.wasElementFound()) {
+        this->checkAndRehash();
+
         response.bucketRef.push_back({key, Value()});
         this->numberOfElements++;
         return response.bucketRef.back().second;
