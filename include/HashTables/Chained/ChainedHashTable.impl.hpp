@@ -7,62 +7,34 @@
 #include "Utils/StringHandler.hpp"
 
 template <typename Key, typename Value, typename Hash>
-ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf) {
-    tableSize = getNextPrime(size);
-    table.resize(tableSize);
-    maxLoadFactor = mlf <= 0 ? 1.0 : mlf;
-    numberOfElements = 0;
-    comparisonsCount = 0;
-}
-
-template <typename Key, typename Value, typename Hash>
-size_t ChainedHashTable<Key, Value, Hash>::getNextPrime(size_t num) const {
-    auto isPrime = [&num](size_t x) -> bool {
-        if (x <= 1) return false;
-        if (x == 2 or x == 3) return true;
-        if (x % 2 == 0) return false;
-
-        for (int i = 3; i <= sqrt(x); i += 2) {
-            if (x % i == 0) return false;
-        }
-
-        return true;
-    };
-    
-    size_t candidate;
-    if (num % 2 == 0) candidate = num + 1;
-    else candidate = num + 2;
-    while (true) {
-        if (isPrime(candidate)) return candidate;
-        candidate += 2;
-    }
-}
+ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf)
+    : BaseHashTable<ChainedHashTable<Key, Value, Hash>, std::list<std::pair<Key, Value>>, Key, Value, Hash>(size, mlf) {}
 
 template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::hashCode(const Key& key) const {
-    return hashing(key) % tableSize;
+    return this->hashing(key) % this->tableSize;
 }
 
 template <typename Key, typename Value, typename Hash>
 float ChainedHashTable<Key, Value, Hash>::getLoadFactor() const {
-    return static_cast<float>(numberOfElements) / tableSize;
+    return static_cast<float>(this->numberOfElements) / this->tableSize;
 }
 
 template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::getMaxLoadFactor() const {
-    return maxLoadFactor;
+    return this->maxLoadFactor;
 }
 
 template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::rehash(size_t m) {
-    size_t newTableSize = getNextPrime(m);
+    size_t newTableSize = this->getNextPrime(m);
 
-    if (newTableSize > tableSize) {
-        std::vector<std::list<std::pair<Key, Value>>> copy = table;
-        table.clear();
-        table.resize(newTableSize);
-        tableSize = newTableSize;
-        numberOfElements = 0;
+    if (newTableSize > this->tableSize) {
+        std::vector<std::list<std::pair<Key, Value>>> copy = this->table;
+        this->table.clear();
+        this->table.resize(newTableSize);
+        this->tableSize = newTableSize;
+        this->numberOfElements = 0;
 
         for (auto& line : copy) {
             for (auto& [k, v] : line)
@@ -76,10 +48,10 @@ template <typename Key, typename Value, typename Hash>
 typename ChainedHashTable<Key, Value, Hash>::FindResult ChainedHashTable<Key, Value, Hash>::findPairIterator(const Key& key) {
     size_t slot = hashCode(key);
 
-    std::list<std::pair<Key, Value>>& lst = table[slot];
+    std::list<std::pair<Key, Value>>& lst = this->table[slot];
 
     auto it = std::find_if(lst.begin(), lst.end(), [this, &key](const std::pair<Key, Value>& p) {
-        comparisonsCount++;
+        this->comparisonsCount++;
         return p.first == key;
     });
 
@@ -90,10 +62,10 @@ template <typename Key, typename Value, typename Hash>
 typename ChainedHashTable<Key, Value, Hash>::ConstFindResult ChainedHashTable<Key, Value, Hash>::findConstPairIterator(const Key& key) const {
     size_t slot = hashCode(key);
 
-    const std::list<std::pair<Key, Value>>& lst = table[slot];
+    const std::list<std::pair<Key, Value>>& lst = this->table[slot];
 
     auto it = std::find_if(lst.begin(), lst.end(), [this, &key](const std::pair<Key, Value>& p) {
-        comparisonsCount++;
+        this->comparisonsCount++;
         return p.first == key;
     });
 
@@ -102,18 +74,18 @@ typename ChainedHashTable<Key, Value, Hash>::ConstFindResult ChainedHashTable<Ke
 
 template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& value) {
-    if (getLoadFactor() >= maxLoadFactor)
-        rehash(2 * tableSize);
+    if (getLoadFactor() >= this->maxLoadFactor)
+        rehash(2 * this->tableSize);
 
     size_t slot = hashCode(key);
     
-    for (const auto& p : table[slot]) {
-        comparisonsCount++;
+    for (const auto& p : this->table[slot]) {
+        this->comparisonsCount++;
         if (p.first == key) throw KeyAlreadyExistsException();
     }
 
-    table[slot].push_back({key, value});
-    numberOfElements++;
+    this->table[slot].push_back({key, value});
+    this->numberOfElements++;
 }
 
 template <typename Key, typename Value, typename Hash>
@@ -142,24 +114,24 @@ void ChainedHashTable<Key, Value, Hash>::remove(const Key& key) {
 
     if (response.wasElementFound()) {
         response.bucketRef.erase(response.iterator);
-        numberOfElements--;
+        this->numberOfElements--;
     }
 }
 
 template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::clear() {
-    table.clear();
-    table.resize(tableSize);
-    numberOfElements = 0;
+    this->table.clear();
+    this->table.resize(this->tableSize);
+    this->numberOfElements = 0;
 }
 
 template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
     size_t maxKeyLen = 0, maxValLen = 0;
-    std::vector<std::pair<Key, Value>> vec(numberOfElements);
+    std::vector<std::pair<Key, Value>> vec(this->numberOfElements);
 
     size_t i = 0;
-    for (const auto& line : table) {
+    for (const auto& line : this->table) {
         for (const auto& p : line) {
             maxKeyLen = std::max(maxKeyLen, StringHandler::size(p.first));
             maxValLen = std::max(maxValLen, StringHandler::size(p.second));
@@ -180,7 +152,7 @@ void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
 
 template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::getComparisonsCount() const {
-    return comparisonsCount;
+    return this->comparisonsCount;
 }
 
 template <typename Key, typename Value, typename Hash>
@@ -189,7 +161,7 @@ Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) {
 
     if (!response.wasElementFound()) {
         response.bucketRef.push_back({key, Value()});
-        numberOfElements++;
+        this->numberOfElements++;
         return response.bucketRef.back().second;
     } else {
         return response.iterator->second;

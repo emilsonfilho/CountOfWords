@@ -6,17 +6,11 @@
 #include <utility>
 #include <functional>
 
+#include "HashTables/Base/BaseHashTable.hpp"
 #include "Dictionary/IDictionary.hpp"
 
 template <typename Key, typename Value, typename Hash = std::hash<Key>>
-class ChainedHashTable : public IDictionary<Key, Value> {
-    std::vector<std::list<std::pair<Key, Value>>> table;
-    size_t tableSize;
-    float maxLoadFactor;
-    size_t numberOfElements;
-    Hash hashing;
-    mutable int comparisonsCount;
-
+class ChainedHashTable : public IDictionary<Key, Value>, public BaseHashTable<ChainedHashTable<Key, Value, Hash>, std::list<std::pair<Key, Value>>, Key, Value, Hash> {
     template <typename Iterator, typename BucketRef>
     struct GenericFindResult {
         Iterator iterator;
@@ -35,19 +29,6 @@ class ChainedHashTable : public IDictionary<Key, Value> {
     using ConstFindResult = GenericFindResult<
         typename std::list<std::pair<Key, Value>>::const_iterator,
         const std::list<std::pair<Key, Value>>&>;
-
-    /**
-     * @brief Finds the next prime number greater than or equal to the given number.
-     * 
-     * This function calculates the smallest prime number that is greater than or 
-     * equal to the input number. It uses a helper lambda function to check if a 
-     * number is prime and iterates through odd numbers starting from the next 
-     * candidate until a prime is found.
-     * 
-     * @param num The starting number to find the next prime.
-     * @return size_t The next prime number greater than or equal to the input.
-     */
-    size_t getNextPrime(size_t num) const;
 
     /**
      * @brief Computes the hash code for a given key.
