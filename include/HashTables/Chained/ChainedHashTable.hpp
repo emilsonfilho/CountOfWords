@@ -156,6 +156,7 @@ public:
      * by certain operations within the hash table (e.g., search, insertion).
      *
      * @return The current number of comparisons as a `size_t`.
+     * @note Not passed to the base hash table by the function no need to add complexity to something relatively simple
      */
     size_t getComparisonsCount() const override;
 
