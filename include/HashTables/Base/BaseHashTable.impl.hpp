@@ -33,7 +33,7 @@ void BaseHashTable<HashTable, Collection, Key, Value, Hash>::checkAndRehash() {
 
 template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
 BaseHashTable<HashTable, Collection, Key, Value, Hash>::BaseHashTable(size_t size, float mlf) {
-    tableSize = getNextPrime(size);
+    tableSize = size;
     table.resize(tableSize);
     maxLoadFactor = mlf <= 0 ? 0.7 : mlf;
     numberOfElements = 0;

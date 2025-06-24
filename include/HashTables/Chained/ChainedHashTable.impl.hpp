@@ -8,7 +8,7 @@
 
 template <typename Key, typename Value, typename Hash>
 ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf)
-    : BaseHashTable<ChainedHashTable<Key, Value, Hash>, std::list<std::pair<Key, Value>>, Key, Value, Hash>(size, mlf) {}
+    : BaseHashTable<ChainedHashTable<Key, Value, Hash>, std::list<std::pair<Key, Value>>, Key, Value, Hash>(this->getNextPrime(size), mlf) {}
 
 template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::hashCode(const Key& key) const {
