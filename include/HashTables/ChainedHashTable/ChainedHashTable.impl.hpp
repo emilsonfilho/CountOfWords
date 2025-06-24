@@ -1,4 +1,4 @@
-#include "HashTables/ChainedHashTable.hpp"
+#include "HashTables/ChainedHashTable/ChainedHashTable.hpp"
 
 #include <cmath>
 #include <iomanip>
