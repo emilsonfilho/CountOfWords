@@ -16,11 +16,6 @@ size_t ChainedHashTable<Key, Value, Hash>::hashCode(const Key& key) const {
 }
 
 template <typename Key, typename Value, typename Hash>
-size_t ChainedHashTable<Key, Value, Hash>::getMaxLoadFactor() const {
-    return this->maxLoadFactor;
-}
-
-template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::rehash(size_t m) {
     size_t newTableSize = this->getNextPrime(m);
 
@@ -152,7 +147,7 @@ size_t ChainedHashTable<Key, Value, Hash>::getComparisonsCount() const {
 template <typename Key, typename Value, typename Hash>
 Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) {
     this->checkAndRehash();
-    
+
     FindResult response = findPairIterator(key);
 
     if (!response.wasElementFound()) {

@@ -27,6 +27,8 @@ public:
      * @return size_t The current load factor as a floating-point value.
      */
     float getLoadFactor() const;
+
+    size_t getMaxLoadFactor() const;
 };
 
 #include "HashTables/Base/BaseHashTable.impl.hpp"

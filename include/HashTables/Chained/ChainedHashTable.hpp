@@ -43,18 +43,6 @@ class ChainedHashTable : public IDictionary<Key, Value>, public BaseHashTable<Ch
     size_t hashCode(const Key& key) const;
 
     /**
-     * @brief Retrieves the maximum load factor of the hash table.
-     * 
-     * The maximum load factor determines the threshold at which the hash table
-     * will trigger a rehash to maintain efficient operations. If the current
-     * load factor (number of elements divided by table size) exceeds this value,
-     * the table will resize and redistribute its elements.
-     * 
-     * @return The maximum load factor as a floating-point value.
-     */
-    size_t getMaxLoadFactor() const;
-
-    /**
      * @brief Rehashes the hash table to a new size.
      * 
      * This function resizes the hash table to a new size that is the next prime 
