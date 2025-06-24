@@ -109,9 +109,7 @@ void ChainedHashTable<Key, Value, Hash>::remove(const Key& key) {
 
 template <typename Key, typename Value, typename Hash>
 void ChainedHashTable<Key, Value, Hash>::clear() {
-    this->table.clear();
-    this->table.resize(this->tableSize);
-    this->numberOfElements = 0;
+    this->clearHashTable();
 }
 
 template <typename Key, typename Value, typename Hash>

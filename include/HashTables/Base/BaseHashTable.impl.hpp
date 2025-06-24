@@ -43,3 +43,9 @@ template <typename HashTable, typename Collection, typename Key, typename Value,
 float BaseHashTable<HashTable, Collection, Key, Value, Hash>::getLoadFactor() const {
     return static_cast<float>(this->numberOfElements) / this->tableSize;
 }
+template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
+void BaseHashTable<HashTable, Collection, Key, Value, Hash>::clearHashTable() {
+    table.clear();
+    table.resize(tableSize);
+    numberOfElements = 0;
+}

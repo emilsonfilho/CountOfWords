@@ -29,6 +29,8 @@ public:
     float getLoadFactor() const;
 
     size_t getMaxLoadFactor() const;
+
+    void clearHashTable();
 };
 
 #include "HashTables/Base/BaseHashTable.impl.hpp"
