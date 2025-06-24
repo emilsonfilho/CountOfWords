@@ -240,7 +240,7 @@ public:
     const Value& operator[](const Key& key) const override;
 };
 
-#include "HashTables/ChainedHashTable/ChainedHashTable.impl.hpp"
+#include "HashTables/Chained/ChainedHashTable.impl.hpp"
 
 #endif
 
