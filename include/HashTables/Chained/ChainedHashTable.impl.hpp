@@ -151,10 +151,11 @@ size_t ChainedHashTable<Key, Value, Hash>::getComparisonsCount() const {
 
 template <typename Key, typename Value, typename Hash>
 Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) {
+    this->checkAndRehash();
+    
     FindResult response = findPairIterator(key);
 
     if (!response.wasElementFound()) {
-        this->checkAndRehash();
 
         response.bucketRef.push_back({key, Value()});
         this->numberOfElements++;

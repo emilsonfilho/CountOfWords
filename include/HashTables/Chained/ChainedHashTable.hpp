@@ -43,16 +43,6 @@ class ChainedHashTable : public IDictionary<Key, Value>, public BaseHashTable<Ch
     size_t hashCode(const Key& key) const;
 
     /**
-     * @brief Calculates and returns the current load factor of the hash table.
-     * 
-     * The load factor is defined as the ratio of the number of elements
-     * stored in the hash table to the total number of slots (buckets) in the table.
-     * 
-     * @return size_t The current load factor as a floating-point value.
-     */
-    float getLoadFactor() const;
-
-    /**
      * @brief Retrieves the maximum load factor of the hash table.
      * 
      * The maximum load factor determines the threshold at which the hash table
