@@ -23,6 +23,8 @@ template <typename Key, typename Value>
 class AVLTree : public IDictionary<Key, Value>, public BaseTree<AVLTree<Key, Value>, AVLNode<Key, Value>, Key, Value> {
 private:
     AVLNode<Key, Value>* root; ///< Pointer to the root node of the AVL tree.
+    size_t maxKeyLen;
+    size_t maxValLen;
 
     /**
      * @brief Retrieves the root node of the AVL tree.
@@ -134,6 +136,20 @@ private:
      */
     AVLNode<Key, Value>* remove(const Key& key, AVLNode<Key, Value>* node);
 
+    /**
+     * @brief Inserts or updates a key-value pair in the AVL tree.
+     * @param key The key to be inserted or updated.
+     * @param node The current node being processed in the recursive call.
+     * @param outValue A reference to a pointer that will store the address of the value associated with the key.
+     * @return A pointer to the balanced node after insertion or update.
+     * @details This method handles both insertion of new nodes and updating existing
+     * node values. It recursively traverses the tree to find the correct position
+     * for the key. If the key is found, `outValue` is set to point to the existing
+     * value. If a new node is created, `outValue` points to its new value.
+     * It also updates `maxKeyLen` and `maxValLen` based on the display size
+     * of the key and value, and performs AVL tree rotations via `fixupNode`
+     * to maintain balance.
+     */
     AVLNode<Key, Value>* upsert(const Key& key, AVLNode<Key, Value>* node, Value*& outValue);
 public:
     static const int IMBALANCE = 2; ///< The imbalance threshold for the AVL tree.
@@ -149,11 +165,12 @@ public:
     ~AVLTree();
 
     /**
-     * @brief Inserts a key-value pair into the AVL tree.
-     * 
-     * @param key The key to insert.
+     * @brief Inserts a new key-value pair into the AVL tree.
+     * @param key The key to be inserted.
      * @param value The value associated with the key.
-     * @throws KeyAlreadyExistsException If the key already exists in the tree.
+     * @details This method updates the `root` of the AVL tree after insertion
+     * and also updates `maxKeyLen` and `maxValLen` based on the
+     * display size of the inserted key and value, respectively.
      */
     void insert(const Key& key, const Value& value) override;
 

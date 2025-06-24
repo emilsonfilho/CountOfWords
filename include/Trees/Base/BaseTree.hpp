@@ -33,6 +33,19 @@ class BaseTree {
      */
     const Node* getTreeRoot() const;
 
+    /**
+     * @brief Retrieves the maximum key length recorded in the derived tree.
+     * @tparam Value The type of the values stored in the tree.
+     * @return The maximum display length of keys encountered in the tree.
+     */
+    const size_t getMaxKeyLen() const;
+
+    /**
+     * @brief Retrieves the maximum value length recorded in the derived tree.
+     * @details This method uses CRTP to access the `maxValLen` member from the derived `Tree` object.
+     * @return The maximum display length of values encountered in the tree.
+     */
+    const size_t getMaxValLen() const;
 protected:
     /**
      * @brief Finds a node with the specified key in the tree.
@@ -71,6 +84,10 @@ protected:
      * @throws KeyNotFoundException If the key is not found in the tree.
      */
     const Value& at(const Key& key) const;
+
+    void setMaxKeyLen(const Key& key);
+
+    void setMaxValLen(const Value& value);
 };
 
 // Include the implementation file to provide the definitions for the template methods.

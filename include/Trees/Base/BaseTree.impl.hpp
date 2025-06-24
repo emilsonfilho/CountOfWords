@@ -3,6 +3,10 @@
 
 #include "Trees/Base/BaseTree.hpp" 
 
+#include <cmath>
+
+#include "Utils/StringHandler.hpp"
+
 template <typename Tree, typename Node, typename Key, typename Value>
 void BaseTree<Tree, Node, Key, Value>::count() const {
     static_cast<const Tree*>(this)->incrementCounter();
@@ -11,6 +15,16 @@ void BaseTree<Tree, Node, Key, Value>::count() const {
 template <typename Tree, typename Node, typename Key, typename Value>
 const Node* BaseTree<Tree, Node, Key, Value>::getTreeRoot() const {
     return static_cast<const Tree*>(this)->getRoot();
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+const size_t BaseTree<Tree, Node, Key, Value>::getMaxKeyLen() const {
+    return static_cast<const Tree*>(this)->maxKeyLen;
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+const size_t BaseTree<Tree, Node, Key, Value>::getMaxValLen() const {
+    return static_cast<const Tree*>(this)->maxValLen;
 }
 
 template <typename Tree, typename Node, typename Key, typename Value>
@@ -51,7 +65,8 @@ void BaseTree<Tree, Node, Key, Value>::inOrderTransversal(std::ostream& out, Nod
     if (node != comp) {
         inOrderTransversal(out, node->left, comp);
 
-        out << node->show() << '\n';
+        out << StringHandler::SetWidthAtLeft(node->getKey(), getMaxKeyLen()) << " | " 
+            << StringHandler::SetWidthAtLeft(node->getValue(), getMaxValLen()) << '\n';
 
         inOrderTransversal(out, node->right, comp);
     }
@@ -74,6 +89,16 @@ const Value& BaseTree<Tree, Node, Key, Value>::at(const Key& key) const {
     }
 
     throw KeyNotFoundException();
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+void BaseTree<Tree, Node, Key, Value>::setMaxKeyLen(const Key& key) {
+    static_cast<Tree*>(this)->maxKeyLen = std::max(getMaxKeyLen(), StringHandler::size(key));
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+void BaseTree<Tree, Node, Key, Value>::setMaxValLen(const Value& value) {
+    static_cast<Tree*>(this)->maxValLen = std::max(getMaxValLen(), StringHandler::size(value));
 }
 
 #endif 
