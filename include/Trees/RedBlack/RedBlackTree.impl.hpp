@@ -326,23 +326,23 @@ template <typename Key, typename Value>
 Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
     this->setMaxKeyLen(key);
 
-    RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, Value(), NIL, NIL, NIL, RED);
-
     RedBlackNode<Key, Value> *x = root, *y = NIL;
     
     while (x != NIL) {
         y = x;
 
         this->incrementCounter();
-        if (z->getKey() < x->getKey()) {
+        if (key < x->getKey()) {
             x = x->left;
-        } else if (z->getKey() > x->getKey()) {
+        } else if (key > x->getKey()) {
             x = x->right;
         } else {
             this->setMaxValLen(x->getValue());        
             return x->getValue();
         }
     }
+
+    RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, Value(), NIL, NIL, NIL, RED);
 
     this->setMaxValLen(z->getValue());
 
