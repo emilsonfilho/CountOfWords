@@ -11,11 +11,12 @@ template <typename Key, typename Value, typename Hash = std::hash<Key>>
 class OpenAddressingHashTable : public IDictionary<Key, Value>, public BaseHashTable<OpenAddressingHashTable<Key, Value, Hash>, Slot<Key, Value>, Key, Value, Hash>{
 private:
     struct ConstFindResult {
-        bool wasElementFound;
-        const Slot<Key, Value>& slot;
+        const Slot<Key, Value>* slot = nullptr;
 
-        ConstFindResult(bool wef, const Slot<Key, Value>& s)
-            : wasElementFound(wef), slot(s) {}
+        ConstFindResult(const Slot<Key, Value>* s)
+            : slot(s) {}
+
+        bool wasElementFound() const { return slot != nullptr; }
     };
 
     size_t hashCode(const Key& key, size_t i) const;
@@ -23,27 +24,22 @@ private:
     void rehash(size_t m);
 
     ConstFindResult findSlot(const Key& key) {
-        bool wasElementFound;
-        const Slot<Key, Value>& tableSlot;
+        const Slot<Key, Value>* tableSlot = nullptr;
         
         for (size_t i = 0; i < this->tableSize; i++) {
             size_t slotIdx = hashCode(key, i);
-            Slot<Key, Value> slot = this->table[slotIdx];
+            const Slot<Key, Value>& slot = this->table[slotIdx];
 
             this->comparisonsCount++;
 
-            if (slot.status == EMPTY) {
-                wasElementFound = true;
+            if (slot.status == EMPTY)
                 break;
-            }
 
-            if (slot.status == ACTIVE and slot.key == key) {
-                tableSlot = slot;
-                wasElementFound = true;
-            }
+            if (slot.status == ACTIVE and slot.key == key)
+                tableSlot = &slot;
         }
 
-        return ConstFindResult(wasElementFound, tableSlot);
+        return ConstFindResult(tableSlot);
     }
 public:
     OpenAddressingHashTable(size_t size = 8, float mlf = 0.7);

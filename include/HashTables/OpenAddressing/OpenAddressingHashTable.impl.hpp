@@ -63,9 +63,10 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
 template <typename Key, typename Value, typename Hash>
 bool OpenAddressingHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
     ConstFindResult response = findSlot(key);
+    bool wasElementFound = response.wasElementFound();
 
-    if (response.wasElementFound)
-        outValue = response.slot.key;
+    if (wasElementFound)
+        outValue = response.slot->value;
 
-    return response.wasElementFound;
+    return wasElementFound;
 }
