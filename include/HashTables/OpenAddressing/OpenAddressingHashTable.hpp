@@ -10,20 +10,24 @@
 template <typename Key, typename Value, typename Hash = std::hash<Key>>
 class OpenAddressingHashTable : public IDictionary<Key, Value>, public BaseHashTable<OpenAddressingHashTable<Key, Value, Hash>, Slot<Key, Value>, Key, Value, Hash>{
 private:
-    struct ConstFindResult {
-        const Slot<Key, Value>* slot = nullptr;
+    template <typename Entry>
+    struct GenericFindResult {
+        Entry* slot;
 
-        ConstFindResult(const Slot<Key, Value>* s)
-            : slot(s) {}
+        GenericFindResult(Entry* e)
+            : slot(e) {}
 
         bool wasElementFound() const { return slot != nullptr; }
     };
+
+    using FindResult = GenericFindResult<Slot<Key, Value>>;
+    using ConstFindResult = GenericFindResult<const Slot<Key, Value>>;
 
     size_t hashCode(const Key& key, size_t i) const;
 
     void rehash(size_t m);
 
-    ConstFindResult findSlot(const Key& key) {
+    ConstFindResult findConstSlot(const Key& key) {
         const Slot<Key, Value>* tableSlot = nullptr;
         
         for (size_t i = 0; i < this->tableSize; i++) {
@@ -41,12 +45,31 @@ private:
 
         return ConstFindResult(tableSlot);
     }
+
+    FindResult findSlot(const Key& key) {
+        Slot<Key, Value>* tableSlot = nullptr;
+        
+        for (size_t i = 0; i < this->tableSize; i++) {
+            size_t slotIdx = hashCode(key, i);
+            Slot<Key, Value>& slot = this->table[slotIdx];
+
+            this->comparisonsCount++;
+
+            if (slot.status == EMPTY)
+                break;
+
+            if (slot.status == ACTIVE and slot.key == key)
+                tableSlot = &slot;
+        }
+
+        return FindResult(tableSlot);
+    }
 public:
     OpenAddressingHashTable(size_t size = 8, float mlf = 0.7);
 
     void insert(const Key& key, const Value& value);
     bool find(const Key& key, Value& outValue);
-    void update(const Key& key, const Value& value) {};
+    void update(const Key& key, const Value& value);
     void remove(const Key& key) {};
     void clear() {};
     void printInOrder(std::ostream& out) const {

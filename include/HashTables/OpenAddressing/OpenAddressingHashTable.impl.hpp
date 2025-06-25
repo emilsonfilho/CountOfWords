@@ -62,11 +62,22 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
 
 template <typename Key, typename Value, typename Hash>
 bool OpenAddressingHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
-    ConstFindResult response = findSlot(key);
+    ConstFindResult response = findConstSlot(key);
     bool wasElementFound = response.wasElementFound();
 
     if (wasElementFound)
         outValue = response.slot->value;
 
     return wasElementFound;
+}
+
+template <typename Key, typename Value, typename Hash>
+void OpenAddressingHashTable<Key, Value, Hash>::update(const Key& key, const Value& value) {
+    FindResult response = findSlot(key);
+    bool wasElementFound = response.wasElementFound();
+
+    if (!wasElementFound)
+        throw KeyNotFoundException();
+
+    response.slot->value = value;
 }
