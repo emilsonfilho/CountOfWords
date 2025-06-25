@@ -62,20 +62,10 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
 
 template <typename Key, typename Value, typename Hash>
 bool OpenAddressingHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
-    for (size_t i = 0; i < this->tableSize; i++) {
-        size_t slotIdx = hashCode(key, i);
-        const Slot<Key, Value>& slot = this->table[slotIdx];
+    ConstFindResult response = findSlot(key);
 
-        this->comparisonsCount++;
+    if (response.wasElementFound)
+        outValue = response.slot.key;
 
-        if (slot.status == EMPTY)
-            return false;
-
-        if (slot.status == ACTIVE and slot.key == key) {
-            outValue = slot.value;
-            return true;
-        }
-    }
-
-    return false;
+    return response.wasElementFound;
 }

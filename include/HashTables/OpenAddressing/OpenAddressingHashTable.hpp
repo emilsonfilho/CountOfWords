@@ -10,9 +10,41 @@
 template <typename Key, typename Value, typename Hash = std::hash<Key>>
 class OpenAddressingHashTable : public IDictionary<Key, Value>, public BaseHashTable<OpenAddressingHashTable<Key, Value, Hash>, Slot<Key, Value>, Key, Value, Hash>{
 private:
+    struct ConstFindResult {
+        bool wasElementFound;
+        const Slot<Key, Value>& slot;
+
+        ConstFindResult(bool wef, const Slot<Key, Value>& s)
+            : wasElementFound(wef), slot(s) {}
+    };
+
     size_t hashCode(const Key& key, size_t i) const;
 
     void rehash(size_t m);
+
+    ConstFindResult findSlot(const Key& key) {
+        bool wasElementFound;
+        const Slot<Key, Value>& tableSlot;
+        
+        for (size_t i = 0; i < this->tableSize; i++) {
+            size_t slotIdx = hashCode(key, i);
+            Slot<Key, Value> slot = this->table[slotIdx];
+
+            this->comparisonsCount++;
+
+            if (slot.status == EMPTY) {
+                wasElementFound = true;
+                break;
+            }
+
+            if (slot.status == ACTIVE and slot.key == key) {
+                tableSlot = slot;
+                wasElementFound = true;
+            }
+        }
+
+        return ConstFindResult(wasElementFound, tableSlot);
+    }
 public:
     OpenAddressingHashTable(size_t size = 8, float mlf = 0.7);
 
