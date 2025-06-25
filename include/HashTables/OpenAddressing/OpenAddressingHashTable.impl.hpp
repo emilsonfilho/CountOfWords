@@ -89,3 +89,9 @@ void OpenAddressingHashTable<Key, Value, Hash>::remove(const Key& key) {
     if (response.wasElementFound())
         response.slot->status = DELETED;
 }
+
+template <typename Key, typename Value, typename Hash>
+void OpenAddressingHashTable<Key, Value, Hash>::clear() {
+    for (Slot<Key, Value>& slot : this->table)
+        slot.status = EMPTY;
+}

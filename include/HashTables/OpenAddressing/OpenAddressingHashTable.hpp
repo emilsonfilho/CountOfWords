@@ -71,7 +71,7 @@ public:
     bool find(const Key& key, Value& outValue);
     void update(const Key& key, const Value& value);
     void remove(const Key& key);
-    void clear() {};
+    void clear();
     void printInOrder(std::ostream& out) const {
         for (const auto& slot : this->table) {
             if (slot.status == ACTIVE)
