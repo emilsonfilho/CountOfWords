@@ -15,7 +15,6 @@ OpenAddressingHashTable<Key, Value, Hash>::OpenAddressingHashTable(size_t size, 
 
 template <typename Key, typename Value, typename Hash>
 void OpenAddressingHashTable<Key, Value, Hash>::rehash(size_t m) {
-    std::cout << "REHASHED\n";
 
     if (m > this->tableSize) {
         std::vector<Slot<Key, Value>> copy = this->table;
@@ -24,8 +23,10 @@ void OpenAddressingHashTable<Key, Value, Hash>::rehash(size_t m) {
         this->tableSize = m;
         this->numberOfElements = 0;
 
-        for (auto& slot : copy)
-            insert(slot.key, slot.value);
+        for (auto& slot : copy) {
+            if (slot.status == ACTIVE)
+                insert(slot.key, slot.value);
+        }
     }
 }
 
@@ -35,13 +36,11 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
     
     int lastDeletedSlot = -1;
 
-    std::cout << "new insetion!\n";
     for (int i = 0; i < this->tableSize; i++) {
         size_t slotIdx = hashCode(key, i);
         Slot<Key, Value>& slot = this->table[slotIdx];
 
 
-        std::cout << "idx = " << slotIdx << '\n';
         if (slot.status == EMPTY) {
             slot = Slot(key, value);
             this->numberOfElements++;

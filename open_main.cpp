@@ -15,12 +15,12 @@ int main() {
     oaht.insert("honeydew", 16);
     
     oaht.insert("kiwi", 3);
-    // oaht.insert("lemon", 18);
-    // oaht.insert("mango", 14);
-    // oaht.insert("nectarine", 27);
-    // oaht.insert("orange", 11);
-    // oaht.insert("papaya", 6);
-    // oaht.insert("quince", 30);
+    oaht.insert("lemon", 18);
+    oaht.insert("mango", 14);
+    oaht.insert("nectarine", 27);
+    oaht.insert("orange", 11);
+    oaht.insert("papaya", 6);
+    oaht.insert("quince", 30);
 
     oaht.printInOrder(std::cout);
 
