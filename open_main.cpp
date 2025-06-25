@@ -22,6 +22,15 @@ int main() {
     oaht.insert("papaya", 6);
     oaht.insert("quince", 30);
 
+    int sla = 0;
+    if (oaht.find("orange", sla)) {
+        std::cout << "orange foi encontrado com valor " << sla << std::endl;
+    } else std::runtime_error("ORANGE NAO FOI ENCONtRADO\n");
+
+    if (!oaht.find("mamao", sla)) {
+        std::cout << "nao foi possivel encontrar mamao como o esperdo\n";
+    }
+
     oaht.printInOrder(std::cout);
 
     return 0;

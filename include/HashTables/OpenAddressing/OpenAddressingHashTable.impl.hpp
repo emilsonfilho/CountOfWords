@@ -40,6 +40,7 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
         size_t slotIdx = hashCode(key, i);
         Slot<Key, Value>& slot = this->table[slotIdx];
 
+        this->comparisonsCount++;
 
         if (slot.status == EMPTY) {
             slot = Slot(key, value);
@@ -57,4 +58,24 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
     } else {
         this->table[lastDeletedSlot] = Slot(key, value);
     }
+}
+
+template <typename Key, typename Value, typename Hash>
+bool OpenAddressingHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
+    for (size_t i = 0; i < this->tableSize; i++) {
+        size_t slotIdx = hashCode(key, i);
+        const Slot<Key, Value>& slot = this->table[slotIdx];
+
+        this->comparisonsCount++;
+
+        if (slot.status == EMPTY)
+            return false;
+
+        if (slot.status == ACTIVE and slot.key == key) {
+            outValue = slot.value;
+            return true;
+        }
+    }
+
+    return false;
 }

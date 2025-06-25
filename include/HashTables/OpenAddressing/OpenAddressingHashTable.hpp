@@ -17,7 +17,7 @@ public:
     OpenAddressingHashTable(size_t size = 8, float mlf = 0.7);
 
     void insert(const Key& key, const Value& value);
-    bool find(const Key& key, Value& outValue) { return false; };
+    bool find(const Key& key, Value& outValue);
     void update(const Key& key, const Value& value) {};
     void remove(const Key& key) {};
     void clear() {};
