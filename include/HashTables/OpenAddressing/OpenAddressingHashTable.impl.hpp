@@ -119,3 +119,8 @@ void OpenAddressingHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) 
         if (slot.status == ACTIVE)
             out << StringHandler::SetWidthAtLeft(slot.key, maxKeyLen) << " | " << StringHandler::SetWidthAtLeft(slot.value, maxValLen) << "\n";
 }
+
+template <typename Key, typename Value, typename Hash>
+size_t OpenAddressingHashTable<Key, Value, Hash>::getComparisonsCount() const {
+    return this->comparisonsCount;
+}

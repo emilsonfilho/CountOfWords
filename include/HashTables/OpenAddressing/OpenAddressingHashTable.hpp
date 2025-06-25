@@ -73,7 +73,7 @@ public:
     void remove(const Key& key);
     void clear();
     void printInOrder(std::ostream& out) const;
-    size_t getComparisonsCount() const { return 0; };
+    size_t getComparisonsCount() const;
     Value& operator[](const Key& key) {};
     const Value& operator[](const Key& key) const {};
 
