@@ -72,12 +72,7 @@ public:
     void update(const Key& key, const Value& value);
     void remove(const Key& key);
     void clear();
-    void printInOrder(std::ostream& out) const {
-        for (const auto& slot : this->table) {
-            if (slot.status == ACTIVE)
-                out << "(" << slot.key << ", " << slot.value << ")\n";
-        }
-    };
+    void printInOrder(std::ostream& out) const;
     size_t getComparisonsCount() const { return 0; };
     Value& operator[](const Key& key) {};
     const Value& operator[](const Key& key) const {};

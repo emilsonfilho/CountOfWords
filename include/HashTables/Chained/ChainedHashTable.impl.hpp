@@ -133,7 +133,7 @@ void ChainedHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
 
 
     for (const auto& p : vec) {
-        out << StringHandler::SetWidthAtLeft(p.first, maxKeyLen) << " | " << std::setw(maxValLen) << p.second << "\n";
+        out << StringHandler::SetWidthAtLeft(p.first, maxKeyLen) << " | " << StringHandler::SetWidthAtLeft(p.second, maxValLen) << "\n";
     }
 }
 

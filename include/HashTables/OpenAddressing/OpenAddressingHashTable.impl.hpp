@@ -1,6 +1,7 @@
 #include "HashTables/OpenAddressing/OpenAddressingHashTable.hpp"
 
 #include <iostream>
+#include <algorithm>
 
 #include "Exceptions/KeyExceptions.hpp"
 
@@ -94,4 +95,27 @@ template <typename Key, typename Value, typename Hash>
 void OpenAddressingHashTable<Key, Value, Hash>::clear() {
     for (Slot<Key, Value>& slot : this->table)
         slot.status = EMPTY;
+}
+
+template <typename Key, typename Value, typename Hash>
+void OpenAddressingHashTable<Key, Value, Hash>::printInOrder(std::ostream& out) const {
+    size_t maxKeyLen = 0, maxValLen = 0, i = 0;
+    std::vector<Slot<Key, Value>> vec(this->numberOfElements);
+
+    for (const Slot<Key, Value>& slot : this->table) {
+        if (slot.status == ACTIVE) {
+            maxKeyLen = std::max(maxKeyLen, StringHandler::size(slot.key));
+            maxValLen = std::max(maxValLen, StringHandler::size(slot.value));
+            
+            vec[i++] = slot;
+        }
+    }
+
+    std::sort(vec.begin(), vec.end(), [](const Slot<Key, Value>& slotA, const Slot<Key, Value>& slotB) {
+        return slotA.key < slotB.key;
+    });
+
+    for (const Slot<Key, Value>& slot : vec)
+        if (slot.status == ACTIVE)
+            out << StringHandler::SetWidthAtLeft(slot.key, maxKeyLen) << " | " << StringHandler::SetWidthAtLeft(slot.value, maxValLen) << "\n";
 }
