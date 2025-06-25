@@ -70,11 +70,12 @@ public:
     void insert(const Key& key, const Value& value);
     bool find(const Key& key, Value& outValue);
     void update(const Key& key, const Value& value);
-    void remove(const Key& key) {};
+    void remove(const Key& key);
     void clear() {};
     void printInOrder(std::ostream& out) const {
         for (const auto& slot : this->table) {
-            out << "(" << slot.key << ", " << slot.value << ")\n";
+            if (slot.status == ACTIVE)
+                out << "(" << slot.key << ", " << slot.value << ")\n";
         }
     };
     size_t getComparisonsCount() const { return 0; };

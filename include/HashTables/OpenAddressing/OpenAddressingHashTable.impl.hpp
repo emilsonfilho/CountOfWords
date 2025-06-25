@@ -81,3 +81,11 @@ void OpenAddressingHashTable<Key, Value, Hash>::update(const Key& key, const Val
 
     response.slot->value = value;
 }
+
+template <typename Key, typename Value, typename Hash>
+void OpenAddressingHashTable<Key, Value, Hash>::remove(const Key& key) {
+    FindResult response = findSlot(key);
+    
+    if (response.wasElementFound())
+        response.slot->status = DELETED;
+}
