@@ -41,16 +41,19 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
         size_t slotIdx = hashCode(key, i);
         Slot<Key, Value>& slot = this->table[slotIdx];
 
-        this->comparisonsCount++;
-
         if (slot.status == EMPTY) {
+            this->comparisonsCount++;
             slot = Slot(key, value);
             this->numberOfElements++;
             return;
         } else if (slot.status == ACTIVE and slot.key == key) {
+            this->comparisonsCount += 2;
             throw KeyAlreadyExistsException();
         } else if (slot.status == DELETED and lastDeletedSlot == -1) {
+            this->comparisonsCount += 3;
             lastDeletedSlot = slotIdx;
+        } else {
+            this->comparisonsCount += 3;
         }
     }
 

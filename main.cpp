@@ -116,6 +116,7 @@ void testRedBlackClear() {
 
 	std::cout << "Red-Black Tree before clearing:" << std::endl;
 	rb.print();
+	std::cout << "Numeros de comparacoes " << rb.getComparisonsCount() << std::endl;
 
 	std::cout << "Clearing the tree." << std::endl;
 	rb.clear();
@@ -142,8 +143,8 @@ void testRedBlackPrintInOrder() {
 	rb.insert("Emilly", 6);
 	rb.insert("Emanuel", 7);
 
-	std::cout << "Red-Black Tree in-order traversal:" << std::endl;
 	std::cout << "Number of comparisons: " << rb.getComparisonsCount() << std::endl;
+	std::cout << "Red-Black Tree in-order traversal:" << std::endl;
 	rb.printInOrder(std::cout);
 }
 

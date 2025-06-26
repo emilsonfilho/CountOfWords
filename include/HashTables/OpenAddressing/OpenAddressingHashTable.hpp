@@ -35,13 +35,16 @@ private:
             size_t slotIdx = hashCode(key, i);
             const Slot<Key, Value>& slot = this->table[slotIdx];
 
-            this->comparisonsCount++;
 
-            if (slot.status == EMPTY)
+            if (slot.status == EMPTY) {
+                this->comparisonsCount++;
                 break;
+            }
 
             if (slot.status == ACTIVE and slot.key == key)
                 tableSlot = &slot;
+
+            this->comparisonsCount += 2;
         }
 
         return ConstFindResult(tableSlot);
@@ -54,23 +57,27 @@ private:
             size_t slotIdx = hashCode(key, i);
             Slot<Key, Value>& slot = this->table[slotIdx];
 
-            this->comparisonsCount++;
-
             if (slot.status == EMPTY) {
-                if (!availableSlot)
+                this->comparisonsCount++;
+
+                if (!availableSlot) {
+                    this->comparisonsCount++;
                     availableSlot = &slot;
+                }
 
                 break;
             }
 
             if (slot.status == ACTIVE and slot.key == key) {
+                this->comparisonsCount += 2;
                 tableSlot = &slot;
                 break;
             }
 
             if (slot.status == DELETED and !availableSlot)
                 availableSlot = &slot;
-
+            
+            this->comparisonsCount += 3;
         }
 
         return FindResult(tableSlot, availableSlot);

@@ -24,7 +24,7 @@ class BaseTree {
      * @brief Increments a counter in the derived tree class.
      * @details This method uses CRTP to call `incrementCounter()` on the derived `Tree` object.
      */
-    void count() const;
+    void count(size_t amount = 1) const;
 
     /**
      * @brief Retrieves the root node of the derived tree.

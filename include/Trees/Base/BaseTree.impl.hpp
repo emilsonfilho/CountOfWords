@@ -8,8 +8,8 @@
 #include "Utils/StringHandler.hpp"
 
 template <typename Tree, typename Node, typename Key, typename Value>
-void BaseTree<Tree, Node, Key, Value>::count() const {
-    static_cast<const Tree*>(this)->incrementCounter();
+void BaseTree<Tree, Node, Key, Value>::count(size_t increment) const {
+    static_cast<const Tree*>(this)->incrementCounter(increment);
 }
 
 template <typename Tree, typename Node, typename Key, typename Value>
@@ -32,12 +32,14 @@ const Node* BaseTree<Tree, Node, Key, Value>::findNode(const Key& key) const {
     const Node* aux = getTreeRoot();
 
     while (aux) {
-        count();
         if (key < aux->getKey()) {
+            count();
             aux = aux->left;
         } else if (key > aux->getKey()) {
+            count(2);
             aux = aux->right;
         } else {
+            count(2);
             return aux;
         }
     }
@@ -77,13 +79,15 @@ const Value& BaseTree<Tree, Node, Key, Value>::at(const Key& key) const {
     const Node* aux = getTreeRoot();
 
     while (aux) {
-        count();
 
         if (key < aux->getKey()) {
+            count();
             aux = aux->left;
         } else if (key > aux->getKey()) {
+            count(2);
             aux = aux->right;
         } else {
+            count(2);
             return aux->getValue();
         }
     }

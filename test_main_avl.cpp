@@ -6,11 +6,22 @@ void testAVLInsertAndPrint() {
 	AVLTree<std::string, int> avl;
 
 	avl.insert("Emilson", 7);
+	std::cout << "Number of comparisons: " << avl.getComparisonsCount() << std::endl;
+
 	avl.insert("Mislayne", 8);
+	std::cout << "Number of comparisons: " << avl.getComparisonsCount() << std::endl;
+
 	avl.insert("Miranda", 7);
+	std::cout << "Number of comparisons: " << avl.getComparisonsCount() << std::endl;
+
 	avl.insert("Karen", 5);
+	std::cout << "Number of comparisons: " << avl.getComparisonsCount() << std::endl;
+
 	avl.insert("Emilly", 6);
+	std::cout << "Number of comparisons: " << avl.getComparisonsCount() << std::endl;
+
 	avl.insert("Emanuel", 7);
+	std::cout << "Number of comparisons: " << avl.getComparisonsCount() << std::endl;
 
 	// Assuming printInOrder prints in sorted order
 	std::cout << "AVL Tree after insertions (in-order):" << std::endl;
@@ -67,14 +78,19 @@ void testAVLFind() {
 }
 
 void testAVLComparisonsCount() {
+	std::cout << "Testes do comparison\n";
+
 	AVLTree<std::string, int> avl;
 
 	avl.insert("Emilson", 7);
 	avl.insert("Mislayne", 8);
 	avl.insert("Miranda", 7);
 
-	
-	std::cout << "Number of comparisons: " << avl.getComparisonsCount() << std::endl;
+	avl["Miranda"]++;
+
+	avl.print();
+
+	std::cout << avl.getComparisonsCount() << std::endl;
 }
 
 int main() {

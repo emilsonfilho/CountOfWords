@@ -111,13 +111,14 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::insert(const Key& key, const Value& va
 
 	if (key < node->getKey()) {
 		node->left = insert(key, value, node->left);
+		this->incrementCounter();
 	} else if (key > node->getKey()) {
 		node->right = insert(key, value, node->right);
+		this->incrementCounter(2);
 	} else {
+		this->incrementCounter(2); // this is a consequence of the previous ifs not working
 		throw KeyAlreadyExistsException();
 	}
-
-	this->incrementCounter();
 
 	return fixupNode(node);
 }
@@ -167,15 +168,17 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::upsert(const Key& key, AVLNode<Key, Va
 		outValue = &(newNode->getValue());
 		this->setMaxValLen(*outValue);
 		return newNode;
-	}
+	} // does the comparison of this if count?
 
-	this->incrementCounter();
 
 	if (key < node->getKey()) {
+		this->incrementCounter();
 		node->left = upsert(key, node->left, outValue);
 	} else if (key > node->getKey()) {
+		this->incrementCounter(2);
 		node->right = upsert(key, node->right, outValue);
 	} else {
+		this->incrementCounter(2);
 		outValue = &(node->getValue());
 		this->setMaxValLen(*outValue);
 		return node;

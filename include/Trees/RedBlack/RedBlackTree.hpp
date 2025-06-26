@@ -23,7 +23,6 @@ class RedBlackTree : public IDictionary<Key, Value>, public BaseTree<RedBlackTre
 private:
     RedBlackNode<Key, Value>* root; ///< Pointer to the root node of the Red-Black Tree.
     static RedBlackNode<Key, Value>* const NIL; ///< Sentinel node representing null leaves.
-    int comparisonsCount;
     size_t maxKeyLen;
     size_t maxValLen;
 
