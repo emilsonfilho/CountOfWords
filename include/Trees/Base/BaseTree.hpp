@@ -25,12 +25,14 @@ class BaseTree {
      * @details This method uses CRTP to call `incrementCounter()` on the derived `Tree` object.
      */
     void count(size_t n) const;
+
+    void clearCounter();
 protected:
     Node* root;
     size_t maxKeyLen;
     size_t maxValLen;
 
-    BaseTree(Node* r) : root(r), maxKeyLen(0), maxValLen(0) {}
+    BaseTree(Node* r);
 
     /**
      * @brief Finds a node with the specified key in the tree.

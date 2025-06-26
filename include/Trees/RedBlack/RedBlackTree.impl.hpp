@@ -1,11 +1,6 @@
 #include "Trees/RedBlack/RedBlackTree.hpp"
 
 template <typename Key, typename Value>
-const RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::getRoot() const {
-    return root;
-}
-
-template <typename Key, typename Value>
 RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key, Value>* y) {
 	RedBlackNode<Key, Value>* x = y->right;
 
@@ -98,11 +93,9 @@ template <typename Key, typename Value>
 RedBlackNode<Key, Value> RedBlackTree<Key, Value>::NIL_NODE = RedBlackNode<Key, Value>();
 
 template <typename Key, typename Value>
-RedBlackTree<Key, Value>::RedBlackTree() {
-    root = NIL;
-    comparisonsCount = 0;
-    maxKeyLen = 0;
-    maxValLen = 0;
+RedBlackTree<Key, Value>::RedBlackTree()
+    : BaseTree<RedBlackNode<Key, Value>, RedBlackNode<Key, Value>, Key, Value>(NIL),
+      comparisonsCount(0), maxKeyLen(0), maxValLen(0) {
 }
 
 template <typename Key, typename Value>

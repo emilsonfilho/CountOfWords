@@ -13,6 +13,17 @@ void BaseTree<Tree, Node, Key, Value>::count(size_t n) const {
 }
 
 template <typename Tree, typename Node, typename Key, typename Value>
+void BaseTree<Tree, Node, Key, Value>::clearCounter() {
+    static_cast<Tree*>(this)->resetCounter();
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+BaseTree<Tree, Node, Key, Value>::BaseTree(Node* r)
+    : root(r), maxKeyLen(0), maxValLen(0) {
+        clearCounter();
+    }
+
+template <typename Tree, typename Node, typename Key, typename Value>
 const Node* BaseTree<Tree, Node, Key, Value>::findNode(const Key& key, Node* comp) const {
     const Node* aux = root;
     
@@ -53,7 +64,7 @@ void BaseTree<Tree, Node, Key, Value>::reset(Node* node, Node* comp, Node* defau
     root = defaultRoot;
     maxKeyLen = 0;
     maxValLen = 0;
-    static_cast<Tree*>(this)->resetCounter();
+    clearCounter();
 }
 
 
