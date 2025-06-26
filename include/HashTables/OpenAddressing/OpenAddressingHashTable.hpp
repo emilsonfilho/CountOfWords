@@ -28,7 +28,7 @@ private:
 
     void rehash(size_t m);
 
-    ConstFindResult findConstSlot(const Key& key) {
+    ConstFindResult findConstSlot(const Key& key) const {
         const Slot<Key, Value>* tableSlot = nullptr;
         
         for (size_t i = 0; i < this->tableSize; i++) {
@@ -86,7 +86,7 @@ public:
     void printInOrder(std::ostream& out) const;
     size_t getComparisonsCount() const;
     Value& operator[](const Key& key);
-    const Value& operator[](const Key& key) const {};
+    const Value& operator[](const Key& key) const;
 
     template <typename HashTable, typename Collection, typename K, typename V, typename H>
     friend class BaseHashTable;

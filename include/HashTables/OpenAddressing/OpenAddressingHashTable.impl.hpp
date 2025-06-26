@@ -140,3 +140,13 @@ Value& OpenAddressingHashTable<Key, Value, Hash>::operator[](const Key& key) {
     response.availableSlot->status = ACTIVE;
     return response.availableSlot->value;
 }
+
+template <typename Key, typename Value, typename Hash>
+const Value& OpenAddressingHashTable<Key, Value, Hash>::operator[](const Key& key) const {
+    ConstFindResult response = findConstSlot(key);
+
+    if (!response.wasElementFound())
+        throw KeyNotFoundException();
+
+    return response.slot->value;
+}
