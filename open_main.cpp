@@ -25,6 +25,7 @@ int main() {
 
     // oaht.update("kiwi", 4);
     // oaht.remove("mango");
+    oaht.clear();
 
     std::cout << "numero de comparacoes " << oaht.getComparisonsCount() << std::endl;
 

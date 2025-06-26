@@ -221,6 +221,9 @@ template <typename Key, typename Value>
 void AVLTree<Key, Value>::clear() {
 	this->clearNode(root, nullptr);
 	root = nullptr;
+	this->setMaxKeyLen(0);
+	this->setMaxValLen(0);
+	this->comparisonsCount = 0;
 }
 
 template <typename Key, typename Value>
