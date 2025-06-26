@@ -112,22 +112,22 @@ void RedBlackTree<Key, Value>::insert(const Key& key, const Value& value) {
     this->setMaxKeyLen(key);
 	maxValLen = std::max(maxValLen, StringHandler::size(value));
 
-    RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, value, NIL, NIL, NIL, RED);
-
     RedBlackNode<Key, Value> *x = root, *y = NIL;
     
     while (x != NIL) {
         y = x;
 
         this->incrementCounter();
-        if (z->getKey() < x->getKey()) {
+        if (key < x->getKey()) {
             x = x->left;
-        } else if (z->getKey() > x->getKey()) {
+        } else if (key > x->getKey()) {
             x = x->right;
         } else {
             throw KeyNotFoundException();
         }
     }
+    
+    RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, value, NIL, NIL, NIL, RED);
 
     z->parent = y;
     if (y == NIL) 
