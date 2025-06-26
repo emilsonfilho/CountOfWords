@@ -54,11 +54,7 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
         }
     }
 
-    if (lastDeletedSlot == -1) {
-        throw std::runtime_error("tabela cheia");
-    } else {
-        this->table[lastDeletedSlot] = Slot(key, value);
-    }
+    this->table[lastDeletedSlot] = Slot(key, value);
 }
 
 template <typename Key, typename Value, typename Hash>
