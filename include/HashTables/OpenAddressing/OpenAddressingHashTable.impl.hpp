@@ -124,3 +124,19 @@ template <typename Key, typename Value, typename Hash>
 size_t OpenAddressingHashTable<Key, Value, Hash>::getComparisonsCount() const {
     return this->comparisonsCount;
 }
+
+template <typename Key, typename Value, typename Hash>
+Value& OpenAddressingHashTable<Key, Value, Hash>::operator[](const Key& key) {
+    this->checkAndRehash();
+
+    FindResult response = findSlot(key);
+
+    if (response.wasElementFound())
+        return response.slot->value;
+
+    this->numberOfElements++;
+    response.availableSlot->key = key;
+    response.availableSlot->value = Value();
+    response.availableSlot->status = ACTIVE;
+    return response.availableSlot->value;
+}

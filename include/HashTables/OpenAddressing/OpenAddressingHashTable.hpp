@@ -13,9 +13,10 @@ private:
     template <typename Entry>
     struct GenericFindResult {
         Entry* slot;
+        Entry* availableSlot;
 
-        GenericFindResult(Entry* e)
-            : slot(e) {}
+        GenericFindResult(Entry* e, Entry* as = nullptr)
+            : slot(e), availableSlot(as) {}
 
         bool wasElementFound() const { return slot != nullptr; }
     };
@@ -47,22 +48,32 @@ private:
     }
 
     FindResult findSlot(const Key& key) {
-        Slot<Key, Value>* tableSlot = nullptr;
-        
+        Slot<Key, Value> *tableSlot = nullptr, *availableSlot = nullptr;
+
         for (size_t i = 0; i < this->tableSize; i++) {
             size_t slotIdx = hashCode(key, i);
             Slot<Key, Value>& slot = this->table[slotIdx];
 
             this->comparisonsCount++;
 
-            if (slot.status == EMPTY)
-                break;
+            if (slot.status == EMPTY) {
+                if (!availableSlot)
+                    availableSlot = &slot;
 
-            if (slot.status == ACTIVE and slot.key == key)
+                break;
+            }
+
+            if (slot.status == ACTIVE and slot.key == key) {
                 tableSlot = &slot;
+                break;
+            }
+
+            if (slot.status == DELETED and !availableSlot)
+                availableSlot = &slot;
+
         }
 
-        return FindResult(tableSlot);
+        return FindResult(tableSlot, availableSlot);
     }
 public:
     OpenAddressingHashTable(size_t size = 8, float mlf = 0.7);
@@ -74,7 +85,7 @@ public:
     void clear();
     void printInOrder(std::ostream& out) const;
     size_t getComparisonsCount() const;
-    Value& operator[](const Key& key) {};
+    Value& operator[](const Key& key);
     const Value& operator[](const Key& key) const {};
 
     template <typename HashTable, typename Collection, typename K, typename V, typename H>

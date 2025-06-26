@@ -5,31 +5,28 @@
 int main() {
     OpenAddressingHashTable<std::string, int> oaht;
 
-    oaht.insert("apple", 12);
-    oaht.insert("banana", 7);
-    oaht.insert("cherry", 42);
-    oaht.insert("dragonfruit", 5);
-    oaht.insert("elderberry", 23);
-    oaht.insert("fig", 9);
-    oaht.insert("grape", 31);
-    oaht.insert("honeydew", 16);
-    
-    oaht.insert("kiwi", 3);
-    oaht.insert("lemon", 18);
-    oaht.insert("mango", 14);
-    oaht.insert("nectarine", 27);
-    oaht.insert("orange", 11);
-    oaht.insert("papaya", 6);
-    oaht.insert("quince", 30);
+    oaht["banana"] = 7;
+    oaht["cherry"] = 42;
+    oaht["dragonfruit"] = 5;
+    oaht["elderberry"] = 23;
+    oaht["fig"] = 9;
+    oaht["grape"] = 31;
+    oaht["honeydew"] = 16;
+    oaht["kiwi"] = 3;
+    oaht["lemon"] = 18;
+    oaht["mango"] = 14;
+    oaht["nectarine"] = 27;
+    oaht["orange"] = 11;
+    oaht["papaya"] = 6;
+    oaht["quince"] = 30;
 
-    int sla = 0;
-    if (oaht.find("orange", sla)) {
-        std::cout << "orange foi encontrado com valor " << sla << std::endl;
-    } else std::runtime_error("ORANGE NAO FOI ENCONtRADO\n");
 
-    if (!oaht.find("mamao", sla)) {
-        std::cout << "nao foi possivel encontrar mamao como o esperdo\n";
-    }
+    oaht["apple"] = 12;
+
+    // oaht.update("kiwi", 4);
+    // oaht.remove("mango");
+
+    std::cout << "numero de comparacoes " << oaht.getComparisonsCount() << std::endl;
 
     oaht.printInOrder(std::cout);
 
