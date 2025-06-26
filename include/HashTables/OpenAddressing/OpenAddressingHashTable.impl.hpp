@@ -7,7 +7,7 @@
 
 template <typename Key, typename Value, typename Hash>
 size_t OpenAddressingHashTable<Key, Value, Hash>::hashCode(const Key& key, size_t i) const {
-    return (this->hashing(key) + (i + i * i) / 2) % this->tableSize;
+    return (this->hashing(key) + ((i + (i * i)) / 2)) % this->tableSize;
 }
 
 template <typename Key, typename Value, typename Hash>
