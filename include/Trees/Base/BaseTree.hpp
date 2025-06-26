@@ -24,29 +24,14 @@ class BaseTree {
      * @brief Increments a counter in the derived tree class.
      * @details This method uses CRTP to call `incrementCounter()` on the derived `Tree` object.
      */
-    void count() const;
-
-    /**
-     * @brief Retrieves the root node of the derived tree.
-     * @details This method uses CRTP to call `getRoot()` on the derived `Tree` object.
-     * @return A pointer to the root node of the tree.
-     */
-    const Node* getTreeRoot() const;
-
-    /**
-     * @brief Retrieves the maximum key length recorded in the derived tree.
-     * @tparam Value The type of the values stored in the tree.
-     * @return The maximum display length of keys encountered in the tree.
-     */
-    const size_t getMaxKeyLen() const;
-
-    /**
-     * @brief Retrieves the maximum value length recorded in the derived tree.
-     * @details This method uses CRTP to access the `maxValLen` member from the derived `Tree` object.
-     * @return The maximum display length of values encountered in the tree.
-     */
-    const size_t getMaxValLen() const;
+    void count(size_t n) const;
 protected:
+    Node* root;
+    size_t maxKeyLen;
+    size_t maxValLen;
+
+    BaseTree(Node* r) : root(r), maxKeyLen(0), maxValLen(0) {}
+
     /**
      * @brief Finds a node with the specified key in the tree.
      * @param key The key to search for.
@@ -69,6 +54,8 @@ protected:
      */
     void clearNode(Node* node, Node* comp);
 
+    void reset(Node* node, Node* comp = nullptr, Node* defaultRoot = nullptr);
+
     /**
      * @brief Performs an in-order traversal of the subtree and prints node information to an output stream.
      * @param out The output stream to print to.
@@ -83,10 +70,9 @@ protected:
      * @return A const reference to the value associated with the key.
      * @throws KeyNotFoundException If the key is not found in the tree.
      */
-    const Value& at(const Key& key) const;
+    const Value& at(const Key& key, Node* comp = nullptr) const;
 
     void setMaxKeyLen(const Key& key);
-
     void setMaxValLen(const Value& value);
 };
 

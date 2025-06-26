@@ -306,11 +306,7 @@ void RedBlackTree<Key, Value>::remove(const Key& key) {
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::clear() {
-    this->clearNode(root, NIL);
-    root = NIL;
-    this->setMaxKeyLen(0);
-    this->setMaxValLen(0);
-    comparisonsCount = 0;
+    this->reset(root, NIL, NIL);
 }
 
 template <typename Key, typename Value>

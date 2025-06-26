@@ -22,17 +22,6 @@
 template <typename Key, typename Value>
 class AVLTree : public IDictionary<Key, Value>, public BaseTree<AVLTree<Key, Value>, AVLNode<Key, Value>, Key, Value> {
 private:
-    AVLNode<Key, Value>* root; ///< Pointer to the root node of the AVL tree.
-    size_t maxKeyLen;
-    size_t maxValLen;
-
-    /**
-     * @brief Retrieves the root node of the AVL tree.
-     * 
-     * @return A pointer to the root node of the AVL tree.
-     */
-    const AVLNode<Key, Value>* getRoot() const;
-
     /**
      * @brief Computes the height of a given node in the AVL tree.
      * 
@@ -151,9 +140,10 @@ private:
      * to maintain balance.
      */
     AVLNode<Key, Value>* upsert(const Key& key, AVLNode<Key, Value>* node, Value*& outValue);
-public:
-    static const int IMBALANCE = 2; ///< The imbalance threshold for the AVL tree.
 
+    public:
+    static const int IMBALANCE = 2; ///< The imbalance threshold for the AVL tree.
+    
     /**
      * @brief Constructs an empty AVL tree.
      */
@@ -163,7 +153,7 @@ public:
      * @brief Destroys the AVL tree and deallocates all resources.
      */
     ~AVLTree();
-
+    
     /**
      * @brief Inserts a new key-value pair into the AVL tree.
      * @param key The key to be inserted.
@@ -173,7 +163,7 @@ public:
      * display size of the inserted key and value, respectively.
      */
     void insert(const Key& key, const Value& value) override;
-
+    
     /**
      * @brief Searches for a key in the AVL tree and retrieves its associated value.
      * 
@@ -183,7 +173,7 @@ public:
      * @return false If the key is not found.
      */
     bool find(const Key& key, Value& outValue) override;
-
+    
     /**
      * @brief Updates the value associated with a given key in the AVL tree.
      * 
@@ -192,19 +182,19 @@ public:
      * @throws KeyNotFoundException If the key is not found in the tree.
      */
     void update(const Key& key, const Value& value) override;
-
+    
     /**
      * @brief Removes a node with the specified key from the AVL tree.
      * 
      * @param key The key of the node to be removed.
      */
     void remove(const Key& key) override;
-
+    
     /**
      * @brief Clears the AVL tree by deallocating all nodes.
      */
     void clear() override;
-
+    
     /**
      * @brief Prints the elements of the AVL tree in in-order traversal.
      * 
@@ -218,7 +208,7 @@ public:
      * @return The total number of comparisons made.
      */
     size_t getComparisonsCount() const override;
-
+    
     /**
      * @brief Accesses the value associated with a given key.
      * 
@@ -226,7 +216,7 @@ public:
      * @return A reference to the associated value.
      */
     Value& operator[](const Key& key) override;
-
+    
     /**
      * @brief Accesses the value associated with a given key (const version).
      * 
@@ -234,17 +224,11 @@ public:
      * @return A const reference to the associated value.
      */
     const Value& operator[](const Key& key) const override;
-
+    
     /**
      * @brief Prints the AVL tree structure.
      */
     void print() const;
-
-    /**
-     * @brief Grants friendship to the BaseTree class.
-     */
-    template <typename Tree, typename Node, typename K, typename V>
-    friend class BaseTree;
 };
 
 #include "Trees/AVL/AVLTree.impl.hpp"

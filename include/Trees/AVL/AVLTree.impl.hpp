@@ -6,11 +6,6 @@
 #include "Utils/StringHandler.hpp"
 
 template <typename Key, typename Value>
-const AVLNode<Key, Value>* AVLTree<Key, Value>::getRoot() const {
-	return root;
-}
-
-template <typename Key, typename Value>
 size_t AVLTree<Key, Value>::height(AVLNode<Key, Value>* node) const {
 	if (!node) return 0;
 
@@ -108,16 +103,17 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::insert(const Key& key, const Value& va
 	// It'll never be called w/ root == nullptr
 	if (!node)
 		return new AVLNode(key, value);
-
+	
 	if (key < node->getKey()) {
+		this->incrementCounter(1);
 		node->left = insert(key, value, node->left);
 	} else if (key > node->getKey()) {
+		this->incrementCounter(2);
 		node->right = insert(key, value, node->right);
 	} else {
+		this->incrementCounter(2);
 		throw KeyAlreadyExistsException();
 	}
-
-	this->incrementCounter();
 
 	return fixupNode(node);
 }
@@ -127,14 +123,15 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::update(const Key& key, const Value& va
 	if (!node) throw KeyNotFoundException();
 
 	if (key < node->getKey()) {
+		this->incrementCounter(1);
 		node->left = update(key, value, node->left);
 	} else if (key > node->getKey()) {
+		this->incrementCounter(2);
 		node->right = update(key, value, node->right);
 	} else {
+		this->incrementCounter(2);
 		node->setValue(value);
 	}
-
-	this->incrementCounter();
 
 	return fixupNode(node);
 }
@@ -169,13 +166,14 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::upsert(const Key& key, AVLNode<Key, Va
 		return newNode;
 	}
 
-	this->incrementCounter();
-
 	if (key < node->getKey()) {
+		this->incrementCounter(1);
 		node->left = upsert(key, node->left, outValue);
 	} else if (key > node->getKey()) {
+		this->incrementCounter(2);
 		node->right = upsert(key, node->right, outValue);
 	} else {
+		this->incrementCounter(2);
 		outValue = &(node->getValue());
 		this->setMaxValLen(*outValue);
 		return node;
@@ -185,14 +183,15 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::upsert(const Key& key, AVLNode<Key, Va
 }
 
 template <typename Key, typename Value>
-AVLTree<Key, Value>::AVLTree(): root(nullptr), maxKeyLen(0), maxValLen(0) {}
+AVLTree<Key, Value>::AVLTree()
+	: BaseTree<AVLTree<Key, Value>, AVLNode<Key, Value>, Key, Value>(nullptr) {}
 
 template <typename Key, typename Value>
 AVLTree<Key, Value>::~AVLTree() { clear(); }
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::insert(const Key& key, const Value& value) {
-	root = insert(key, value, root);
+	this->root = insert(key, value, this->root);
 	this->setMaxKeyLen(key);
 	this->setMaxValLen(value);
 }
@@ -209,21 +208,17 @@ bool AVLTree<Key, Value>::find(const Key& key, Value& outValue) {
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::update(const Key& key, const Value& value) {
-	root = update(key, value, root);
+	this->root = update(key, value, this->root);
 }
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::remove(const Key& key) {
-	root = remove(key, root);
+	this->root = remove(key, this->root);
 }
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::clear() {
-	this->clearNode(root, nullptr);
-	root = nullptr;
-	this->setMaxKeyLen(0);
-	this->setMaxValLen(0);
-	this->comparisonsCount = 0;
+	this->reset(this->root);
 }
 
 template <typename Key, typename Value>
@@ -241,12 +236,12 @@ void AVLTree<Key, Value>::printTree(AVLNode<Key, Value>* node, size_t depth) con
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::print() const {
-	printTree(root);
+	printTree(this->root);
 }
 
 template <typename Key, typename Value>
 void AVLTree<Key, Value>::printInOrder(std::ostream& os) const {
-	this->inOrderTransversal(os, root, nullptr);
+	this->inOrderTransversal(os, this->root, nullptr);
 }
 
 template <typename Key, typename Value>
@@ -257,7 +252,7 @@ size_t AVLTree<Key, Value>::getComparisonsCount() const {
 template <typename Key, typename Value>
 Value& AVLTree<Key, Value>::operator[](const Key& key) {
 	Value* insertedValue = nullptr;
-	root = upsert(key, root, insertedValue);
+	this->root = upsert(key, this->root, insertedValue);
 	return *insertedValue;
 }
 
@@ -265,3 +260,5 @@ template <typename Key, typename Value>
 const Value& AVLTree<Key, Value>::operator[](const Key& key) const {
 	return this->at(key);
 }
+
+

@@ -8,7 +8,9 @@ class IDictionary {
 protected:
     mutable size_t comparisonsCount = 0;
 
-    void incrementCounter() const { comparisonsCount++; }
+    void incrementCounter(size_t n) const { comparisonsCount += n; }
+    void resetCounter() const { comparisonsCount = 0; }
+
 public:
     virtual void insert(const Key& key, const Value& value) = 0;
     virtual bool find(const Key& key, Value& outValue) = 0;
