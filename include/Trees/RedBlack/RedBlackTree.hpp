@@ -22,7 +22,8 @@ template <typename Key, typename Value>
 class RedBlackTree : public IDictionary<Key, Value>, public BaseTree<RedBlackTree<Key, Value>, RedBlackNode<Key, Value>, Key, Value> {
 private:
     RedBlackNode<Key, Value>* root; ///< Pointer to the root node of the Red-Black Tree.
-    static RedBlackNode<Key, Value>* const NIL; ///< Sentinel node representing null leaves.
+    static RedBlackNode<Key, Value> NIL_NODE; ///< Sentinel node representing null leaves.
+    static constexpr RedBlackNode<Key, Value>* const NIL = &NIL_NODE; ///< Sentinel node representing null leaves.
     int comparisonsCount;
     size_t maxKeyLen;
     size_t maxValLen;

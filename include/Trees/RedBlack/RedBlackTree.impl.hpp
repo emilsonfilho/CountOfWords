@@ -95,9 +95,7 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value>* z) {
 }
 
 template <typename Key, typename Value>
-RedBlackNode<Key, Value>* const RedBlackTree<Key, Value>::NIL = new RedBlackNode<Key, Value>(
-    Key(), Value(), NIL, NIL, NIL, BLACK
-);
+RedBlackNode<Key, Value> RedBlackTree<Key, Value>::NIL_NODE = RedBlackNode<Key, Value>();
 
 template <typename Key, typename Value>
 RedBlackTree<Key, Value>::RedBlackTree() {
@@ -261,7 +259,7 @@ void RedBlackTree<Key, Value>::printTree(RedBlackNode<Key, Value>* node, int ind
 
 template <typename Key, typename Value>
 bool RedBlackTree<Key, Value>::find(const Key& key, Value& outValue) {
-    const RedBlackNode<Key, Value>* node = this->findNode(key);
+    const RedBlackNode<Key, Value>* node = this->findNode(key, NIL);
     
     if (!node) return false;
 

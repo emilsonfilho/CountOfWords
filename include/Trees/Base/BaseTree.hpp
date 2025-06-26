@@ -52,7 +52,7 @@ protected:
      * @param key The key to search for.
      * @return A const pointer to the node if found, nullptr otherwise.
      */
-    const Node* findNode(const Key& key) const;
+    const Node* findNode(const Key& key, Node* comp = nullptr) const;
 
     /**
      * @brief Finds the node with the minimum key in the subtree rooted at the given node.

@@ -28,10 +28,10 @@ const size_t BaseTree<Tree, Node, Key, Value>::getMaxValLen() const {
 }
 
 template <typename Tree, typename Node, typename Key, typename Value>
-const Node* BaseTree<Tree, Node, Key, Value>::findNode(const Key& key) const {
+const Node* BaseTree<Tree, Node, Key, Value>::findNode(const Key& key, Node* comp) const {
     const Node* aux = getTreeRoot();
-
-    while (aux) {
+    
+    while (aux != comp) {
         count();
         if (key < aux->getKey()) {
             aux = aux->left;

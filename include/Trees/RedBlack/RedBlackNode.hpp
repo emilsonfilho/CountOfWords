@@ -26,6 +26,12 @@ struct RedBlackNode : public Node<Key, Value> {
                     RedBlackNode* p, Color c)
         : Node<Key, Value>(k, v), left(l), right(r), parent(p), color(c) {}
 
+    RedBlackNode(Color color = BLACK) : Node<Key, Value>(Key(), Value()) {
+        this->left = this;
+        this->right = this;
+        this->parent = this;
+        this->color = color;
+    }
 };
 
 #endif
