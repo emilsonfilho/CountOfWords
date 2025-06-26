@@ -6,17 +6,11 @@
 #include <utility>
 #include <functional>
 
+#include "HashTables/Base/BaseHashTable.hpp"
 #include "Dictionary/IDictionary.hpp"
 
 template <typename Key, typename Value, typename Hash = std::hash<Key>>
-class ChainedHashTable : public IDictionary<Key, Value> {
-    std::vector<std::list<std::pair<Key, Value>>> table;
-    size_t tableSize;
-    float maxLoadFactor;
-    size_t numberOfElements;
-    Hash hashing;
-    mutable int comparisonsCount;
-
+class ChainedHashTable : public IDictionary<Key, Value>, public BaseHashTable<ChainedHashTable<Key, Value, Hash>, std::list<std::pair<Key, Value>>, Key, Value, Hash> {
     template <typename Iterator, typename BucketRef>
     struct GenericFindResult {
         Iterator iterator;
@@ -37,19 +31,6 @@ class ChainedHashTable : public IDictionary<Key, Value> {
         const std::list<std::pair<Key, Value>>&>;
 
     /**
-     * @brief Finds the next prime number greater than or equal to the given number.
-     * 
-     * This function calculates the smallest prime number that is greater than or 
-     * equal to the input number. It uses a helper lambda function to check if a 
-     * number is prime and iterates through odd numbers starting from the next 
-     * candidate until a prime is found.
-     * 
-     * @param num The starting number to find the next prime.
-     * @return size_t The next prime number greater than or equal to the input.
-     */
-    size_t getNextPrime(size_t num) const;
-
-    /**
      * @brief Computes the hash code for a given key.
      * 
      * This function applies the hash function provided by the Hash template parameter
@@ -60,28 +41,6 @@ class ChainedHashTable : public IDictionary<Key, Value> {
      * @return size_t The computed hash code, which is the index in the hash table.
      */
     size_t hashCode(const Key& key) const;
-
-    /**
-     * @brief Calculates and returns the current load factor of the hash table.
-     * 
-     * The load factor is defined as the ratio of the number of elements
-     * stored in the hash table to the total number of slots (buckets) in the table.
-     * 
-     * @return size_t The current load factor as a floating-point value.
-     */
-    float getLoadFactor() const;
-
-    /**
-     * @brief Retrieves the maximum load factor of the hash table.
-     * 
-     * The maximum load factor determines the threshold at which the hash table
-     * will trigger a rehash to maintain efficient operations. If the current
-     * load factor (number of elements divided by table size) exceeds this value,
-     * the table will resize and redistribute its elements.
-     * 
-     * @return The maximum load factor as a floating-point value.
-     */
-    size_t getMaxLoadFactor() const;
 
     /**
      * @brief Rehashes the hash table to a new size.
@@ -197,6 +156,7 @@ public:
      * by certain operations within the hash table (e.g., search, insertion).
      *
      * @return The current number of comparisons as a `size_t`.
+     * @note Not passed to the base hash table by the function no need to add complexity to something relatively simple
      */
     size_t getComparisonsCount() const override;
 
@@ -238,9 +198,12 @@ public:
      * found element).
      */
     const Value& operator[](const Key& key) const override;
+
+    template <typename HashTable, typename Collection, typename K, typename V, typename H>
+    friend class BaseHashTable;
 };
 
-#include "HashTables/ChainedHashTable.impl.hpp"
+#include "HashTables/Chained/ChainedHashTable.impl.hpp"
 
 #endif
 
