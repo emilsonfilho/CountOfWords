@@ -165,12 +165,6 @@ public:
      * @brief Prints the structure of the Red-Black Tree.
      */
     void print() const;
-
-    /**
-     * @brief Grants friendship to the BaseTree class.
-     */
-    template <typename Tree, typename Node, typename K, typename V>
-    friend class BaseTree;
 };
 
 #include "Trees/RedBlack/RedBlackTree.impl.hpp"
