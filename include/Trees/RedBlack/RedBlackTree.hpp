@@ -21,19 +21,8 @@
 template <typename Key, typename Value>
 class RedBlackTree : public IDictionary<Key, Value>, public BaseTree<RedBlackTree<Key, Value>, RedBlackNode<Key, Value>, Key, Value> {
 private:
-    RedBlackNode<Key, Value>* root; ///< Pointer to the root node of the Red-Black Tree.
     static RedBlackNode<Key, Value> NIL_NODE; ///< Sentinel node representing null leaves.
     static constexpr RedBlackNode<Key, Value>* const NIL = &NIL_NODE; ///< Sentinel node representing null leaves.
-    int comparisonsCount;
-    size_t maxKeyLen;
-    size_t maxValLen;
-
-    /**
-     * @brief Retrieves the root node of the Red-Black Tree.
-     * 
-     * @return A pointer to the root node of the Red-Black Tree.
-     */
-    const RedBlackNode<Key, Value>* getRoot() const;
 
     /**
      * @brief Performs a left rotation on a given node.
@@ -176,12 +165,6 @@ public:
      * @brief Prints the structure of the Red-Black Tree.
      */
     void print() const;
-
-    /**
-     * @brief Grants friendship to the BaseTree class.
-     */
-    template <typename Tree, typename Node, typename K, typename V>
-    friend class BaseTree;
 };
 
 #include "Trees/RedBlack/RedBlackTree.impl.hpp"

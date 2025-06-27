@@ -41,16 +41,19 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
         size_t slotIdx = hashCode(key, i);
         Slot<Key, Value>& slot = this->table[slotIdx];
 
-        this->comparisonsCount++;
-
         if (slot.status == EMPTY) {
+            this->incrementCounter(1);
             slot = Slot(key, value);
             this->numberOfElements++;
             return;
         } else if (slot.status == ACTIVE and slot.key == key) {
+            this->incrementCounter(2);
             throw KeyAlreadyExistsException();
         } else if (slot.status == DELETED and lastDeletedSlot == -1) {
+            this->incrementCounter(3);
             lastDeletedSlot = slotIdx;
+        } else {
+            this->incrementCounter(3);
         }
     }
 
@@ -89,8 +92,7 @@ void OpenAddressingHashTable<Key, Value, Hash>::remove(const Key& key) {
 
 template <typename Key, typename Value, typename Hash>
 void OpenAddressingHashTable<Key, Value, Hash>::clear() {
-    for (Slot<Key, Value>& slot : this->table)
-        slot.status = EMPTY;
+    this->clearHashTable();
 }
 
 template <typename Key, typename Value, typename Hash>

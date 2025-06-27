@@ -1,11 +1,6 @@
 #include "Trees/RedBlack/RedBlackTree.hpp"
 
 template <typename Key, typename Value>
-const RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::getRoot() const {
-    return root;
-}
-
-template <typename Key, typename Value>
 RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key, Value>* y) {
 	RedBlackNode<Key, Value>* x = y->right;
 
@@ -22,7 +17,7 @@ RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key,
         else
             x->parent->right = x;
     } else {
-        root = x;
+        this->root = x;
     }
 
 	return x;
@@ -45,7 +40,7 @@ RedBlackNode<Key, Value>* RedBlackTree<Key, Value>::rotateRight(RedBlackNode<Key
         else
             x->parent->right = x;
     } else {
-        root = x;
+        this->root = x;
     }
 
 	return x;
@@ -91,59 +86,60 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value>* z) {
         }
     }
 
-    root->color = BLACK;
+    this->root->color = BLACK;
 }
 
 template <typename Key, typename Value>
 RedBlackNode<Key, Value> RedBlackTree<Key, Value>::NIL_NODE = RedBlackNode<Key, Value>();
 
 template <typename Key, typename Value>
-RedBlackTree<Key, Value>::RedBlackTree() {
-    root = NIL;
-    comparisonsCount = 0;
-    maxKeyLen = 0;
-    maxValLen = 0;
+RedBlackTree<Key, Value>::RedBlackTree()
+    : BaseTree<RedBlackTree<Key, Value>, RedBlackNode<Key, Value>, Key, Value>(NIL) {
 }
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::insert(const Key& key, const Value& value) {
-    this->setMaxKeyLen(key);
-	maxValLen = std::max(maxValLen, StringHandler::size(value));
-
-    RedBlackNode<Key, Value> *x = root, *y = NIL;
+    RedBlackNode<Key, Value> *x = this->root, *y = NIL;
     
     while (x != NIL) {
         y = x;
-
-        this->incrementCounter();
+        
         if (key < x->getKey()) {
+            this->incrementCounter(1);
             x = x->left;
         } else if (key > x->getKey()) {
+            this->incrementCounter(2);
             x = x->right;
         } else {
-            throw KeyNotFoundException();
+            this->incrementCounter(2);
+            throw KeyAlreadyExistsException();
         }
+    
     }
+
+    this->setMaxKeyLen(key);
+    this->setMaxValLen(value);
     
     RedBlackNode<Key, Value> *z = new RedBlackNode<Key, Value>(key, value, NIL, NIL, NIL, RED);
 
     z->parent = y;
-    if (y == NIL) 
-        root = z;
-    else if (z->getKey() < y->getKey())
+    if (y == NIL) {
+        this->incrementCounter(1);
+        this->root = z;
+    } else if (z->getKey() < y->getKey()) {
+        this->incrementCounter(2);
         y->left = z;
-    else
+    } else {
+        this->incrementCounter(2);
         y->right = z;
-
-    // should I increment counter here?
-    this->incrementCounter();
+    }
 
     insertFixup(z);
 }
 
 template <typename Key, typename Value>
 void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
-    while (x != root and x->color == BLACK) {
+    while (x != this->root and x->color == BLACK) {
         if (x == x->parent->left) {
             RedBlackNode<Key, Value>* w = x->parent->right;
 
@@ -171,7 +167,7 @@ void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
                 w->right->color = BLACK;
                 w = rotateLeft(x->parent);
 
-                x = root;
+                x = this->root;
             }
         } else { // Symetrical case
             RedBlackNode<Key, Value>* w = x->parent->left;
@@ -200,7 +196,7 @@ void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
                 w->left->color = BLACK;
                 w = rotateRight(x->parent);
 
-                x = root;
+                x = this->root;
             }
         }
     }
@@ -225,7 +221,7 @@ void RedBlackTree<Key, Value>::deleteNode(RedBlackNode<Key, Value>* z) {
     x->parent = y->parent;
 
     if (y->parent == NIL) {
-        root = x;
+        this->root = x;
     } else {
         if (y == y->parent->left)
             y->parent->left = x;
@@ -269,15 +265,16 @@ bool RedBlackTree<Key, Value>::find(const Key& key, Value& outValue) {
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::update(const Key& key, const Value& value) {
-    RedBlackNode<Key, Value>* aux = root;
+    RedBlackNode<Key, Value>* aux = this->root;
     while (aux != NIL) {
-        this->incrementCounter();
-        
         if (key < aux->getKey()) {
+            this->incrementCounter(1);
             aux = aux->left;
         } else if (key > aux->getKey()) {
+            this->incrementCounter(2);
             aux = aux->right;
         } else {
+            this->incrementCounter(2);
             aux->setValue(value);
             return;
         }
@@ -288,16 +285,18 @@ void RedBlackTree<Key, Value>::update(const Key& key, const Value& value) {
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::print() const {
-    printTree(root);
+    printTree(this->root);
 }
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::remove(const Key& key) {
-    RedBlackNode<Key, Value>* p = root;
+    RedBlackNode<Key, Value>* p = this->root;
 
     while (p != NIL and p->getKey() != key) {
-        if (key < p->getKey()) p = p->left;
+        if (key < p->getKey()) p = p->left;  
         else p = p->right;
+
+        this->incrementCounter(1);
     }
 
     if (p != NIL)
@@ -306,35 +305,36 @@ void RedBlackTree<Key, Value>::remove(const Key& key) {
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::clear() {
-    this->clearNode(root, NIL);
-    root = NIL;
+    this->reset(this->root, NIL, NIL);
 }
 
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::printInOrder(std::ostream& os) const {
-    this->inOrderTransversal(os, root, NIL);
+    this->inOrderTransversal(os, this->root, NIL);
 }
 
 template <typename Key, typename Value>
 size_t RedBlackTree<Key, Value>::getComparisonsCount() const {
-    return comparisonsCount;
+    return this->comparisonsCount;
 }
 
 template <typename Key, typename Value>
 Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
     this->setMaxKeyLen(key);
 
-    RedBlackNode<Key, Value> *x = root, *y = NIL;
+    RedBlackNode<Key, Value> *x = this->root, *y = NIL;
     
     while (x != NIL) {
         y = x;
 
-        this->incrementCounter();
         if (key < x->getKey()) {
+            this->incrementCounter(1);
             x = x->left;
         } else if (key > x->getKey()) {
+            this->incrementCounter(2);
             x = x->right;
         } else {
+            this->incrementCounter(2);
             this->setMaxValLen(x->getValue());        
             return x->getValue();
         }
@@ -345,14 +345,16 @@ Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
     this->setMaxValLen(z->getValue());
 
     z->parent = y;
-    if (y == NIL) 
-        root = z;
-    else if (z->getKey() < y->getKey())
+    if (y == NIL) {
+        this->incrementCounter(1);    
+        this->root = z;
+    } else if (z->getKey() < y->getKey()) {
+        this->incrementCounter(2);
         y->left = z;
-    else
+    } else {
+        this->incrementCounter(2);
         y->right = z;
-
-    this->incrementCounter();
+    }
 
     insertFixup(z);
 
