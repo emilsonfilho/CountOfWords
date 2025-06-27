@@ -293,13 +293,10 @@ void RedBlackTree<Key, Value>::remove(const Key& key) {
     RedBlackNode<Key, Value>* p = this->root;
 
     while (p != NIL and p->getKey() != key) {
-        if (key < p->getKey()) {
-            this->incrementCounter(1);
-            p = p->left;  
-        } else {
-            this->incrementCounter(2);
-            p = p->right;
-        }
+        if (key < p->getKey()) p = p->left;  
+        else p = p->right;
+
+        this->incrementCounter(1);
     }
 
     if (p != NIL)
