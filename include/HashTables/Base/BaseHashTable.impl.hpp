@@ -48,5 +48,5 @@ void BaseHashTable<HashTable, Collection, Key, Value, Hash>::clearHashTable() {
     table.clear();
     table.resize(tableSize);
     numberOfElements = 0;
-    static_cast<HashTable*>(this)->comparisonsCount = 0;
+    static_cast<HashTable*>(this)->resetCounter();
 }
