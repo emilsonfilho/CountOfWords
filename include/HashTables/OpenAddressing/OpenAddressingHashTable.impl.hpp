@@ -11,6 +11,62 @@ size_t OpenAddressingHashTable<Key, Value, Hash>::hashCode(const Key& key, size_
 }
 
 template <typename Key, typename Value, typename Hash>
+typename OpenAddressingHashTable<Key, Value, Hash>::ConstFindResult OpenAddressingHashTable<Key, Value, Hash>::findConstSlot(const Key& key) const {
+    const Slot<Key, Value>* tableSlot = nullptr;
+        
+    for (size_t i = 0; i < this->tableSize; i++) {
+        size_t slotIdx = hashCode(key, i);
+        const Slot<Key, Value>& slot = this->table[slotIdx];
+
+        if (slot.status == EMPTY) {
+            this->incrementCounter(1);
+            break;
+        }
+
+        if (slot.status == ACTIVE and slot.key == key)
+            tableSlot = &slot;
+        
+        this->incrementCounter(2);
+    }
+
+    return ConstFindResult(tableSlot);
+}
+
+template <typename Key, typename Value, typename Hash>
+typename OpenAddressingHashTable<Key, Value, Hash>::FindResult OpenAddressingHashTable<Key, Value, Hash>::findSlot(const Key& key) {
+    Slot<Key, Value> *tableSlot = nullptr, *availableSlot = nullptr;
+
+    for (size_t i = 0; i < this->tableSize; i++) {
+        size_t slotIdx = hashCode(key, i);
+        Slot<Key, Value>& slot = this->table[slotIdx];
+
+        if (slot.status == EMPTY) {
+            if (!availableSlot)
+                availableSlot = &slot;
+
+            this->incrementCounter(2);
+
+            break;
+        }
+
+        if (slot.status == ACTIVE and slot.key == key) {
+            this->incrementCounter(2);
+
+            tableSlot = &slot;
+            break;
+        }
+
+        if (slot.status == DELETED and !availableSlot)
+            availableSlot = &slot;
+
+        this->incrementCounter(3);
+
+    }
+
+    return FindResult(tableSlot, availableSlot);
+}
+
+template <typename Key, typename Value, typename Hash>
 OpenAddressingHashTable<Key, Value, Hash>::OpenAddressingHashTable(size_t size, float mlf)
     : BaseHashTable<OpenAddressingHashTable<Key, Value, Hash>, Slot<Key, Value>, Key, Value, Hash>(size, mlf) {}
 
