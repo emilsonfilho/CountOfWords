@@ -25,6 +25,9 @@ public:
     
     template <typename Tree, typename Node, typename K, typename V>
     friend class BaseTree;
+
+    template <typename HashTable, typename Collection, typename K, typename V, typename Hash>
+    friend class BaseHashTable;
 };
 
 #endif
