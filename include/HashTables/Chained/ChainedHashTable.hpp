@@ -42,21 +42,37 @@ class ChainedHashTable : public IDictionary<Key, Value>, public BaseHashTable<Ch
      */
     size_t hashCode(const Key& key) const;
 
-    /**
-     * @brief Rehashes the hash table to a new size.
-     * 
-     * This function resizes the hash table to a new size that is the next prime 
-     * number greater than or equal to the specified size `m`. It redistributes 
-     * all existing key-value pairs into the new table, ensuring that the hash 
-     * table maintains its integrity and performance.
-     * 
-     * @param m The minimum size for the new hash table. The actual size will be 
-     *          the next prime number greater than or equal to `m`.
-     */
-    void rehash(size_t m);
 
-    FindResult findPairIterator(const Key& key);
+    /**
+    * @brief Finds a constant iterator to a key-value pair in the hash table.
+    * 
+    * This method searches for a key in the hash table and returns a constant iterator
+    * to the key-value pair if found. The search is performed in the list corresponding
+    * to the hash slot of the given key.
+    * 
+    * @param key The key to search for in the hash table.
+    * 
+    * @return ConstFindResult A pair consisting of a constant iterator to the found key-value
+    *         pair and a reference to the list in which the key-value pair resides. If the key
+    *         is not found, the iterator will be equal to the end iterator of the list.
+    * 
+    * @note This method increments the `comparisonsCount` member variable for each comparison
+    *       made during the search.
+    */
     ConstFindResult findConstPairIterator(const Key& key) const;
+
+    /**
+     * @brief Finds the iterator pointing to the pair with the specified key in the hash table.
+     * 
+     * This method searches for a key-value pair in the hash table and returns a result containing
+     * the iterator to the found pair and a reference to the bucket (list) where the pair resides.
+     * 
+     * @param key The key to search for in the hash table.
+     * @return FindResult A structure containing:
+     *         - An iterator pointing to the found pair if the key exists, or the end iterator of the bucket if not.
+     *         - A reference to the bucket (list) where the key would be located.
+     */
+    FindResult findPairIterator(const Key& key);
 public:
     /**
      * @class ChainedHashTable
@@ -199,8 +215,18 @@ public:
      */
     const Value& operator[](const Key& key) const override;
 
-    template <typename HashTable, typename Collection, typename K, typename V, typename H>
-    friend class BaseHashTable;
+    /**
+     * @brief Rehashes the hash table to a new size.
+     * 
+     * This function resizes the hash table to a new size that is the next prime 
+     * number greater than or equal to the specified size `m`. It redistributes 
+     * all existing key-value pairs into the new table, ensuring that the hash 
+     * table maintains its integrity and performance.
+     * 
+     * @param m The minimum size for the new hash table. The actual size will be 
+     *          the next prime number greater than or equal to `m`.
+     */
+    void rehash(size_t m);
 };
 
 #include "HashTables/Chained/ChainedHashTable.impl.hpp"
