@@ -12,7 +12,12 @@ ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf)
 
 template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::hashCode(const Key& key) const {
-    return this->hashing(key) % this->tableSize;
+    size_t pos = this->hashing(key) % this->tableSize;
+
+    if (!this->table[pos].empty())
+        this->incrementCollisionsCount();
+
+    return pos;
 }
 
 template <typename Key, typename Value, typename Hash>
@@ -38,6 +43,8 @@ template <typename Key, typename Value, typename Hash>
 typename ChainedHashTable<Key, Value, Hash>::FindResult ChainedHashTable<Key, Value, Hash>::findPairIterator(const Key& key) {
     size_t slot = hashCode(key);
 
+   
+
     std::list<std::pair<Key, Value>>& lst = this->table[slot];
 
     auto it = std::find_if(lst.begin(), lst.end(), [this, &key](const std::pair<Key, Value>& p) {
@@ -51,6 +58,8 @@ typename ChainedHashTable<Key, Value, Hash>::FindResult ChainedHashTable<Key, Va
 template <typename Key, typename Value, typename Hash>
 typename ChainedHashTable<Key, Value, Hash>::ConstFindResult ChainedHashTable<Key, Value, Hash>::findConstPairIterator(const Key& key) const {
     size_t slot = hashCode(key);
+
+   
 
     const std::list<std::pair<Key, Value>>& lst = this->table[slot];
 
@@ -67,6 +76,7 @@ void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& val
     this->checkAndRehash();
 
     size_t slot = hashCode(key);
+   
     
     for (const auto& p : this->table[slot]) {
         this->comparisonsCount++;
@@ -167,4 +177,14 @@ const Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) cons
     } else {
         return response.iterator->second;
     }
+}
+
+template <typename Key, typename Value, typename Hash>
+size_t ChainedHashTable<Key, Value, Hash>::getCollissionsCount() const {
+    return this->collisionsCount;
+}
+
+template <typename Key, typename Value, typename Hash>
+size_t ChainedHashTable<Key, Value, Hash>::getTableSize() const {
+    return this->tableSize;
 }

@@ -11,6 +11,7 @@ protected:
     float maxLoadFactor;
     size_t numberOfElements;
     Hash hashing;
+    mutable size_t collisionsCount;
     
     /**
      * @brief Calculates and returns the next prime number greater than or equal to a given number.
@@ -78,6 +79,8 @@ public:
      * Finally, `numberOfElements` is reset to 0, accurately reflecting the empty state.
      */
     void clearHashTable();
+
+    void incrementCollisionsCount(size_t m = 1) const;
 };
 
 #include "HashTables/Base/BaseHashTable.impl.hpp"

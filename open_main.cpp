@@ -27,6 +27,7 @@ int main() {
     oaht.remove("mango");
 
     std::cout << "numero de comparacoes " << oaht.getComparisonsCount() << std::endl;
+    std::cout << "numero de colisões: " << oaht.getCollisionsCount() << std::endl;
 
     oaht.printInOrder(std::cout);
 

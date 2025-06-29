@@ -19,7 +19,7 @@ void BaseTree<Tree, Node, Key, Value>::clearCounter() {
 
 template <typename Tree, typename Node, typename Key, typename Value>
 BaseTree<Tree, Node, Key, Value>::BaseTree(Node* r)
-    : root(r), maxKeyLen(0), maxValLen(0) {
+    : root(r), maxKeyLen(0), maxValLen(0), rotationsCount(0) {
         clearCounter();
     }
 
@@ -108,6 +108,11 @@ void BaseTree<Tree, Node, Key, Value>::setMaxKeyLen(const Key& key) {
 template <typename Tree, typename Node, typename Key, typename Value>
 void BaseTree<Tree, Node, Key, Value>::setMaxValLen(const Value& value) {
     maxValLen = std::max(maxValLen, StringHandler::size(value));
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+void BaseTree<Tree, Node, Key, Value>::incrementRotationsCount(size_t amount) {
+    rotationsCount += amount;
 }
 
 #endif 

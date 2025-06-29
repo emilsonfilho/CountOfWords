@@ -227,6 +227,10 @@ public:
      *          the next prime number greater than or equal to `m`.
      */
     void rehash(size_t m);
+
+    size_t getCollissionsCount() const;
+
+    size_t getTableSize() const;  
 };
 
 #include "HashTables/Chained/ChainedHashTable.impl.hpp"

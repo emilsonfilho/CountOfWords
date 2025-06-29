@@ -60,11 +60,13 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value>* z) {
                     z = z->parent;
                     z = rotateLeft(z);
                     z = z->left;
+                    this->incrementRotationsCount();
                 }
 
                 z->parent->color = BLACK;
                 z->parent->parent->color = RED;
                 z = rotateRight(z->parent->parent);
+                this->incrementRotationsCount();
             }
         } else { // Symmetrical case
             if (z->parent->parent->left->color == RED) { // Case 1
@@ -77,11 +79,13 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value>* z) {
                     z = z->parent;
                     z = rotateRight(z);
                     z = z->right;
+                    this->incrementRotationsCount();
                 }
 
                 z->parent->color = BLACK;
                 z->parent->parent->color = RED;
                 z = rotateLeft(z->parent->parent);
+                this->incrementRotationsCount();
             }
         }
     }
@@ -158,6 +162,7 @@ void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
                     w->left->color = BLACK;
                     w->color = RED;
                     w = rotateRight(w);
+                    this->incrementRotationsCount();
                     w = x->parent->right;
                 }
 
@@ -166,6 +171,7 @@ void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
                 x->parent->color = BLACK;
                 w->right->color = BLACK;
                 w = rotateLeft(x->parent);
+                this->incrementRotationsCount();
 
                 x = this->root;
             }
@@ -176,6 +182,7 @@ void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
                 x->parent->color = RED;
                 w->color = BLACK;
                 x->parent = rotateRight(x->parent);
+                this->incrementRotationsCount();
                 w = x->parent->left;
             }
 
@@ -187,6 +194,7 @@ void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
                     w->right->color = BLACK;
                     w->color = RED;
                     w = rotateLeft(w);
+                    this->incrementRotationsCount();
                     w = x->parent->left;
                 }
 
@@ -195,6 +203,7 @@ void RedBlackTree<Key,Value>::deleteFixup(RedBlackNode<Key, Value>* x) {
                 x->parent->color = BLACK;
                 w->left->color = BLACK;
                 w = rotateRight(x->parent);
+                this->incrementRotationsCount();
 
                 x = this->root;
             }
@@ -364,4 +373,9 @@ Value& RedBlackTree<Key, Value>::operator[](const Key& key) {
 template <typename Key, typename Value>
 const Value& RedBlackTree<Key, Value>::operator[](const Key& key) const {
     return this->at(key);
+}
+
+template <typename Key, typename Value>
+size_t RedBlackTree<Key, Value>::getRotationsCount() const {
+    return this->rotationsCount;
 }

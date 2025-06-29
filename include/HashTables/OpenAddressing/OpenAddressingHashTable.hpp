@@ -193,6 +193,8 @@ public:
      * @param m The new size of the hash table. Must be greater than the current table size.
      */
     void rehash(size_t m);
+
+    size_t getCollisionsCount() const;
 };
 
 #include "HashTables/OpenAddressing/OpenAddressingHashTable.impl.hpp"

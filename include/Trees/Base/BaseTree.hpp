@@ -31,6 +31,7 @@ protected:
     Node* root;
     size_t maxKeyLen;
     size_t maxValLen;
+    size_t rotationsCount;
 
     BaseTree(Node* r);
 
@@ -76,6 +77,8 @@ protected:
 
     void setMaxKeyLen(const Key& key);
     void setMaxValLen(const Value& value);
+
+    void incrementRotationsCount(size_t amount = 1);
 };
 
 // Include the implementation file to provide the definitions for the template methods.

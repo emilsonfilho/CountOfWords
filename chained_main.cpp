@@ -17,14 +17,16 @@ int main() {
 
     cht.update("Emilly", 9);
 
-    int val = 0;
-    std::cout << "Miranda was found? " << std::boolalpha << cht.find("Miranda", val) << std::endl;
+    // int val = 0;
+    // std::cout << "Miranda was found? " << std::boolalpha << cht.find("Miranda", val) << std::endl;
 
     cht["Miranda"] = 7;
     cht["Emilson"] = 0;
     cht["Atílio"] = 0;
 
     cht.printInOrder(std::cout);
+    std::cout << "Número de colisões: " << cht.getCollissionsCount() << std::endl;
+    std::cout << "Tamanho da tabela: " << cht.getTableSize() << '\n';
 
     return 0;
 }

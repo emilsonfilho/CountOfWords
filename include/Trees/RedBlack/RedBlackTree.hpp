@@ -165,6 +165,8 @@ public:
      * @brief Prints the structure of the Red-Black Tree.
      */
     void print() const;
+
+    size_t getRotationsCount() const;
 };
 
 #include "Trees/RedBlack/RedBlackTree.impl.hpp"

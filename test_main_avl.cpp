@@ -77,12 +77,24 @@ void testAVLComparisonsCount() {
 	std::cout << "Number of comparisons: " << avl.getComparisonsCount() << std::endl;
 }
 
+void testAVLRotationsCount() {
+	AVLTree<std::string, int> avl;
+	
+	avl.insert("Emilson", 7);
+	avl.insert("Mislayne", 8);
+	avl.insert("Miranda", 7);
+
+	
+	std::cout << "Number of rotations: " << avl.getRotationsCount() << std::endl;
+}
+
 int main() {
 	testAVLInsertAndPrint();
 	testAVLRemove();
 	testAVLOperatorAccess();
 	testAVLFind();
 	testAVLComparisonsCount();
+	testAVLRotationsCount();
 
 	std::cout << "All AVL Tree tests completed successfully!" << std::endl;
 	return 0;

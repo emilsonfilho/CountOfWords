@@ -7,7 +7,12 @@
 
 template <typename Key, typename Value, typename Hash>
 size_t OpenAddressingHashTable<Key, Value, Hash>::hashCode(const Key& key, size_t i) const {
-    return (this->hashing(key) + ((i + (i * i)) / 2)) % this->tableSize;
+    size_t pos = (this->hashing(key) + ((i + (i * i)) / 2)) % this->tableSize;
+
+    if (this->table[pos].status == ACTIVE)
+        this->incrementCollisionsCount();
+    
+    return pos;
 }
 
 template <typename Key, typename Value, typename Hash>
@@ -16,6 +21,7 @@ typename OpenAddressingHashTable<Key, Value, Hash>::ConstFindResult OpenAddressi
         
     for (size_t i = 0; i < this->tableSize; i++) {
         size_t slotIdx = hashCode(key, i);
+
         const Slot<Key, Value>& slot = this->table[slotIdx];
 
         if (slot.status == EMPTY) {
@@ -203,4 +209,9 @@ const Value& OpenAddressingHashTable<Key, Value, Hash>::operator[](const Key& ke
         throw KeyNotFoundException();
 
     return response.slot->value;
+}
+
+template <typename Key, typename Value, typename Hash>
+size_t OpenAddressingHashTable<Key, Value, Hash>::getCollisionsCount() const {
+    return this->collisionsCount;
 }

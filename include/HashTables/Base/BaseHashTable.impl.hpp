@@ -37,16 +37,23 @@ BaseHashTable<HashTable, Collection, Key, Value, Hash>::BaseHashTable(size_t siz
     table.resize(tableSize);
     maxLoadFactor = mlf <= 0 ? 0.7 : mlf;
     numberOfElements = 0;
+    collisionsCount = 0;
 }
 
 template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
 float BaseHashTable<HashTable, Collection, Key, Value, Hash>::getLoadFactor() const {
     return static_cast<float>(this->numberOfElements) / this->tableSize;
 }
+
 template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
 void BaseHashTable<HashTable, Collection, Key, Value, Hash>::clearHashTable() {
     table.clear();
     table.resize(tableSize);
     numberOfElements = 0;
     static_cast<HashTable*>(this)->resetCounter();
+}
+
+template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
+void BaseHashTable<HashTable, Collection, Key, Value, Hash>::incrementCollisionsCount(size_t amount) const {
+    collisionsCount += amount;
 }

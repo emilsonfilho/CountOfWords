@@ -195,6 +195,16 @@ void testRedBlackConstOperatorAccess() {
 	std::cout << "Const operator[] tests passed successfully!" << std::endl;
 }
 
+void testRedBlackRotationsCount() {
+	RedBlackTree<std::string, int> temp;
+
+	temp.insert("Emilson", 7);
+	temp.insert("Mislayne", 8);
+	temp.insert("Miranda", 7);
+
+	std::cout << "Número de rotações: " << temp.getRotationsCount() << std::endl;
+}
+
 int main() {
 	testRedBlackInsertAndPrint();
 	testRedBlackFind();
@@ -204,6 +214,7 @@ int main() {
 	testRedBlackPrintInOrder();
 	testRedBlackOperatorAccess();
 	testRedBlackConstOperatorAccess();
+	testRedBlackRotationsCount();
 
 	std::cout << "All Red-Black Tree tests completed successfully!" << std::endl;
 	return 0;

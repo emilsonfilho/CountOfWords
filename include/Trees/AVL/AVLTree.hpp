@@ -229,6 +229,8 @@ private:
      * @brief Prints the AVL tree structure.
      */
     void print() const;
+
+    size_t getRotationsCount() const;
 };
 
 #include "Trees/AVL/AVLTree.impl.hpp"

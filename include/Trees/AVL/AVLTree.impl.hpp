@@ -64,16 +64,20 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::fixupNode(AVLNode<Key, Value>* y) {
 		if (balanceFactor < 0) {
 			if (getBalanceFactor(y->left) <= 0) {
 				y = rotateRight(y);
+				this->incrementRotationsCount();
 			} else {
 				y->left = rotateLeft(y->left);
 				y = rotateRight(y);
+				this->incrementRotationsCount(2);
 			}
 		} else {
 			if (getBalanceFactor(y->right) >= 0) {
 				y = rotateLeft(y);
+				this->incrementRotationsCount();
 			} else {
 				y->right = rotateRight(y->right);
 				y = rotateLeft(y);
+				this->incrementRotationsCount(2);
 			}
 		}
 	}
@@ -261,4 +265,7 @@ const Value& AVLTree<Key, Value>::operator[](const Key& key) const {
 	return this->at(key);
 }
 
-
+template <typename Key, typename Value>
+size_t AVLTree<Key, Value>::getRotationsCount() const {
+	return this->rotationsCount;
+}
