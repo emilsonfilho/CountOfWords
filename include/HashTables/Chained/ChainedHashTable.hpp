@@ -9,23 +9,60 @@
 #include "HashTables/Base/BaseHashTable.hpp"
 #include "Dictionary/IDictionary.hpp"
 
+/**
+ * @brief Hash table implementation using separate chaining.
+ * 
+ * @tparam Key The type of the keys.
+ * @tparam Value The type of the values.
+ * @tparam Hash The hash function to be used (defaults to std::hash<Key>).
+ */
 template <typename Key, typename Value, typename Hash = std::hash<Key>>
 class ChainedHashTable : public IDictionary<Key, Value>, public BaseHashTable<ChainedHashTable<Key, Value, Hash>, std::list<std::pair<Key, Value>>, Key, Value, Hash> {
+    
+    /**
+     * @brief Result of a generic find operation within a bucket.
+     * 
+     * @tparam Iterator Type of the iterator used to traverse the bucket.
+     * @tparam BucketRef Reference type to the bucket container.
+     */
     template <typename Iterator, typename BucketRef>
     struct GenericFindResult {
+        /**
+         * @brief Iterator pointing to the found element or end of bucket.
+         */
         Iterator iterator;
+
+        /**
+         * @brief Reference to the bucket where the element was searched.
+         */
         BucketRef bucketRef;
         
-        GenericFindResult(Iterator it, BucketRef bRef)
-            : iterator(it), bucketRef(bRef) {}
+        /**
+         * @brief Constructs a GenericFindResult with the given iterator and bucket reference.
+         * 
+         * @param it Iterator pointing to the element (or end).
+         * @param bRef Reference to the bucket.
+         */
+        GenericFindResult(Iterator it, BucketRef bRef);
 
-        bool wasElementFound() const { return iterator != bucketRef.end(); }
+        /**
+         * @brief Checks whether the element was found in the bucket.
+         * 
+         * @return true if the iterator does not point to the end of the bucket; false otherwise.
+         */
+        bool wasElementFound() const;
     };
 
+    /**
+     * @brief Result type used when performing mutable find operations.
+     */
     using FindResult = GenericFindResult<
         typename std::list<std::pair<Key, Value>>::iterator,
         std::list<std::pair<Key, Value>>&>;
 
+    /**
+     * @brief Result type used when performing read-only find operations.
+     */
     using ConstFindResult = GenericFindResult<
         typename std::list<std::pair<Key, Value>>::const_iterator,
         const std::list<std::pair<Key, Value>>&>;
@@ -228,9 +265,27 @@ public:
      */
     void rehash(size_t m);
 
+    /**
+     * @brief Retrieves the total number of collisions that have occurred in the hash table.
+     * 
+     * A collision occurs when two different keys are hashed to the same index in the hash table.
+     * This method provides a count of such occurrences, which can be useful for analyzing the
+     * efficiency of the hash function and the load factor of the table.
+     * 
+     * @return size_t The number of collisions that have occurred in the hash table.
+     */
     size_t getCollissionsCount() const;
 
-    size_t getTableSize() const;  
+    /**
+     * @brief Retrieves the current size of the hash table.
+     * 
+     * This function returns the total number of buckets currently allocated
+     * in the hash table. It provides insight into the capacity of the table
+     * and can be useful for debugging or performance analysis.
+     * 
+     * @return size_t The number of buckets in the hash table.
+     */
+    size_t getTableSize() const;
 };
 
 #include "HashTables/Chained/ChainedHashTable.impl.hpp"

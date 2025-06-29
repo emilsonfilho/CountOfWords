@@ -230,6 +230,15 @@ private:
      */
     void print() const;
 
+    /**
+     * @brief Retrieves the total number of rotations performed by the AVL tree.
+     * 
+     * This function returns the count of rotations (both single and double) 
+     * that have been executed to maintain the balance of the AVL tree during 
+     * insertions, deletions, or updates.
+     * 
+     * @return size_t The number of rotations performed.
+     */
     size_t getRotationsCount() const;
 };
 

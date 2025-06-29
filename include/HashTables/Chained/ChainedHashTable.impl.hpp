@@ -7,6 +7,18 @@
 #include "Utils/StringHandler.hpp"
 
 template <typename Key, typename Value, typename Hash>
+template <typename Iterator, typename BucketRef>
+ChainedHashTable<Key, Value, Hash>::GenericFindResult<Iterator, BucketRef>::GenericFindResult(
+    Iterator it, BucketRef bRef)
+    : iterator(it), bucketRef(bRef) {}
+
+template <typename Key, typename Value, typename Hash>
+template <typename Iterator, typename BucketRef>
+bool ChainedHashTable<Key, Value, Hash>::GenericFindResult<Iterator, BucketRef>::wasElementFound() const {
+    return iterator != bucketRef.end();
+}
+
+template <typename Key, typename Value, typename Hash>
 ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf)
     : BaseHashTable<ChainedHashTable<Key, Value, Hash>, std::list<std::pair<Key, Value>>, Key, Value, Hash>(this->getNextPrime(size), mlf) {}
 

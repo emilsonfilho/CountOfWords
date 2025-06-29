@@ -7,22 +7,59 @@
 #include "HashTables/Base/BaseHashTable.hpp"
 #include "HashTables/OpenAddressing/Slot.hpp"
 
+/**
+ * @brief Hash table implementation using open addressing.
+ * 
+ * @tparam Key The type of the keys.
+ * @tparam Value The type of the values.
+ * @tparam Hash The hash function to be used (defaults to std::hash<Key>).
+ */
 template <typename Key, typename Value, typename Hash = std::hash<Key>>
 class OpenAddressingHashTable : public IDictionary<Key, Value>, public BaseHashTable<OpenAddressingHashTable<Key, Value, Hash>, Slot<Key, Value>, Key, Value, Hash>{
 private:
+    /**
+     * @brief Result of a probing operation in open addressing.
+     * 
+     * @tparam Entry Type of the slot being probed.
+     */
     template <typename Entry>
     struct GenericFindResult {
+        /**
+         * @brief Pointer to the slot where the key was found (or where the search ended).
+         */
         Entry* slot;
+
+        /**
+         * @brief Pointer to the first available (empty or deleted) slot encountered during probing.
+         */
         Entry* availableSlot;
 
-        GenericFindResult(Entry* e, Entry* as = nullptr)
-            : slot(e), availableSlot(as) {}
+        /**
+         * @brief Constructs a GenericFindResult with the given slot and optional available slot.
+         * 
+         * @param e Pointer to the slot where the key was found (or search ended).
+         * @param as Pointer to the first available slot (optional, may be nullptr).
+         */
+        GenericFindResult(Entry* e, Entry* as = nullptr);
 
-        bool wasElementFound() const { return slot != nullptr; }
+        /**
+         * @brief Checks whether the element was found in the table.
+         * 
+         * @return true if the slot pointer is not null and refers to a valid element.
+         */
+        bool wasElementFound() const;
     };
 
+    /**
+     * @brief Result type used when performing mutable find operations.
+     */
     using FindResult = GenericFindResult<Slot<Key, Value>>;
+
+    /**
+     * @brief Result type used when performing read-only find operations.
+     */
     using ConstFindResult = GenericFindResult<const Slot<Key, Value>>;
+
 
     /**
      * @brief Computes the hash code for a given key and probe number.
@@ -194,6 +231,15 @@ public:
      */
     void rehash(size_t m);
 
+    /**
+     * @brief Retrieves the total number of collisions that have occurred in the hash table.
+     * 
+     * A collision occurs when two different keys are hashed to the same index in the table.
+     * This function provides a count of such collisions, which can be useful for analyzing
+     * the efficiency of the hash function and the overall performance of the hash table.
+     * 
+     * @return size_t The number of collisions that have occurred.
+     */
     size_t getCollisionsCount() const;
 };
 

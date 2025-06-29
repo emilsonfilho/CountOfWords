@@ -166,6 +166,14 @@ public:
      */
     void print() const;
 
+    /**
+     * @brief Retrieves the total number of rotations performed by the Red-Black Tree.
+     * 
+     * This method returns the count of rotations (both left and right) that have been
+     * executed during insertions or deletions to maintain the Red-Black Tree properties.
+     * 
+     * @return size_t The total number of rotations performed.
+     */
     size_t getRotationsCount() const;
 };
 

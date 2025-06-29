@@ -6,12 +6,36 @@
 template <typename HashTable, typename Collection, typename Key, typename Value, typename Hash>
 class BaseHashTable {
 protected:
+    /**
+     * @brief The hash table's internal storage, composed of collections (e.g., lists or buckets).
+     */
     std::vector<Collection> table;
+
+    /**
+     * @brief The current size of the hash table (number of slots).
+     */
     size_t tableSize;
+
+    /**
+     * @brief The maximum load factor before the table is resized.
+     */
     float maxLoadFactor;
+
+    /**
+     * @brief The number of elements currently stored in the table.
+     */
     size_t numberOfElements;
+
+    /**
+     * @brief Hash function object used to compute the index for each key.
+     */
     Hash hashing;
+
+    /**
+     * @brief Number of collisions occurred during insertions and searches.
+     */
     mutable size_t collisionsCount;
+
     
     /**
      * @brief Calculates and returns the next prime number greater than or equal to a given number.
@@ -80,6 +104,15 @@ public:
      */
     void clearHashTable();
 
+    /**
+     * @brief Increments the count of collisions in the hash table.
+     * 
+     * This method increases the internal counter that tracks the number of
+     * collisions encountered during operations on the hash table. Collisions
+     * occur when multiple keys are hashed to the same index in the table.
+     * 
+     * @param m The amount by which to increment the collision count. Defaults to 1.
+     */
     void incrementCollisionsCount(size_t m = 1) const;
 };
 

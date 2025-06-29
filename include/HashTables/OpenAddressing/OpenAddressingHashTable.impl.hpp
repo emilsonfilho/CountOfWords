@@ -6,6 +6,17 @@
 #include "Exceptions/KeyExceptions.hpp"
 
 template <typename Key, typename Value, typename Hash>
+template <typename Entry>
+OpenAddressingHashTable<Key, Value, Hash>::GenericFindResult<Entry>::GenericFindResult(Entry* e, Entry* as)
+    : slot(e), availableSlot(as) {}
+
+template <typename Key, typename Value, typename Hash>
+template <typename Entry>
+bool OpenAddressingHashTable<Key, Value, Hash>::GenericFindResult<Entry>::wasElementFound() const {
+    return slot != nullptr;
+}
+
+template <typename Key, typename Value, typename Hash>
 size_t OpenAddressingHashTable<Key, Value, Hash>::hashCode(const Key& key, size_t i) const {
     size_t pos = (this->hashing(key) + ((i + (i * i)) / 2)) % this->tableSize;
 
