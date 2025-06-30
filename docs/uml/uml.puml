@@ -1,0 +1,300 @@
+@startuml Count Of Words Design Project
+
+interface IDictionary<Key, Value> {
+    - comparisonsCount: size_t
+
+    - incrementCounter(n: size_t): void
+    - resetCounter(): void
+
+    + insert(key: Key, value: Value): void
+    + find(key: Key, outValue: Value): bool
+    + update(key: Key, value: Value): void
+    + remove(key: Key): void
+    + clear(): void
+    + printInOrder(std::ostream& out): void
+    + getComparisonsCount(): size_t
+    + operator[](key: Key): Value
+}
+
+class std::runtime_error
+
+class KeyAlreadyExistsException {
+    + KeyAlreadyExistsException()
+}
+class KeyNotFoundException {
+    + KeyNotFoundException()
+}
+
+class BaseHashTable<HashTable, Collection, Key, Value, Hash> {
+    # table : std:vector<Collection>
+    # tableSize : size_t
+    # maxLoadFactor : float
+    # numberOfElements : size_t
+    # hashing : Hash
+    # collisionsCount : size_t
+
+    # getNextPrime(num: size_t) : size_t
+    # checkAndRehash() : void
+
+    + BaseHashTable(size: size_t, mlf: float)
+    + getLoadFactor() : float
+    + clearHashTable() : void
+    + incrementCollisionsCount(amount: size_t) : void
+}
+
+class ChainedHashTable<Key, Value, Hash> {
+    - FindResult : type alias
+    - ConstFindResult : type alias
+
+    - hashCode(key: Key) : size_t
+    - findConstPairIterator(key: Key) : ConstFindResult
+    - findPairIterator(key: Key) : FindResult
+
+    + ChainedHashTable(size: size_t, mlf: float)
+    + insert(key: Key, value: Value) : void
+    + find(key: Key, outValue: Value) : bool
+    + update(key: Key, value: Value) : void
+    + remove(key: Key) : void
+    + clear() : void
+    + printInOrder(out: std::ostream&) : void
+    + getComparisonsCount() : size_t
+    + operator[](key: Key) : Value
+    + rehash(m: size_t) : void
+    + getCollisionsCount() : size_t
+    + getTablesize() : size_t
+}
+
+enum Status {
+    EMPTY
+    ACTIVE
+    DELETED
+}
+
+class Slot<Key, Value> {
+    + key : Key
+    + value : Value
+    + satus : Status
+    
+    + Slot()
+    + Slot(k: Key, v: Value)
+}
+
+class GenericFindResult<Iterator, BucketRef> {
+    + iterator : Iterator
+    + BucketRef : BucketRef
+    + GenericFindResult(it: Iterator, bRef: BucketRef)
+    + wasElementFound() : bool
+}
+
+class OpenAddressingHashTable<Key, Value, Hash> {
+    - FindResult : type alias
+    - ConstFindResult  : type alias
+
+    - hashCode(key: Key, i: size_t) : size_t
+    - findConstSlot(key: Key) : ConstFindResult
+    - findSlot(key: Key) : FindResult
+    - nextBase2Of(m: size_t) : size_t
+
+    + OpenAddressingHashTable(size: size_t, mlf: float)
+    + insert(key: Key, value: Value) : void
+    + find(key: Key, outValue: Value) : bool
+    + update(key: Key, value: Value) : void
+    + remove(key: Key) : void
+    + clear() : void
+    + printInOrder(out: std::ostream&) : void
+    + getComparisonsCount() : size_t
+    + operator[](key: Key) : Value
+    + rehash(m: size_t) : void
+    + getCollisionsCount() : size_t
+    + getTablesize() : size_t
+}
+
+class GenericFindResultOpenAddressed<Entry> {
+    + slot : Entry
+    + availableSlot : Entry
+
+    + GenericFindResult(e: Entry, as: Entry)
+    + wasElementFound() : bool
+}
+
+class Node<Key, Value> {
+    - data : std::pair<Key, Value>
+
+    + Node(key: Key, value: Value)
+    + getKey() : Key
+    + setKey(key: Key) : void
+    + getValue() : Value
+    + setKey(key: Key) : void
+    + update(key: Key, value: Value) : void
+    + show() : String
+}
+
+class BaseTree<Tree, Node, Key, Value> {
+    - count(n: size_t) : void
+    - clearCounter() : void
+
+    # root : Node
+    # maxKeyLen : size_t
+    # maxValLen : size_t
+    # rotationsCount : size_t
+
+    # BaseTree(r: Node)
+    # findNode(key: Key, comp : Node) : Node
+    # minimum(node: Node) : Node
+    # clearNode(node: Node, comp: Node) : void
+    # reset(node: Node, comp: Node, defaultRoot: Node)
+    # inOrderTraversal(out: std::ostream&, node: Node, comp: Node) : void
+    # at(key: Key, comp: Node) : Value
+    # setMaxLen(key: Key) : void
+    # setValLen(value: Value) : void
+    # incrementCounter(amount: size_t) : void
+}
+
+class AVLNode<Key, Value> {
+    + left : AVLNode
+    + right : AVLNode
+    + height : size_t
+
+    + AVLNode(k: Key, v: Value)
+}
+
+class AVLTree<Key, Value> {
+    - height() : size_t
+    - calcHeight(node: AVLNode) : size_t
+    - getBalanceFactor(node: AVLNode) : int
+    - printTree(node: AVLNode, depth: size_t) : void
+    - rotateLeft(y: AVLNode) : AVLNode
+    - rotateRight(y: AVLNode) : AVLNode
+    - fixupNode(node: AVLNode) : AVLNode
+    - removeSuccesor(root: AVLNode, node: AVLNode) : AVLNode
+    - insert(key: Key, value: Value, node: AVLNode) : AVLNode
+    - update(key: Key, value: Value, node: AVLNode) : AVLNode
+    - remove(key: Key, node: AVLNode) : AVLNode
+    - upsert(key: Key, node: AVLNode, outValue: Value) : AVLNode
+
+    + AVLTree()
+    + insert(key: Key, value: Value) : void
+    + find(key: Key, outValue: Value) : bool
+    + update(key: Key, value: Value) : void
+    + remove(key: Key) : void
+    + clear() : void
+    + printInOrder(out: std::ostream&) : void
+    + getComparisonsCount() : size_t
+    + operator[](key: Key) : Value
+    + print() : void
+    + getRotationsCount() : size_t
+}
+
+enum Color {
+    RED
+    BLACK
+}
+
+class RedBlackNode<Key, Value> {
+    + left : RedBlackNode
+    + right : RedBlackNode
+    + parent : RedBlackNode
+    + color : Color
+    
+    + RedBlackNode(k: Key, v: Value)
+    + RedBlackNode(color: Color)
+}
+
+class RedBlackTree<Key, Value> {
+    - __NIL_NODE__ : RedBlackNode
+    - __NIL__ : RedBlackNode
+
+    - rotateLeft(y: RedBlackNode) : RedBlackNode
+    - rotateRight(y: RedBlackNode) : RedBlackNode
+    - insertFixup(z: RedBlackNode) : void
+    - deleteFixup(x: RedBlackNode) : void
+    - deleteNode(z: RedBlackNode) : void
+    - printTree(node: RedBlackNode, indent: int) : void
+
+    + RedBlackTree()
+    + insert(key: Key, value: Value) : void
+    + find(key: Key, outValue: Value) : bool
+    + update(key: Key, value: Value) : void
+    + remove(key: Key) : void
+    + clear() : void
+    + printInOrder(out: std::ostream&) : void
+    + getComparisonsCount() : size_t
+    + operator[](key: Key) : Value
+    + print() : void
+    + getRotationsCount(): size_t
+}
+
+package StringHandler <<namespace>> {
+    class SetWidthAtLeft<Object> {
+        + obj : Object
+        + width : size_t
+        + SetWidthAtLeft(o: Object, w: size_t)
+    }
+
+    class Utils {
+        + toString(obj: Object) : std::string
+        + size(obj: Object) : size_t
+        + operator<<(os: std::ostream&, manip: SetWidthAtLeft<Object>&) : ostream&
+    }
+
+    Utils ..> SetWidthAtLeft
+}
+
+class std::pair<Key, Value>
+
+GenericFindResult -[#hidden]> ChainedHashTable : <<nested>>
+GenericFindResultOpenAddressed -[#hidden]> OpenAddressingHashTable : <<nested>>
+
+note right of ChainedHashTable::GenericFindResult
+    Nested helper struct used for search results
+end note
+
+note bottom of ChainedHashTable
+    using FindResult = GenericFindResult<iterator, list&>\n
+    using ConstFindResult = ConstFindResult<const_iterator, const list&>
+end note
+
+note right of OpenAddressingHashTable::GenericFindResultOpenAddressed
+    Nested helper struct used for search results
+end note
+
+note bottom of OpenAddressingHashTable
+    using FindResult = GenericFindResultOpenAddressed<slot>
+    using ConstFindResult = GenericFindResultOpenAddressed<const slot>
+end note
+
+IDictionary --|> ChainedHashTable
+ChainedHashTable --|> BaseHashTable
+
+IDictionary --|> OpenAddressingHashTable
+OpenAddressingHashTable --|> BaseHashTable
+
+IDictionary --|> AVLTree
+AVLTree --|> BaseTree
+
+IDictionary --|> RedBlackTree
+RedBlackTree --|> BaseTree
+
+KeyAlreadyExistsException --|> std::runtime_error
+KeyNotFoundException --|> std::runtime_error
+
+BaseTree ..> IDictionary : <<friend>>
+BaseHashTable ..> IDictionary : <<friend>>
+
+Slot --> Status : has-a
+RedBlackNode --> Color : has-a
+
+Node *-- std::pair : data
+BaseTree o--> Node : root
+AVLNode --|> Node
+RedBlackNode --|> Node
+
+AVLTree *-- AVLNode : owns
+RedBlackTree *-- RedBlackNode : owns
+
+SetWidthAtLeft ..> std::ostream : operator<<
+SetWidthAtLeft ...> std::string : toString()
+
+OpenAddressingHashTable *-- Slot : contains
+
+@enduml
