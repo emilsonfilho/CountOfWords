@@ -84,8 +84,21 @@ typename OpenAddressingHashTable<Key, Value, Hash>::FindResult OpenAddressingHas
 }
 
 template <typename Key, typename Value, typename Hash>
+size_t OpenAddressingHashTable<Key, Value, Hash>::nextBase2Of(size_t m) const {
+    // sizeof returns the number of bytes for a type
+    // 1 byte = 8 bits
+
+    size_t n = m, bits = sizeof(size_t) * 8;
+
+    for (size_t i = 1; i <= bits; i *= 2)
+        n |= n >> i;
+
+    return (n + 1);
+}
+
+template <typename Key, typename Value, typename Hash>
 OpenAddressingHashTable<Key, Value, Hash>::OpenAddressingHashTable(size_t size, float mlf)
-    : BaseHashTable<OpenAddressingHashTable<Key, Value, Hash>, Slot<Key, Value>, Key, Value, Hash>(size, mlf) {}
+    : BaseHashTable<OpenAddressingHashTable<Key, Value, Hash>, Slot<Key, Value>, Key, Value, Hash>(nextBase2Of(size), mlf) {}
 
 template <typename Key, typename Value, typename Hash>
 void OpenAddressingHashTable<Key, Value, Hash>::rehash(size_t m) {
@@ -134,7 +147,7 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
 }
 
 template <typename Key, typename Value, typename Hash>
-bool OpenAddressingHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
+bool OpenAddressingHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) const {
     ConstFindResult response = findConstSlot(key);
     bool wasElementFound = response.wasElementFound();
 
@@ -225,4 +238,9 @@ const Value& OpenAddressingHashTable<Key, Value, Hash>::operator[](const Key& ke
 template <typename Key, typename Value, typename Hash>
 size_t OpenAddressingHashTable<Key, Value, Hash>::getCollisionsCount() const {
     return this->collisionsCount;
+}
+
+template <typename Key, typename Value, typename Hash>
+size_t OpenAddressingHashTable<Key, Value, Hash>::getTableSize() const {
+    return this->tableSize;
 }

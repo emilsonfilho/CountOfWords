@@ -100,6 +100,18 @@ private:
      *         - A pointer to the first available slot (if any), or nullptr if no available slot is found.
      */
     FindResult findSlot(const Key& key);
+
+    /**
+     * @brief Calculates the next power of 2 greater than or equal to the given number.
+     * 
+     * This function determines the smallest power of 2 that is greater than or equal to the input value `m`.
+     * It is useful for ensuring that certain data structures, such as hash tables, have sizes that are powers of 2,
+     * which can optimize certain operations like hashing.
+     * 
+     * @param m The input number for which the next power of 2 is to be calculated.
+     * @return The smallest power of 2 greater than or equal to `m`.
+     */
+    size_t nextBase2Of(size_t m) const;
 public:
     /**
      * @brief Constructs an OpenAddressingHashTable with a specified initial size and maximum load factor.
@@ -134,7 +146,7 @@ public:
      * 
      * @throws None
      */
-    bool find(const Key& key, Value& outValue);
+    bool find(const Key& key, Value& outValue) const;
 
     /**
      * @brief Updates the value associated with the given key in the hash table.
@@ -241,6 +253,17 @@ public:
      * @return size_t The number of collisions that have occurred.
      */
     size_t getCollisionsCount() const;
+
+    /**
+     * @brief Retrieves the size of the hash table.
+     * 
+     * This function returns the total number of slots available in the hash table,
+     * which represents its capacity. It does not indicate the number of elements
+     * currently stored in the table.
+     * 
+     * @return size_t The total number of slots in the hash table.
+     */
+    size_t getTableSize() const;
 };
 
 #include "HashTables/OpenAddressing/OpenAddressingHashTable.impl.hpp"
