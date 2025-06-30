@@ -5,23 +5,12 @@
 #include <stdexcept>
 #include <iomanip>
 
-// Função auxiliar para organizar a saída dos testes
 void printHeader(const std::string& title) {
     std::cout << "\n" << std::string(70, '=') << "\n";
     std::cout << std::string((70 - title.length()) / 2, ' ') << title << "\n";
     std::cout << std::string(70, '=') << std::endl;
 }
 
-/**
- * @brief Testa a funcionalidade basica: insercao, busca, atualizacao e remocao.
- *
- * Este teste demonstra:
- * 1.  Criação de uma tabela com tamanho inicial pequeno para forçar colisões.
- * 2.  Inserção de múltiplos elementos e verificação das contagens de colisão e comparação.
- * 3.  Uso do `operator[]` para inserir e modificar elementos.
- * 4.  Uso dos métodos `update()` e `remove()`.
- * 5.  Verificação da integridade dos dados após cada operação.
- */
 void testBasicFunctionality() {
     printHeader("Teste de Funcionalidade Basica: Frota Estelar");
     
@@ -67,19 +56,9 @@ void testBasicFunctionality() {
     fleet.printInOrder(std::cout);
 }
 
-/**
- * @brief Testa a capacidade de redimensionamento (rehash) e o tratamento de exceções.
- *
- * Este teste demonstra:
- * 1.  O rehash automático quando o fator de carga (`load factor`) é excedido.
- * 2.  O uso do método `rehash()` para forçar um redimensionamento manual.
- * 3.  O tratamento de exceções para chaves duplicadas (`insert`) e não encontradas (`update`, `const operator[]`).
- * 4.  O funcionamento do método `clear()`.
- */
 void testRehashingAndExceptions() {
     printHeader("Teste de Rehash, Capacidade e Excecoes");
     
-    // Tabela com tamanho 3 e fator de carga maximo de 1.0. O 4º elemento deve causar rehash.
     ChainedHashTable<int, std::string> testTable(3, 1.0f);
     
     std::cout << "\n--- Fase 1: Testando o Rehash Automatico ---\n";
@@ -95,7 +74,7 @@ void testRehashingAndExceptions() {
     testTable[60] = "Sessenta";
     
     std::cout << "Tamanho da tabela apos rehash: " << testTable.getTableSize() << std::endl;
-    assert(testTable.getTableSize() > 3); // O tamanho deve ser o proximo primo > 5*2
+    assert(testTable.getTableSize() > 3);
 
     std::string value;
     assert(testTable.find(10, value) && value == "Dez");
@@ -127,9 +106,6 @@ void testRehashingAndExceptions() {
     std::cout << "Tabela limpa com sucesso. Tentando buscar elemento: " << std::boolalpha << testTable.find(10, value) << std::endl;
 }
 
-/**
- * @brief Testa a corretude do `const` e o comportamento do `const operator[]`.
- */
 void testConstCorrectness() {
     printHeader("Teste de Corretude 'const'");
 
@@ -146,7 +122,7 @@ void testConstCorrectness() {
 
     try {
         std::cout << "Tentando acessar uma chave inexistente ('Plutao') em uma tabela constante...\n";
-        int val = constTable["Plutao"]; // Deve lançar KeyNotFoundException
+        int val = constTable["Plutao"];
         assert(false);
     } catch(const std::exception& e) {
         std::cout << "Excecao esperada capturada: " << e.what() << std::endl;
@@ -168,7 +144,6 @@ void testRehash() {
 
     std::cout << "Table size: " << testTable.getTableSize() << std::endl;
 
-    // next prime is 2 * 7 = 14 ==> 17
     assert(testTable.getTableSize() == 17);
 }
 
