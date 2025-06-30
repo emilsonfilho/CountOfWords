@@ -172,7 +172,7 @@ private:
      * @return true If the key is found.
      * @return false If the key is not found.
      */
-    bool find(const Key& key, Value& outValue) override;
+    bool find(const Key& key, Value& outValue) const override;
     
     /**
      * @brief Updates the value associated with a given key in the AVL tree.

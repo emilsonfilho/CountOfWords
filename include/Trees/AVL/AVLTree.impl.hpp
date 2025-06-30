@@ -201,7 +201,7 @@ void AVLTree<Key, Value>::insert(const Key& key, const Value& value) {
 }
 
 template  <typename Key, typename Value>
-bool AVLTree<Key, Value>::find(const Key& key, Value& outValue) {
+bool AVLTree<Key, Value>::find(const Key& key, Value& outValue) const {
 	const AVLNode<Key, Value>* node = this->findNode(key);
 
 	if (!node) return false;

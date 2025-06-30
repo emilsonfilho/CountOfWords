@@ -53,7 +53,7 @@ public:
      * @param outValue The value associated with the key, if found.
      * @return true if the key is found; false otherwise.
      */
-    virtual bool find(const Key& key, Value& outValue) = 0;
+    virtual bool find(const Key& key, Value& outValue) const = 0;
 
     /**
      * @brief Updates the value associated with an existing key.
