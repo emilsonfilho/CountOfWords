@@ -154,11 +154,29 @@ void testConstCorrectness() {
     std::cout << "Teste de 'const' concluido com sucesso." << std::endl;
 }
 
+void testRehash() {
+    printHeader("Teste de Rehash aplicando próximo primo");
+
+    ChainedHashTable<int, char> testTable(5, 1.0);
+
+    for (int i = 1; i <= 7; i++)
+        testTable.insert(i, 'o');
+
+    std::cout << "Table size: " << testTable.getTableSize() << std::endl;
+
+    testTable.insert(0, '*');
+
+    std::cout << "Table size: " << testTable.getTableSize() << std::endl;
+
+    // next prime is 2 * 7 = 14 ==> 17
+    assert(testTable.getTableSize() == 17);
+}
 
 int main() {
     testBasicFunctionality();
     testRehashingAndExceptions();
     testConstCorrectness();
+    testRehash();
     
     std::cout << "\n" << std::string(70, '*') << "\n";
     std::cout << std::string(10, ' ') << "TODOS OS TESTES DA TABELA HASH FORAM CONCLUIDOS!" << std::string(10, ' ') << "\n";
