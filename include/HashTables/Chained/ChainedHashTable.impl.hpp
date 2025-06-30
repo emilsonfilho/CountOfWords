@@ -100,8 +100,8 @@ void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& val
 }
 
 template <typename Key, typename Value, typename Hash>
-bool ChainedHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) {
-    FindResult response = findPairIterator(key);
+bool ChainedHashTable<Key, Value, Hash>::find(const Key& key, Value& outValue) const {
+    ConstFindResult response = findConstPairIterator(key);
 
     bool wasFound = response.wasElementFound();
 

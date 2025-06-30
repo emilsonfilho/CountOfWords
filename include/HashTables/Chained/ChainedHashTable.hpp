@@ -146,7 +146,7 @@ public:
      * @return true If the key is found in the hash table.
      * @return false If the key is not found in the hash table.
      */
-    bool find(const Key& key, Value& outValue) override;
+    bool find(const Key& key, Value& outValue) const override;
 
     /**
      * @brief Updates the value associated with a given key in the hash table.
