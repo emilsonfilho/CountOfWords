@@ -37,7 +37,9 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::rotateLeft(AVLNode<Key, Value>*& y) {
 
 	y->height = calcHeight(y);
 	x->height = calcHeight(x);
-
+	
+	this->incrementRotationsCount();
+	
 	return x;
 }
 
@@ -50,6 +52,8 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::rotateRight(AVLNode<Key, Value>*& y) {
 
 	y->height = calcHeight(y);
 	x->height = calcHeight(x);
+
+	this->incrementRotationsCount();
 
 	return x;
 }
@@ -64,20 +68,20 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::fixupNode(AVLNode<Key, Value>* y) {
 		if (balanceFactor < 0) {
 			if (getBalanceFactor(y->left) <= 0) {
 				y = rotateRight(y);
-				this->incrementRotationsCount();
+				
 			} else {
 				y->left = rotateLeft(y->left);
 				y = rotateRight(y);
-				this->incrementRotationsCount(2);
+				
 			}
 		} else {
 			if (getBalanceFactor(y->right) >= 0) {
 				y = rotateLeft(y);
-				this->incrementRotationsCount();
+				
 			} else {
 				y->right = rotateRight(y->right);
 				y = rotateLeft(y);
-				this->incrementRotationsCount(2);
+				
 			}
 		}
 	}

@@ -37,7 +37,7 @@ void testBasicInsertionsAndBalance() {
     avl.insert("Banana", 10);
     avl.insert("Apple", 5);
     avl.insert("Cherry", 15);
-    avl.insert("Date", 20); // Should cause a rotation
+    avl.insert("Date", 20); 
     avl.insert("Fig", 25);   // Should cause another rotation
     avl.insert("Grape", 30);
     avl.insert("Elderberry", 18); // Could cause more complex rotations
