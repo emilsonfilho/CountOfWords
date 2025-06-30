@@ -115,14 +115,19 @@ void testNonBase2TableSize() {
 
     OpenAddressingHashTable<int, char> testTable(7, 1.0f);
 
-    for (int i = 1; i <= 100; i++) {
+    assert(testTable.getTableSize() == 8);
+
+    std::cout << "TableSize is a power of 2 as expected\n";
+
+    for (int i = 1; i <= 100; i++)
         testTable.insert(i, 'a');
-        std::cout << "tableSize at " << i << " = " << testTable.getTableSize() << '\n';
-    }
 
     testTable.printInOrder(std::cout);
 
     std::cout << "Table size: " << testTable.getTableSize() << '\n';
+    
+    // 8 -> 16 -> 32 -> 64 -> 128
+    assert(testTable.getTableSize() == 128);
 }
 
 int main() {
