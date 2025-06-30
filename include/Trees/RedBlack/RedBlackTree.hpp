@@ -108,7 +108,7 @@ public:
      * @return true If the key is found.
      * @return false If the key is not found.
      */
-    bool find(const Key& key, Value& outValue);
+    bool find(const Key& key, Value& outValue) const;
 
     /**
      * @brief Updates the value associated with a given key in the Red-Black Tree.
