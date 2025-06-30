@@ -64,6 +64,7 @@ void BaseTree<Tree, Node, Key, Value>::reset(Node* node, Node* comp, Node* defau
     root = defaultRoot;
     maxKeyLen = 0;
     maxValLen = 0;
+    rotationsCount = 0;
     clearCounter();
 }
 
