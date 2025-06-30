@@ -85,12 +85,14 @@ typename OpenAddressingHashTable<Key, Value, Hash>::FindResult OpenAddressingHas
 
 template <typename Key, typename Value, typename Hash>
 size_t OpenAddressingHashTable<Key, Value, Hash>::nextBase2Of(size_t m) const {
-    // sizeof returns the number of bytes for a type
-    // 1 byte = 8 bits
+    if (m <= 0)
+        return 1;
+    
+    
 
     size_t n = m, bits = sizeof(size_t) * 8;
 
-    for (size_t i = 1; i <= bits; i *= 2)
+    for (size_t i = 1; i < bits; i *= 2)
         n |= n >> i;
 
     return (n + 1);
