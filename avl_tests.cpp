@@ -4,16 +4,14 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <stdexcept> // For std::out_of_range in case of map-like access
+#include <stdexcept>
 
-// Helper function to print test banners
 void printTestHeader(const std::string& title) {
     std::cout << "\n===================================================\n";
     std::cout << "TEST: " << title << "\n";
     std::cout << "===================================================\n";
 }
 
-// Helper function to print AVL tree in-order
 template <typename Key, typename Value>
 void printTreeInOrder(const AVLTree<Key, Value>& avl, const std::string& message) {
     std::cout << "\n--- " << message << " ---\n";
@@ -21,11 +19,10 @@ void printTreeInOrder(const AVLTree<Key, Value>& avl, const std::string& message
     std::cout << "-------------------------------------------\n";
 }
 
-// Helper function to print AVL tree structure (visual)
 template <typename Key, typename Value>
 void printTreeStructure(const AVLTree<Key, Value>& avl, const std::string& message) {
     std::cout << "\n--- " << message << " (Structure) ---\n";
-    avl.print(); // This prints the tree visually
+    avl.print();
     std::cout << "-------------------------------------------\n";
 }
 
@@ -38,9 +35,9 @@ void testBasicInsertionsAndBalance() {
     avl.insert("Apple", 5);
     avl.insert("Cherry", 15);
     avl.insert("Date", 20); 
-    avl.insert("Fig", 25);   // Should cause another rotation
+    avl.insert("Fig", 25);
     avl.insert("Grape", 30);
-    avl.insert("Elderberry", 18); // Could cause more complex rotations
+    avl.insert("Elderberry", 18);
 
     printTreeInOrder(avl, "Tree after multiple insertions (in-order)");
     printTreeStructure(avl, "Tree structure after insertions");
@@ -48,7 +45,6 @@ void testBasicInsertionsAndBalance() {
     std::cout << "Total comparisons after insertions: " << avl.getComparisonsCount() << std::endl;
     std::cout << "Total rotations after insertions: " << avl.getRotationsCount() << std::endl;
 
-    // Verify some values
     int val;
     assert(avl.find("Apple", val) && val == 5);
     assert(avl.find("Cherry", val) && val == 15);
@@ -102,7 +98,6 @@ void testUpdateOperations() {
     printTreeInOrder(avl, "Tree after updating 'Brown'");
     std::cout << "Update successful. Comparisons: " << avl.getComparisonsCount() << std::endl;
 
-    
     std::string nonExistingKey = "Lazy";
     std::cout << "Attempting to update non-existing key: '" << nonExistingKey << "' (should throw exception).\n";
     try {
@@ -152,9 +147,8 @@ void testOperatorAccessAndUpsert() {
 
 void testRemoveOperations() {
     printTestHeader("Remove Operations");
-    AVLTree<int, std::string> avl; // Using int keys for simplicity in remove testing
+    AVLTree<int, std::string> avl;
 
-    std::cout << "Building a tree for removal tests.\n";
     std::vector<int> keys_to_insert = {50, 30, 70, 20, 40, 60, 80, 10, 25, 35, 45, 55, 65, 75, 85};
     for (int key : keys_to_insert) {
         avl.insert(key, "Value-" + std::to_string(key));
@@ -162,7 +156,6 @@ void testRemoveOperations() {
     printTreeInOrder(avl, "Initial tree for removals (in-order)");
     printTreeStructure(avl, "Initial tree structure for removals");
     std::cout << "Initial rotations: " << avl.getRotationsCount() << std::endl;
-     // Reset rotations count for remove tests
 
     std::cout << "Removing a leaf node (10).\n";
     avl.remove(10);
@@ -190,10 +183,9 @@ void testRemoveOperations() {
     printTreeStructure(avl, "Structure after removing 50");
 
     std::cout << "Attempting to remove a non-existent key (99).\n";
-    // Remove for non-existent key typically does nothing or is handled internally without exception
     size_t initial_rotations = avl.getRotationsCount();
     avl.remove(99);
-    assert(avl.getRotationsCount() == initial_rotations); // Should not cause rotations or alter tree state
+    assert(avl.getRotationsCount() == initial_rotations);
     std::cout << "Removing non-existent key had no effect as expected.\n";
 
     std::cout << "Total rotations during remove operations: " << avl.getRotationsCount() << std::endl;
@@ -209,20 +201,19 @@ void testClearFunctionality() {
     avl.insert("Three", 3.3);
 
     printTreeInOrder(avl, "Tree before clearing");
-    assert(avl.getComparisonsCount() > 0 || avl.getRotationsCount() > 0); // Ensure it's not empty
+    assert(avl.getComparisonsCount() > 0 || avl.getRotationsCount() > 0);
 
     std::cout << "Clearing the tree...\n";
     avl.clear();
 
     double d_val;
-    assert(!avl.find("One", d_val)); // Should not find any elements
+    assert(!avl.find("One", d_val));
     assert(!avl.find("Two", d_val));
     assert(!avl.find("Three", d_val));
 
-    // Verify it's effectively empty (e.g., trying to print or access)
     std::cout << "Tree after clearing (should be empty):\n";
-    avl.printInOrder(std::cout); // Should print nothing or minimal output for an empty tree
-    avl.print(); // Should print nothing or minimal output for an empty tree
+    avl.printInOrder(std::cout);
+    avl.print();
 
     std::cout << "Attempting to insert after clear.\n";
     avl.insert("NewItem", 99.9);
@@ -234,7 +225,7 @@ void testClearFunctionality() {
 
 void testComprehensiveScenario() {
     printTestHeader("Comprehensive Mixed Operations Scenario");
-    AVLTree<char, int> avl; // Using char keys for a smaller alphabet
+    AVLTree<char, int> avl;
 
     std::cout << "Phase 1: Initial insertions (some causing rotations).\n";
     avl.insert('M', 13);
@@ -251,21 +242,17 @@ void testComprehensiveScenario() {
     printTreeInOrder(avl, "After initial insertions");
     printTreeStructure(avl, "Structure after initial insertions");
     std::cout << "Current comparisons: " << avl.getComparisonsCount() << ", rotations: " << avl.getRotationsCount() << std::endl;
-    
-    
 
     std::cout << "\nPhase 2: Updates and new inserts via operator[].\n";
-    avl['D'] = 40; // Update
-    avl['A'] = 1;  // New insert, may cause rotation
-    avl['C'] = 3;  // New insert
-    avl['Q'] = 17; // New insert
+    avl['D'] = 40;
+    avl['A'] = 1;
+    avl['C'] = 3;
+    avl['Q'] = 17;
     printTreeInOrder(avl, "After updates and operator[] inserts");
     printTreeStructure(avl, "Structure after updates and operator[] inserts");
     assert(avl['D'] == 40);
     assert(avl['A'] == 1);
     std::cout << "Current comparisons: " << avl.getComparisonsCount() << ", rotations: " << avl.getRotationsCount() << std::endl;
-    
-    
 
     std::cout << "\nPhase 3: Removals (testing various cases).\n";
     std::cout << "Removing 'H' (leaf).\n";
@@ -287,8 +274,6 @@ void testComprehensiveScenario() {
     assert(!avl.find('M', int_val));
 
     std::cout << "Current comparisons: " << avl.getComparisonsCount() << ", rotations: " << avl.getRotationsCount() << std::endl;
-    
-    
 
     std::cout << "\nPhase 4: Final checks.\n";
     int outVal;
@@ -312,7 +297,7 @@ int main() {
         std::cout << "\n\nAll AVL Tree tests completed successfully! The implementation rocks!\n";
     } catch (const std::exception& e) {
         std::cerr << "An unexpected error occurred: " << e.what() << std::endl;
-        return 1; // Indicate failure
+        return 1;
     }
-    return 0; // Indicate success
+    return 0;
 }
