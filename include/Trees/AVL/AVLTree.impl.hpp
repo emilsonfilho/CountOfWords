@@ -39,7 +39,6 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::rotateLeft(AVLNode<Key, Value>*& y) {
 	x->height = calcHeight(x);
 	
 	this->incrementRotationsCount();
-	std::cout << "chamaram rotação esquerda\n";
 	
 	return x;
 }
@@ -55,7 +54,6 @@ AVLNode<Key, Value>* AVLTree<Key, Value>::rotateRight(AVLNode<Key, Value>*& y) {
 	x->height = calcHeight(x);
 
 	this->incrementRotationsCount();
-	std::cout << "chamaram rotação direita\n";
 
 	return x;
 }

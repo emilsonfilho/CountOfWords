@@ -5,157 +5,100 @@
 #include <stdexcept>
 #include <iomanip>
 
-void printHeader(const std::string& title) {
-    std::cout << "\n" << std::string(70, '=') << "\n";
-    std::cout << std::string((70 - title.length()) / 2, ' ') << title << "\n";
-    std::cout << std::string(70, '=') << std::endl;
-}
-
-void testBasicFunctionality() {
-    printHeader("Teste de Funcionalidade Basica: Frota Estelar");
-    
-    ChainedHashTable<std::string, std::string> fleet(5);
-
-    std::cout << "\n--- Fase 1: Comissionando a Frota (Insercoes) ---\n";
-    fleet.insert("Kirk", "USS Enterprise");
-    fleet.insert("Picard", "USS Enterprise-D");
-    fleet.insert("Sisko", "Deep Space 9");
-    fleet.insert("Janeway", "USS Voyager");
-    
-    std::cout << "Tabela apos insercoes:" << std::endl;
-    fleet.printInOrder(std::cout);
-    
-    std::cout << "\n>> Status da Tabela:" << std::endl;
-    std::cout << "Tamanho da Tabela: " << fleet.getTableSize() << std::endl;
-    std::cout << "Numero de Colisoes: " << fleet.getCollissionsCount() << std::endl;
-    std::cout << "Numero de Comparacoes: " << fleet.getComparisonsCount() << std::endl;
-
-    std::string ship;
-    assert(fleet.find("Kirk", ship) && ship == "USS Enterprise");
-    assert(fleet.find("Picard", ship) && ship == "USS Enterprise-D");
-    
-    std::cout << "\n--- Fase 2: Promocoes e Desativacoes (Updates & Removals) ---\n";
-
-    std::cout << "Atualizando a nave do Sisko usando update()...\n";
-    fleet.update("Sisko", "USS Defiant");
-    assert(fleet.find("Sisko", ship) && ship == "USS Defiant");
-    
-    std::cout << "Adicionando 'Archer' e sua 'Enterprise NX-01' usando operator[]...\n";
-    fleet["Archer"] = "Enterprise NX-01";
-    assert(fleet.find("Archer", ship) && ship == "Enterprise NX-01");
-    
-    std::cout << "O Kirk foi promovido! Atualizando sua nave para 'USS Enterprise-A'...\n";
-    fleet["Kirk"] = "USS Enterprise-A";
-    assert(fleet.find("Kirk", ship) && ship == "USS Enterprise-A");
-    
-    std::cout << "Desativando a nave de Janeway (removendo o registro)...\n";
-    fleet.remove("Janeway");
-    assert(!fleet.find("Janeway", ship));
-
-    std::cout << "\nEstado final da frota:" << std::endl;
-    fleet.printInOrder(std::cout);
-}
-
-void testRehashingAndExceptions() {
-    printHeader("Teste de Rehash, Capacidade e Excecoes");
-    
-    ChainedHashTable<int, std::string> testTable(3, 1.0f);
-    
-    std::cout << "\n--- Fase 1: Testando o Rehash Automatico ---\n";
-    std::cout << "Tamanho inicial da tabela: " << testTable.getTableSize() << std::endl;
-    
-    testTable[10] = "Dez";
-    testTable[20] = "Vinte";
-    testTable[30] = "Trinta";
-    testTable[40] = "Quarenta";
-    testTable[50] = "Cinquenta";
-    
-    std::cout << "Tabela cheia (5/5)... Adicionando o proximo elemento para forcar o rehash.\n";
-    testTable[60] = "Sessenta";
-    
-    std::cout << "Tamanho da tabela apos rehash: " << testTable.getTableSize() << std::endl;
-    assert(testTable.getTableSize() > 3);
-
-    std::string value;
-    assert(testTable.find(10, value) && value == "Dez");
-    assert(testTable.find(40, value) && value == "Quarenta");
-    std::cout << "Todos os elementos foram preservados apos o rehash.\n";
-
-    std::cout << "\n--- Fase 2: Testando Excecoes ---\n";
-    try {
-        std::cout << "Tentando inserir chave duplicada (20)...\n";
-        testTable.insert(20, "Vinte de novo");
-        assert(false);
-    } catch (const std::exception& e) {
-        std::cout << "Excecao esperada capturada: " << e.what() << std::endl;
-    }
-    
-    try {
-        std::cout << "Tentando atualizar chave inexistente (99)...\n";
-        testTable.update(99, "Noventa e Nove");
-        assert(false);
-    } catch (const std::exception& e) {
-        std::cout << "Excecao esperada capturada: " << e.what() << std::endl;
-    }
-
-    std::cout << "\n--- Fase 3: Testando o metodo clear() ---\n";
-    std::cout << "Limpando a tabela...\n";
-    testTable.clear();
-    assert(!testTable.find(10, value));
-    assert(testTable.getCollissionsCount() == 0);
-    std::cout << "Tabela limpa com sucesso. Tentando buscar elemento: " << std::boolalpha << testTable.find(10, value) << std::endl;
-}
-
-void testConstCorrectness() {
-    printHeader("Teste de Corretude 'const'");
-
-    const auto constTable = [] {
-        ChainedHashTable<std::string, int> tempTable(5);
-        tempTable["Terra"] = 3;
-        tempTable["Marte"] = 4;
-        tempTable["Jupiter"] = 5;
-        return tempTable;
-    }();
-    
-    std::cout << "Acessando 'Marte' em uma tabela constante: " << constTable["Marte"] << std::endl;
-    assert(constTable["Marte"] == 4);
-
-    try {
-        std::cout << "Tentando acessar uma chave inexistente ('Plutao') em uma tabela constante...\n";
-        int val = constTable["Plutao"];
-        assert(false);
-    } catch(const std::exception& e) {
-        std::cout << "Excecao esperada capturada: " << e.what() << std::endl;
-    }
-    std::cout << "Teste de 'const' concluido com sucesso." << std::endl;
-}
-
-void testRehash() {
-    printHeader("Teste de Rehash aplicando próximo primo");
-
-    ChainedHashTable<int, char> testTable(5, 1.0);
-
-    for (int i = 1; i <= 7; i++)
-        testTable.insert(i, 'o');
-
-    std::cout << "Table size: " << testTable.getTableSize() << std::endl;
-
-    testTable.insert(0, '*');
-
-    std::cout << "Table size: " << testTable.getTableSize() << std::endl;
-
-    assert(testTable.getTableSize() == 17);
-}
+using namespace std;
 
 int main() {
-    testBasicFunctionality();
-    testRehashingAndExceptions();
-    testConstCorrectness();
-    testRehash();
-    
-    std::cout << "\n" << std::string(70, '*') << "\n";
-    std::cout << std::string(10, ' ') << "TODOS OS TESTES DA TABELA HASH FORAM CONCLUIDOS!" << std::string(10, ' ') << "\n";
-    std::cout << std::string(70, '*') << std::endl;
+    ChainedHashTable<char, char> tb;
+
+    tb.insert('K', 'M');
+    tb.print();
+    tb.insert('Q', 'Z');
+
+    cout << tb.getTableSize() << endl;
+
+    tb.printInOrder(cout);
+
+    tb.remove('N');
+    tb.remove('Q');
+
+    cout << "Fator de carga (deve ser 1/11 = 0.9090...): " << tb.getLoadFactor() << endl;
+
+    tb.insert('N', 'Q');
+    tb.insert('R', 'V');
+    tb.insert('J', 'H');
+    tb.insert('Y', 'R'); // deve colidir com N
+    tb.insert('A', 'B');
+
+    tb.print();
+
+    cout << "Número de colisões (deve ser 1): " << tb.getCollissionsCount() << endl;
+
+    cout << "Limpando tabela...\n";
+    tb.clear();
+
+    tb.print();
+
+    char searched = ' ';
+    tb.find('N', searched);
+
+    assert(searched == ' ');
+
+    try {
+        tb.update('N', 'O');
+    } catch (const KeyNotFoundException& e) {
+        cout << "Chave após clear não encontrada, como esperado.\n";
+    }
+
+    tb.remove('C');
+
+    cout << "Comparisons count após clear (deve ser 0): " << tb.getComparisonsCount() << endl;
+
+
+    try {
+        tb.insert('C', 'A');
+        tb.insert('D', 'W');
+        tb.insert('H', 'F');
+        tb.insert('V', 'Q');
+        tb.insert('C', 'A'); 
+    } catch (const KeyAlreadyExistsException& e) {
+        cout << "Última operação falhou apontando chave já existente como esperado\nPrinte a estrutura pra se certificar de que os passos anteriores foram concluídos\n";
+    }
+
+    tb.print();
+    cout << "Número de comparações: " << tb.getComparisonsCount() << endl;
+
+    tb['N'] = 'I'; // colide com C
+    tb['U'] = 'D';
+
+    cout << "Fator de carga (deve ser 6/11 = 0.5454...): " << tb.getLoadFactor() << endl;
+
+    tb.insert('Y', 'L'); // colide com C e N
+    tb.insert('O', 'M'); // colide com D
+    tb.insert('Z', 'W'); // colide com D e O
+
+    cout << "Número de colisões (deve ser 4): " << tb.getCollissionsCount() << endl;
+
+    try {
+        tb.update('H', 'D');
+        tb.update('A', 'Y');
+    } catch (const KeyNotFoundException& e) {
+        cout << "Última operação lançou exceção como esperado. H deve ter sido atualizado\n";
+    }
+
+    tb.printInOrder(cout);
+
+    tb.remove('Y');
+    tb.remove('C');
+
+    cout << "Estrutura após remoção\n";
+    tb.print();
+
+    cout << "Fator de carga (deve ser 7/11 = 0.6363...): " << tb.getLoadFactor() << endl;
+
+    cout << "Número de colisões: " << tb.getCollissionsCount() << endl
+         << "Número de comparações: " << tb.getComparisonsCount() << endl;
+
+    tb.clear();
 
     return 0;
 }

@@ -264,6 +264,16 @@ public:
      * @return size_t The total number of slots in the hash table.
      */
     size_t getTableSize() const;
+
+    /**
+     * @brief Prints all slots in the hash table, including empty and deleted ones.
+     * 
+     * This function iterates through all slots in the hash table and prints their
+     * status (EMPTY, DELETED, or OCCUPIED) along with their key-value pairs if applicable.
+     * 
+     * @param out The output stream where the slot information will be printed.
+     */
+    void print() const;
 };
 
 #include "HashTables/OpenAddressing/OpenAddressingHashTable.impl.hpp"

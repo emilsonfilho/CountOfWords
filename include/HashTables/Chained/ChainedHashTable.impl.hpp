@@ -24,12 +24,7 @@ ChainedHashTable<Key, Value, Hash>::ChainedHashTable(size_t size, float mlf)
 
 template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::hashCode(const Key& key) const {
-    size_t pos = this->hashing(key) % this->tableSize;
-
-    if (!this->table[pos].empty())
-        this->incrementCollisionsCount();
-
-    return pos;
+    return this->hashing(key) % this->tableSize;
 }
 
 template <typename Key, typename Value, typename Hash>
@@ -89,7 +84,9 @@ void ChainedHashTable<Key, Value, Hash>::insert(const Key& key, const Value& val
 
     size_t slot = hashCode(key);
    
-    
+    if (!this->table[slot].empty())
+        this->incrementCollisionsCount();
+
     for (const auto& p : this->table[slot]) {
         this->comparisonsCount++;
         if (p.first == key) throw KeyAlreadyExistsException();
@@ -199,4 +196,19 @@ size_t ChainedHashTable<Key, Value, Hash>::getCollissionsCount() const {
 template <typename Key, typename Value, typename Hash>
 size_t ChainedHashTable<Key, Value, Hash>::getTableSize() const {
     return this->tableSize;
+}
+
+template <typename Key, typename Value, typename Hash>
+void ChainedHashTable<Key, Value, Hash>::print() const {
+    for (size_t i = 0; i < this->table.size(); ++i) {
+        std::cout << "Slot " << i << ": ";
+        if (this->table[i].empty()) {
+        std::cout << "Empty";
+        } else {
+        for (const auto& pair : this->table[i]) {
+            std::cout << "[" << pair.first << ": " << pair.second << "] ";
+        }
+        }
+        std::cout << "\n";
+    }
 }

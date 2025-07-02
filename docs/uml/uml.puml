@@ -62,6 +62,7 @@ class ChainedHashTable<Key, Value, Hash> {
     + rehash(m: size_t) : void
     + getCollisionsCount() : size_t
     + getTablesize() : size_t
+    + print() : void
 }
 
 enum Status {
@@ -107,6 +108,7 @@ class OpenAddressingHashTable<Key, Value, Hash> {
     + rehash(m: size_t) : void
     + getCollisionsCount() : size_t
     + getTablesize() : size_t
+    + print() : void
 }
 
 class GenericFindResultOpenAddressed<Entry> {

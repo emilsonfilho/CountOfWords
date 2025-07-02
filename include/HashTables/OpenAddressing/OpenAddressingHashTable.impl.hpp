@@ -18,12 +18,7 @@ bool OpenAddressingHashTable<Key, Value, Hash>::GenericFindResult<Entry>::wasEle
 
 template <typename Key, typename Value, typename Hash>
 size_t OpenAddressingHashTable<Key, Value, Hash>::hashCode(const Key& key, size_t i) const {
-    size_t pos = (this->hashing(key) + ((i + (i * i)) / 2)) % this->tableSize;
-
-    if (this->table[pos].status == ACTIVE)
-        this->incrementCollisionsCount();
-    
-    return pos;
+    return (this->hashing(key) + ((i + (i * i)) / 2)) % this->tableSize;
 }
 
 template <typename Key, typename Value, typename Hash>
@@ -130,18 +125,25 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key& key, const Val
         Slot<Key, Value>& slot = this->table[slotIdx];
 
         if (slot.status == EMPTY) {
-            this->incrementCounter(1);
-            slot = Slot(key, value);
-            this->numberOfElements++;
-            return;
+            if (lastDeletedSlot == -1) {
+                this->incrementCounter(1);
+                slot = Slot(key, value);
+                this->numberOfElements++;
+                return;
+            }
+
+            break;
         } else if (slot.status == ACTIVE and slot.key == key) {
             this->incrementCounter(2);
             throw KeyAlreadyExistsException();
-        } else if (slot.status == DELETED and lastDeletedSlot == -1) {
+        } else if (slot.status == ACTIVE and slot.key != key) {
+            this->incrementCollisionsCount();
             this->incrementCounter(3);
+        } else if (slot.status == DELETED and lastDeletedSlot == -1) {
+            this->incrementCounter(4);
             lastDeletedSlot = slotIdx;
         } else {
-            this->incrementCounter(3);
+            this->incrementCounter(4);
         }
     }
 
@@ -245,4 +247,20 @@ size_t OpenAddressingHashTable<Key, Value, Hash>::getCollisionsCount() const {
 template <typename Key, typename Value, typename Hash>
 size_t OpenAddressingHashTable<Key, Value, Hash>::getTableSize() const {
     return this->tableSize;
+}
+
+template <typename Key, typename Value, typename Hash>
+void OpenAddressingHashTable<Key, Value, Hash>::print() const {
+    for (size_t i = 0; i < this->table.size(); ++i) {
+        const auto& slot = this->table[i];
+        std::cout << "Slot " << i << ": ";
+        if (slot.status == EMPTY) {
+            std::cout << "EMPTY";
+        } else if (slot.status == DELETED) {
+            std::cout << "DELETED";
+        } else if (slot.status == ACTIVE) {
+            std::cout << "ACTIVE [" << slot.key << ": " << slot.value << "]";
+        }
+        std::cout << '\n';
+    }
 }

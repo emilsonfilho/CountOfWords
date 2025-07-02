@@ -286,6 +286,16 @@ public:
      * @return size_t The number of buckets in the hash table.
      */
     size_t getTableSize() const;
+
+    /**
+     * @brief Prints the contents of the hash table to the standard output.
+     * 
+     * Each slot of the hash table is printed, showing the key-value pairs
+     * stored in that slot. If a slot is empty, it will display "Empty".
+     * This function is primarily used for debugging and visualization
+     * purposes.
+     */
+    void print() const;
 };
 
 #include "HashTables/Chained/ChainedHashTable.impl.hpp"
