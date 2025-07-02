@@ -141,7 +141,7 @@ private:
      */
     AVLNode<Key, Value>* upsert(const Key& key, AVLNode<Key, Value>* node, Value*& outValue);
 
-    public:
+public:
     static const int IMBALANCE = 2; ///< The imbalance threshold for the AVL tree.
     
     /**
