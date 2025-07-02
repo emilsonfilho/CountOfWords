@@ -1,0 +1,10 @@
+<map id="include/Trees/RedBlack/Color.hpp" name="include/Trees/RedBlack/Color.hpp">
+<area shape="rect" id="Node000001" title="Defines the Color enumeration used in Red&#45;Black Tree nodes." alt="" coords="6,5,167,45"/>
+<area shape="rect" id="Node000002" href="$RedBlackNode_8hpp_source.html" title=" " alt="" coords="6,93,167,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,59,89,93,84,93,84,59"/>
+<area shape="rect" id="Node000003" href="$RedBlackTree_8hpp_source.html" title=" " alt="" coords="6,181,167,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,147,89,181,84,181,84,147"/>
+<area shape="rect" id="Node000004" href="$RedBlackTree_8impl_8hpp_source.html" title=" " alt="" coords="5,269,168,309"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="81,235,82,269,76,269,75,235"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="93,256,92,222,97,222,98,256"/>
+</map>

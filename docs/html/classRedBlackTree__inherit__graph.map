@@ -1,0 +1,7 @@
+<map id="RedBlackTree&lt; Key, Value &gt;" name="RedBlackTree&lt; Key, Value &gt;">
+<area shape="rect" id="Node000001" title="A class representing a Red&#45;Black Tree." alt="" coords="256,30,399,70"/>
+<area shape="rect" id="Node000002" href="$classIDictionary.html" title="Interface for a generic dictionary data structure." alt="" coords="21,5,192,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,30,256,37,255,42,205,35"/>
+<area shape="rect" id="Node000003" href="$classBaseTree.html" title=" " alt="" coords="5,55,208,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,63,255,58,256,63,222,68"/>
+</map>

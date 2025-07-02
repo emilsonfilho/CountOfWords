@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,95,109,121"/>
+<area shape="rect" id="Node000001" href="$classutf8_1_1exception.html" title=" " alt="" coords="157,95,265,121"/>
+<area shape="poly" id="edge11_Node000000_Node000001" title=" " alt="" coords="123,105,157,105,157,111,123,111"/>
+<area shape="rect" id="Node000002" href="$classutf8_1_1invalid__code__point.html" title=" " alt="" coords="329,5,453,45"/>
+<area shape="poly" id="edge12_Node000001_Node000002" title=" " alt="" coords="248,86,312,55,339,43,341,48,314,60,250,91"/>
+<area shape="rect" id="Node000003" href="$classutf8_1_1invalid__utf16.html" title=" " alt="" coords="328,70,453,95"/>
+<area shape="poly" id="edge13_Node000001_Node000003" title=" " alt="" coords="279,96,327,89,328,94,280,101"/>
+<area shape="rect" id="Node000004" href="$classutf8_1_1invalid__utf8.html" title=" " alt="" coords="331,119,450,145"/>
+<area shape="poly" id="edge14_Node000001_Node000004" title=" " alt="" coords="279,114,331,121,330,127,279,120"/>
+<area shape="rect" id="Node000005" href="$classutf8_1_1not__enough__room.html" title=" " alt="" coords="313,169,468,194"/>
+<area shape="poly" id="edge15_Node000001_Node000005" title=" " alt="" coords="250,124,314,154,349,166,347,171,312,158,248,129"/>
+</map>
