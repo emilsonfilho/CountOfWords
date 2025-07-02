@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "Factory/DictionaryType.hpp"
+
 namespace StringHandler {
     /**
      * @brief A manipulator to set the width and left-align an object when streamed.
@@ -50,6 +52,20 @@ namespace StringHandler {
      */
     template <typename Object>
     std::ostream& operator<<(std::ostream& os, const SetWidthAtLeft<Object>& manip);
+
+    /**
+     * @brief Converts a string identifier to a DictionaryType enum.
+     *
+     * This function attempts to find the given string `str` as a key in the
+     * global `stringDicitionaryTypeMap`. If successful, it returns the
+     * corresponding `DictionaryType` value.
+     *
+     * @param str The string representation of the dictionary type to convert.
+     * @return The corresponding `DictionaryType` enum value.
+     * @throw DictionaryTypeNotFound if the string does not correspond to a valid
+     * dictionary type in the map.
+     */
+    DictionaryType toDictionaryType(const std::string& str);
 }
 
 #include "Utils/StringHandler.impl.hpp"

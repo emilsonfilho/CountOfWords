@@ -1,12 +1,15 @@
 #ifndef DICTIONARY_FACTORY_HPP
 #define DICTIONARY_FACTORY_HPP
 
+#include <memory>
+
 #include "Dictionary/IDictionary.hpp"
 #include "Trees/AVL/AVLTree.hpp"
 #include "Trees/RedBlack/RedBlackTree.hpp"
 #include "HashTables/Chained/ChainedHashTable.hpp"
 #include "HashTables/OpenAddressing/OpenAddressingHashTable.hpp"
 #include "Exceptions/FactoryExceptions.hpp"
+#include "Factory/DictionaryType.hpp"
 
 /**
  * @class DictionaryFactory
@@ -39,20 +42,19 @@ public:
      * The caller is responsible for deleting this object.
      * @throw DictionaryTypeNotFound If the `dictType` does not match any known type.
      */
-    static IDictionary<Key, Value>* createDictionary(const std::string& dictType) {
-        if (dictType == "avl_dictionary")
-            return new AVLTree<Key, Value>();
-
-        if (dictType == "redblack_dictionary")
-            return new RedBlackTree<Key, Value>();
-
-        if (dictType == "chained_dictionary")
-            return new ChainedHashTable<Key, Value>();
-
-        if (dictType == "open_dictionary")
-            return new OpenAddressingHashTable<Key, Value>();
-
-        throw DictionaryTypeNotFound();
+    static std::unique_ptr<IDictionary<Key, Value>> createDictionary(DictionaryType dictType) {
+        switch (dictType) {
+            case DictionaryType::AVL: 
+                return std::make_unique<AVLTree<Key, Value>>();
+            case DictionaryType::RedBlack: 
+                return std::make_unique<RedBlackTree<Key, Value>>();
+            case DictionaryType::Chained: 
+                return std::make_unique<ChainedHashTable<Key, Value>>();
+            case DictionaryType::OpenAddressing: 
+                return std::make_unique<OpenAddressingHashTable<Key, Value>>();
+            default: 
+                throw DictionaryTypeNotFound();
+        }
     }
 };
 

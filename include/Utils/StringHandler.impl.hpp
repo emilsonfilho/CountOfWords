@@ -2,6 +2,9 @@
 
 #include <sstream>
 
+#include "Utils/StringDictionaryTypeMap.hpp"
+#include "Exceptions/FactoryExceptions.hpp"
+
 #include "utf8.h"
 
 namespace StringHandler {
@@ -38,5 +41,13 @@ namespace StringHandler {
         os << str << std::string(padding, ' ');
 
         return os;
+    }
+
+    DictionaryType toDictionaryType(const std::string& str) {
+        try {
+            return stringDicitionaryTypeMap.at(str);
+        } catch(const std::out_of_range& e) {
+            throw DictionaryTypeNotFound();
+        }
     }
 }
