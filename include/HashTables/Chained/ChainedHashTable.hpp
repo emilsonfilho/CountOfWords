@@ -297,6 +297,11 @@ public:
      */
     void print() const;
 
+    /**
+     * @brief Accepts a visitor implementing IDictionaryVisitor interface to collect metrics or perform operations on the ChainedHashTable.
+     * 
+     * @param visitor A reference to an IDictionaryVisitor<Key, Value> object that will interact with the ChainedHashTable.
+     */
     void accept(IDictionaryVisitor<Key, Value>& visitor) const override;
 };
 
