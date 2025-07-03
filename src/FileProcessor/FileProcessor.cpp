@@ -14,12 +14,10 @@
 FileProcessor::FileProcessor(const std::string& filename) {
     path = inputPath + filename + extension;
 
-    std::cout << path << std::endl;
-
     std::ifstream file(path);
 
     if (!file)
-        throw FileNotFoundException();
+        throw FileNotFoundException(path);
 
     if (!std::setlocale(LC_ALL, lang))
         throw LocaleNotFoundException();
@@ -39,7 +37,7 @@ std::string FileProcessor::normalizeWord(const std::string& word) const {
      * Perhaps this implementation needs to be modified so that the 
      * Bible chapter and verse symbols are separated correctly.
      */
-    while (!normalizeWord.empty() and ispunct(normalizeWord.back()))
+    while (!normalizeWord.empty() and ispunct(static_cast<unsigned char>(normalizeWord.back())))
         normalizeWord.pop_back();
 
     return normalizeWord;

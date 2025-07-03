@@ -17,8 +17,8 @@ public:
      *
      * Initializes the exception with the message "File not found."
      */
-    explicit FileNotFoundException()
-        : std::out_of_range("File not found.") {}
+    explicit FileNotFoundException(const std::string& filename)
+        : std::out_of_range("File " + filename + " not found.") {}
 };
 
 #endif
