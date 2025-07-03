@@ -296,6 +296,8 @@ public:
      * purposes.
      */
     void print() const;
+
+    void accept(IDictionaryVisitor<Key, Value>& visitor) const override;
 };
 
 #include "HashTables/Chained/ChainedHashTable.impl.hpp"

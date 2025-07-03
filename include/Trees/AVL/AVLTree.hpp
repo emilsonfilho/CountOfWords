@@ -240,6 +240,8 @@ public:
      * @return size_t The number of rotations performed.
      */
     size_t getRotationsCount() const;
+
+    void accept(IDictionaryVisitor<Key, Value>& visitor) const override;
 };
 
 #include "Trees/AVL/AVLTree.impl.hpp"

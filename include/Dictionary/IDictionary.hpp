@@ -2,6 +2,7 @@
 #define IDICTIONARY_HPP
 
 #include "Trees/Base/BaseTree.hpp"
+#include "Visitor/IDictionaryVisitor.hpp"
 
 /**
  * @brief Interface for a generic dictionary data structure.
@@ -109,6 +110,8 @@ public:
      * @brief Virtual destructor.
      */
     virtual ~IDictionary() = default;
+
+    virtual void accept(IDictionaryVisitor<Key, Value>& visitor) const = 0;
     
     template <typename Tree, typename Node, typename K, typename V>
     friend class BaseTree;

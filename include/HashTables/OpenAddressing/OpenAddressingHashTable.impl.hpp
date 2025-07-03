@@ -264,3 +264,8 @@ void OpenAddressingHashTable<Key, Value, Hash>::print() const {
         std::cout << '\n';
     }
 }
+
+template <typename Key, typename Value, typename Hash>
+void OpenAddressingHashTable<Key, Value, Hash>::accept(IDictionaryVisitor<Key, Value>& visitor) {
+	visitor.collectMetrics(*this);
+}

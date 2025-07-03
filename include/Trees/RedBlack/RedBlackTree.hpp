@@ -175,6 +175,8 @@ public:
      * @return size_t The total number of rotations performed.
      */
     size_t getRotationsCount() const;
+
+    void accept(IDictionaryVisitor<Key, Value>& visitor) const override;
 };
 
 #include "Trees/RedBlack/RedBlackTree.impl.hpp"

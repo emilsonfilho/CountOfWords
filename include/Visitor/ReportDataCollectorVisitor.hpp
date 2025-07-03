@@ -3,15 +3,15 @@
 
 #include <functional>
 
+#include "Dictionary/IDictionary.hpp"
 #include "Visitor/IDictionaryVisitor.hpp"
 #include "Reports/ReportData.hpp"
 
-template <typename Key, typename Value, typename Hash = std::hash<Key>>
+template <typename Key, typename Value>
 class ReportDataCollectorVisitor : public IDictionaryVisitor<Key, Value> {
     ReportData& report;
 
-    template <typename Dictionary>
-    void addComparisonsCount(const Dictionary& dict);
+    void addComparisonsCount(const IDictionary& dict);
 
     void setDictionaryType(const std::string& dictType);
 public:

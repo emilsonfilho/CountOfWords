@@ -274,6 +274,8 @@ public:
      * @param out The output stream where the slot information will be printed.
      */
     void print() const;
+
+    void accept(IDictionaryVisitor<Key, Value>& visitor) const = 0;
 };
 
 #include "HashTables/OpenAddressing/OpenAddressingHashTable.impl.hpp"
