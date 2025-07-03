@@ -1,4 +1,5 @@
 #include "Factory/DictionaryFactory.hpp"
+#include "FileProcessor/FileProcessor.hpp"
 
 int main() {
     std::unique_ptr<IDictionary<std::string, int>> dict = DictionaryFactory<std::string, int>::createDictionary(StringHandler::toDictionaryType("dictionary_avl"));
@@ -8,4 +9,11 @@ int main() {
     (*dict)["Alessandra"]++;
 
     dict->printInOrder(std::cout);
+
+    FileProcessor fp("text");
+
+    for (std::string& word : fp.words) {
+        std::cout << word << "\n";
+    }
+    std::cout << std::endl;
 }
