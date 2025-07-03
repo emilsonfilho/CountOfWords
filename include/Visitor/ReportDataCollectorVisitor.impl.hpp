@@ -30,7 +30,7 @@ void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(const RedBlack
 
 template <typename Key, typename Value>
 void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(const ChainedHashTable<Key, Value>& chainedHashTable) {
-    setDictionaryType("Tabela Hash por Encademaneto Exterior");
+    setDictionaryType("Tabela Hash por Encadeamento Exterior");
     addComparisonsCount(ChainedHashTable);
     report.specificMetric = {"colisões", chainedHashTable.getCollisionsCount()};
 }
