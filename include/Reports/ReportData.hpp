@@ -5,7 +5,7 @@
 #include <chrono>
 
 struct ReportData {
-    std::string dictionarType;
+    std::string dictionaryType;
     std::chrono::nanoseconds buildTime;
     size_t comparisons;
     std::pair<std::string, size_t> specificMetric;
