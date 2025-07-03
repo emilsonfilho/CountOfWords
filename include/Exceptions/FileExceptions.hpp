@@ -3,13 +3,19 @@
 
 #include <stdexcept>
 
+/**
+ * @class FileNotFoundException
+ * @brief Custom exception for file-not-found errors.
+ *
+ * This class inherits from std::out_of_range and is used to signal
+ * that a file was not found during program execution.
+ */
 class FileNotFoundException : public std::out_of_range {
 public:
     /**
-     * @brief Constructs the exception object.
+     * @brief Default constructor.
      *
-     * Initializes the base class std::out_of_range with a default error message.
-     * @post The exception object is created with the message "Dictionary type not found.".
+     * Initializes the exception with the message "File not found."
      */
     explicit FileNotFoundException()
         : std::out_of_range("File not found.") {}
