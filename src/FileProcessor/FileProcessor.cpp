@@ -1,16 +1,20 @@
 #include "FileProcessor/FileProcessor.hpp"
 
 #include <fstream>
-#include <locale>
 #include <clocale>
+#include <boost/locale.hpp>
+
+#include <iostream>
 
 #include "Configs/Path.hpp"
 #include "Configs/Locale.hpp"
 #include "Exceptions/FileExceptions.hpp"
-#include "Exception/FileProcessorExceptions.hpp"
+#include "Exceptions/FileProcessorExceptions.hpp"
 
 FileProcessor::FileProcessor(const std::string& filename) {
     path = inputPath + filename + extension;
+
+    std::cout << path << std::endl;
 
     std::ifstream file(path);
 
@@ -23,14 +27,19 @@ FileProcessor::FileProcessor(const std::string& filename) {
     boost::locale::generator gen;
     loc = gen.generate(lang);
 
-
-    while ()
+    std::string word;
+    while (file >> word)
+        words.push_back(normalizeWord(word));
 }
 
-std::string normalizeWord(const std::string& word) const {
-    normalizeWord = boost::locale::to_lower(word, loc);
+std::string FileProcessor::normalizeWord(const std::string& word) const {
+    std::string normalizeWord = boost::locale::to_lower(word, loc);
 
-    while (!normalizeWord.empty() and boost::locale::ispunct(normalizeWord.back()))
+    /**
+     * Perhaps this implementation needs to be modified so that the 
+     * Bible chapter and verse symbols are separated correctly.
+     */
+    while (!normalizeWord.empty() and ispunct(normalizeWord.back()))
         normalizeWord.pop_back();
 
     return normalizeWord;

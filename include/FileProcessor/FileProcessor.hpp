@@ -3,14 +3,15 @@
 
 #include <vector>
 #include <string>
+#include <locale>
 
 class FileProcessor {
     std::string path;
-    std::vector<std::string> words;
     std::locale loc;
-
+    
     std::string normalizeWord(const std::string& word) const;
 public:
+    std::vector<std::string> words;
     FileProcessor(const std::string& filename);
 };
 

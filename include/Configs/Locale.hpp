@@ -3,6 +3,6 @@
 
 #include <string>
 
-const std::string& lang = "pt_BR.utf8";
+const char* lang = "pt_BR.utf8";
 
 #endif

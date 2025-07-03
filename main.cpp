@@ -10,7 +10,10 @@ int main() {
 
     dict->printInOrder(std::cout);
 
-    FileProcessor fp("text.txt");
+    FileProcessor fp("text");
 
-    fp.normalizeWord()
+    for (std::string& word : fp.words) {
+        std::cout << word << "\n";
+    }
+    std::cout << std::endl;
 }
