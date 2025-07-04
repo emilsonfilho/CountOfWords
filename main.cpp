@@ -19,7 +19,7 @@ int main() {
     std::cout << std::endl;
 
     WordFrequencyAnalyzer wfa;
-    ReportData result = wfa.analyze(dict, fp.words);
+    ReportData result = wfa.analyze(std::move(dict), fp.words);
 
-    cout << result.buildTime << std::endl;
+    std::cout << result.buildTime.count() << std::endl;
 }

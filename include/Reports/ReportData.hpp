@@ -6,7 +6,7 @@
 
 struct ReportData {
     std::string dictionaryType;
-    std::chrono::nanoseconds buildTime;
+    std::chrono::milliseconds buildTime;
     size_t comparisons;
     std::pair<std::string, size_t> specificMetric;
     size_t totalWordsProcessed;    

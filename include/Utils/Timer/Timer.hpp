@@ -35,7 +35,7 @@ public:
      * 
      * @return The duration in milliseconds as a long long integer.
      */
-    long long duration() const;
+    std::chrono::milliseconds duration() const;
 };
 
 #endif

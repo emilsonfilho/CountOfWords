@@ -18,7 +18,7 @@
  * @tparam Key The key type of the elements in the dictionary.
  * @tparam Value The value type of the elements in the dictionary.
  */
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Hash = std::hash<Key>>
 class ReportDataCollectorVisitor : public IDictionaryVisitor<Key, Value> {
     /**
      * @var report
@@ -30,7 +30,7 @@ class ReportDataCollectorVisitor : public IDictionaryVisitor<Key, Value> {
      * @brief Extracts the total number of comparisons from a dictionary and adds it to the report.
      * @param dict The dictionary from which to retrieve the comparison count.
      */
-    void addComparisonsCount(const IDictionary& dict);
+    void addComparisonsCount(const IDictionary<Key, Value>& dict);
 
     /**
      * @brief Sets the type name of the dictionary being processed in the report.
@@ -72,7 +72,7 @@ public:
      *
      * @param chainedHashTable The ChainedHashTable instance to be analyzed.
      */
-    void collectMetrics(const ChainedHashTable<Key, Value>& chainedHashTable);
+    void collectMetrics(const ChainedHashTable<Key, Value, Hash>& chainedHashTable);
 
     /**
      * @brief Collects performance metrics from an OpenAddressingHashTable.
@@ -82,7 +82,7 @@ public:
      *
      * @param openAddressingHashTable The OpenAddressingHashTable instance to be analyzed.
      */
-    void collectMetrics(const OpenAddressingHashTable<Key, Value>& openAddressingHashTable);
+    void collectMetrics(const OpenAddressingHashTable<Key, Value, Hash>& openAddressingHashTable);
 };
 
 #include "Visitor/ReportDataCollectorVisitor.impl.hpp"

@@ -9,10 +9,10 @@ class AVLTree;
 template <typename Key, typename Value>
 class RedBlackTree;
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Hash>
 class ChainedHashTable;
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Hash>
 class OpenAddressingHashTable;
 
 /**
@@ -64,7 +64,7 @@ public:
      *
      * @param chainedHashTable A constant reference to the ChainedHashTable to be visited.
      */
-    virtual void collectMetrics(const ChainedHashTable<Key, Value>& chainedHashTable) = 0;
+    virtual void collectMetrics(const ChainedHashTable<Key, Value, Hash>& chainedHashTable) = 0;
 
     /**
      * @brief Pure virtual function to visit an OpenAddressingHashTable.
@@ -74,7 +74,7 @@ public:
      *
      * @param openAddressingHashTable A constant reference to the OpenAddressingHashTable to be visited.
      */
-    virtual void collectMetrics(const OpenAddressingHashTable<Key, Value>& openAddressingHashTable) = 0;
+    virtual void collectMetrics(const OpenAddressingHashTable<Key, Value, Hash>& openAddressingHashTable) = 0;
 };
 
 #endif

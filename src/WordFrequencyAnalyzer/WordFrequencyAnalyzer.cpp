@@ -5,7 +5,7 @@
 
 ReportData WordFrequencyAnalyzer::analyze(
     std::unique_ptr<IDictionary<std::string, int>> dictionary,
-    const vector<std::string>& words
+    const std::vector<std::string>& words
 ) const {
     ReportData report;
 
@@ -14,13 +14,21 @@ ReportData WordFrequencyAnalyzer::analyze(
 
     long wordsCount = 0;
     for (const std::string& word : words) {
-        dictionary[word]++;
+        (*dictionary)[word]++;
         wordsCount++;
     }
 
     timer.stop();
 
-    dictionary->accept(ReportDataCollectorVisitor(report));
+    /**
+     * Acredito que isso não devia ser feito dessa maneira e era para ser 
+     * possível receber o valor sem ser lvalue modificável
+     * Além disso, está dando erro de conversão. Isso se dá pelo fato
+     * de que eu acho que a conversão lá em AVLTree e as outras classes estão
+     * erradas em assumir que receberão objetos de IDictionary
+     */
+    ReportDataCollectorVisitor<std::string, int> visitor(report); 
+    dictionary->accept(visitor);
     report.buildTime = timer.duration();
     report.totalWordsProcessed = wordsCount;
 

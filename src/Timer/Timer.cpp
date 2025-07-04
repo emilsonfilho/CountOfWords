@@ -12,6 +12,6 @@ void Timer::stop() {
     end = now();
 }
 
-long long duration() const {
-    return std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+std::chrono::milliseconds Timer::duration() const {
+    return std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
 }
