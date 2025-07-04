@@ -8,7 +8,8 @@
 #include "Dictionary/IDictionary.hpp"
 
 class ReportWriter {
-    void printLine(std::ostream&) const;
+    void printLine(std::ostream& out) const;
+    void printHeader(const std::string& title, std::ostream& out) const;
 public:
     void exportReport(const ReportData& reportData, std::ostream& out, IDictionary<std::string, int>* dict);
 };
