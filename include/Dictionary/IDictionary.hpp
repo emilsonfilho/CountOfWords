@@ -2,6 +2,7 @@
 #define IDICTIONARY_HPP
 
 #include "Trees/Base/BaseTree.hpp"
+#include "Visitor/IDictionaryVisitor.hpp"
 
 /**
  * @brief Interface for a generic dictionary data structure.
@@ -109,6 +110,19 @@ public:
      * @brief Virtual destructor.
      */
     virtual ~IDictionary() = default;
+
+    /**
+     * @brief Accepts a visitor that performs operations on the dictionary.
+     * 
+     * This method allows an external visitor object to interact with the dictionary
+     * by implementing the IDictionaryVisitor interface. The visitor can perform
+     * custom operations on the dictionary's keys and values without exposing
+     * the internal structure of the dictionary.
+     * 
+     * @param visitor A reference to an object implementing the IDictionaryVisitor
+     * interface, which defines the operations to be performed on the dictionary.
+     */
+    virtual void accept(IDictionaryVisitor<Key, Value>& visitor) const = 0;
     
     template <typename Tree, typename Node, typename K, typename V>
     friend class BaseTree;

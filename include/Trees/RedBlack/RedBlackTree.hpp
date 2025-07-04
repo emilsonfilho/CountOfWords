@@ -175,6 +175,13 @@ public:
      * @return size_t The total number of rotations performed.
      */
     size_t getRotationsCount() const;
+
+    /**
+     * @brief Accepts a visitor implementing IDictionaryVisitor interface to collect metrics or perform operations on the RedBlackTree.
+     * 
+     * @param visitor A reference to an IDictionaryVisitor<Key, Value> object that will interact with the RedBlackTree.
+     */
+    void accept(IDictionaryVisitor<Key, Value>& visitor) const override;
 };
 
 #include "Trees/RedBlack/RedBlackTree.impl.hpp"
