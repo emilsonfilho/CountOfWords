@@ -1,5 +1,6 @@
 #include "Factory/DictionaryFactory.hpp"
 #include "FileProcessor/FileProcessor.hpp"
+#include "WordFrequencyAnalyzer/WordFrequencyAnalyzer.hpp"
 
 int main() {
     std::unique_ptr<IDictionary<std::string, int>> dict = DictionaryFactory<std::string, int>::createDictionary(StringHandler::toDictionaryType("dictionary_avl"));
@@ -16,4 +17,9 @@ int main() {
         std::cout << word << "\n";
     }
     std::cout << std::endl;
+
+    WordFrequencyAnalyzer wfa;
+    ReportData result = wfa.analyze(dict, fp.words);
+
+    cout << result.buildTime << std::endl;
 }
