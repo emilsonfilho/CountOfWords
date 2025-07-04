@@ -2,6 +2,7 @@
 #define UTILS_TIMER_TIMER_HPP
 
 #include <chrono>
+#include <string>
 
 /**
  * @class Timer
@@ -41,6 +42,8 @@ public:
      * @return The duration in milliseconds as a long long integer.
      */
     std::chrono::milliseconds duration() const;
+
+    static std::string getCurrentDateTime();
 };
 
 #endif

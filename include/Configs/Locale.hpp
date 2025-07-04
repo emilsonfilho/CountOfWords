@@ -3,6 +3,6 @@
 
 #include <string>
 
-const char* lang = "pt_BR.utf8";
+extern const char* lang = "pt_BR.utf8";
 
 #endif
