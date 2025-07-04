@@ -11,8 +11,8 @@ void ReportWriter::printLine(std::ostream& out) const {
 void ReportWriter::exportReport(const ReportData& reportData, std::ostream& out, std::unique_ptr<IDictionary<std::string, int>> dict) {
     printLine(out);
     out << "Count of Words: Data Structure Edition - Output Report\n";
+    printLine(out);
     out << "Arquivo Analisado: " << reportData.filename << '\n';
     out << "Estrutura de Dados: " << reportData.dictionaryType << '\n';
     out << "Data de execução: " << Timer::getCurrentDateTime() << '\n';
-    printLine(out);
 }
