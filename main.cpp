@@ -20,9 +20,9 @@ int main() {
     }
     std::cout << std::endl;
 
-    ReportData result = WordFrequencyAnalyzer::analyze(std::move(dict), fp);
+    ReportData result = WordFrequencyAnalyzer::analyze(dict.get(), fp);
 
     std::cout << result.buildTime.count() << std::endl;
 
-    ReportWriter().exportReport(result, std::cout, std::move(dict));
+    ReportWriter().exportReport(result, std::cout, dict.get());
 }

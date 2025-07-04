@@ -10,7 +10,7 @@
 class ReportWriter {
     void printLine(std::ostream&) const;
 public:
-    void exportReport(const ReportData& reportData, std::ostream& out, std::unique_ptr<IDictionary<std::string, int>> dict);
+    void exportReport(const ReportData& reportData, std::ostream& out, IDictionary<std::string, int>* dict);
 };
 
 #endif

@@ -21,7 +21,7 @@ public:
      * @return ReportData An object containing the results of the word frequency analysis.
      */
     static ReportData analyze(
-        std::unique_ptr<IDictionary<std::string, int>> dictionary,
+        IDictionary<std::string, int>* dictionary,
         const FileProcessor& fileProcessor
     );
 };

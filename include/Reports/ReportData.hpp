@@ -43,6 +43,8 @@ struct ReportData {
     size_t totalWordsProcessed;
 
     std::string filename;
-};;
+
+    size_t maxKeyLength;
+};
 
 #endif
