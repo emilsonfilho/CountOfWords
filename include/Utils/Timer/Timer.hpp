@@ -14,6 +14,11 @@
 class Timer {
     std::chrono::high_resolution_clock::time_point begin, end;
 
+    /**
+     * @brief Returns the current time point using high-resolution clock.
+     * 
+     * @return std::chrono::high_resolution_clock::time_point The current time point.
+     */
     std::chrono::high_resolution_clock::time_point now() const;
 public:
     /**
