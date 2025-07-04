@@ -13,7 +13,6 @@
  * It also configures locale settings to properly handle text normalization.
  */
 class FileProcessor {
-    std::string path;  ///< Full path to the input file.
     std::locale loc; ///< Locale used for word normalization.
     
     /**
@@ -27,6 +26,7 @@ class FileProcessor {
      */
     std::string normalizeWord(const std::string& word) const;
 public:
+    std::string path;  ///< Full path to the input file.
     std::vector<std::string> words; //< Vector containing all normalized words read from the file.
 
     /**

@@ -2,6 +2,7 @@
 #include "FileProcessor/FileProcessor.hpp"
 #include "WordFrequencyAnalyzer/WordFrequencyAnalyzer.hpp"
 #include "Utils/Casting/Casting.hpp"
+#include "Reports/ReportWriter.hpp"
 
 int main() {
     std::unique_ptr<IDictionary<std::string, int>> dict = DictionaryFactory<std::string, int>::createDictionary(Casting::toDictionaryType("dictionary_avl"));
@@ -19,8 +20,9 @@ int main() {
     }
     std::cout << std::endl;
 
-    WordFrequencyAnalyzer wfa;
-    ReportData result = wfa.analyze(std::move(dict), fp.words);
+    ReportData result = WordFrequencyAnalyzer().analyze(std::move(dict), fp);
 
     std::cout << result.buildTime.count() << std::endl;
+
+    ReportWriter().exportReport(result, std::cout, std::move(dict));
 }

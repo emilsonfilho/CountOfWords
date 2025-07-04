@@ -53,6 +53,11 @@
         "format": "cpp",
         "span": "cpp",
         "cinttypes": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "chrono": "cpp",
+        "set": "cpp",
+        "ratio": "cpp",
+        "source_location": "cpp",
+        "fstream": "cpp"
     }
 }

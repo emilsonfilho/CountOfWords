@@ -41,6 +41,8 @@ struct ReportData {
      * @brief The total number of words or items processed during the test run.
      */
     size_t totalWordsProcessed;
+
+    std::string filename;
 };;
 
 #endif

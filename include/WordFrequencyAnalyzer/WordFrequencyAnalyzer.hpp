@@ -6,6 +6,7 @@
 
 #include "Dictionary/IDictionary.hpp"
 #include "Reports/ReportData.hpp"
+#include "FileProcessor/FileProcessor.hpp"
 
 class WordFrequencyAnalyzer {
 public:
@@ -21,7 +22,7 @@ public:
      */
     ReportData analyze(
         std::unique_ptr<IDictionary<std::string, int>> dictionary,
-        const std::vector<std::string>& words
+        const FileProcessor& fileProcessor
     ) const;
 };
 

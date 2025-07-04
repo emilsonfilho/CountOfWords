@@ -5,7 +5,7 @@
 
 ReportData WordFrequencyAnalyzer::analyze(
     std::unique_ptr<IDictionary<std::string, int>> dictionary,
-    const std::vector<std::string>& words
+    const FileProcessor& fileProcessor
 ) const {
     ReportData report;
 
@@ -13,7 +13,7 @@ ReportData WordFrequencyAnalyzer::analyze(
     timer.start();
 
     long wordsCount = 0;
-    for (const std::string& word : words) {
+    for (const std::string& word : fileProcessor.words) {
         (*dictionary)[word]++;
         wordsCount++;
     }
@@ -31,6 +31,7 @@ ReportData WordFrequencyAnalyzer::analyze(
     dictionary->accept(visitor);
     report.buildTime = timer.duration();
     report.totalWordsProcessed = wordsCount;
+    report.filename = fileProcessor.path;
 
     return report;
 }
