@@ -214,6 +214,6 @@ void ChainedHashTable<Key, Value, Hash>::print() const {
 }
 
 template <typename Key, typename Value, typename Hash>
-void ChainedHashTable<Key, Value, Hash>::accept(IDictionaryVisitor<Key, Value>& visitor) {
+void ChainedHashTable<Key, Value, Hash>::accept(IDictionaryVisitor<Key, Value>& visitor) const {
 	visitor.collectMetrics(*this);
 }

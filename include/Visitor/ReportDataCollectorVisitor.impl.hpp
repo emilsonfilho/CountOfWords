@@ -1,7 +1,7 @@
 #include "Visitor/ReportDataCollectorVisitor.hpp"
 
 template <typename Key, typename Value>
-void ReportDataCollectorVisitor<Key, Value, Hash>::addComparisonsCount(const IDictionary& dict) {
+void ReportDataCollectorVisitor<Key, Value, Hash>::addComparisonsCount(const IDictionary<Key, Value>& dict) {
     report.comparisons = dict.getComparisonsCount();
 }
 
@@ -31,13 +31,13 @@ void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(const RedBlack
 template <typename Key, typename Value>
 void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(const ChainedHashTable<Key, Value>& chainedHashTable) {
     setDictionaryType("Tabela Hash por Encademaneto Exterior");
-    addComparisonsCount(ChainedHashTable);
+    addComparisonsCount(chainedHashTable);
     report.specificMetric = {"colisões", chainedHashTable.getCollisionsCount()};
 }
 
 template <typename Key, typename Value>
-void ReportDataCollectorVisitor::collectMetrics(const OpenAddressingHashTable<Key, Value, Hash>&) {
+void ReportDataCollectorVisitor::collectMetrics(const OpenAddressingHashTable<Key, Value, Hash>& openAddressingHashTable) {
     setDictionaryType("Tabela Hash por Endereçamento Aberto");
-    addComparisonsCount(OpenAddressingHashTable);
+    addComparisonsCount(openAddressingHashTable);
     report.specificMetric = {"colisões", openAddressingHashTable.getCollisionsCount()};
 }

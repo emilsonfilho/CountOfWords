@@ -385,6 +385,6 @@ size_t RedBlackTree<Key, Value>::getRotationsCount() const {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::accept(IDictionaryVisitor<Key, Value>& visitor) {
+void RedBlackTree<Key, Value>::accept(IDictionaryVisitor<Key, Value>& visitor) const {
 	visitor.collectMetrics(*this);
 }

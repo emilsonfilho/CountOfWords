@@ -266,6 +266,6 @@ void OpenAddressingHashTable<Key, Value, Hash>::print() const {
 }
 
 template <typename Key, typename Value, typename Hash>
-void OpenAddressingHashTable<Key, Value, Hash>::accept(IDictionaryVisitor<Key, Value>& visitor) {
+void OpenAddressingHashTable<Key, Value, Hash>::accept(IDictionaryVisitor<Key, Value>& visitor) const {
 	visitor.collectMetrics(*this);
 }

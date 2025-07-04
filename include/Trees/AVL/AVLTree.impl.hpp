@@ -275,6 +275,6 @@ size_t AVLTree<Key, Value>::getRotationsCount() const {
 }
 
 template <typename Key, typename Value>
-void AVLTree<Key, Value>::accept(IDictionaryVisitor& visitor) {
+void AVLTree<Key, Value>::accept(IDictionaryVisitor& visitor) const {
 	visitor.collectMetrics(*this);
 }
