@@ -7,9 +7,8 @@
 #include <iostream>
 
 #include "Configs/Path.hpp"
-#include "Configs/Locale.hpp"
+#include "Configs/Locale/Locale.hpp"
 #include "Exceptions/FileExceptions.hpp"
-#include "Exceptions/LocaleExceptions.hpp"
 
 FileProcessor::FileProcessor(const std::string& filename) {
     path = inputPath + filename + extension;
@@ -19,15 +18,13 @@ FileProcessor::FileProcessor(const std::string& filename) {
     if (!file)
         throw FileNotFoundException(path);
 
-    if (!std::setlocale(LC_ALL, lang))
-        throw LocaleNotFoundException();
-
     boost::locale::generator gen;
-    loc = gen.generate(lang);
+    loc = gen.generate(Locale().getLang());
 
     std::string word;
-    while (file >> word)
+    while (file >> word) {
         words.push_back(normalizeWord(word));
+    }
 }
 
 std::string FileProcessor::normalizeWord(const std::string& word) const {
@@ -37,7 +34,7 @@ std::string FileProcessor::normalizeWord(const std::string& word) const {
      * Perhaps this implementation needs to be modified so that the 
      * Bible chapter and verse symbols are separated correctly.
      */
-    while (!normalizeWord.empty() and ispunct(static_cast<unsigned char>(normalizeWord.back())))
+    while (!normalizeWord.empty() && ispunct(static_cast<unsigned char>(normalizeWord.back())))
         normalizeWord.pop_back();
 
     return normalizeWord;

@@ -4,8 +4,7 @@
 #include <sstream>
 #include <iomanip>
 
-#include "Configs/Locale.hpp"
-#include "Exceptions/LocaleExceptions.hpp"
+#include "Configs/Locale/Locale.hpp"
 
 std::chrono::high_resolution_clock::time_point Timer::now() const {
     return std::chrono::high_resolution_clock::now();
@@ -27,10 +26,7 @@ std::string Timer::getCurrentDateTime() {
     auto now = std::chrono::system_clock::now();
     std::time_t time = std::chrono::system_clock::to_time_t(now);
 
-    if (!std::setlocale(LC_ALL, lang))
-        throw LocaleNotFoundException();
-
-    std::locale loc("pt_BR.utf8");
+    std::locale loc(Locale().getLang());
 
     std::ostringstream oss;
     oss.imbue(loc);
