@@ -4,7 +4,7 @@
 #include <iomanip>
 
 #include "Exceptions/KeyExceptions.hpp"
-#include "Utils/StringHandler.hpp"
+#include "Utils/Strings/StringHandler.hpp"
 
 template <typename Key, typename Value, typename Hash>
 template <typename Iterator, typename BucketRef>
@@ -189,7 +189,7 @@ const Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) cons
 }
 
 template <typename Key, typename Value, typename Hash>
-size_t ChainedHashTable<Key, Value, Hash>::getCollissionsCount() const {
+size_t ChainedHashTable<Key, Value, Hash>::getCollisionsCount() const {
     return this->collisionsCount;
 }
 

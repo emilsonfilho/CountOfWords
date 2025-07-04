@@ -1,7 +1,0 @@
-<map id="Node&lt; Key, Value &gt;" name="Node&lt; Key, Value &gt;">
-<area shape="rect" id="Node000001" title="Represents a basic node that stores a key&#45;value pair." alt="" coords="106,5,245,31"/>
-<area shape="rect" id="Node000002" href="$structAVLNode.html" title="AVL tree node structure extending a generic Node." alt="" coords="5,86,167,111"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,42,101,88,97,84,150,38"/>
-<area shape="rect" id="Node000003" href="$structRedBlackNode.html" title="Represents a node in a Red&#45;Black Tree." alt="" coords="191,79,338,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="200,38,245,77,241,81,197,42"/>
-</map>

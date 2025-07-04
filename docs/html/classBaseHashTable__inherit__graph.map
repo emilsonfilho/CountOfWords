@@ -1,7 +1,0 @@
-<map id="BaseHashTable&lt; HashTable, Collection, Key, Value, Hash &gt;" name="BaseHashTable&lt; HashTable, Collection, Key, Value, Hash &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="93,5,285,60"/>
-<area shape="rect" id="Node000002" href="$classChainedHashTable.html" title="Hash table implementation using separate chaining." alt="" coords="5,108,175,148"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,71,112,110,108,106,149,68"/>
-<area shape="rect" id="Node000003" href="$classOpenAddressingHashTable.html" title="Hash table implementation using open addressing." alt="" coords="199,108,379,148"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="229,68,270,106,267,110,225,72"/>
-</map>

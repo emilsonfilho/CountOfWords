@@ -5,7 +5,7 @@
 
 #include <cmath>
 
-#include "Utils/StringHandler.hpp"
+#include "Utils/Strings/StringHandler.hpp"
 
 template <typename Tree, typename Node, typename Key, typename Value>
 void BaseTree<Tree, Node, Key, Value>::count(size_t n) const {

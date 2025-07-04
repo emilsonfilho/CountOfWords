@@ -1,13 +1,19 @@
 #ifndef IDICTIONARY_VISITOR_HPP
 #define IDICTIONARY_VISITOR_HPP
 
-#include "Trees/AVL/AVLTree.hpp"
-#include "Trees/RedBlack/RedBlackTree.hpp"
-#include "HashTables/Chained/ChainedHashTable.hpp"
-#include "HashTables/OpenAddressing/OpenAddressingHashTable.hpp"
-
 #include <utility>
 
+template <typename Key, typename Value>
+class AVLTree;
+
+template <typename Key, typename Value>
+class RedBlackTree;
+
+template <typename Key, typename Value, typename Hash>
+class ChainedHashTable;
+
+template <typename Key, typename Value, typename Hash>
+class OpenAddressingHashTable;
 
 /**
  * @class IDictionaryVisitor
