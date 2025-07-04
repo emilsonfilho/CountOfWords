@@ -6,7 +6,7 @@
 ReportData WordFrequencyAnalyzer::analyze(
     std::unique_ptr<IDictionary<std::string, int>> dictionary,
     const FileProcessor& fileProcessor
-) const {
+) {
     ReportData report;
 
     Timer timer;

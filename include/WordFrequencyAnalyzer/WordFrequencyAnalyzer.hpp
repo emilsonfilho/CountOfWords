@@ -20,10 +20,10 @@ public:
      * @param words A constant reference to a vector of strings representing the words to be analyzed.
      * @return ReportData An object containing the results of the word frequency analysis.
      */
-    ReportData analyze(
+    static ReportData analyze(
         std::unique_ptr<IDictionary<std::string, int>> dictionary,
         const FileProcessor& fileProcessor
-    ) const;
+    );
 };
 
 #endif
