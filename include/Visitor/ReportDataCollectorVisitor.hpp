@@ -7,7 +7,6 @@
 #include "Visitor/IDictionaryVisitor.hpp"
 #include "Reports/ReportData.hpp"
 
-
 /**
  * @class ReportDataCollectorVisitor
  * @brief Implements the visitor pattern to collect performance metrics from various dictionary data structures.

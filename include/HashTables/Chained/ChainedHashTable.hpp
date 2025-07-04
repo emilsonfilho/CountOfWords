@@ -274,7 +274,7 @@ public:
      * 
      * @return size_t The number of collisions that have occurred in the hash table.
      */
-    size_t getCollissionsCount() const;
+    size_t getCollisionsCount() const;
 
     /**
      * @brief Retrieves the current size of the hash table.

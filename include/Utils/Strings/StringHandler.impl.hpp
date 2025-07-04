@@ -42,12 +42,4 @@ namespace StringHandler {
 
         return os;
     }
-
-    DictionaryType toDictionaryType(const std::string& str) {
-        try {
-            return stringDictionaryTypeMap.at(str);
-        } catch(const std::out_of_range& e) {
-            throw DictionaryTypeNotFound();
-        }
-    }
 }

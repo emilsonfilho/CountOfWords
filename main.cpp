@@ -1,9 +1,10 @@
 #include "Factory/DictionaryFactory.hpp"
 #include "FileProcessor/FileProcessor.hpp"
 #include "WordFrequencyAnalyzer/WordFrequencyAnalyzer.hpp"
+#include "Utils/Casting/Casting.hpp"
 
 int main() {
-    std::unique_ptr<IDictionary<std::string, int>> dict = DictionaryFactory<std::string, int>::createDictionary(StringHandler::toDictionaryType("dictionary_avl"));
+    std::unique_ptr<IDictionary<std::string, int>> dict = DictionaryFactory<std::string, int>::createDictionary(Casting::toDictionaryType("dictionary_avl"));
 
     dict->insert("Emilson", 8);
     (*dict)["Emilson"]++;
@@ -11,7 +12,7 @@ int main() {
 
     dict->printInOrder(std::cout);
 
-    FileProcessor fp("text");
+    FileProcessor fp("crime_and_punishment");
 
     for (std::string& word : fp.words) {
         std::cout << word << "\n";

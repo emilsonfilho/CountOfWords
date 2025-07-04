@@ -189,7 +189,7 @@ const Value& ChainedHashTable<Key, Value, Hash>::operator[](const Key& key) cons
 }
 
 template <typename Key, typename Value, typename Hash>
-size_t ChainedHashTable<Key, Value, Hash>::getCollissionsCount() const {
+size_t ChainedHashTable<Key, Value, Hash>::getCollisionsCount() const {
     return this->collisionsCount;
 }
 

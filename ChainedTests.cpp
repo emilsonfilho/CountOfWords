@@ -31,7 +31,7 @@ int main() {
 
     tb.print();
 
-    cout << "Número de colisões (deve ser 1): " << tb.getCollissionsCount() << endl;
+    cout << "Número de colisões (deve ser 1): " << tb.getCollisionsCount() << endl;
 
     cout << "Limpando tabela...\n";
     tb.clear();
@@ -76,7 +76,7 @@ int main() {
     tb.insert('O', 'M'); // colide com D
     tb.insert('Z', 'W'); // colide com D e O
 
-    cout << "Número de colisões (deve ser 4): " << tb.getCollissionsCount() << endl;
+    cout << "Número de colisões (deve ser 4): " << tb.getCollisionsCount() << endl;
 
     try {
         tb.update('H', 'D');
@@ -95,7 +95,7 @@ int main() {
 
     cout << "Fator de carga (deve ser 7/11 = 0.6363...): " << tb.getLoadFactor() << endl;
 
-    cout << "Número de colisões: " << tb.getCollissionsCount() << endl
+    cout << "Número de colisões: " << tb.getCollisionsCount() << endl
          << "Número de comparações: " << tb.getComparisonsCount() << endl;
 
     tb.clear();
