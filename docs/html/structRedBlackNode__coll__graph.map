@@ -1,9 +1,0 @@
-<map id="RedBlackNode&lt; Key, Value &gt;" name="RedBlackNode&lt; Key, Value &gt;">
-<area shape="rect" id="Node000001" title="Represents a node in a Red&#45;Black Tree." alt="" coords="7,216,153,256"/>
-<area shape="rect" id="Node000002" href="$classNode.html" title="Represents a basic node that stores a key&#45;value pair." alt="" coords="5,5,144,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,45,82,215,77,215,73,45"/>
-<area shape="rect" id="Node000003" href="$structRedBlackNode.html" title="Represents a node in a Red&#45;Black Tree." alt="" coords="96,82,243,122"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="100,38,149,80,146,84,97,42"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="151,135,95,217,91,214,147,132"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="257,93,269,102,261,110,243,113,242,107,259,105,264,102,255,98"/>
-</map>

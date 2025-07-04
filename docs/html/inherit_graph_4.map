@@ -1,7 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classNode.html" title="Represents a basic node that stores a key&#45;value pair." alt="" coords="5,35,144,60"/>
-<area shape="rect" id="Node000001" href="$structAVLNode.html" title="AVL tree node structure extending a generic Node." alt="" coords="192,5,353,31"/>
-<area shape="poly" id="edge9_Node000000_Node000001" title=" " alt="" coords="157,32,191,27,192,33,158,38"/>
-<area shape="rect" id="Node000002" href="$structRedBlackNode.html" title="Represents a node in a Red&#45;Black Tree." alt="" coords="199,55,346,95"/>
-<area shape="poly" id="edge10_Node000000_Node000002" title=" " alt="" coords="158,56,199,62,198,68,157,62"/>
-</map>
