@@ -4,7 +4,7 @@
 #include <iomanip>
 
 #include "Exceptions/KeyExceptions.hpp"
-#include "Utils/StringHandler.hpp"
+#include "Utils/Strings/StringHandler.hpp"
 
 template <typename Key, typename Value, typename Hash>
 template <typename Iterator, typename BucketRef>

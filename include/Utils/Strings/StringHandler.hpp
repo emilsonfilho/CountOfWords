@@ -68,6 +68,6 @@ namespace StringHandler {
     DictionaryType toDictionaryType(const std::string& str);
 }
 
-#include "Utils/StringHandler.impl.hpp"
+#include "Utils/Strings/StringHandler.impl.hpp"
 
 #endif
