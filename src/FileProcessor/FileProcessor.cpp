@@ -9,7 +9,7 @@
 #include "Configs/Path.hpp"
 #include "Configs/Locale.hpp"
 #include "Exceptions/FileExceptions.hpp"
-#include "Exceptions/FileProcessorExceptions.hpp"
+#include "Exceptions/LocaleExceptions.hpp"
 
 FileProcessor::FileProcessor(const std::string& filename) {
     path = inputPath + filename + extension;
