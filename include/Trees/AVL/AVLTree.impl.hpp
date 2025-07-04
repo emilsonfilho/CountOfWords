@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 
-#include "Utils/StringHandler.hpp"
+#include "Utils/Strings/StringHandler.hpp"
 
 template <typename Key, typename Value>
 size_t AVLTree<Key, Value>::height(AVLNode<Key, Value>* node) const {

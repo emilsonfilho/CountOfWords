@@ -1,8 +1,8 @@
-#include "Utils/StringHandler.hpp"
+#include "Utils/Strings/StringHandler.hpp"
 
 #include <sstream>
 
-#include "Utils/StringDictionaryTypeMap.hpp"
+#include "Utils/Strings/StringDictionaryTypeMap.hpp"
 #include "Exceptions/FactoryExceptions.hpp"
 
 #include "utf8.h"
