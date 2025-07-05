@@ -20,10 +20,11 @@ void ReportWriter::exportReport(const ReportData& reportData, std::ostream& out,
     out << "Estrutura de Dados: " << reportData.dictionaryType << '\n';
     out << "Data de execução: " << Timer::getCurrentDateTime() << '\n';
 
-    out << '\n';
+    out << std::endl;
 
     printHeader("Tabela de Frequências", out);
-    out << "Palavra" << std::string(reportData.maxKeyLength - 7, ' ') << "| " << "Frequência";
+    std::cout << "Valor maximo de chave: " << reportData.maxKeyLength << std::endl;
+    out << "Palavra" << std::string(reportData.maxKeyLength - 6, ' ') << "| " << "Frequência\n";
     dict->printInOrder(out);
 
     out << '\n';

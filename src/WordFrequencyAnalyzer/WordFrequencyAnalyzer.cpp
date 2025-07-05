@@ -14,6 +14,7 @@ ReportData WordFrequencyAnalyzer::analyze(
     timer.start();
 
     long wordsCount = 0;
+    report.maxKeyLength = 0;
     for (const std::string& word : fileProcessor.words) {
         (*dictionary)[word]++;
         wordsCount++;

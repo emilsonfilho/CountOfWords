@@ -24,7 +24,11 @@ class FileProcessor {
      * @param word The word to normalize.
      * @return The normalized word.
      */
-    std::string normalizeWord(const std::string& word) const;
+    std::vector<std::string> tokenize(const std::string& text) const;
+
+    std::string normalize(const std::string& word) const;
+
+    bool isUnderscore(char ch) const;
 public:
     std::string path;  ///< Full path to the input file.
     std::vector<std::string> words; //< Vector containing all normalized words read from the file.

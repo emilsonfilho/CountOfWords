@@ -21,21 +21,49 @@ FileProcessor::FileProcessor(const std::string& filename) {
     boost::locale::generator gen;
     loc = gen.generate(Locale().getLang());
 
-    std::string word;
-    while (file >> word) {
-        words.push_back(normalizeWord(word));
+    std::string line;
+    while (std::getline(file, line)) {
+        auto tokens = tokenize(line);
+        for (const auto& word : tokens)
+            words.push_back(normalize(word));
     }
 }
 
-std::string FileProcessor::normalizeWord(const std::string& word) const {
-    std::string normalizeWord = boost::locale::to_lower(word, loc);
+std::vector<std::string> FileProcessor::tokenize(const std::string& text) const {
+    std::vector<std::string> tokens;
 
-    /**
-     * Perhaps this implementation needs to be modified so that the 
-     * Bible chapter and verse symbols are separated correctly.
-     */
-    while (!normalizeWord.empty() && ispunct(static_cast<unsigned char>(normalizeWord.back())))
-        normalizeWord.pop_back();
+    boost::locale::boundary::ssegment_index tokenMap(
+        boost::locale::boundary::word,
+        text.begin(),
+        text.end(),
+        loc
+    );
 
-    return normalizeWord;
+    tokenMap.rule(boost::locale::boundary::word_any);
+
+    for (auto it = tokenMap.begin(); it != tokenMap.end(); it++) {
+        if (!std::all_of(it->begin(), it->end(), [&](char ch) {
+            return std::use_facet<std::ctype<char>>(loc).is(std::ctype_base::space, ch);
+        })) {
+            tokens.emplace_back(it->str());
+        }
+    }
+
+    return tokens;
+}
+
+std::string FileProcessor::normalize(const std::string& word) const {
+    std::string normalized = word;
+
+    while (isUnderscore(normalized.front()))
+        normalized.erase(normalized.begin());
+
+    while (isUnderscore(normalized.back()))
+        normalized.pop_back();
+
+    return boost::locale::to_lower(normalized, loc);
+}
+
+bool FileProcessor::isUnderscore(char ch) const {
+    return ch == '_';
 }
