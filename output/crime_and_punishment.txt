@@ -3,7 +3,7 @@ Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/crime_and_punishment.txt
 Estrutura de Dados: Árvore AVL
-Data de execução: sexta, 04 de julho de 2025 - 22:49:32
+Data de execução: sexta, 04 de julho de 2025 - 22:52:59
 
 ================================================================================
 Tabela de Frequências
@@ -9518,6 +9518,6 @@ zossimov           | 87
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 3771
+Tempo total (ms): 3967
 Número de comparações: 3260072
 Número de rotações: 7027
