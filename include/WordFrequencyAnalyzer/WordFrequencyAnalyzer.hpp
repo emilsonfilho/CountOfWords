@@ -6,6 +6,7 @@
 
 #include "Dictionary/IDictionary.hpp"
 #include "Reports/ReportData.hpp"
+#include "FileProcessor/FileProcessor.hpp"
 
 class WordFrequencyAnalyzer {
 public:
@@ -19,10 +20,10 @@ public:
      * @param words A constant reference to a vector of strings representing the words to be analyzed.
      * @return ReportData An object containing the results of the word frequency analysis.
      */
-    ReportData analyze(
-        std::unique_ptr<IDictionary<std::string, int>> dictionary,
-        const std::vector<std::string>& words
-    ) const;
+    static ReportData analyze(
+        IDictionary<std::string, int>* dictionary,
+        const FileProcessor& fileProcessor
+    );
 };
 
 #endif

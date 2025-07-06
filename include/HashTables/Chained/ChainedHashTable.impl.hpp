@@ -203,11 +203,11 @@ void ChainedHashTable<Key, Value, Hash>::print() const {
     for (size_t i = 0; i < this->table.size(); ++i) {
         std::cout << "Slot " << i << ": ";
         if (this->table[i].empty()) {
-        std::cout << "Empty";
+            std::cout << "Empty";
         } else {
-        for (const auto& pair : this->table[i]) {
-            std::cout << "[" << pair.first << ": " << pair.second << "] ";
-        }
+            for (const auto& pair : this->table[i]) {
+                std::cout << "[" << pair.first << ": " << pair.second << "] ";
+            }
         }
         std::cout << "\n";
     }

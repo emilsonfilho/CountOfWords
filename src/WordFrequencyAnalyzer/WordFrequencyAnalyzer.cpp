@@ -2,20 +2,23 @@
 
 #include "Utils/Timer/Timer.hpp"
 #include "Visitor/ReportDataCollectorVisitor.hpp"
+#include "Utils/Strings/StringHandler.hpp"
 
 ReportData WordFrequencyAnalyzer::analyze(
-    std::unique_ptr<IDictionary<std::string, int>> dictionary,
-    const std::vector<std::string>& words
-) const {
+    IDictionary<std::string, int>* dictionary,
+    const FileProcessor& fileProcessor
+) {
     ReportData report;
 
     Timer timer;
     timer.start();
 
     long wordsCount = 0;
-    for (const std::string& word : words) {
+    report.maxKeyLength = 0;
+    for (const std::string& word : fileProcessor.words) {
         (*dictionary)[word]++;
         wordsCount++;
+        report.maxKeyLength = std::max(report.maxKeyLength, StringHandler::size(word));
     }
 
     timer.stop();
@@ -31,6 +34,7 @@ ReportData WordFrequencyAnalyzer::analyze(
     dictionary->accept(visitor);
     report.buildTime = timer.duration();
     report.totalWordsProcessed = wordsCount;
+    report.filename = fileProcessor.path;
 
     return report;
 }
