@@ -23,7 +23,6 @@ void ReportWriter::exportReport(const ReportData& reportData, std::ostream& out,
     out << std::endl;
 
     printHeader("Tabela de Frequências", out);
-    std::cout << "Valor maximo de chave: " << reportData.maxKeyLength << std::endl;
     out << "Palavra" << std::string(reportData.maxKeyLength - 6, ' ') << "| " << "Frequência\n";
     dict->printInOrder(out);
 
