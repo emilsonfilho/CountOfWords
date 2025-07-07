@@ -35,8 +35,8 @@ int CLIHandler::execute() {
     FileProcessor fp(options.filename);
 
     std::ofstream outFile(outputPath + options.filename);
-    std::unique_ptr<IDictionary<std::string, int>> dict =
-        DictionaryFactory<std::string, int>::createDictionary(options.dictType);
+    std::unique_ptr<IDictionary<std::string, size_t>> dict =
+        DictionaryFactory<std::string, size_t>::createDictionary(options.dictType);
 
     ReportData report = WordFrequencyAnalyzer::analyze(dict.get(), fp);
 

@@ -5,7 +5,7 @@
 #include "Visitor/ReportDataCollectorVisitor.hpp"
 
 ReportData
-WordFrequencyAnalyzer::analyze(IDictionary<std::string, int> *dictionary,
+WordFrequencyAnalyzer::analyze(IDictionary<std::string, size_t> *dictionary,
                                const FileProcessor &fileProcessor) {
   ReportData report;
 
@@ -30,7 +30,7 @@ WordFrequencyAnalyzer::analyze(IDictionary<std::string, int> *dictionary,
    * de que eu acho que a conversão lá em AVLTree e as outras classes estão
    * erradas em assumir que receberão objetos de IDictionary
    */
-  ReportDataCollectorVisitor<std::string, int> visitor(report);
+  ReportDataCollectorVisitor<std::string, size_t> visitor(report);
   dictionary->accept(visitor);
   report.buildTime = timer.duration();
   report.totalWordsProcessed = wordsCount;

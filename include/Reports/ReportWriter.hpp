@@ -13,7 +13,7 @@ class ReportWriter {
 
 public:
   static void exportReport(const ReportData &reportData, std::ostream &out,
-                           IDictionary<std::string, int> *dict);
+                           IDictionary<std::string, size_t> *dict);
 };
 
 #endif
