@@ -71,6 +71,13 @@ enum Status {
     DELETED
 }
 
+enum DictionaryType {
+    AVL
+    RedBlack
+    Chained
+    OpenAddressing
+}
+
 class Slot<Key, Value> {
     + key : Key
     + value : Value
@@ -234,12 +241,121 @@ package StringHandler <<namespace>> {
     }
 
     class Utils {
-        + toString(obj: Object) : std::string
+        + toString(obj: Object) : String
         + size(obj: Object) : size_t
         + operator<<(os: std::ostream&, manip: SetWidthAtLeft<Object>&) : ostream&
     }
 
     Utils ..> SetWidthAtLeft
+}
+
+class CLIOptions {
+    + filename : String
+    + inputDict : String
+    + dictType : String
+}
+
+class CLIHandler {
+    - options : CLIOptions
+    - quantityArguments : int
+
+    + CLIHandler()
+    + validOptions() : bool
+    + execute() : int
+}
+
+class FileProcessor {
+    - loc : std::locale
+    
+    - tokenize(text: String) : String[]
+    - normalize(word: String) : String
+    - isUnderscore(ch: char) : bool
+
+    + path : String
+    + words : String[]
+
+    + FileProcessor(filename: String)
+}
+
+class DictionaryTypeNotFoundException {
+    + DictionaryTypeNotFoundException()
+}
+
+class DictionaryFactory<Key, Value> {
+    + createDictionary(dictType: DictionaryType)
+}
+
+class ReportData {
+    + dictionaryType : String
+    + buildTime : std::chrono::milliseconds
+    + comparisons : size_t
+    + specificMetric : std::pair<String, size_t>
+    + totalWordsProcessed : size_t
+    + filename : String
+    + maxKeyLength : size_t
+}
+
+class WordFrequencyAnalyzer {
+    {static} analyze(dictionary: IDictionary<String, size_t>, fileProcessor: FileProcessor) : ReportData
+}
+
+class Timer {
+    - begin : std::chrono::high_resolution_clocl::time_point
+    - end : std::chrono::high_resolution_clocl::time_point
+
+    - now() : std::chrono::high_resolution_clocl::time_point
+
+    + start() : void
+    + stop() : void
+    + duration() : std::chrono::milliseconds
+    
+    {static} getCurrentDateTime() : String
+}
+
+class ReportDataCollectorVisitor<Key, Value, Hash> {
+    - report : ReportData
+
+    - addComparisonsCount(dict: IDictionary<Key, Value>) : void
+    - setDictionaryType(dictType: String) : void
+
+    + ReportDataCollectorVisitor(data: ReportData)
+    + collectMetrics(avlTree: AVLTree<Key, Value>) : void
+    + collectMetrics(redBlackTree: RedBlackTree<Key, Value>) : void
+    + collectMetrics(chainedHashTable: ChainedHashTable<Key, Value, Hash>) : void
+    + collectMetrics(openAddressingHashTable: OpenAddressingHashTable<Key, Value>) : void
+}
+
+interface IDictionaryVisitor<Key, Value, Hash> {
+    + collectMetrics(avlTree: AVLTree<Key, Value>) : void
+    + collectMetrics(redBlackTree: RedBlackTree<Key, Value>) : void
+    + collectMetrics(chainedHashTable: ChainedHashTable<Key, Value, Hash>) : void
+    + collectMetrics(openAddressingHashTable: OpenAddressingHashTable<Key, Value>) : void
+}
+
+class ReportWriter {
+    {static} printLine(out: std::ostream&) : void
+    {static} printHeader(title: String, out: std::ostream&) : void
+    {static} exportReport(reportData: ReportData, out: std::ostream&, dict: IDictionary<String, size_t>* dict) : void
+}
+
+class Locale {
+    - lang : String
+
+    + getLang : String
+}
+
+class LocaleNotFoundException {
+    + LocaleNotFoundException()
+}
+
+package Casting <<namespace>> {
+    class Utils<Key, Value, Impl> {
+        + toIDictionary(impl: Impl) : const IDictionary<Key, Value>&
+        + toDictionaryType(str: String) : DictionaryType
+    }
+
+    Utils ..> IDictionary
+    Utils ..> DictionaryType
 }
 
 class std::pair<Key, Value>
@@ -298,5 +414,42 @@ SetWidthAtLeft ..> std::ostream : operator<<
 SetWidthAtLeft ...> std::string : toString()
 
 OpenAddressingHashTable *-- Slot : contains
+
+CLIHandler *-- CLIOptions : contains
+CLIHandler ..> Utils : use static functions
+CLIHandler ..> FileProcessor : uses
+CLIHandler ..> IDictionary : uses
+CLIHandler ..> DictionaryTypeNotFoundException : uses
+CLIHandler ..> DictionaryFactory : uses
+CLIHandler ..> ReportData : uses
+CLIHandler ..> ReportWriter : uses
+
+DictionaryFactory ..|> IDictionary : returns
+DictionaryFactory --> AVLTree
+DictionaryFactory --> RedBlackTree
+DictionaryFactory --> ChainedHashTable
+DictionaryFactory --> OpenAddressingHashTable
+DictionaryFactory ..> DictionaryType
+DictionaryFactory ..> DictionaryTypeNotFoundException : throw exception
+
+DictionaryTypeNotFoundException --> std::out_of_range
+
+WordFrequencyAnalyzer ..|> ReportData : returns
+WordFrequencyAnalyzer ..> IDictionary
+WordFrequencyAnalyzer ..> FileProcessor
+WordFrequencyAnalyzer ..> Timer
+WordFrequencyAnalyzer ..> ReportDataCollectorVisitor
+
+IDictionaryVisitor --|> ReportDataCollectorVisitor
+ReportDataCollectorVisitor o-- ReportData
+ReportDataCollectorVisitor ..> IDictionary
+ReportDataCollectorVisitor ..> Utils : uses
+
+ReportWriter ..> ReportData
+ReportWriter ..> IDictionary
+
+Locale  ..> LocaleNotFoundException : throw exception
+
+LocaleNotFoundException --> std::runtime_error
 
 @enduml
