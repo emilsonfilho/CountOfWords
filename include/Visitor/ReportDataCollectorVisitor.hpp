@@ -19,7 +19,7 @@
  * @tparam Key The key type of the elements in the dictionary.
  * @tparam Value The value type of the elements in the dictionary.
  */
-template <typename Key, typename Value, typename Hash = std::hash<Key>>
+template <typename Key, typename Value, typename Hash = std::hash<Key>, typename Compare = std::less<Key>>
 class ReportDataCollectorVisitor : public IDictionaryVisitor<Key, Value> {
   /**
    * @var report
@@ -58,7 +58,7 @@ public:
    *
    * @param avlTree The AVLTree instance to be analyzed.
    */
-  void collectMetrics(const AVLTree<Key, Value> &avlTree);
+  void collectMetrics(const AVLTree<Key, Value, Compare> &avlTree);
 
   /**
    * @brief Collects performance metrics from a RedBlackTree.
@@ -68,7 +68,7 @@ public:
    *
    * @param redBlackTree The RedBlackTree instance to be analyzed.
    */
-  void collectMetrics(const RedBlackTree<Key, Value> &redBlackTree);
+  void collectMetrics(const RedBlackTree<Key, Value, Compare> &redBlackTree);
 
   /**
    * @brief Collects performance metrics from a ChainedHashTable.

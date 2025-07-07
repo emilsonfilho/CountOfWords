@@ -6,44 +6,44 @@
 #include "Trees/RedBlack/RedBlackTree.hpp"
 #include "Utils/Casting/Casting.hpp"
 
-template <typename Key, typename Value, typename Hash>
-void ReportDataCollectorVisitor<Key, Value, Hash>::addComparisonsCount(
+template <typename Key, typename Value, typename Hash, typename Compare>
+void ReportDataCollectorVisitor<Key, Value, Hash, Compare>::addComparisonsCount(
     const IDictionary<Key, Value> &dict) {
   report.comparisons = dict.getComparisonsCount();
 }
 
-template <typename Key, typename Value, typename Hash>
-void ReportDataCollectorVisitor<Key, Value, Hash>::setDictionaryType(
+template <typename Key, typename Value, typename Hash, typename Compare>
+void ReportDataCollectorVisitor<Key, Value, Hash, Compare>::setDictionaryType(
     const std::string &dictType) {
   report.dictionaryType = dictType;
 }
 
-template <typename Key, typename Value, typename Hash>
-ReportDataCollectorVisitor<Key, Value, Hash>::ReportDataCollectorVisitor(
+template <typename Key, typename Value, typename Hash, typename Compare>
+ReportDataCollectorVisitor<Key, Value, Hash, Compare>::ReportDataCollectorVisitor(
     ReportData &data)
     : report(data) {}
 
-template <typename Key, typename Value, typename Hash>
-void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(
-    const AVLTree<Key, Value> &avlTree) {
+template <typename Key, typename Value, typename Hash, typename Compare>
+void ReportDataCollectorVisitor<Key, Value, Hash, Compare>::collectMetrics(
+    const AVLTree<Key, Value, Compare> &avlTree) {
   setDictionaryType("Árvore AVL");
   addComparisonsCount(
-      Casting::toIDictionary<Key, Value, AVLTree<Key, Value>>(avlTree));
+      Casting::toIDictionary<Key, Value, AVLTree<Key, Value, Compare>>(avlTree));
   report.specificMetric = {"rotações", avlTree.getRotationsCount()};
 }
 
-template <typename Key, typename Value, typename Hash>
-void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(
-    const RedBlackTree<Key, Value> &redBlackTree) {
+template <typename Key, typename Value, typename Hash, typename Compare>
+void ReportDataCollectorVisitor<Key, Value, Hash, Compare>::collectMetrics(
+    const RedBlackTree<Key, Value, Compare> &redBlackTree) {
   setDictionaryType("Árvore Rubro-Negra");
   addComparisonsCount(
-      Casting::toIDictionary<Key, Value, RedBlackTree<Key, Value>>(
+      Casting::toIDictionary<Key, Value, RedBlackTree<Key, Value, Compare>>(
           redBlackTree));
   report.specificMetric = {"rotações", redBlackTree.getRotationsCount()};
 }
 
-template <typename Key, typename Value, typename Hash>
-void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(
+template <typename Key, typename Value, typename Hash, typename Compare>
+void ReportDataCollectorVisitor<Key, Value, Hash, Compare>::collectMetrics(
     const ChainedHashTable<Key, Value, Hash> &chainedHashTable) {
   setDictionaryType("Tabela Hash por Encadeamento Exterior");
   addComparisonsCount(
@@ -52,8 +52,8 @@ void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(
   report.specificMetric = {"colisões", chainedHashTable.getCollisionsCount()};
 }
 
-template <typename Key, typename Value, typename Hash>
-void ReportDataCollectorVisitor<Key, Value, Hash>::collectMetrics(
+template <typename Key, typename Value, typename Hash, typename Compare>
+void ReportDataCollectorVisitor<Key, Value, Hash, Compare>::collectMetrics(
     const OpenAddressingHashTable<Key, Value, Hash> &openAddressingHashTable) {
   setDictionaryType("Tabela Hash por Endereçamento Aberto");
   addComparisonsCount(

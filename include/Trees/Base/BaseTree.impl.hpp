@@ -123,12 +123,22 @@ void BaseTree<Tree, Node, Key, Value, Compare>::incrementRotationsCount(size_t a
 
 template <typename Tree, typename Node, typename Key, typename Value, typename Compare>
 bool BaseTree<Tree, Node, Key, Value, Compare>::isLeft(const Key& a, const Key& b) const {
-  return comp(a, b);
+  return compare(a, b);
 }
 
 template <typename Tree, typename Node, typename Key, typename Value, typename Compare>
 bool BaseTree<Tree, Node, Key, Value, Compare>::isRight(const Key& a, const Key& b) const {
-  return comp(b, a);
+  return compare(b, a);
+}
+
+template <typename Tree, typename Node, typename Key, typename Value, typename Compare>
+bool BaseTree<Tree, Node, Key, Value, Compare>::isEqual(const Key& a, const Key& b) const {
+  return !(isLeft(a, b) or isRight(a, b));
+}
+
+template <typename Tree, typename Node, typename Key, typename Value, typename Compare>
+bool BaseTree<Tree, Node, Key, Value, Compare>::isDifferent(const Key& a, const Key& b) const {
+  return !isEqual(a, b);
 }
 
 #endif

@@ -1,6 +1,6 @@
 #include "Trees/RedBlack/RedBlackTree.hpp"
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 RedBlackNode<Key, Value> *
 RedBlackTree<Key, Value, Compare>::rotateLeft(RedBlackNode<Key, Value> *y) {
   RedBlackNode<Key, Value> *x = y->right;
@@ -14,7 +14,7 @@ RedBlackTree<Key, Value, Compare>::rotateLeft(RedBlackNode<Key, Value> *y) {
   y->parent = x;
 
   if (x->parent != NIL) {
-    if (x->getKey() < x->parent->getKey())
+    if (this->isLeft(x->getKey(), x->parent->getKey()))
       x->parent->left = x;
     else
       x->parent->right = x;
@@ -27,7 +27,7 @@ RedBlackTree<Key, Value, Compare>::rotateLeft(RedBlackNode<Key, Value> *y) {
   return x;
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 RedBlackNode<Key, Value> *
 RedBlackTree<Key, Value, Compare>::rotateRight(RedBlackNode<Key, Value> *y) {
   RedBlackNode<Key, Value> *x = y->left;
@@ -41,7 +41,7 @@ RedBlackTree<Key, Value, Compare>::rotateRight(RedBlackNode<Key, Value> *y) {
   y->parent = x;
 
   if (x->parent != NIL) {
-    if (x->getKey() < x->parent->getKey())
+    if (this->isLeft(x->getKey(), x->parent->getKey()))
       x->parent->left = x;
     else
       x->parent->right = x;
@@ -54,7 +54,7 @@ RedBlackTree<Key, Value, Compare>::rotateRight(RedBlackNode<Key, Value> *y) {
   return x;
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::insertFixup(RedBlackNode<Key, Value> *z) {
   while (z->parent->color == RED) {
     if (z->parent == z->parent->parent->left) {
@@ -97,26 +97,26 @@ void RedBlackTree<Key, Value, Compare>::insertFixup(RedBlackNode<Key, Value> *z)
   this->root->color = BLACK;
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 RedBlackNode<Key, Value> RedBlackTree<Key, Value, Compare>::NIL_NODE =
     RedBlackNode<Key, Value>();
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 RedBlackTree<Key, Value, Compare>::RedBlackTree()
-    : BaseTree<RedBlackTree<Key, Value, Compare>, RedBlackNode<Key, Value>, Key, Value>(
+    : BaseTree<RedBlackTree<Key, Value, Compare>, RedBlackNode<Key, Value>, Key, Value, Compare>(
           NIL) {}
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::insert(const Key &key, const Value &value) {
   RedBlackNode<Key, Value> *x = this->root, *y = NIL;
 
   while (x != NIL) {
     y = x;
 
-    if (key < x->getKey()) {
+    if (this->isLeft(key, x->getKey())) {
       this->incrementCounter(1);
       x = x->left;
-    } else if (key > x->getKey()) {
+    } else if (this->isRight(key, x->getKey())) {
       this->incrementCounter(2);
       x = x->right;
     } else {
@@ -135,7 +135,7 @@ void RedBlackTree<Key, Value, Compare>::insert(const Key &key, const Value &valu
   if (y == NIL) {
     this->incrementCounter(1);
     this->root = z;
-  } else if (z->getKey() < y->getKey()) {
+  } else if (this->isLeft(z->getKey(), y->getKey())) {
     this->incrementCounter(2);
     y->left = z;
   } else {
@@ -146,7 +146,7 @@ void RedBlackTree<Key, Value, Compare>::insert(const Key &key, const Value &valu
   insertFixup(z);
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::deleteFixup(RedBlackNode<Key, Value> *x) {
   while (x != this->root and x->color == BLACK) {
     if (x == x->parent->left) {
@@ -216,7 +216,7 @@ void RedBlackTree<Key, Value, Compare>::deleteFixup(RedBlackNode<Key, Value> *x)
   x->color = BLACK;
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::deleteNode(RedBlackNode<Key, Value> *z) {
   RedBlackNode<Key, Value> *y;
   if (z->left == NIL or z->right == NIL)
@@ -250,7 +250,7 @@ void RedBlackTree<Key, Value, Compare>::deleteNode(RedBlackNode<Key, Value> *z) 
   delete y;
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::printTree(RedBlackNode<Key, Value> *node,
                                          int indent) const {
   if (node != NIL) {
@@ -267,7 +267,7 @@ void RedBlackTree<Key, Value, Compare>::printTree(RedBlackNode<Key, Value> *node
   }
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 bool RedBlackTree<Key, Value, Compare>::find(const Key &key, Value &outValue) const {
   const RedBlackNode<Key, Value> *node = this->findNode(key, NIL);
 
@@ -278,14 +278,14 @@ bool RedBlackTree<Key, Value, Compare>::find(const Key &key, Value &outValue) co
   return true;
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::update(const Key &key, const Value &value) {
   RedBlackNode<Key, Value> *aux = this->root;
   while (aux != NIL) {
-    if (key < aux->getKey()) {
+    if (this->isLeft(key, aux->getKey())) {
       this->incrementCounter(1);
       aux = aux->left;
-    } else if (key > aux->getKey()) {
+    } else if (this->isRight(key, aux->getKey())) {
       this->incrementCounter(2);
       aux = aux->right;
     } else {
@@ -298,17 +298,17 @@ void RedBlackTree<Key, Value, Compare>::update(const Key &key, const Value &valu
   throw KeyNotFoundException();
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::print() const {
   printTree(this->root);
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::remove(const Key &key) {
   RedBlackNode<Key, Value> *p = this->root;
 
-  while (p != NIL and p->getKey() != key) {
-    if (key < p->getKey())
+  while (p != NIL and this->isDifferent(key, p->getKey())) {
+    if (this->isLeft(key, p->getKey()))
       p = p->left;
     else
       p = p->right;
@@ -320,21 +320,21 @@ void RedBlackTree<Key, Value, Compare>::remove(const Key &key) {
     deleteNode(p);
 }
 
-template <typename Key, typename Value> void RedBlackTree<Key, Value, Compare>::clear() {
+template <typename Key, typename Value, typename Compare> void RedBlackTree<Key, Value, Compare>::clear() {
   this->reset(this->root, NIL, NIL);
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::printInOrder(std::ostream &os) const {
   this->inOrderTransversal(os, this->root, NIL);
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 size_t RedBlackTree<Key, Value, Compare>::getComparisonsCount() const {
   return this->comparisonsCount;
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 Value &RedBlackTree<Key, Value, Compare>::operator[](const Key &key) {
   this->setMaxKeyLen(key);
 
@@ -343,10 +343,10 @@ Value &RedBlackTree<Key, Value, Compare>::operator[](const Key &key) {
   while (x != NIL) {
     y = x;
 
-    if (key < x->getKey()) {
+    if (this->isLeft(key, x->getKey())) {
       this->incrementCounter(1);
       x = x->left;
-    } else if (key > x->getKey()) {
+    } else if (this->isRight(key, x->getKey())) {
       this->incrementCounter(2);
       x = x->right;
     } else {
@@ -365,7 +365,7 @@ Value &RedBlackTree<Key, Value, Compare>::operator[](const Key &key) {
   if (y == NIL) {
     this->incrementCounter(1);
     this->root = z;
-  } else if (z->getKey() < y->getKey()) {
+  } else if (this->isLeft(z->getKey(), y->getKey())) {
     this->incrementCounter(2);
     y->left = z;
   } else {
@@ -378,17 +378,17 @@ Value &RedBlackTree<Key, Value, Compare>::operator[](const Key &key) {
   return z->getValue();
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 const Value &RedBlackTree<Key, Value, Compare>::operator[](const Key &key) const {
   return this->at(key);
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 size_t RedBlackTree<Key, Value, Compare>::getRotationsCount() const {
   return this->rotationsCount;
 }
 
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 void RedBlackTree<Key, Value, Compare>::accept(
     IDictionaryVisitor<Key, Value> &visitor) const {
   visitor.collectMetrics(*this);

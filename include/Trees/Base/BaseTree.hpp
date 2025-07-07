@@ -20,6 +20,8 @@
  */
 template <typename Tree, typename Node, typename Key, typename Value, typename Compare>
 class BaseTree {
+  Compare compare;
+
   /**
    * @brief Increments a counter in the derived tree class.
    * @details This method uses CRTP to call `incrementCounter()` on the derived
@@ -175,6 +177,8 @@ protected:
 
   bool isLeft(const Key& a, const Key& b) const;
   bool isRight(const Key& a, const Key& b) const;
+  bool isEqual(const Key& a, const Key& b) const;
+  bool isDifferent(const Key& a, const Key& b) const;
 };
 
 // Include the implementation file to provide the definitions for the template

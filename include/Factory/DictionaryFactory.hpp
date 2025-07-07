@@ -22,7 +22,7 @@
  * @tparam Key The type of the keys in the dictionary.
  * @tparam Value The type of the values in the dictionary.
  */
-template <typename Key, typename Value> class DictionaryFactory {
+template <typename Key, typename Value, typename Compare = std::less<Key>> class DictionaryFactory {
 public:
   /**
    * @brief Creates a dictionary instance based on the specified type.
@@ -46,9 +46,9 @@ public:
   createDictionary(DictionaryType dictType) {
     switch (dictType) {
     case DictionaryType::AVL:
-      return std::make_unique<AVLTree<Key, Value>>();
+      return std::make_unique<AVLTree<Key, Value, Compare>>();
     case DictionaryType::RedBlack:
-      return std::make_unique<RedBlackTree<Key, Value>>();
+      return std::make_unique<RedBlackTree<Key, Value, Compare>>();
     case DictionaryType::Chained:
       return std::make_unique<ChainedHashTable<Key, Value>>();
     case DictionaryType::OpenAddressing:

@@ -22,7 +22,7 @@
 template <typename Key, typename Value, typename Compare = std::less<Key>>
 class AVLTree
     : public IDictionary<Key, Value>,
-      public BaseTree<AVLTree<Key, Value, Compare>, AVLNode<Key, Value>, Key, Value> {
+      public BaseTree<AVLTree<Key, Value, Compare>, AVLNode<Key, Value>, Key, Value, Compare> {
 private:
   /**
    * @brief Computes the height of a given node in the AVL tree.

@@ -123,7 +123,7 @@ public:
    */
   virtual void accept(IDictionaryVisitor<Key, Value> &visitor) const = 0;
 
-  template <typename Tree, typename Node, typename K, typename V>
+  template <typename Tree, typename Node, typename K, typename V, typename Compare>
   friend class BaseTree;
 
   template <typename HashTable, typename Collection, typename K, typename V,

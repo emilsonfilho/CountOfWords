@@ -204,7 +204,7 @@ AVLNode<Key, Value> *AVLTree<Key, Value, Compare>::upsert(const Key &key,
 
 template <typename Key, typename Value, typename Compare>
 AVLTree<Key, Value, Compare>::AVLTree()
-    : BaseTree<AVLTree<Key, Value, Compare>, AVLNode<Key, Value>, Key, Value>(nullptr) {}
+    : BaseTree<AVLTree<Key, Value, Compare>, AVLNode<Key, Value>, Key, Value, Compare>(nullptr) {}
 
 template <typename Key, typename Value, typename Compare> AVLTree<Key, Value, Compare>::~AVLTree() {
   clear();
