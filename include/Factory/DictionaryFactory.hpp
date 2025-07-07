@@ -33,10 +33,10 @@ public:
    *
    * @param dictType A string specifying the dictionary type to create.
    * Valid options are:
-   * - "avl_dictionary"
-   * - "redblack_dictionary"
-   * - "chained_dictionary"
-   * - "open_dictionary"
+   * - "dictionary_avl"
+   * - "dictionary_redblack"
+   * - "dictionary_chained"
+   * - "dictionary_open"
    * @return IDictionary<Key, Value>* A pointer to the newly created dictionary
    * instance. The caller is responsible for deleting this object.
    * @throw DictionaryTypeNotFoundException If the `dictType` does not match any

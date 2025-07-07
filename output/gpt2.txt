@@ -1,0 +1,36 @@
+================================================================================
+Count of Words: Data Structure Edition - Output Report
+================================================================================
+Arquivo Analisado: input/gpt2.txt
+Estrutura de Dados: Árvore Rubro-Negra
+Data de execução: segunda, 07 de julho de 2025 - 17:03:38
+
+================================================================================
+Tabela de Frequências
+================================================================================
+Palavra | Frequência
+achando | 1
+até     | 1
+clean   | 1
+de      | 1
+digitei | 1
+ele     | 1
+ia      | 1
+limpar  | 1
+limpou  | 1
+make    | 1
+minha   | 1
+o       | 1
+projeto | 1
+que     | 1
+só      | 1
+tudo    | 1
+viver   | 1
+vontade | 1
+
+================================================================================
+Métricas de Desempenho
+================================================================================
+Tempo total (ms): 0
+Número de comparações: 117
+Número de rotações: 4

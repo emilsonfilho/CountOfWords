@@ -1,0 +1,51 @@
+================================================================================
+Count of Words: Data Structure Edition - Output Report
+================================================================================
+Arquivo Analisado: input/gym.txt
+Estrutura de Dados: Árvore Rubro-Negra
+Data de execução: segunda, 07 de julho de 2025 - 17:15:30
+
+================================================================================
+Tabela de Frequências
+================================================================================
+Palavra     | Frequência
+a           | 3
+achei       | 1
+agora       | 1
+alonguei    | 1
+animado     | 1
+aquecimento | 1
+cinco       | 1
+começar     | 2
+disse       | 1
+do          | 1
+em          | 1
+esteira     | 1
+eu          | 1
+feito       | 1
+fim         | 1
+fui         | 1
+fundo       | 1
+já          | 1
+luz         | 1
+minutos     | 1
+moça        | 1
+na          | 1
+no          | 1
+nárnia      | 1
+professora  | 1
+que         | 1
+respirei    | 1
+roupa       | 1
+tava        | 1
+túnel       | 1
+vamos       | 1
+vesti       | 1
+vi          | 1
+
+================================================================================
+Métricas de Desempenho
+================================================================================
+Tempo total (ms): 0
+Número de comparações: 276
+Número de rotações: 19

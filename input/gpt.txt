@@ -1,0 +1,11 @@
+Tudo começou quando abri o editor de texto e ele travou. Pensei: "Ok, normal." Reiniciei. Três travamentos depois, percebi que ele não estava lento... ele estava magoado.
+
+Fui conferir os arquivos e vi um TXT misterioso chamado "Desabafo.txt". Abri. Estava escrito:
+
+“Caro Emilson,
+Você me usa para programar estruturas de dados complexas, rodar três IDEs ao mesmo tempo e ainda quer jogar Minecraft com shaders. Eu sou um Intel Atom, não um Transformer.
+Com carinho (e superaquecimento),
+Seu notebook.”
+
+Desde então, trato ele com mais carinho. Abro só uma aba do navegador por vez, dou um “bom dia” antes de compilar e, de vez em quando, passo um pano na tela.
+A gente se entende. Eu não forço demais, e ele só trava às segundas-feiras.
