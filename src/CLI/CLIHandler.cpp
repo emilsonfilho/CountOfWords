@@ -21,6 +21,9 @@ CLIHandler::CLIHandler(int argc, char** argv) {
 
 bool CLIHandler::validOptions() {
     try {
+        if (quantityArguments <= 2)
+            return false;
+
         options.dictType = Casting::toDictionaryType(options.inputDict);
         return true;
     } catch (const DictionaryTypeNotFoundException& e) {
@@ -30,10 +33,10 @@ bool CLIHandler::validOptions() {
 
 int CLIHandler::execute() {
     try {
+        FileProcessor fp(options.filename);
+
         std::ofstream outFile(outputPath + options.filename);
         std::unique_ptr<IDictionary<std::string, int>> dict = DictionaryFactory<std::string, int>::createDictionary(options.dictType);
-
-        FileProcessor fp(options.filename);
 
         ReportData report = WordFrequencyAnalyzer::analyze(dict.get(), fp);
 
@@ -41,6 +44,7 @@ int CLIHandler::execute() {
 
         return 0;
     } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
         return 1;
     }
 }
