@@ -14,7 +14,7 @@
  * @tparam Key The type of the keys used in the dictionary.
  * @tparam Value The type of the values stored in the dictionary.
  */
-template <typename Key, typename Value> class IDictionary {
+template <typename Key, typename Value, typename Hash = std::hash<Key>, typename Compare = std::less<Key>> class IDictionary {
 protected:
   /**
    * @brief Tracks the number of comparisons made during dictionary operations.
@@ -121,13 +121,13 @@ public:
    * @param visitor A reference to an object implementing the IDictionaryVisitor
    * interface, which defines the operations to be performed on the dictionary.
    */
-  virtual void accept(IDictionaryVisitor<Key, Value> &visitor) const = 0;
+  virtual void accept(IDictionaryVisitor<Key, Value, Hash, Compare> &visitor) const = 0;
 
-  template <typename Tree, typename Node, typename K, typename V, typename Compare>
+  template <typename Tree, typename Node, typename K, typename V, typename C>
   friend class BaseTree;
 
   template <typename HashTable, typename Collection, typename K, typename V,
-            typename Hash>
+            typename H>
   friend class BaseHashTable;
 };
 

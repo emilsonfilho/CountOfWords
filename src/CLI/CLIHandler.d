@@ -1,8 +1,9 @@
 src/CLI/CLIHandler.o: src/CLI/CLIHandler.cpp include/CLI/CLIHandler.hpp \
  include/CLI/CLIOptions.hpp include/Factory/DictionaryType.hpp \
- include/Configs/Path.hpp include/Factory/DictionaryFactory.hpp \
- include/Dictionary/IDictionary.hpp include/Trees/Base/BaseTree.hpp \
- include/Exceptions/KeyExceptions.hpp \
+ include/Configs/Locale/CollateCompare/CollateCompare.hpp \
+ include/Configs/Locale/Locale.hpp include/Configs/Path.hpp \
+ include/Factory/DictionaryFactory.hpp include/Dictionary/IDictionary.hpp \
+ include/Trees/Base/BaseTree.hpp include/Exceptions/KeyExceptions.hpp \
  include/Trees/Base/BaseTree.impl.hpp \
  include/Utils/Strings/StringHandler.hpp \
  include/Utils/Strings/StringHandler.impl.hpp \
@@ -31,6 +32,8 @@ src/CLI/CLIHandler.o: src/CLI/CLIHandler.cpp include/CLI/CLIHandler.hpp \
 include/CLI/CLIHandler.hpp:
 include/CLI/CLIOptions.hpp:
 include/Factory/DictionaryType.hpp:
+include/Configs/Locale/CollateCompare/CollateCompare.hpp:
+include/Configs/Locale/Locale.hpp:
 include/Configs/Path.hpp:
 include/Factory/DictionaryFactory.hpp:
 include/Dictionary/IDictionary.hpp:

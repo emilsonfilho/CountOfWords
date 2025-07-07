@@ -2,6 +2,7 @@
 
 #include <fstream>
 
+#include "Configs/Locale/CollateCompare/CollateCompare.hpp"
 #include "Configs/Path.hpp"
 #include "Factory/DictionaryFactory.hpp"
 #include "FileProcessor/FileProcessor.hpp"
@@ -35,7 +36,7 @@ int CLIHandler::execute() {
     FileProcessor fp(options.filename);
 
     std::ofstream outFile(outputPath + options.filename);
-    std::unique_ptr<IDictionary<std::string, size_t>> dict =
+    std::unique_ptr<IDictionary<std::string, size_t, std::hash<std::string>, CollateCompare>> dict =
         DictionaryFactory<std::string, size_t>::createDictionary(options.dictType);
 
     ReportData report = WordFrequencyAnalyzer::analyze(dict.get(), fp);
