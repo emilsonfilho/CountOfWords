@@ -23,13 +23,6 @@ WordFrequencyAnalyzer::analyze(IDictionary<std::string, size_t> *dictionary,
 
   timer.stop();
 
-  /**
-   * Acredito que isso não devia ser feito dessa maneira e era para ser
-   * possível receber o valor sem ser lvalue modificável
-   * Além disso, está dando erro de conversão. Isso se dá pelo fato
-   * de que eu acho que a conversão lá em AVLTree e as outras classes estão
-   * erradas em assumir que receberão objetos de IDictionary
-   */
   ReportDataCollectorVisitor<std::string, size_t> visitor(report);
   dictionary->accept(visitor);
   report.buildTime = timer.duration();
