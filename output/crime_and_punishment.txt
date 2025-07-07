@@ -3,7 +3,7 @@ Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/crime_and_punishment.txt
 Estrutura de Dados: Árvore AVL
-Data de execução: sexta, 04 de julho de 2025 - 22:52:59
+Data de execução: domingo, 06 de julho de 2025 - 21:51:12
 
 ================================================================================
 Tabela de Frequências
@@ -16,8 +16,6 @@ Palavra            | Frequência
 5                  | 1   
 8                  | 1   
 9                  | 1   
-Alessandra         | 1   
-Emilson            | 9   
 a                  | 4583
 a.d                | 1   
 aback              | 4   
@@ -9518,6 +9516,6 @@ zossimov           | 87
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 3967
-Número de comparações: 3260072
-Número de rotações: 7027
+Tempo total (ms): 3826
+Número de comparações: 3240075
+Número de rotações: 6972

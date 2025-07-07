@@ -4,11 +4,11 @@
 
 #include "Utils/Timer/Timer.hpp"
 
-void ReportWriter::printLine(std::ostream& out) const {
+void ReportWriter::printLine(std::ostream& out) {
     out << std::string(80, '=') << '\n';
 }
 
-void ReportWriter::printHeader(const std::string& title, std::ostream& out) const {
+void ReportWriter::printHeader(const std::string& title, std::ostream& out) {
     printLine(out);
     out << title << "\n";
     printLine(out);
