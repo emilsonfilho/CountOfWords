@@ -1,0 +1,24 @@
+================================================================================
+Count of Words: Data Structure Edition - Output Report
+================================================================================
+Arquivo Analisado: input/text.txt
+Estrutura de Dados: Tabela Hash por Encadeamento Exterior
+Data de execução: domingo, 06 de julho de 2025 - 22:14:27
+
+================================================================================
+Tabela de Frequências
+================================================================================
+Palavra | Frequência
+a       | 1
+eis     | 1
+não     | 1
+ou      | 1
+questão | 1
+ser     | 2
+
+================================================================================
+Métricas de Desempenho
+================================================================================
+Tempo total (ms): 0
+Número de comparações: 2
+Número de colisões: 0
