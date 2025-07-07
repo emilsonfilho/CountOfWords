@@ -1,8 +1,8 @@
 #ifndef STRING_DICTIONARY_TYPE_HPP
 #define STRING_DICTIONARY_TYPE_HPP
 
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
 #include "Factory/DictionaryType.hpp"
 
@@ -14,11 +14,10 @@
  * typically used to parse user input or configuration settings to determine
  * which dictionary implementation should be instantiated by a factory.
  */
-const std::unordered_map<std::string, DictionaryType> stringDictionaryTypeMap = {
-    {"dictionary_avl", DictionaryType::AVL},
-    {"dictionary_redblack", DictionaryType::RedBlack},
-    {"dictionary_chained", DictionaryType::Chained},
-    {"dictionary_open", DictionaryType::OpenAddressing}
-};
+const std::unordered_map<std::string, DictionaryType> stringDictionaryTypeMap =
+    {{"dictionary_avl", DictionaryType::AVL},
+     {"dictionary_redblack", DictionaryType::RedBlack},
+     {"dictionary_chained", DictionaryType::Chained},
+     {"dictionary_open", DictionaryType::OpenAddressing}};
 
 #endif

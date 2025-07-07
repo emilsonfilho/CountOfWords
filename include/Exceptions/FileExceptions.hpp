@@ -12,13 +12,13 @@
  */
 class FileNotFoundException : public std::out_of_range {
 public:
-    /**
-     * @brief Default constructor.
-     *
-     * Initializes the exception with the message "File not found."
-     */
-    explicit FileNotFoundException(const std::string& filename)
-        : std::out_of_range("File " + filename + " not found.") {}
+  /**
+   * @brief Default constructor.
+   *
+   * Initializes the exception with the message "File not found."
+   */
+  explicit FileNotFoundException(const std::string &filename)
+      : std::out_of_range("File " + filename + " not found.") {}
 };
 
 #endif

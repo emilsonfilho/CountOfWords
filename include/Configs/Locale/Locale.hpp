@@ -4,9 +4,9 @@
 #include <string>
 
 class Locale {
-    const char* lang = "pt_BR.utf8"; // Language code for Brazilian Portuguese
+  const char *lang = "pt_BR.utf8"; // Language code for Brazilian Portuguese
 public:
-    const char* getLang() const;
+  const char *getLang() const;
 };
 
 #endif

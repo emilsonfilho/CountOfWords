@@ -4,9 +4,9 @@
 
 #include "Exceptions/LocaleExceptions.hpp"
 
-const char* Locale::getLang() const {
-    if (!std::setlocale(LC_ALL, lang))
-        throw LocaleNotFoundException();
+const char *Locale::getLang() const {
+  if (!std::setlocale(LC_ALL, lang))
+    throw LocaleNotFoundException();
 
-    return lang;
+  return lang;
 }

@@ -6,7 +6,8 @@
 
 /**
  * @class KeyAlreadyExistsException
- * @brief Exception thrown when attempting to insert a key that already exists in a dictionary.
+ * @brief Exception thrown when attempting to insert a key that already exists
+ * in a dictionary.
  *
  * This exception is derived from std::runtime_error and is used to indicate
  * that a key being inserted into a dictionary or similar data structure
@@ -23,8 +24,8 @@
  */
 class KeyAlreadyExistsException : public std::runtime_error {
 public:
-    explicit KeyAlreadyExistsException()
-        : std::runtime_error("Key already exists in the dictionary.") {}
+  explicit KeyAlreadyExistsException()
+      : std::runtime_error("Key already exists in the dictionary.") {}
 };
 
 /**
@@ -46,8 +47,8 @@ public:
  */
 class KeyNotFoundException : public std::runtime_error {
 public:
-    explicit KeyNotFoundException()
-        : std::runtime_error("Key not found in the dictionary.") {}
+  explicit KeyNotFoundException()
+      : std::runtime_error("Key not found in the dictionary.") {}
 };
 
 #endif
