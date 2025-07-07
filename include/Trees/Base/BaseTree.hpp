@@ -18,7 +18,7 @@
  * @tparam Key The type of the keys stored in the tree.
  * @tparam Value The type of the values stored in the tree.
  */
-template <typename Tree, typename Node, typename Key, typename Value>
+template <typename Tree, typename Node, typename Key, typename Value, typename Compare>
 class BaseTree {
   /**
    * @brief Increments a counter in the derived tree class.
@@ -172,6 +172,9 @@ protected:
    *               Defaults to 1 if not specified.
    */
   void incrementRotationsCount(size_t amount = 1);
+
+  bool isLeft(const Key& a, const Key& b) const;
+  bool isRight(const Key& a, const Key& b) const;
 };
 
 // Include the implementation file to provide the definitions for the template

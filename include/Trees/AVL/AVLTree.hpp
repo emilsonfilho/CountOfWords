@@ -19,10 +19,10 @@
  * @tparam Key The type of the keys stored in the tree.
  * @tparam Value The type of the values associated with the keys.
  */
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare = std::less<Key>>
 class AVLTree
     : public IDictionary<Key, Value>,
-      public BaseTree<AVLTree<Key, Value>, AVLNode<Key, Value>, Key, Value> {
+      public BaseTree<AVLTree<Key, Value, Compare>, AVLNode<Key, Value>, Key, Value> {
 private:
   /**
    * @brief Computes the height of a given node in the AVL tree.

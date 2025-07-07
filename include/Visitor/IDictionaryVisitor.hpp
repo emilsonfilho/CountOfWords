@@ -3,9 +3,9 @@
 
 #include <utility>
 
-template <typename Key, typename Value> class AVLTree;
+template <typename Key, typename Value, typename Compare> class AVLTree;
 
-template <typename Key, typename Value> class RedBlackTree;
+template <typename Key, typename Value, typename Compare> class RedBlackTree;
 
 template <typename Key, typename Value, typename Hash> class ChainedHashTable;
 
@@ -25,9 +25,10 @@ class OpenAddressingHashTable;
  * @tparam Key The type of the keys stored in the dictionary.
  * @tparam Value The type of the values stored in the dictionary.
  * @tparam Hash The hash function object type, used for hash-based structures.
+ * @tparam Compare Comparator 
  * Defaults to std::hash<Key>.
  */
-template <typename Key, typename Value, typename Hash = std::hash<Key>>
+template <typename Key, typename Value, typename Hash = std::hash<Key>, typename Compare = std::less<Key>>
 class IDictionaryVisitor {
 public:
   /**
@@ -43,7 +44,7 @@ public:
    *
    * @param avlTree A constant reference to the AVLTree to be visited.
    */
-  virtual void collectMetrics(const AVLTree<Key, Value> &avlTree) = 0;
+  virtual void collectMetrics(const AVLTree<Key, Value, Compare> &avlTree) = 0;
 
   /**
    * @brief Pure virtual function to visit a RedBlackTree.
@@ -53,7 +54,7 @@ public:
    *
    * @param redBlackTree A constant reference to the RedBlackTree to be visited.
    */
-  virtual void collectMetrics(const RedBlackTree<Key, Value> &redBlackTree) = 0;
+  virtual void collectMetrics(const RedBlackTree<Key, Value, Compare> &redBlackTree) = 0;
 
   /**
    * @brief Pure virtual function to visit a ChainedHashTable.

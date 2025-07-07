@@ -2,7 +2,7 @@
 
 template <typename Key, typename Value>
 RedBlackNode<Key, Value> *
-RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key, Value> *y) {
+RedBlackTree<Key, Value, Compare>::rotateLeft(RedBlackNode<Key, Value> *y) {
   RedBlackNode<Key, Value> *x = y->right;
 
   y->right = x->left;
@@ -29,7 +29,7 @@ RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key, Value> *y) {
 
 template <typename Key, typename Value>
 RedBlackNode<Key, Value> *
-RedBlackTree<Key, Value>::rotateRight(RedBlackNode<Key, Value> *y) {
+RedBlackTree<Key, Value, Compare>::rotateRight(RedBlackNode<Key, Value> *y) {
   RedBlackNode<Key, Value> *x = y->left;
 
   y->left = x->right;
@@ -55,7 +55,7 @@ RedBlackTree<Key, Value>::rotateRight(RedBlackNode<Key, Value> *y) {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value> *z) {
+void RedBlackTree<Key, Value, Compare>::insertFixup(RedBlackNode<Key, Value> *z) {
   while (z->parent->color == RED) {
     if (z->parent == z->parent->parent->left) {
       if (z->parent->parent->right->color == RED) { // Case 1
@@ -98,16 +98,16 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value> *z) {
 }
 
 template <typename Key, typename Value>
-RedBlackNode<Key, Value> RedBlackTree<Key, Value>::NIL_NODE =
+RedBlackNode<Key, Value> RedBlackTree<Key, Value, Compare>::NIL_NODE =
     RedBlackNode<Key, Value>();
 
 template <typename Key, typename Value>
-RedBlackTree<Key, Value>::RedBlackTree()
-    : BaseTree<RedBlackTree<Key, Value>, RedBlackNode<Key, Value>, Key, Value>(
+RedBlackTree<Key, Value, Compare>::RedBlackTree()
+    : BaseTree<RedBlackTree<Key, Value, Compare>, RedBlackNode<Key, Value>, Key, Value>(
           NIL) {}
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::insert(const Key &key, const Value &value) {
+void RedBlackTree<Key, Value, Compare>::insert(const Key &key, const Value &value) {
   RedBlackNode<Key, Value> *x = this->root, *y = NIL;
 
   while (x != NIL) {
@@ -147,7 +147,7 @@ void RedBlackTree<Key, Value>::insert(const Key &key, const Value &value) {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::deleteFixup(RedBlackNode<Key, Value> *x) {
+void RedBlackTree<Key, Value, Compare>::deleteFixup(RedBlackNode<Key, Value> *x) {
   while (x != this->root and x->color == BLACK) {
     if (x == x->parent->left) {
       RedBlackNode<Key, Value> *w = x->parent->right;
@@ -217,7 +217,7 @@ void RedBlackTree<Key, Value>::deleteFixup(RedBlackNode<Key, Value> *x) {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::deleteNode(RedBlackNode<Key, Value> *z) {
+void RedBlackTree<Key, Value, Compare>::deleteNode(RedBlackNode<Key, Value> *z) {
   RedBlackNode<Key, Value> *y;
   if (z->left == NIL or z->right == NIL)
     y = z;
@@ -251,7 +251,7 @@ void RedBlackTree<Key, Value>::deleteNode(RedBlackNode<Key, Value> *z) {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::printTree(RedBlackNode<Key, Value> *node,
+void RedBlackTree<Key, Value, Compare>::printTree(RedBlackNode<Key, Value> *node,
                                          int indent) const {
   if (node != NIL) {
     printTree(node->right, indent + 4);
@@ -268,7 +268,7 @@ void RedBlackTree<Key, Value>::printTree(RedBlackNode<Key, Value> *node,
 }
 
 template <typename Key, typename Value>
-bool RedBlackTree<Key, Value>::find(const Key &key, Value &outValue) const {
+bool RedBlackTree<Key, Value, Compare>::find(const Key &key, Value &outValue) const {
   const RedBlackNode<Key, Value> *node = this->findNode(key, NIL);
 
   if (!node)
@@ -279,7 +279,7 @@ bool RedBlackTree<Key, Value>::find(const Key &key, Value &outValue) const {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::update(const Key &key, const Value &value) {
+void RedBlackTree<Key, Value, Compare>::update(const Key &key, const Value &value) {
   RedBlackNode<Key, Value> *aux = this->root;
   while (aux != NIL) {
     if (key < aux->getKey()) {
@@ -299,12 +299,12 @@ void RedBlackTree<Key, Value>::update(const Key &key, const Value &value) {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::print() const {
+void RedBlackTree<Key, Value, Compare>::print() const {
   printTree(this->root);
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::remove(const Key &key) {
+void RedBlackTree<Key, Value, Compare>::remove(const Key &key) {
   RedBlackNode<Key, Value> *p = this->root;
 
   while (p != NIL and p->getKey() != key) {
@@ -320,22 +320,22 @@ void RedBlackTree<Key, Value>::remove(const Key &key) {
     deleteNode(p);
 }
 
-template <typename Key, typename Value> void RedBlackTree<Key, Value>::clear() {
+template <typename Key, typename Value> void RedBlackTree<Key, Value, Compare>::clear() {
   this->reset(this->root, NIL, NIL);
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::printInOrder(std::ostream &os) const {
+void RedBlackTree<Key, Value, Compare>::printInOrder(std::ostream &os) const {
   this->inOrderTransversal(os, this->root, NIL);
 }
 
 template <typename Key, typename Value>
-size_t RedBlackTree<Key, Value>::getComparisonsCount() const {
+size_t RedBlackTree<Key, Value, Compare>::getComparisonsCount() const {
   return this->comparisonsCount;
 }
 
 template <typename Key, typename Value>
-Value &RedBlackTree<Key, Value>::operator[](const Key &key) {
+Value &RedBlackTree<Key, Value, Compare>::operator[](const Key &key) {
   this->setMaxKeyLen(key);
 
   RedBlackNode<Key, Value> *x = this->root, *y = NIL;
@@ -379,17 +379,17 @@ Value &RedBlackTree<Key, Value>::operator[](const Key &key) {
 }
 
 template <typename Key, typename Value>
-const Value &RedBlackTree<Key, Value>::operator[](const Key &key) const {
+const Value &RedBlackTree<Key, Value, Compare>::operator[](const Key &key) const {
   return this->at(key);
 }
 
 template <typename Key, typename Value>
-size_t RedBlackTree<Key, Value>::getRotationsCount() const {
+size_t RedBlackTree<Key, Value, Compare>::getRotationsCount() const {
   return this->rotationsCount;
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::accept(
+void RedBlackTree<Key, Value, Compare>::accept(
     IDictionaryVisitor<Key, Value> &visitor) const {
   visitor.collectMetrics(*this);
 }

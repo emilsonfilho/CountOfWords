@@ -17,10 +17,11 @@
  *
  * @tparam Key The type of the keys stored in the tree.
  * @tparam Value The type of the values associated with the keys.
+ * @tparam Compare A custom comparator for strings.
  */
-template <typename Key, typename Value>
+template <typename Key, typename Value, typename Compare>
 class RedBlackTree : public IDictionary<Key, Value>,
-                     public BaseTree<RedBlackTree<Key, Value>,
+                     public BaseTree<RedBlackTree<Key, Value, Compare>,
                                      RedBlackNode<Key, Value>, Key, Value> {
 private:
   static RedBlackNode<Key, Value>
