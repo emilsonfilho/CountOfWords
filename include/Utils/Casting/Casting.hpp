@@ -16,7 +16,7 @@ namespace Casting {
      *
      * @param str The string representation of the dictionary type to convert.
      * @return The corresponding `DictionaryType` enum value.
-     * @throw DictionaryTypeNotFound if the string does not correspond to a valid
+     * @throw DictionaryTypeNotFoundException if the string does not correspond to a valid
      * dictionary type in the map.
      */
     DictionaryType toDictionaryType(const std::string& str);

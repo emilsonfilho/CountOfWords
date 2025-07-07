@@ -40,7 +40,7 @@ public:
      * - "open_dictionary"
      * @return IDictionary<Key, Value>* A pointer to the newly created dictionary instance.
      * The caller is responsible for deleting this object.
-     * @throw DictionaryTypeNotFound If the `dictType` does not match any known type.
+     * @throw DictionaryTypeNotFoundException If the `dictType` does not match any known type.
      */
     static std::unique_ptr<IDictionary<Key, Value>> createDictionary(DictionaryType dictType) {
         switch (dictType) {
@@ -53,7 +53,7 @@ public:
             case DictionaryType::OpenAddressing: 
                 return std::make_unique<OpenAddressingHashTable<Key, Value>>();
             default: 
-                throw DictionaryTypeNotFound();
+                throw DictionaryTypeNotFoundException();
         }
     }
 };

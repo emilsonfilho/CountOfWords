@@ -11,7 +11,7 @@
 #include "Exceptions/FileExceptions.hpp"
 
 FileProcessor::FileProcessor(const std::string& filename) {
-    path = inputPath + filename + extension;
+    path = inputPath + filename;
 
     std::ifstream file(path);
 

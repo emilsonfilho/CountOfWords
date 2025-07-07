@@ -5,7 +5,7 @@ namespace Casting {
         try {
             return stringDictionaryTypeMap.at(str);
         } catch(const std::out_of_range& e) {
-            throw DictionaryTypeNotFound();
+            throw DictionaryTypeNotFoundException();
         }
     }
 }

@@ -1,5 +1,5 @@
 # Nome do executável
-TARGET = countofwords
+TARGET = freq
 
 # Compilador e flags
 CXX = g++

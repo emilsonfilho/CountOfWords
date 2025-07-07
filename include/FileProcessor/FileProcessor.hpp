@@ -39,7 +39,7 @@ public:
      * Sets the file path, checks if the file and locale are available,
      * reads each word from the file, normalizes it, and stores it.
      *
-     * @param filename Name of the file to be processed (without path or extension).
+     * @param filename Name of the file to be processed (without path).
      * @throws FileNotFoundException If the file cannot be opened.
      * @throws LocaleNotFoundException If the locale cannot be set on the system.
      */

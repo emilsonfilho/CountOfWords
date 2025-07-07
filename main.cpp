@@ -1,24 +1,23 @@
 #include <fstream>
+#include <iostream>
 
-#include "Factory/DictionaryFactory.hpp"
-#include "FileProcessor/FileProcessor.hpp"
-#include "WordFrequencyAnalyzer/WordFrequencyAnalyzer.hpp"
-#include "Utils/Casting/Casting.hpp"
-#include "Reports/ReportWriter.hpp"
+#include "CLI/CLIHandler.hpp"
 
-int main() {
-    std::ofstream outFile("output/crime_and_punishment.txt");
-    std::unique_ptr<IDictionary<std::string, int>> dict = DictionaryFactory<std::string, int>::createDictionary(Casting::toDictionaryType("dictionary_avl"));
+int main(int argc, char** argv) {
+    CLIHandler cli(argc, argv);
 
-    dict->insert("Emilson", 8);
-    (*dict)["Emilson"]++;
-    (*dict)["Alessandra"]++;
+    if (!cli.validOptions()) {
+        std::cerr << "Argumentos inválidos!\n"
+                 << "O comando deve ser dado na seguinte forma:\n"
+                 << "freq [tipo] [nome_arquivo.txt]\n"
+                 << "As opções disponíveis são: \n"
+                 << "dictionary_avl\n"
+                 << "dictionary_redblack\n"
+                 << "dictionary_chained\n"
+                 << "dictionary_open" << std::endl;
+        
+        return 1;
+    }
 
-    FileProcessor fp("crime_and_punishment");
-
-    ReportData result = WordFrequencyAnalyzer::analyze(dict.get(), fp);
-
-    std::cout << result.buildTime.count() << std::endl;
-
-    ReportWriter().exportReport(result, outFile, dict.get());
+    return cli.execute();
 }
