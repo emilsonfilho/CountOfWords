@@ -42,7 +42,7 @@ struct LexicalStr {
         return !(*this == other);
     }
 
-    operator const std::string&() const {
+    explicit operator const std::string&() const {
         return data;
     }
 
