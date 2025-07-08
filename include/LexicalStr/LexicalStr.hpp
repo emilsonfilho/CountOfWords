@@ -11,43 +11,25 @@
 struct LexicalStr {
     std::string data;
 
-    LexicalStr() : data("") {}
-    LexicalStr(const std::string& str)
-        : data(str) {}
-    LexicalStr(const char* str)
-        : data(str) {}
+    LexicalStr();
+    LexicalStr(const std::string& str);
+    LexicalStr(const char* str);
 
-    bool operator<(const LexicalStr& other) const {
-        return LocaleSingleton::getComparator()(data, other.data);
-    }
+    bool operator<(const LexicalStr& other) const;
 
-    bool operator>(const LexicalStr& other) const {
-        return other < *this;
-    }
+    bool operator>(const LexicalStr& other) const;
 
-    bool operator<=(const LexicalStr& other) const {
-        return !(other < *this);
-    }
+    bool operator<=(const LexicalStr& other) const;
 
-    bool operator>=(const LexicalStr& other) const {
-        return !(*this < other);
-    }
+    bool operator>=(const LexicalStr& other) const;
 
-    bool operator==(const LexicalStr& other) const {
-        return data == other.data;
-    }
+    bool operator==(const LexicalStr& other) const;
 
-    bool operator!=(const LexicalStr& other) const {
-        return !(*this == other);
-    }
+    bool operator!=(const LexicalStr& other) const;
 
-    explicit operator const std::string&() const {
-        return data;
-    }
+    explicit operator const std::string&() const;
 
-    friend std::ostream& operator<<(std::ostream& os, const LexicalStr& s) {
-        return os << s.data;
-    }
+    friend std::ostream& operator<<(std::ostream& os, const LexicalStr& s);
 };
 
 namespace std {
