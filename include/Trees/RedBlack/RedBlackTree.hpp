@@ -32,7 +32,6 @@ private:
    * @brief Performs a left rotation on a given node.
    *
    * @param y A pointer to the node to be rotated.
-   * @return A pointer to the new root of the subtree after the rotation.
    */
   void rotateLeft(RedBlackNode<Key, Value> *x);
 
@@ -40,7 +39,6 @@ private:
    * @brief Performs a right rotation on a given node.
    *
    * @param y A pointer to the node to be rotated.
-   * @return A pointer to the new root of the subtree after the rotation.
    */
   void rotateRight(RedBlackNode<Key, Value> *x);
 
