@@ -125,7 +125,7 @@ void OpenAddressingHashTable<Key, Value, Hash>::insert(const Key &key,
 
   int lastDeletedSlot = -1;
 
-  for (int i = 0; i < this->tableSize; i++) {
+  for (size_t i = 0; i < this->tableSize; i++) {
     size_t slotIdx = hashCode(key, i);
     Slot<Key, Value> &slot = this->table[slotIdx];
 
