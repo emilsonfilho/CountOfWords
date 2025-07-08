@@ -5,6 +5,7 @@
 
 #include <boost/locale.hpp>
 #include "Configs/Locale/Locale.hpp"
+#include "Configs/Locale/LocaleSingleton.hpp"
 
 struct LexicalStr {
     std::string data;
@@ -16,10 +17,7 @@ struct LexicalStr {
         : data(str) {}
 
     bool operator<(const LexicalStr& other) const {
-        static const boost::locale::comparator<char> cmp(
-            boost::locale::generator()(Locale().getLang())
-        );
-        return cmp(data, other.data);
+        return LocaleSingleton::getComparator()(data, other.data);
     }
 
     bool operator>(const LexicalStr& other) const {

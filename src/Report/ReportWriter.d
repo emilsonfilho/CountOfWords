@@ -11,7 +11,8 @@ src/Report/ReportWriter.o: src/Report/ReportWriter.cpp \
  include/utf8/cpp11.h include/utf8/checked.h include/utf8/unchecked.h \
  include/Visitor/IDictionaryVisitor.hpp include/Reports/ReportData.hpp \
  include/LexicalStr/LexicalStr.hpp include/Configs/Locale/Locale.hpp \
- include/Utils/Timer/Timer.hpp
+ include/Configs/Locale/LocaleSingleton.hpp \
+ include/Configs/Locale/Locale.hpp include/Utils/Timer/Timer.hpp
 include/Reports/ReportWriter.hpp:
 include/Dictionary/IDictionary.hpp:
 include/Trees/Base/BaseTree.hpp:
@@ -32,5 +33,7 @@ include/utf8/unchecked.h:
 include/Visitor/IDictionaryVisitor.hpp:
 include/Reports/ReportData.hpp:
 include/LexicalStr/LexicalStr.hpp:
+include/Configs/Locale/Locale.hpp:
+include/Configs/Locale/LocaleSingleton.hpp:
 include/Configs/Locale/Locale.hpp:
 include/Utils/Timer/Timer.hpp:

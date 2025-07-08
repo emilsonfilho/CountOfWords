@@ -14,7 +14,8 @@ src/WordFrequencyAnalyzer/WordFrequencyAnalyzer.o: \
  include/Visitor/IDictionaryVisitor.hpp \
  include/FileProcessor/FileProcessor.hpp include/Reports/ReportData.hpp \
  include/LexicalStr/LexicalStr.hpp include/Configs/Locale/Locale.hpp \
- include/Utils/Timer/Timer.hpp \
+ include/Configs/Locale/LocaleSingleton.hpp \
+ include/Configs/Locale/Locale.hpp include/Utils/Timer/Timer.hpp \
  include/Visitor/ReportDataCollectorVisitor.hpp \
  include/Visitor/ReportDataCollectorVisitor.impl.hpp \
  include/HashTables/Chained/ChainedHashTable.hpp \
@@ -51,6 +52,8 @@ include/Visitor/IDictionaryVisitor.hpp:
 include/FileProcessor/FileProcessor.hpp:
 include/Reports/ReportData.hpp:
 include/LexicalStr/LexicalStr.hpp:
+include/Configs/Locale/Locale.hpp:
+include/Configs/Locale/LocaleSingleton.hpp:
 include/Configs/Locale/Locale.hpp:
 include/Utils/Timer/Timer.hpp:
 include/Visitor/ReportDataCollectorVisitor.hpp:

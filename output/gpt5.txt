@@ -3,7 +3,7 @@ Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/gpt5.txt
 Estrutura de Dados: Árvore Rubro-Negra
-Data de execução: terça, 08 de julho de 2025 - 01:43:50
+Data de execução: terça, 08 de julho de 2025 - 11:34:00
 
 ================================================================================
 Tabela de Frequências
@@ -33,6 +33,6 @@ vai           | 1
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 5
+Tempo total (ms): 0
 Número de comparações: 148
 Número de rotações: 17
