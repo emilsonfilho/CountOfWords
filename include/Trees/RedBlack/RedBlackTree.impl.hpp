@@ -65,6 +65,7 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value> *z) {
         z = z->parent->parent;
       } else {
         if (z == z->parent->right) { // Case 2
+          std::cout << "entrou no caso 2\n";
           z = z->parent;
           z = rotateLeft(z);
           z = z->left;
@@ -251,21 +252,45 @@ void RedBlackTree<Key, Value>::deleteNode(RedBlackNode<Key, Value> *z) {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::printTree(RedBlackNode<Key, Value> *node,
-                                         int indent) const {
-  if (node != NIL) {
-    printTree(node->right, indent + 4);
+void RedBlackTree<Key, Value>::printTree(RedBlackNode<Key, Value>* node,
+                                         const std::string& prefix,
+                                         bool isLeft) const {
+    if (node == this->NIL) return;
 
-    if (indent > 0) {
-      std::cout << std::string(indent, ' ');
+    std::cout << prefix;
+
+    std::cout << (isLeft ? "├── " : "└── ");
+
+    std::cout << node->getKey() << " (" << (node->color == RED ? "R" : "B") << ")" << std::endl;
+
+    std::string newPrefix = prefix + (isLeft ? "│   " : "    ");
+    bool hasLeft = node->left != this->NIL;
+    bool hasRight = node->right != this->NIL;
+
+    if (hasRight)
+        printTree(node->right, newPrefix, true);
+    if (hasLeft)
+        printTree(node->left, newPrefix, false);
+}
+
+template <typename Key, typename Value>
+void RedBlackTree<Key, Value>::print() const {
+    if (this->root == this->NIL) {
+        std::cout << "Árvore vazia.\n";
+        return;
     }
 
-    std::cout << node->getKey() << " (" << (node->color == RED ? "R" : "B")
-              << ")" << std::endl;
+    std::cout << this->root->getKey() << " (" << (this->root->color == RED ? "R" : "B") << ") (Raiz)\n";
+    bool hasRight = this->root->right != this->NIL;
+    bool hasLeft = this->root->left != this->NIL;
 
-    printTree(node->left, indent + 4);
-  }
+    if (hasRight)
+        printTree(this->root->right, "", true);
+    if (hasLeft)
+        printTree(this->root->left, "", false);
 }
+
+
 
 template <typename Key, typename Value>
 bool RedBlackTree<Key, Value>::find(const Key &key, Value &outValue) const {
@@ -299,11 +324,6 @@ void RedBlackTree<Key, Value>::update(const Key &key, const Value &value) {
 }
 
 template <typename Key, typename Value>
-void RedBlackTree<Key, Value>::print() const {
-  printTree(this->root);
-}
-
-template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::remove(const Key &key) {
   RedBlackNode<Key, Value> *p = this->root;
 
@@ -327,6 +347,7 @@ template <typename Key, typename Value> void RedBlackTree<Key, Value>::clear() {
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::printInOrder(std::ostream &os) const {
   this->inOrderTransversal(os, this->root, NIL);
+  print();
 }
 
 template <typename Key, typename Value>
@@ -373,7 +394,15 @@ Value &RedBlackTree<Key, Value>::operator[](const Key &key) {
     y->right = z;
   }
 
+  std::cout << std::string(80, '=') << std::endl;
+  print();
+  std::cout << std::string(80, '=') << std::endl;
+
+
   insertFixup(z);
+
+  print();
+  std::cout << std::string(80, '-') << std::endl;
 
   return z->getValue();
 }

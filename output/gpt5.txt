@@ -3,7 +3,7 @@ Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/gpt5.txt
 Estrutura de Dados: Árvore Rubro-Negra
-Data de execução: terça, 08 de julho de 2025 - 11:34:00
+Data de execução: terça, 08 de julho de 2025 - 13:23:34
 
 ================================================================================
 Tabela de Frequências
@@ -12,27 +12,22 @@ Palavra       | Frequência
 a             | 1
 agora         | 1
 consegui      | 1
-criei         | 1
 é             | 1
 eu            | 2
-forte         | 1
 lembrar       | 1
 nem           | 2
 ninguém       | 1
 nova          | 1
-que           | 2
+que           | 1
 redefinir     | 1
-senha         | 1
 senhaforte123 | 1
 suspeitar     | 1
-tão           | 1
 tive          | 1
-uma           | 1
 vai           | 1
 
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 0
-Número de comparações: 148
-Número de rotações: 17
+Tempo total (ms): 3
+Número de comparações: 147
+Número de rotações: 12

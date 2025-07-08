@@ -90,7 +90,7 @@ private:
    * @param node A pointer to the current node being printed.
    * @param indent The indentation level for the current node.
    */
-  void printTree(RedBlackNode<Key, Value> *node, int indent = 0) const;
+  void printTree(RedBlackNode<Key, Value>* node, const std::string& prefix, bool isLeft) const;
 
 public:
   /**
