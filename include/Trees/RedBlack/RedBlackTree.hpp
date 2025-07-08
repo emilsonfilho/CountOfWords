@@ -34,7 +34,7 @@ private:
    * @param y A pointer to the node to be rotated.
    * @return A pointer to the new root of the subtree after the rotation.
    */
-  RedBlackNode<Key, Value> *rotateLeft(RedBlackNode<Key, Value> *y);
+  void rotateLeft(RedBlackNode<Key, Value> *x);
 
   /**
    * @brief Performs a right rotation on a given node.
@@ -42,7 +42,7 @@ private:
    * @param y A pointer to the node to be rotated.
    * @return A pointer to the new root of the subtree after the rotation.
    */
-  RedBlackNode<Key, Value> *rotateRight(RedBlackNode<Key, Value> *y);
+  void rotateRight(RedBlackNode<Key, Value> *x);
 
   /**
    * @brief Fixes the Red-Black Tree properties after an insertion.

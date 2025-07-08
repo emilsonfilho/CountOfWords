@@ -1,57 +1,51 @@
 #include "Trees/RedBlack/RedBlackTree.hpp"
 
 template <typename Key, typename Value>
-RedBlackNode<Key, Value> *
-RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key, Value> *y) {
-  RedBlackNode<Key, Value> *x = y->right;
+void RedBlackTree<Key, Value>::rotateLeft(RedBlackNode<Key, Value> *x) {
+  RedBlackNode<Key, Value> *y = x->right;
 
-  y->right = x->left;
-  if (y->right != NIL)
-    y->right->parent = y;
-  x->left = y;
+  x->right = y->left;
 
-  x->parent = y->parent;
-  y->parent = x;
+  if (y->left != NIL)
+    y->left->parent = x;
+  
+  y->parent = x->parent;
 
-  if (x->parent != NIL) {
-    if (x->getKey() < x->parent->getKey())
-      x->parent->left = x;
-    else
-      x->parent->right = x;
-  } else {
-    this->root = x;
-  }
+  if (x->parent == NIL)
+    this->root = y;
+  else if (x == x->parent->left)
+    x->parent->left = y;
+  else
+    x->parent->right = y;
+
+  y->left = x;
+  x->parent = y;
 
   this->incrementRotationsCount();
-
-  return x;
 }
 
 template <typename Key, typename Value>
-RedBlackNode<Key, Value> *
-RedBlackTree<Key, Value>::rotateRight(RedBlackNode<Key, Value> *y) {
-  RedBlackNode<Key, Value> *x = y->left;
+void RedBlackTree<Key, Value>::rotateRight(RedBlackNode<Key, Value> *x) {
+  RedBlackNode<Key, Value> *y = x->left;
 
-  y->left = x->right;
-  if (y->left != NIL)
-    y->left->parent = y;
-  x->right = y;
+  x->left = y->right;
 
-  x->parent = y->parent;
-  y->parent = x;
+  if (y->right != NIL)
+    y->right->parent = x;
+  
+  y->parent = x->parent;
 
-  if (x->parent != NIL) {
-    if (x->getKey() < x->parent->getKey())
-      x->parent->left = x;
-    else
-      x->parent->right = x;
-  } else {
-    this->root = x;
-  }
+  if (x->parent == NIL)
+    this->root = y;
+  else if (x == x->parent->right)
+    x->parent->right = y;
+  else
+    x->parent->left = y;
+
+  y->right = x;
+  x->parent = y;
 
   this->incrementRotationsCount();
-
-  return x;
 }
 
 template <typename Key, typename Value>
@@ -67,13 +61,12 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value> *z) {
         if (z == z->parent->right) { // Case 2
           std::cout << "entrou no caso 2\n";
           z = z->parent;
-          z = rotateLeft(z);
-          z = z->left;
+          rotateLeft(z);
         }
 
         z->parent->color = BLACK;
         z->parent->parent->color = RED;
-        z = rotateRight(z->parent->parent);
+        rotateRight(z->parent->parent);
       }
     } else {                                       // Symmetrical case
       if (z->parent->parent->left->color == RED) { // Case 1
@@ -84,13 +77,12 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value> *z) {
       } else {
         if (z == z->parent->left) { // Case 2
           z = z->parent;
-          z = rotateRight(z);
-          z = z->right;
+          rotateRight(z);
         }
 
         z->parent->color = BLACK;
         z->parent->parent->color = RED;
-        z = rotateLeft(z->parent->parent);
+        rotateLeft(z->parent->parent);
       }
     }
   }
@@ -156,8 +148,7 @@ void RedBlackTree<Key, Value>::deleteFixup(RedBlackNode<Key, Value> *x) {
       if (w->color == RED) { // Case 1
         x->parent->color = RED;
         w->color = BLACK;
-        x->parent = rotateLeft(x->parent);
-        w = x->parent->right;
+        rotateLeft(x->parent);
       }
 
       if (w->left->color == BLACK and w->right->color == BLACK) { // Case 2
@@ -167,16 +158,14 @@ void RedBlackTree<Key, Value>::deleteFixup(RedBlackNode<Key, Value> *x) {
         if (w->right->color == BLACK) { // Case 3
           w->left->color = BLACK;
           w->color = RED;
-          w = rotateRight(w);
-
-          w = x->parent->right;
+          rotateRight(w);
         }
 
         // Case 4
         w->color = x->parent->color;
         x->parent->color = BLACK;
         w->right->color = BLACK;
-        w = rotateLeft(x->parent);
+        rotateLeft(x->parent);
 
         x = this->root;
       }
@@ -186,9 +175,7 @@ void RedBlackTree<Key, Value>::deleteFixup(RedBlackNode<Key, Value> *x) {
       if (w->color == RED) { // Case 1
         x->parent->color = RED;
         w->color = BLACK;
-        x->parent = rotateRight(x->parent);
-
-        w = x->parent->left;
+        rotateRight(x->parent);
       }
 
       if (w->right->color == BLACK and w->left->color == BLACK) { // Case 2
@@ -198,16 +185,14 @@ void RedBlackTree<Key, Value>::deleteFixup(RedBlackNode<Key, Value> *x) {
         if (w->left->color == BLACK) { // Case 3
           w->right->color = BLACK;
           w->color = RED;
-          w = rotateLeft(w);
-
-          w = x->parent->left;
+          rotateLeft(w);
         }
 
         // Case 4
         w->color = x->parent->color;
         x->parent->color = BLACK;
         w->left->color = BLACK;
-        w = rotateRight(x->parent);
+        rotateRight(x->parent);
 
         x = this->root;
       }
