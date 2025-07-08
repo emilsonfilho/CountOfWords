@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "LexicalStr/LexicalStr.hpp"
 #include "Utils/Timer/Timer.hpp"
 
 void ReportWriter::printLine(std::ostream &out) {
@@ -15,7 +16,7 @@ void ReportWriter::printHeader(const std::string &title, std::ostream &out) {
 }
 
 void ReportWriter::exportReport(const ReportData &reportData, std::ostream &out,
-                                IDictionary<std::string, size_t> *dict) {
+                                IDictionary<LexicalStr, size_t> *dict) {
   printHeader("Count of Words: Data Structure Edition - Output Report", out);
   out << "Arquivo Analisado: " << reportData.filename << '\n';
   out << "Estrutura de Dados: " << reportData.dictionaryType << '\n';

@@ -6,6 +6,7 @@
 
 #include "Dictionary/IDictionary.hpp"
 #include "ReportData.hpp"
+#include "LexicalStr/LexicalStr.hpp"
 
 class ReportWriter {
   static void printLine(std::ostream &out);
@@ -13,7 +14,7 @@ class ReportWriter {
 
 public:
   static void exportReport(const ReportData &reportData, std::ostream &out,
-                           IDictionary<std::string, size_t> *dict);
+                           IDictionary<LexicalStr, size_t> *dict);
 };
 
 #endif

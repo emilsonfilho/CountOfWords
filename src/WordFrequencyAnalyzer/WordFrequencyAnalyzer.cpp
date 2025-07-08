@@ -5,7 +5,7 @@
 #include "Visitor/ReportDataCollectorVisitor.hpp"
 
 ReportData
-WordFrequencyAnalyzer::analyze(IDictionary<std::string, size_t> *dictionary,
+WordFrequencyAnalyzer::analyze(IDictionary<LexicalStr, size_t> *dictionary,
                                const FileProcessor &fileProcessor) {
   ReportData report;
 
@@ -23,7 +23,7 @@ WordFrequencyAnalyzer::analyze(IDictionary<std::string, size_t> *dictionary,
 
   timer.stop();
 
-  ReportDataCollectorVisitor<std::string, size_t> visitor(report);
+  ReportDataCollectorVisitor<LexicalStr, size_t> visitor(report);
   dictionary->accept(visitor);
   report.buildTime = timer.duration();
   report.totalWordsProcessed = wordsCount;
