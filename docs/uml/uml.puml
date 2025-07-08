@@ -1,10 +1,10 @@
 @startuml Count Of Words Design Project
 
 interface IDictionary<Key, Value> {
-    - comparisonsCount: size_t
+    # comparisonsCount: size_t
 
-    - incrementCounter(n: size_t): void
-    - resetCounter(): void
+    # incrementCounter(n: size_t): void
+    # resetCounter(): void
 
     + insert(key: Key, value: Value): void
     + find(key: Key, outValue: Value): bool
@@ -133,7 +133,6 @@ class Node<Key, Value> {
     + getKey() : Key
     + setKey(key: Key) : void
     + getValue() : Value
-    + setKey(key: Key) : void
     + update(key: Key, value: Value) : void
     + show() : String
 }
@@ -157,6 +156,7 @@ class BaseTree<Tree, Node, Key, Value> {
     # setMaxLen(key: Key) : void
     # setValLen(value: Value) : void
     # incrementCounter(amount: size_t) : void
+    # incrementRotationsCount() : void
 }
 
 class AVLNode<Key, Value> {
@@ -259,7 +259,7 @@ class CLIHandler {
     - options : CLIOptions
     - quantityArguments : int
 
-    + CLIHandler()
+    + CLIHandler(argc: int, argv: String[])
     + validOptions() : bool
     + execute() : int
 }
@@ -339,9 +339,7 @@ class ReportWriter {
 }
 
 class Locale {
-    - lang : String
-
-    + getLang : String
+    {static} getLang() : String
 }
 
 class LocaleNotFoundException {
@@ -384,6 +382,14 @@ class st::hash<LexicalStr> <<template specialization>> {
 }
 
 class std::pair<Key, Value>
+
+class ArgumentsInvalidException {
+    + ArgumentsInvalidException()
+}
+
+class FileNotFoundException() {
+    + FileNotFoundException()
+}
 
 GenericFindResult -[#hidden]> ChainedHashTable : <<nested>>
 GenericFindResultOpenAddressed -[#hidden]> OpenAddressingHashTable : <<nested>>
@@ -477,6 +483,13 @@ Locale  ..> LocaleNotFoundException : throw exception
 
 LocaleNotFoundException --> std::runtime_error
 
-std::hash<LexicalStr> ..> LexicalStr : hashes
+ArgumentsInvalidException --> std::invalid_argument
+FileNotFoundException --> std::out_of_range
+
+LocaleManager ..> Locale : uses
+
+LexicalStr ..> LocaleManager : uses
+
+ReportWriter ..> Timer : uses
 
 @enduml
