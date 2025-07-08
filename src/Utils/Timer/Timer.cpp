@@ -22,7 +22,7 @@ std::string Timer::getCurrentDateTime() {
   auto now = std::chrono::system_clock::now();
   std::time_t time = std::chrono::system_clock::to_time_t(now);
 
-  std::locale loc(Locale().getLang());
+  std::locale loc(Locale::getLang());
 
   std::ostringstream oss;
   oss.imbue(loc);

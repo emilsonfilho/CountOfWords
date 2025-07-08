@@ -3,10 +3,11 @@
 
 #include <string>
 
+inline const char * defaultLocale = "pt_BR.utf8"; // Default locale for Brazilian Portuguese
+
 class Locale {
-  const char *lang = "pt_BR.utf8"; // Language code for Brazilian Portuguese
 public:
-  const char *getLang() const;
+  static const char *getLang();
 };
 
 #endif

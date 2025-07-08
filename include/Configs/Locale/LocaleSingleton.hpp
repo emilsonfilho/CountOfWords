@@ -10,7 +10,7 @@ class LocaleSingleton {
 public:
     static const boost::locale::comparator<char>& getComparator() {
         static boost::locale::generator gen;
-        static std::locale loc = gen(Locale().getLang());
+        static std::locale loc = gen(Locale::getLang());
         static boost::locale::comparator<char> comp(loc);
         return comp;
     }
