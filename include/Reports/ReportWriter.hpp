@@ -6,6 +6,7 @@
 
 #include "Dictionary/IDictionary.hpp"
 #include "ReportData.hpp"
+#include "Configs/Locale/CollateCompare/CollateCompare.hpp"
 
 class ReportWriter {
   static void printLine(std::ostream &out);

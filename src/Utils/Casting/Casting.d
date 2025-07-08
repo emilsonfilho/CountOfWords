@@ -10,7 +10,8 @@ src/Utils/Casting/Casting.o: src/Utils/Casting/Casting.cpp \
  include/utf8/checked.h include/utf8/core.h include/utf8/cpp17.h \
  include/utf8/cpp11.h include/utf8/checked.h include/utf8/unchecked.h \
  include/Visitor/IDictionaryVisitor.hpp \
- include/Utils/Casting/Casting.impl.hpp
+ include/Configs/Locale/CollateCompare/CollateCompare.hpp \
+ include/Configs/Locale/Locale.hpp include/Utils/Casting/Casting.impl.hpp
 include/Utils/Casting/Casting.hpp:
 include/Dictionary/IDictionary.hpp:
 include/Trees/Base/BaseTree.hpp:
@@ -29,4 +30,6 @@ include/utf8/cpp11.h:
 include/utf8/checked.h:
 include/utf8/unchecked.h:
 include/Visitor/IDictionaryVisitor.hpp:
+include/Configs/Locale/CollateCompare/CollateCompare.hpp:
+include/Configs/Locale/Locale.hpp:
 include/Utils/Casting/Casting.impl.hpp:

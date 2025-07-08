@@ -7,6 +7,7 @@
 #include "Dictionary/IDictionary.hpp"
 #include "FileProcessor/FileProcessor.hpp"
 #include "Reports/ReportData.hpp"
+#include "Configs/Locale/CollateCompare/CollateCompare.hpp"
 
 class WordFrequencyAnalyzer {
 public:

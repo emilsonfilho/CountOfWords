@@ -3,6 +3,8 @@
 
 #include <utility>
 
+#include "Configs/Locale/CollateCompare/CollateCompare.hpp"
+
 template <typename Key, typename Value, typename Compare> class AVLTree;
 
 template <typename Key, typename Value, typename Compare> class RedBlackTree;
@@ -24,11 +26,8 @@ class OpenAddressingHashTable;
  *
  * @tparam Key The type of the keys stored in the dictionary.
  * @tparam Value The type of the values stored in the dictionary.
- * @tparam Hash The hash function object type, used for hash-based structures.
- * @tparam Compare Comparator 
- * Defaults to std::hash<Key>.
  */
-template <typename Key, typename Value, typename Hash = std::hash<Key>, typename Compare = std::less<Key>>
+template <typename Key, typename Value>
 class IDictionaryVisitor {
 public:
   /**
@@ -44,7 +43,7 @@ public:
    *
    * @param avlTree A constant reference to the AVLTree to be visited.
    */
-  virtual void collectMetrics(const AVLTree<Key, Value, Compare> &avlTree) = 0;
+  virtual void collectMetrics(const AVLTree<Key, Value, CollateCompare> &avlTree) = 0;
 
   /**
    * @brief Pure virtual function to visit a RedBlackTree.
@@ -54,7 +53,7 @@ public:
    *
    * @param redBlackTree A constant reference to the RedBlackTree to be visited.
    */
-  virtual void collectMetrics(const RedBlackTree<Key, Value, Compare> &redBlackTree) = 0;
+  virtual void collectMetrics(const RedBlackTree<Key, Value, CollateCompare> &redBlackTree) = 0;
 
   /**
    * @brief Pure virtual function to visit a ChainedHashTable.
@@ -66,7 +65,7 @@ public:
    * visited.
    */
   virtual void collectMetrics(
-      const ChainedHashTable<Key, Value, Hash> &chainedHashTable) = 0;
+      const ChainedHashTable<Key, Value, std::hash<Key>> &chainedHashTable) = 0;
 
   /**
    * @brief Pure virtual function to visit an OpenAddressingHashTable.
@@ -77,7 +76,7 @@ public:
    * @param openAddressingHashTable A constant reference to the
    * OpenAddressingHashTable to be visited.
    */
-  virtual void collectMetrics(const OpenAddressingHashTable<Key, Value, Hash>
+  virtual void collectMetrics(const OpenAddressingHashTable<Key, Value, std::hash<Key>>
                                   &openAddressingHashTable) = 0;
 };
 

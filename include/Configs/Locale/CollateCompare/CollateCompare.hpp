@@ -11,7 +11,7 @@ public:
         : loc(Locale().getLang()), coll(std::use_facet<std::collate<char>>(loc)) {}
 
     template <typename Object>
-    int operator()(const Object& a, const Object& b) {
+    int operator()(const Object& a, const Object& b) const {
         return coll.compare(
             a.data(), a.data() + a.size(),
             b.data(), b.data() + b.size()

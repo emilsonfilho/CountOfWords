@@ -19,7 +19,7 @@
  * @tparam Key The key type of the elements in the dictionary.
  * @tparam Value The value type of the elements in the dictionary.
  */
-template <typename Key, typename Value, typename Hash = std::hash<Key>, typename Compare = std::less<Key>>
+template <typename Key, typename Value>
 class ReportDataCollectorVisitor : public IDictionaryVisitor<Key, Value> {
   /**
    * @var report
@@ -58,7 +58,7 @@ public:
    *
    * @param avlTree The AVLTree instance to be analyzed.
    */
-  void collectMetrics(const AVLTree<Key, Value, Compare> &avlTree);
+  void collectMetrics(const AVLTree<Key, Value, CollateCompare> &avlTree);
 
   /**
    * @brief Collects performance metrics from a RedBlackTree.
@@ -68,7 +68,7 @@ public:
    *
    * @param redBlackTree The RedBlackTree instance to be analyzed.
    */
-  void collectMetrics(const RedBlackTree<Key, Value, Compare> &redBlackTree);
+  void collectMetrics(const RedBlackTree<Key, Value, CollateCompare> &redBlackTree);
 
   /**
    * @brief Collects performance metrics from a ChainedHashTable.
@@ -79,7 +79,7 @@ public:
    * @param chainedHashTable The ChainedHashTable instance to be analyzed.
    */
   void
-  collectMetrics(const ChainedHashTable<Key, Value, Hash> &chainedHashTable);
+  collectMetrics(const ChainedHashTable<Key, Value, std::hash<Key>> &chainedHashTable);
 
   /**
    * @brief Collects performance metrics from an OpenAddressingHashTable.
@@ -92,7 +92,7 @@ public:
    * analyzed.
    */
   void collectMetrics(
-      const OpenAddressingHashTable<Key, Value, Hash> &openAddressingHashTable);
+      const OpenAddressingHashTable<Key, Value, std::hash<Key>> &openAddressingHashTable);
 };
 
 #include "Visitor/ReportDataCollectorVisitor.impl.hpp"
