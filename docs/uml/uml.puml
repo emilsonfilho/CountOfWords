@@ -335,7 +335,7 @@ interface IDictionaryVisitor<Key, Value, Hash> {
 class ReportWriter {
     {static} printLine(out: std::ostream&) : void
     {static} printHeader(title: String, out: std::ostream&) : void
-    {static} exportReport(reportData: ReportData, out: std::ostream&, dict: IDictionary<String, size_t>* dict) : void
+    {static} exportReport(reportData: ReportData, out: std::ostream&, dict: IDictionary<LexicalStr, size_t>* dict) : void
 }
 
 class Locale {
@@ -356,6 +356,31 @@ package Casting <<namespace>> {
 
     Utils ..> IDictionary
     Utils ..> DictionaryType
+}
+
+class LocaleManager {
+    {static} getComparator() : boost::locale::comparator<char>
+}
+
+class LexicalStr {
+    + data : String
+
+    + LexicalStr()
+    + LexicalStr(str: String)
+    + LexicalStr(str: const char*)
+
+    + operator<(other: LexicalStr) : bool
+    + operator>(other: LexicalStr) : bool
+    + operator<=(other: LexicalStr) : bool
+    + operator>=(other: LexicalStr) : bool
+    + operator==(other: LexicalStr) : bool
+    + operator!=(other: LexicalStr) : bool
+    + operator() : String
+    + operator<<(os: std::ostream&, obj: LexicalStr) : std::ostream&
+}
+
+class st::hash<LexicalStr> <<template specialization>> {
+    + operator()(key: LexicalStr): size_t
 }
 
 class std::pair<Key, Value>
@@ -451,5 +476,7 @@ ReportWriter ..> IDictionary
 Locale  ..> LocaleNotFoundException : throw exception
 
 LocaleNotFoundException --> std::runtime_error
+
+std::hash<LexicalStr> ..> LexicalStr : hashes
 
 @enduml
