@@ -2,6 +2,7 @@
 #define LEXICAL_STR_HPP
 
 #include <functional>
+#include <string>
 
 #include <boost/locale.hpp>
 #include "Configs/Locale/Locale.hpp"
