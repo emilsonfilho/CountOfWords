@@ -2,8 +2,8 @@
 Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/kjv-bible.txt
-Estrutura de Dados: Árvore Rubro-Negra
-Data de execução: terça, 08 de julho de 2025 - 01:46:40
+Estrutura de Dados: Árvore AVL
+Data de execução: terça, 08 de julho de 2025 - 14:19:03
 
 ================================================================================
 Tabela de Frequências
@@ -12978,6 +12978,6 @@ zuzims                 | 1
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 16161
-Número de comparações: 19421432
-Número de rotações: 11161
+Tempo total (ms): 5058
+Número de comparações: 12958950
+Número de rotações: 9937

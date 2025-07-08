@@ -59,7 +59,6 @@ void RedBlackTree<Key, Value>::insertFixup(RedBlackNode<Key, Value> *z) {
         z = z->parent->parent;
       } else {
         if (z == z->parent->right) { // Case 2
-          std::cout << "entrou no caso 2\n";
           z = z->parent;
           rotateLeft(z);
         }
@@ -332,7 +331,6 @@ template <typename Key, typename Value> void RedBlackTree<Key, Value>::clear() {
 template <typename Key, typename Value>
 void RedBlackTree<Key, Value>::printInOrder(std::ostream &os) const {
   this->inOrderTransversal(os, this->root, NIL);
-  print();
 }
 
 template <typename Key, typename Value>
@@ -379,15 +377,7 @@ Value &RedBlackTree<Key, Value>::operator[](const Key &key) {
     y->right = z;
   }
 
-  std::cout << std::string(80, '=') << std::endl;
-  print();
-  std::cout << std::string(80, '=') << std::endl;
-
-
   insertFixup(z);
-
-  print();
-  std::cout << std::string(80, '-') << std::endl;
 
   return z->getValue();
 }
