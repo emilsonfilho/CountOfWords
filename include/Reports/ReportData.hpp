@@ -46,8 +46,18 @@ struct ReportData {
    */
   size_t totalWordsProcessed;
 
+  /**
+   * @brief Name of the file associated with the report.
+   *
+   * Used to display or log which input file generated this data.
+   */
   std::string filename;
 
+  /**
+   * @brief Length of the longest key stored in the dictionary.
+   *
+   * Useful for aligning columns or formatting output.
+   */
   size_t maxKeyLength;
 };
 
