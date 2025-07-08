@@ -7,13 +7,13 @@
 #include <locale>
 
 /**
- * @class LocaleSingleton
+ * @class LocaleManager
  * @brief Provides a singleton instance of a locale-aware string comparator.
  *
  * This class ensures that a single instance of a locale-based comparator is used 
  * throughout the application, based on the system or application language settings.
  */
-class LocaleSingleton {
+class LocaleManager {
 public:
     /**
      * @brief Returns a reference to a locale-aware string comparator.

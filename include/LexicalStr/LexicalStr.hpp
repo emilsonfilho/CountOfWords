@@ -6,7 +6,7 @@
 
 #include <boost/locale.hpp>
 #include "Configs/Locale/Locale.hpp"
-#include "Configs/Locale/LocaleSingleton.hpp"
+#include "Configs/Locale/LocaleManager.hpp"
 
 struct LexicalStr {
     std::string data;

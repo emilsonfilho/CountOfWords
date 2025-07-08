@@ -26,7 +26,7 @@ src/CLI/CLIHandler.o: src/CLI/CLIHandler.cpp include/CLI/CLIHandler.hpp \
  include/FileProcessor/FileProcessor.hpp include/Reports/ReportWriter.hpp \
  include/Reports/ReportData.hpp include/LexicalStr/LexicalStr.hpp \
  include/Configs/Locale/Locale.hpp \
- include/Configs/Locale/LocaleSingleton.hpp \
+ include/Configs/Locale/LocaleManager.hpp \
  include/Configs/Locale/Locale.hpp include/Utils/Casting/Casting.hpp \
  include/Utils/Casting/Casting.impl.hpp \
  include/WordFrequencyAnalyzer/WordFrequencyAnalyzer.hpp \
@@ -72,7 +72,7 @@ include/Reports/ReportWriter.hpp:
 include/Reports/ReportData.hpp:
 include/LexicalStr/LexicalStr.hpp:
 include/Configs/Locale/Locale.hpp:
-include/Configs/Locale/LocaleSingleton.hpp:
+include/Configs/Locale/LocaleManager.hpp:
 include/Configs/Locale/Locale.hpp:
 include/Utils/Casting/Casting.hpp:
 include/Utils/Casting/Casting.impl.hpp:

@@ -7,7 +7,7 @@ LexicalStr::LexicalStr(const std::string& str): data(str) {}
 LexicalStr::LexicalStr(const char* str): data(str) {}
 
 bool LexicalStr::operator<(const LexicalStr& other) const {
-    return LocaleSingleton::getComparator()(data, other.data);
+    return LocaleManager::getComparator()(data, other.data);
 }
 
 bool LexicalStr::operator>(const LexicalStr& other) const {
