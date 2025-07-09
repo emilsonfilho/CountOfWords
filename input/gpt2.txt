@@ -1,0 +1,3 @@
+Digitei make clean achando que ia só limpar o projeto.
+Ele limpou... tudo.
+Até minha vontade de viver

@@ -32,17 +32,15 @@ private:
    * @brief Performs a left rotation on a given node.
    *
    * @param y A pointer to the node to be rotated.
-   * @return A pointer to the new root of the subtree after the rotation.
    */
-  RedBlackNode<Key, Value> *rotateLeft(RedBlackNode<Key, Value> *y);
+  void rotateLeft(RedBlackNode<Key, Value> *x);
 
   /**
    * @brief Performs a right rotation on a given node.
    *
    * @param y A pointer to the node to be rotated.
-   * @return A pointer to the new root of the subtree after the rotation.
    */
-  RedBlackNode<Key, Value> *rotateRight(RedBlackNode<Key, Value> *y);
+  void rotateRight(RedBlackNode<Key, Value> *x);
 
   /**
    * @brief Fixes the Red-Black Tree properties after an insertion.
@@ -84,13 +82,16 @@ private:
   void deleteNode(RedBlackNode<Key, Value> *z);
 
   /**
-   * @brief Prints the structure of the Red-Black Tree starting from a given
-   * node.
+   * @brief Prints the structure of the Red-Black Tree starting from a given node.
+   *
+   * This method recursively traverses the tree and prints its structure in a human-readable format.
+   * It uses indentation and branch markers to indicate left/right children and tree depth.
    *
    * @param node A pointer to the current node being printed.
-   * @param indent The indentation level for the current node.
+   * @param prefix A string used to format the indentation of the output, indicating depth.
+   * @param isLeft A boolean indicating whether the current node is a left child (true) or right child (false).
    */
-  void printTree(RedBlackNode<Key, Value> *node, int indent = 0) const;
+  void printTree(RedBlackNode<Key, Value>* node, const std::string& prefix, bool isLeft) const;
 
 public:
   /**

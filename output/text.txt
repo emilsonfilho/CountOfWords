@@ -3,7 +3,7 @@ Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/text.txt
 Estrutura de Dados: Tabela Hash por Encadeamento Exterior
-Data de execução: domingo, 06 de julho de 2025 - 22:14:27
+Data de execução: segunda, 07 de julho de 2025 - 16:29:13
 
 ================================================================================
 Tabela de Frequências

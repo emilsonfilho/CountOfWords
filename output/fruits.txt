@@ -1,0 +1,38 @@
+================================================================================
+Count of Words: Data Structure Edition - Output Report
+================================================================================
+Arquivo Analisado: input/fruits.txt
+Estrutura de Dados: Árvore AVL
+Data de execução: segunda, 07 de julho de 2025 - 16:45:23
+
+================================================================================
+Tabela de Frequências
+================================================================================
+Palavra   | Frequência
+abacate   | 1
+banana    | 1
+caju      | 1
+damasco   | 1
+embu      | 1
+figo      | 1
+goiaba    | 1
+hibisco   | 1
+ilama     | 1
+jambo     | 1
+kiwi      | 1
+laranja   | 1
+mamão     | 1
+nêspera   | 1
+pera      | 1
+quiuí     | 1
+romã      | 1
+sapoti    | 1
+tamarindo | 1
+uva       | 1
+
+================================================================================
+Métricas de Desempenho
+================================================================================
+Tempo total (ms): 0
+Número de comparações: 138
+Número de rotações: 15

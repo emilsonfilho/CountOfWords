@@ -1,0 +1,115 @@
+================================================================================
+Count of Words: Data Structure Edition - Output Report
+================================================================================
+Arquivo Analisado: input/gpt.txt
+Estrutura de Dados: Árvore Rubro-Negra
+Data de execução: segunda, 07 de julho de 2025 - 17:02:21
+
+================================================================================
+Tabela de Frequências
+================================================================================
+Palavra          | Frequência
+a                | 1
+aba              | 1
+abri             | 2
+abro             | 1
+ainda            | 1
+antes            | 1
+ao               | 1
+arquivos         | 1
+atom             | 1
+bom              | 1
+carinho          | 2
+caro             | 1
+chamado          | 1
+com              | 3
+começou          | 1
+compilar         | 1
+complexas        | 1
+conferir         | 1
+dados            | 1
+de               | 4
+demais           | 1
+depois           | 1
+desabafo.txt     | 1
+desde            | 1
+dia              | 1
+do               | 1
+dou              | 1
+e                | 6
+editor           | 1
+ele              | 5
+em               | 1
+emilson          | 1
+entende          | 1
+então            | 1
+escrito          | 1
+estava           | 3
+estruturas       | 1
+eu               | 2
+feiras           | 1
+forço            | 1
+fui              | 1
+gente            | 1
+ides             | 1
+intel            | 1
+jogar            | 1
+lento            | 1
+magoado          | 1
+mais             | 1
+me               | 1
+mesmo            | 1
+minecraft        | 1
+misterioso       | 1
+na               | 1
+navegador        | 1
+normal           | 1
+notebook         | 1
+não              | 3
+o                | 1
+ok               | 1
+os               | 1
+pano             | 1
+para             | 1
+passo            | 1
+pensei           | 1
+percebi          | 1
+por              | 1
+programar        | 1
+quando           | 2
+que              | 1
+quer             | 1
+reiniciei        | 1
+rodar            | 1
+se               | 1
+segundas         | 1
+seu              | 1
+shaders          | 1
+sou              | 1
+superaquecimento | 1
+só               | 2
+tela             | 1
+tempo            | 1
+texto            | 1
+transformer      | 1
+trato            | 1
+trava            | 1
+travamentos      | 1
+travou           | 1
+três             | 2
+tudo             | 1
+txt              | 1
+um               | 5
+uma              | 1
+usa              | 1
+vez              | 2
+vi               | 1
+você             | 1
+às               | 1
+
+================================================================================
+Métricas de Desempenho
+================================================================================
+Tempo total (ms): 0
+Número de comparações: 1285
+Número de rotações: 71

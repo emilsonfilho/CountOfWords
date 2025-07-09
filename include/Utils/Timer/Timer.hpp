@@ -47,6 +47,12 @@ public:
    */
   std::chrono::milliseconds duration() const;
 
+  /**
+   * @brief Gets the current system date and time as a localized string.
+   * @note The output is formatted as "Weekday, DD of Month of YYYY - HH:MM:SS" 
+   * using the application's configured locale.
+   * @return A string containing the formatted current date and time.
+   */
   static std::string getCurrentDateTime();
 };
 

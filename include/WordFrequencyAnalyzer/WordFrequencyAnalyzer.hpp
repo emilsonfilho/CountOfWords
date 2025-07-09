@@ -7,6 +7,7 @@
 #include "Dictionary/IDictionary.hpp"
 #include "FileProcessor/FileProcessor.hpp"
 #include "Reports/ReportData.hpp"
+#include "LexicalStr/LexicalStr.hpp"
 
 class WordFrequencyAnalyzer {
 public:
@@ -25,7 +26,7 @@ public:
    * @return ReportData An object containing the results of the word frequency
    * analysis.
    */
-  static ReportData analyze(IDictionary<std::string, int> *dictionary,
+  static ReportData analyze(IDictionary<LexicalStr, size_t> *dictionary,
                             const FileProcessor &fileProcessor);
 };
 

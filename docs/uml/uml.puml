@@ -1,10 +1,10 @@
 @startuml Count Of Words Design Project
 
 interface IDictionary<Key, Value> {
-    - comparisonsCount: size_t
+    # comparisonsCount: size_t
 
-    - incrementCounter(n: size_t): void
-    - resetCounter(): void
+    # incrementCounter(n: size_t): void
+    # resetCounter(): void
 
     + insert(key: Key, value: Value): void
     + find(key: Key, outValue: Value): bool
@@ -133,7 +133,6 @@ class Node<Key, Value> {
     + getKey() : Key
     + setKey(key: Key) : void
     + getValue() : Value
-    + setKey(key: Key) : void
     + update(key: Key, value: Value) : void
     + show() : String
 }
@@ -157,6 +156,7 @@ class BaseTree<Tree, Node, Key, Value> {
     # setMaxLen(key: Key) : void
     # setValLen(value: Value) : void
     # incrementCounter(amount: size_t) : void
+    # incrementRotationsCount() : void
 }
 
 class AVLNode<Key, Value> {
@@ -259,7 +259,7 @@ class CLIHandler {
     - options : CLIOptions
     - quantityArguments : int
 
-    + CLIHandler()
+    + CLIHandler(argc: int, argv: String[])
     + validOptions() : bool
     + execute() : int
 }
@@ -335,13 +335,11 @@ interface IDictionaryVisitor<Key, Value, Hash> {
 class ReportWriter {
     {static} printLine(out: std::ostream&) : void
     {static} printHeader(title: String, out: std::ostream&) : void
-    {static} exportReport(reportData: ReportData, out: std::ostream&, dict: IDictionary<String, size_t>* dict) : void
+    {static} exportReport(reportData: ReportData, out: std::ostream&, dict: IDictionary<LexicalStr, size_t>* dict) : void
 }
 
 class Locale {
-    - lang : String
-
-    + getLang : String
+    {static} getLang() : String
 }
 
 class LocaleNotFoundException {
@@ -358,7 +356,40 @@ package Casting <<namespace>> {
     Utils ..> DictionaryType
 }
 
+class LocaleManager {
+    {static} getComparator() : boost::locale::comparator<char>
+}
+
+class LexicalStr {
+    + data : String
+
+    + LexicalStr()
+    + LexicalStr(str: String)
+    + LexicalStr(str: const char*)
+
+    + operator<(other: LexicalStr) : bool
+    + operator>(other: LexicalStr) : bool
+    + operator<=(other: LexicalStr) : bool
+    + operator>=(other: LexicalStr) : bool
+    + operator==(other: LexicalStr) : bool
+    + operator!=(other: LexicalStr) : bool
+    + operator() : String
+    + operator<<(os: std::ostream&, obj: LexicalStr) : std::ostream&
+}
+
+class st::hash<LexicalStr> <<template specialization>> {
+    + operator()(key: LexicalStr): size_t
+}
+
 class std::pair<Key, Value>
+
+class ArgumentsInvalidException {
+    + ArgumentsInvalidException()
+}
+
+class FileNotFoundException() {
+    + FileNotFoundException()
+}
 
 GenericFindResult -[#hidden]> ChainedHashTable : <<nested>>
 GenericFindResultOpenAddressed -[#hidden]> OpenAddressingHashTable : <<nested>>
@@ -451,5 +482,14 @@ ReportWriter ..> IDictionary
 Locale  ..> LocaleNotFoundException : throw exception
 
 LocaleNotFoundException --> std::runtime_error
+
+ArgumentsInvalidException --> std::invalid_argument
+FileNotFoundException --> std::out_of_range
+
+LocaleManager ..> Locale : uses
+
+LexicalStr ..> LocaleManager : uses
+
+ReportWriter ..> Timer : uses
 
 @enduml

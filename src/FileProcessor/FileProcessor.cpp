@@ -19,7 +19,7 @@ FileProcessor::FileProcessor(const std::string &filename) {
     throw FileNotFoundException(path);
 
   boost::locale::generator gen;
-  loc = gen.generate(Locale().getLang());
+  loc = gen.generate(Locale::getLang());
 
   std::string line;
   while (std::getline(file, line)) {

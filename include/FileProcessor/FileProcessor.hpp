@@ -27,10 +27,19 @@ class FileProcessor {
    */
   std::vector<std::string> tokenize(const std::string &text) const;
 
+  /**
+   * @brief Normalizes a word by trimming leading/trailing underscores and converting it to lowercase.
+   * @param word The word to be normalized.
+   * @return The normalized string.
+   */
   std::string normalize(const std::string &word) const;
 
+  /**
+   * @brief Checks if a character is an underscore.
+   * @param ch The character to check.
+   * @return `true` if the character is an underscore, `false` otherwise.
+   */
   bool isUnderscore(char ch) const;
-
 public:
   std::string path; ///< Full path to the input file.
   std::vector<std::string>

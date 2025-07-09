@@ -1,0 +1,77 @@
+================================================================================
+Count of Words: Data Structure Edition - Output Report
+================================================================================
+Arquivo Analisado: input/gpt3.txt
+Estrutura de Dados: Árvore Rubro-Negra
+Data de execução: segunda, 07 de julho de 2025 - 17:05:44
+
+================================================================================
+Tabela de Frequências
+================================================================================
+Palavra        | Frequência
+a              | 3
+acho           | 1
+acordar        | 1
+apertei        | 1
+arrependimento | 1
+bolacha        | 1
+botão          | 1
+café           | 1
+chá            | 1
+com            | 1
+como           | 1
+convencer      | 1
+cooperar       | 1
+cuspiu         | 1
+de             | 4
+desculpa       | 1
+dia            | 1
+diz            | 1
+e              | 4
+ela            | 3
+encarar        | 1
+está           | 1
+fez            | 1
+fundo          | 1
+gotas          | 1
+grrrt          | 1
+guerreiro      | 1
+hoje           | 2
+impressoras    | 1
+insisti        | 1
+já             | 1
+luz            | 1
+manhã          | 1
+mesma          | 1
+missão         | 1
+máquina        | 1
+no             | 1
+não            | 1
+o              | 2
+os             | 1
+pedir          | 1
+pfff           | 1
+piscou         | 1
+por            | 1
+que            | 4
+quem           | 1
+reiniciei      | 1
+sabe           | 1
+se             | 1
+sem            | 1
+sobreviver     | 1
+sou            | 1
+ti             | 1
+tive           | 1
+toda           | 1
+todos          | 1
+tristeza       | 1
+três           | 1
+vingando       | 1
+
+================================================================================
+Métricas de Desempenho
+================================================================================
+Tempo total (ms): 0
+Número de comparações: 731
+Número de rotações: 50

@@ -4,6 +4,15 @@
 #include "Dictionary/IDictionary.hpp"
 
 namespace Casting {
+/**
+ * @brief Casts a concrete dictionary implementation to its constant IDictionary interface.
+ * @namespace Casting
+ * @tparam Key The key type of the dictionary.
+ * @tparam Value The value type of the dictionary.
+ * @tparam Impl The concrete dictionary implementation type, which must inherit from IDictionary<Key, Value>.
+ * @param impl The dictionary implementation object to be cast.
+ * @return A constant reference to the IDictionary interface of the provided implementation.
+ */
 template <typename Key, typename Value, typename Impl>
 const IDictionary<Key, Value> &toIDictionary(const Impl &impl);
 

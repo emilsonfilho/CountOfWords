@@ -1,0 +1,30 @@
+================================================================================
+Count of Words: Data Structure Edition - Output Report
+================================================================================
+Arquivo Analisado: input/joke.txt
+Estrutura de Dados: Árvore Rubro-Negra
+Data de execução: segunda, 07 de julho de 2025 - 16:36:15
+
+================================================================================
+Tabela de Frequências
+================================================================================
+Palavra  | Frequência
+caiu     | 1
+contar   | 1
+e        | 1
+elefante | 1
+lama     | 1
+na       | 1
+pesada   | 1
+piada    | 1
+suja     | 1
+um       | 1
+uma      | 1
+vou      | 1
+
+================================================================================
+Métricas de Desempenho
+================================================================================
+Tempo total (ms): 0
+Número de comparações: 69
+Número de rotações: 7
