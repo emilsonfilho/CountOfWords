@@ -327,6 +327,8 @@ public:
    * will interact with the ChainedHashTable.
    */
   void accept(IDictionaryVisitor<Key, Value> &visitor) const override;
+
+  size_t getMemoryUsage() const override;
 };
 
 #include "HashTables/Chained/ChainedHashTable.impl.hpp"

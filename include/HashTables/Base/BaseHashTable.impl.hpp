@@ -75,3 +75,10 @@ void BaseHashTable<HashTable, Collection, Key, Value,
                    Hash>::incrementCollisionsCount(size_t amount) const {
   collisionsCount += amount;
 }
+
+template <typename HashTable, typename Collection, typename Key, typename Value,
+          typename Hash>
+size_t BaseHashTable<HashTable, Collection, Key, Value,
+                     Hash>::sizeOf() const {
+  return sizeof(*this) + numberOfElements * sizeof(Collection);
+}

@@ -1,0 +1,13 @@
+@startuml Singleton
+
+class Locale {
+    {static} getLang()
+}
+
+class LocaleManager {
+    {static} getComparator()
+}
+
+LocaleManager ..> Locale
+
+@enduml

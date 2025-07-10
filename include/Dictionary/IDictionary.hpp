@@ -123,6 +123,8 @@ public:
    */
   virtual void accept(IDictionaryVisitor<Key, Value> &visitor) const = 0;
 
+  virtual size_t getMemoryUsage() const = 0;
+
   template <typename Tree, typename Node, typename K, typename V>
   friend class BaseTree;
 

@@ -397,3 +397,8 @@ void RedBlackTree<Key, Value>::accept(
     IDictionaryVisitor<Key, Value> &visitor) const {
   visitor.collectMetrics(*this);
 }
+
+template <typename Key, typename Value>
+size_t RedBlackTree<Key, Value>::getMemoryUsage() const {
+  return this->sizeOf();
+}

@@ -1,6 +1,7 @@
 #include "Reports/ReportWriter.hpp"
 
 #include <string>
+#include <cmath>
 
 #include "LexicalStr/LexicalStr.hpp"
 #include "Utils/Timer/Timer.hpp"
@@ -35,5 +36,6 @@ void ReportWriter::exportReport(const ReportData &reportData, std::ostream &out,
   out << "Tempo total (ms): " << reportData.buildTime.count() << '\n';
   out << "Número de comparações: " << reportData.comparisons << '\n';
   out << "Número de " << reportData.specificMetric.first << ": "
-      << reportData.specificMetric.second << '\n';
+      << reportData.specificMetric.second << '\n'
+      << "Tamanho da estrutura (kB): " << std::round(dict->getMemoryUsage() / 1024);
 }

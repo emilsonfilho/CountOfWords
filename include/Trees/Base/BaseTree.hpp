@@ -172,6 +172,10 @@ protected:
    *               Defaults to 1 if not specified.
    */
   void incrementRotationsCount(size_t amount = 1);
+
+  size_t countNodes(Node* node, Node* comp = nullptr) const;
+  
+  size_t sizeOf() const;
 };
 
 // Include the implementation file to provide the definitions for the template

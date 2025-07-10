@@ -121,4 +121,15 @@ void BaseTree<Tree, Node, Key, Value>::incrementRotationsCount(size_t amount) {
   rotationsCount += amount;
 }
 
+template <typename Tree, typename Node, typename Key, typename Value>
+size_t BaseTree<Tree, Node, Key, Value>::countNodes(Node* node, Node* comp) const {
+  if (node == comp) return 0;
+  return 1 + countNodes(node->left, comp) + countNodes(node->right, comp);
+}
+
+template <typename Tree, typename Node, typename Key, typename Value>
+size_t BaseTree<Tree, Node, Key, Value>::sizeOf() const {
+  return countNodes(root) * sizeof(Node);
+}
+
 #endif

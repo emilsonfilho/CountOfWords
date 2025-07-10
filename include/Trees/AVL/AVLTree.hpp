@@ -262,6 +262,8 @@ public:
    * will interact with the AVLTree.
    */
   void accept(IDictionaryVisitor<Key, Value> &visitor) const override;
+
+  size_t getMemoryUsage() const override;
 };
 
 #include "Trees/AVL/AVLTree.impl.hpp"

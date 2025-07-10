@@ -228,3 +228,8 @@ void ChainedHashTable<Key, Value, Hash>::accept(
     IDictionaryVisitor<Key, Value> &visitor) const {
   visitor.collectMetrics(*this);
 }
+
+template <typename Key, typename Value, typename Hash>
+size_t ChainedHashTable<Key, Value, Hash>::getMemoryUsage() const {
+  return this->sizeOf();
+}

@@ -281,3 +281,8 @@ void OpenAddressingHashTable<Key, Value, Hash>::accept(
     IDictionaryVisitor<Key, Value> &visitor) const {
   visitor.collectMetrics(*this);
 }
+
+template <typename Key, typename Value, typename Hash>
+size_t OpenAddressingHashTable<Key, Value, Hash>::getMemoryUsage() const {
+  return this->sizeOf();
+}

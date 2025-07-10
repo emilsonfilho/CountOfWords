@@ -125,6 +125,8 @@ public:
    * to 1.
    */
   void incrementCollisionsCount(size_t m = 1) const;
+
+  size_t sizeOf() const;
 };
 
 #include "HashTables/Base/BaseHashTable.impl.hpp"

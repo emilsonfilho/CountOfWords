@@ -321,6 +321,8 @@ public:
    * will interact with the OpenAddresingHashTable.
    */
   void accept(IDictionaryVisitor<Key, Value> &visitor) const override;
+
+  size_t getMemoryUsage() const override;
 };
 
 #include "HashTables/OpenAddressing/OpenAddressingHashTable.impl.hpp"
