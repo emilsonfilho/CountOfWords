@@ -37,5 +37,5 @@ void ReportWriter::exportReport(const ReportData &reportData, std::ostream &out,
   out << "Número de comparações: " << reportData.comparisons << '\n';
   out << "Número de " << reportData.specificMetric.first << ": "
       << reportData.specificMetric.second << '\n'
-      << "Tamanho da estrutura (kB): " << std::round(dict->getMemoryUsage() / 1024);
+      << "Tamanho da estrutura (kB): " << reportData.memoryUsage;
 }

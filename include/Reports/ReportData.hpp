@@ -59,6 +59,8 @@ struct ReportData {
    * Useful for aligning columns or formatting output.
    */
   size_t maxKeyLength;
+
+  size_t memoryUsage;
 };
 
 #endif

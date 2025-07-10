@@ -1,5 +1,7 @@
 #include "WordFrequencyAnalyzer/WordFrequencyAnalyzer.hpp"
 
+#include <cmath>
+
 #include "Utils/Strings/StringHandler.hpp"
 #include "Utils/Timer/Timer.hpp"
 #include "Visitor/ReportDataCollectorVisitor.hpp"
@@ -28,6 +30,7 @@ WordFrequencyAnalyzer::analyze(IDictionary<LexicalStr, size_t> *dictionary,
   report.buildTime = timer.duration();
   report.totalWordsProcessed = wordsCount;
   report.filename = fileProcessor.path;
+  report.memoryUsage = std::round(dictionary->getMemoryUsage() / 1024);
 
   return report;
 }

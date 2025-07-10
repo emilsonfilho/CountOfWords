@@ -2,8 +2,8 @@
 Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/kjv-bible.txt
-Estrutura de Dados: Tabela Hash por Endereçamento Aberto
-Data de execução: quinta, 10 de julho de 2025 - 19:14:18
+Estrutura de Dados: Árvore AVL
+Data de execução: quinta, 10 de julho de 2025 - 19:19:52
 
 ================================================================================
 Tabela de Frequências
@@ -12978,7 +12978,7 @@ zuzims                 | 1
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 1916
-Número de comparações: 2259430
-Número de colisões: 5888
-Tamanho da estrutura (kB): 607
+Tempo total (ms): 29068
+Número de comparações: 12958950
+Número de rotações: 9937
+Tamanho da estrutura (kB): 810
