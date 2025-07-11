@@ -400,5 +400,5 @@ void RedBlackTree<Key, Value>::accept(
 
 template <typename Key, typename Value>
 size_t RedBlackTree<Key, Value>::getMemoryUsage() const {
-  return this->sizeOf();
+  return this->sizeOf(NIL);
 }

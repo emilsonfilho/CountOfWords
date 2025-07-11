@@ -175,7 +175,7 @@ protected:
 
   size_t countNodes(Node* node, Node* comp = nullptr) const;
   
-  size_t sizeOf() const;
+  size_t sizeOf(Node* comp = nullptr) const;
 };
 
 // Include the implementation file to provide the definitions for the template

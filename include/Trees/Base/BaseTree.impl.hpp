@@ -128,8 +128,8 @@ size_t BaseTree<Tree, Node, Key, Value>::countNodes(Node* node, Node* comp) cons
 }
 
 template <typename Tree, typename Node, typename Key, typename Value>
-size_t BaseTree<Tree, Node, Key, Value>::sizeOf() const {
-  return countNodes(root) * sizeof(Node);
+size_t BaseTree<Tree, Node, Key, Value>::sizeOf(Node* comp) const {
+  return countNodes(root, comp) * sizeof(Node);
 }
 
 #endif
