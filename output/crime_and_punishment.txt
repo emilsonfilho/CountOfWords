@@ -2,8 +2,9 @@
 Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/crime_and_punishment.txt
-Estrutura de Dados: Árvore AVL
-Data de execução: domingo, 06 de julho de 2025 - 21:51:12
+Estrutura de Dados: Árvore Rubro-Negra
+Data de execução: sexta, 11 de julho de 2025 - 08:05:27
+Quantidade de palavras: 204263
 
 ================================================================================
 Tabela de Frequências
@@ -17,6 +18,7 @@ Palavra            | Frequência
 8                  | 1   
 9                  | 1   
 a                  | 4583
+à                  | 2   
 a.d                | 1   
 aback              | 4   
 abandon            | 3   
@@ -169,6 +171,9 @@ advice             | 7
 advisability       | 1   
 advise             | 3   
 advocating         | 1   
+æsthetic           | 1   
+æsthetically       | 1   
+æsthetics          | 1   
 afanasy            | 8   
 afanasyvitch       | 2   
 afar               | 1   
@@ -217,6 +222,7 @@ aha                | 2
 ahead              | 2   
 aid                | 1   
 aie                | 2   
+aïe                | 1   
 ailing             | 1   
 aim                | 5   
 aimed              | 5   
@@ -241,6 +247,7 @@ algebra            | 1
 alike              | 1   
 alive              | 12  
 all                | 1303
+all’s              | 1   
 allah              | 1   
 allayed            | 1   
 allegorical        | 1   
@@ -255,7 +262,6 @@ alluding           | 1
 allurement         | 1   
 alluring           | 1   
 allusions          | 3   
-all’s              | 1   
 alma               | 1   
 almighty           | 1   
 almost             | 215 
@@ -311,6 +317,7 @@ amusements         | 1
 amuses             | 1   
 amusing            | 2   
 an                 | 546 
+anæmic             | 1   
 analyse            | 1   
 analysed           | 2   
 analysis           | 2   
@@ -370,7 +377,6 @@ anyone’s           | 5
 anything           | 145 
 anyway             | 35  
 anywhere           | 6   
-anæmic             | 1   
 apart              | 10  
 apartments         | 1   
 apathy             | 3   
@@ -610,7 +616,6 @@ awry               | 1
 axe                | 58  
 axes               | 1   
 axiom              | 1   
-aïe                | 1   
 b                  | 1   
 babble             | 1   
 babbled            | 1   
@@ -842,8 +847,8 @@ billiards          | 3
 binding            | 1   
 biography          | 1   
 bird               | 5   
-birds              | 3   
 bird’s             | 1   
+birds              | 3   
 birth              | 3   
 birthday           | 1   
 bit                | 27  
@@ -984,9 +989,9 @@ bows               | 2
 box                | 22  
 boxes              | 5   
 boy                | 35  
+boy’s              | 1   
 boyish             | 1   
 boys               | 6   
-boy’s              | 1   
 braced             | 1   
 bracelets          | 1   
 brag               | 1   
@@ -1061,8 +1066,8 @@ brooded            | 1
 brooding           | 3   
 broom              | 2   
 brother            | 108 
-brothers           | 2   
 brother’s          | 15  
+brothers           | 2   
 brought            | 78  
 brow               | 2   
 brown              | 5   
@@ -1122,8 +1127,8 @@ bustle             | 1
 busy               | 16  
 busybody           | 1   
 but                | 1793
-butchered          | 1   
 butcher’s          | 1   
+butchered          | 1   
 buts               | 1   
 butter             | 1   
 butterfly          | 2   
@@ -1139,6 +1144,7 @@ buzzed             | 1
 bwoken             | 1   
 by                 | 553 
 bye                | 55  
+c’est              | 1   
 cab                | 9   
 cabbage            | 2   
 cabin              | 3   
@@ -1170,6 +1176,7 @@ came               | 240
 camels             | 1   
 campany            | 1   
 can                | 279 
+can’t              | 127 
 canal              | 22  
 canary             | 1   
 cancan             | 3   
@@ -1183,7 +1190,6 @@ cane               | 3
 cannon             | 1   
 cannot             | 33  
 canvas             | 1   
-can’t              | 127 
 cap                | 33  
 capable            | 20  
 capacities         | 2   
@@ -1253,10 +1259,10 @@ category           | 5
 cathedral          | 3   
 caught             | 34  
 cause              | 26  
+causé              | 2   
 caused             | 12  
 causes             | 9   
 causing            | 1   
-causé              | 2   
 caution            | 2   
 cautious           | 3   
 cautiously         | 8   
@@ -1362,12 +1368,12 @@ chief              | 18
 chiefly            | 5   
 chiens             | 1   
 child              | 50  
+child’s            | 5   
 childhood          | 6   
 childish           | 11  
 childishness       | 1   
 children           | 108 
 children’s         | 7   
-child’s            | 5   
 chill              | 7   
 chilled            | 2   
 chin               | 10  
@@ -1389,11 +1395,11 @@ chorus             | 3
 chose              | 2   
 chosen             | 5   
 christ             | 2   
+christ’s           | 1   
 christened         | 1   
 christening        | 1   
 christian          | 2   
 christmas          | 1   
-christ’s           | 1   
 chronicle          | 1   
 chuckled           | 1   
 chuckling          | 1   
@@ -1893,9 +1899,9 @@ cries              | 4
 crime              | 50  
 crimes             | 5   
 criminal           | 23  
+criminal’s         | 1   
 criminality        | 1   
 criminals          | 8   
-criminal’s         | 1   
 crimson            | 9   
 crimsoned          | 2   
 cringing           | 1   
@@ -1915,6 +1921,7 @@ crossed            | 18
 crosses            | 5   
 crossing           | 13  
 crouched           | 2   
+crow’s             | 1   
 crowbar            | 2   
 crowd              | 56  
 crowded            | 10  
@@ -1922,7 +1929,6 @@ crowding           | 2
 crowds             | 5   
 crown              | 2   
 crowned            | 2   
-crow’s             | 1   
 crucified          | 3   
 crucify            | 2   
 crude              | 2   
@@ -1982,8 +1988,8 @@ cynicism           | 1
 cypress            | 2   
 cyprus             | 1   
 cyrus              | 1   
-c’est              | 1   
 d                  | 1   
+d’you              | 3   
 dagestan           | 2   
 daintily           | 1   
 dainty             | 1   
@@ -2029,16 +2035,16 @@ data               | 1
 date               | 5   
 dated              | 1   
 daughter           | 48  
-daughters          | 5   
 daughter’s         | 2   
+daughters          | 5   
 dawn               | 1   
 dawned             | 1   
 day                | 285 
+day’s              | 1   
 daybreak           | 6   
 daylight           | 7   
 days               | 74  
 daytime            | 1   
-day’s              | 1   
 dazed              | 1   
 dazzling           | 1   
 de                 | 12  
@@ -2058,8 +2064,8 @@ deathly            | 1
 debate             | 2   
 debauchery         | 1   
 debt               | 12  
-debtors            | 1   
 debtor’s           | 1   
+debtors            | 1   
 debts              | 5   
 decamped           | 1   
 decanter           | 2   
@@ -2452,9 +2458,9 @@ doing              | 78
 doings             | 1   
 domain             | 2   
 domestic           | 2   
+don’t              | 465 
 donation           | 1   
 done               | 88  
-don’t              | 465 
 door               | 227 
 doorkeeper         | 1   
 doors              | 12  
@@ -2584,7 +2590,6 @@ duties             | 8
 duty               | 22  
 dwelling           | 1   
 dying              | 13  
-d’you              | 3   
 e                  | 1   
 each               | 61  
 eager              | 8   
@@ -2672,8 +2677,8 @@ elle               | 1
 elope              | 1   
 eloquence          | 1   
 else               | 51  
-elsewhere          | 1   
 else’s             | 1   
+elsewhere          | 1   
 eluded             | 1   
 emaciated          | 2   
 emancipation       | 2   
@@ -2764,9 +2769,9 @@ entreat            | 2
 entreaties         | 3   
 entreating         | 2   
 entreaty           | 1   
+entrée             | 1   
 entrusted          | 2   
 entry              | 9   
-entrée             | 1   
 envious            | 2   
 environment        | 10  
 ephemeral          | 2   
@@ -2808,6 +2813,7 @@ estrange           | 1
 et                 | 2   
 etc                | 5   
 eternal            | 3   
+éternelle          | 1   
 eternity           | 5   
 etiquette          | 2   
 europe             | 1   
@@ -3048,8 +3054,8 @@ fatal              | 6
 fate               | 15  
 fateful            | 2   
 father             | 69  
-fatherless         | 1   
 father’s           | 18  
+fatherless         | 1   
 fatigue            | 6   
 fatigued           | 1   
 fatiguing          | 1   
@@ -3276,11 +3282,11 @@ fondly             | 2
 foo                | 12  
 food               | 14  
 fool               | 41  
+fool’s             | 1   
 foolish            | 13  
 foolishly          | 1   
 foolishness        | 4   
 fools              | 11  
-fool’s             | 1   
 foot               | 16  
 footing            | 4   
 footman            | 2   
@@ -3366,6 +3372,7 @@ frail              | 1
 frame              | 3   
 frames             | 2   
 framework          | 1   
+français           | 1   
 france             | 1   
 frankest           | 1   
 frankly            | 6   
@@ -3374,7 +3381,6 @@ frantic            | 9
 frantically        | 3   
 frantsovna         | 3   
 frantsovnas        | 1   
-français           | 1   
 fray               | 1   
 frayed             | 4   
 free               | 27  
@@ -3395,11 +3401,11 @@ freshness          | 2
 fretted            | 1   
 fretting           | 3   
 friend             | 42  
+friend’s           | 2   
 friendliness       | 1   
 friendly           | 20  
 friends            | 25  
 friendship         | 4   
-friend’s           | 2   
 fright             | 8   
 frighten           | 8   
 frightened         | 57  
@@ -3436,11 +3442,11 @@ fun                | 6
 fundamental        | 3   
 fundamentally      | 1   
 funds              | 1   
+funèbre            | 1   
 funeral            | 32  
 funk               | 2   
 funniest           | 2   
 funny              | 8   
-funèbre            | 1   
 fur                | 3   
 furious            | 8   
 furiously          | 5   
@@ -3496,9 +3502,9 @@ gaze               | 3
 gazed              | 43  
 gazing             | 19  
 general            | 27  
+general’s          | 3   
 generally          | 7   
 generals           | 1   
-general’s          | 3   
 generation         | 7   
 generosity         | 2   
 generous           | 14  
@@ -3513,8 +3519,8 @@ gentility          | 1
 gentle             | 8   
 gentlefolk         | 1   
 gentleman          | 42  
-gentlemanly        | 3   
 gentleman’s        | 1   
+gentlemanly        | 3   
 gentlemen          | 14  
 gentleness         | 2   
 gentlewoman        | 1   
@@ -3545,8 +3551,8 @@ giggle             | 2
 giggles            | 1   
 gingerbread        | 1   
 girl               | 98  
-girls              | 7   
 girl’s             | 8   
+girls              | 7   
 give               | 131 
 given              | 55  
 gives              | 3   
@@ -3585,8 +3591,8 @@ go                 | 368
 goal               | 4   
 goatskin           | 3   
 god                | 106 
-godless            | 3   
 god’s              | 8   
+godless            | 3   
 goes               | 9   
 gogol              | 3   
 going              | 185 
@@ -3648,11 +3654,11 @@ grazed             | 2
 grease             | 1   
 greasy             | 5   
 great              | 161 
+great’s            | 1   
 greatcoat          | 3   
 greater            | 8   
 greatest           | 8   
 greatly            | 18  
-great’s            | 1   
 greedily           | 4   
 greediness         | 1   
 greek              | 1   
@@ -3731,6 +3737,7 @@ guttural           | 1
 guzzling           | 1   
 gymnasium          | 3   
 h                  | 1   
+h’m                | 6   
 ha                 | 67  
 habit              | 11  
 habits             | 7   
@@ -3841,6 +3848,9 @@ haven’t            | 38
 having             | 60  
 hay                | 26  
 he                 | 4781
+he’d               | 12  
+he’ll              | 17  
+he’s               | 61  
 head               | 191 
 headdress          | 1   
 headed             | 8   
@@ -3893,14 +3903,14 @@ hem                | 1
 hemmed             | 1   
 hempen             | 1   
 hen                | 1   
+hen’s              | 2   
 hence              | 2   
 henriette          | 1   
-hen’s              | 2   
 her                | 1829
 here               | 353 
+here’s             | 13  
 hereupon           | 1   
 herewith           | 2   
-here’s             | 13  
 hermit             | 1   
 heroic             | 3   
 heroism            | 1   
@@ -3914,9 +3924,6 @@ hesitating         | 9
 hesitatingly       | 2   
 hesitation         | 10  
 hey                | 15  
-he’d               | 12  
-he’ll              | 17  
-he’s               | 61  
 hi                 | 1   
 hid                | 11  
 hidden             | 21  
@@ -4002,9 +4009,9 @@ horrified          | 2
 horror             | 26  
 horrors            | 1   
 horse              | 8   
+horse’s            | 1   
 horseback          | 1   
 horses             | 10  
-horse’s            | 1   
 hospital           | 17  
 hospitality        | 3   
 hospitals          | 1   
@@ -4021,10 +4028,10 @@ household          | 2
 houses             | 16  
 hovering           | 1   
 how                | 530 
+how’s              | 1   
 however            | 45  
 howled             | 2   
 howling            | 3   
-how’s              | 1   
 huckster           | 5   
 huckster’s         | 1   
 huddled            | 1   
@@ -4076,8 +4083,8 @@ hurt               | 5
 hurting            | 2   
 hurts              | 3   
 husband            | 37  
-husbands           | 2   
 husband’s          | 5   
+husbands           | 2   
 hush               | 12  
 hushed             | 1   
 hushing            | 1   
@@ -4093,10 +4100,13 @@ hypothesis         | 1
 hysterical         | 7   
 hysterically       | 1   
 hysterics          | 2   
-h’m                | 6   
 i                  | 3963
 i.e                | 1   
 i.o.u              | 1   
+i’d                | 39  
+i’ll               | 159 
+i’m                | 59  
+i’ve               | 178 
 ice                | 1   
 ich                | 1   
 icy                | 1   
@@ -4511,12 +4521,12 @@ isolation          | 1
 issued             | 1   
 issuing            | 1   
 it                 | 2994
+it’ll              | 1   
+it’s               | 451 
 item               | 1   
 items              | 1   
 its                | 51  
 itself             | 15  
-it’ll              | 1   
-it’s               | 451 
 iv                 | 7   
 ivan               | 5   
 ivanitch           | 1   
@@ -4526,10 +4536,7 @@ ivanovitch’s       | 1
 ivanovna           | 269 
 ivanovna’s         | 35  
 ivory              | 1   
-i’d                | 39  
-i’ll               | 159 
-i’m                | 59  
-i’ve               | 178 
+j’ai               | 1   
 jack               | 1   
 jacket             | 2   
 jam                | 1   
@@ -4558,8 +4565,8 @@ jesus              | 13
 jew                | 3   
 jewel              | 7   
 jeweler’s          | 1   
-jewellery          | 1   
 jeweller’s         | 1   
+jewellery          | 1   
 jewels             | 3   
 jewish             | 1   
 jews               | 6   
@@ -4606,12 +4613,11 @@ justified          | 2
 justify            | 5   
 justly             | 2   
 juxtaposition      | 1   
-j’ai               | 1   
 k                  | 3   
 kammerjunker       | 1   
 kapernaumov        | 8   
-kapernaumovs       | 5   
 kapernaumov’s      | 2   
+kapernaumovs       | 5   
 karl               | 6   
 katerina           | 216 
 katia              | 6   
@@ -4813,6 +4819,7 @@ lesser             | 1
 lesson             | 11  
 lessons            | 18  
 let                | 197 
+let’s              | 8   
 lethargy           | 1   
 lets               | 2   
 lett               | 1   
@@ -4820,9 +4827,8 @@ letter             | 63
 letters            | 13  
 letting            | 5   
 lettres            | 1   
-let’s              | 8   
-level              | 10  
 levées             | 1   
+level              | 10  
 lewes              | 1   
 liable             | 2   
 liar               | 1   
@@ -4930,8 +4936,8 @@ locksmiths         | 1
 lodge              | 5   
 lodged             | 5   
 lodger             | 1   
-lodgers            | 19  
 lodger’s           | 1   
+lodgers            | 19  
 lodges             | 2   
 lodging            | 39  
 lodgings           | 28  
@@ -5005,6 +5011,7 @@ mack               | 1
 mad                | 46  
 madam              | 12  
 madame             | 15  
+mädchen            | 1   
 maddened           | 1   
 madder             | 1   
 made               | 230 
@@ -5032,6 +5039,7 @@ main               | 2
 mainland           | 1   
 maintain           | 6   
 maintained         | 11  
+maître             | 1   
 majestic           | 1   
 majesty            | 1   
 major              | 4   
@@ -5052,6 +5060,7 @@ mamma              | 17
 mamma’s            | 3   
 mammy              | 2   
 man                | 459 
+man’s              | 18  
 manage             | 7   
 managed            | 12  
 managing           | 1   
@@ -5073,7 +5082,6 @@ manuals            | 2
 manuscript         | 1   
 manuscripts        | 1   
 many               | 75  
-man’s              | 18  
 marble             | 2   
 march              | 2   
 mare               | 15  
@@ -5086,8 +5094,8 @@ marking            | 1
 marks              | 1   
 marlborough        | 2   
 marmeladov         | 37  
-marmeladovs        | 1   
 marmeladov’s       | 4   
+marmeladovs        | 1   
 marriage           | 31  
 marriages          | 1   
 married            | 23  
@@ -5129,7 +5137,6 @@ may                | 192
 maybe              | 32  
 mayn’t             | 2   
 mazurka            | 1   
-maître             | 1   
 me                 | 1069
 meadows            | 1   
 meal               | 1   
@@ -5244,11 +5251,11 @@ mingle             | 1
 ministry           | 1   
 minor              | 1   
 minute             | 114 
+minute’s           | 2   
 minutely           | 1   
 minuteness         | 1   
 minutes            | 54  
 minutest           | 1   
-minute’s           | 2   
 miracle            | 7   
 mirage             | 1   
 mire               | 1   
@@ -5309,9 +5316,9 @@ mohair             | 1
 moi                | 1   
 mole               | 1   
 moment             | 195 
+moment’s           | 8   
 momentary          | 3   
 moments            | 13  
-moment’s           | 8   
 mon                | 1   
 monastery          | 4   
 money              | 166 
@@ -5355,8 +5362,8 @@ moscow             | 7
 most               | 130 
 mostly             | 1   
 mother             | 194 
-mothers            | 6   
 mother’s           | 24  
+mothers            | 6   
 motioned           | 3   
 motioning          | 1   
 motionless         | 4   
@@ -5428,13 +5435,15 @@ mystic             | 1
 mystification      | 1   
 mystified          | 1   
 mystify            | 1   
-mädchen            | 1   
 n                  | 8   
+n’êtes             | 1   
 nag                | 4   
 nags               | 1   
 nail               | 3   
 nailed             | 1   
 nails              | 6   
+naïve              | 4   
+naïvely            | 3   
 naked              | 1   
 name               | 49  
 named              | 2   
@@ -5461,8 +5470,6 @@ nature             | 30
 natured            | 10  
 naughty            | 1   
 navel              | 1   
-naïve              | 4   
-naïvely            | 3   
 ne                 | 1   
 near               | 35  
 nearer             | 6   
@@ -5483,10 +5490,10 @@ negative           | 2
 neglect            | 2   
 neglected          | 1   
 neighbour          | 6   
+neighbour’s        | 1   
 neighbourhood      | 4   
 neighbouring       | 1   
 neighbours         | 4   
-neighbour’s        | 1   
 neither            | 6   
 nephews            | 1   
 nerve              | 2   
@@ -5516,10 +5523,10 @@ nickname           | 1
 niece              | 1   
 nigger             | 1   
 night              | 94  
+night’s            | 4   
 nightingale        | 1   
 nightmare          | 1   
 nights             | 6   
-night’s            | 4   
 nihil              | 2   
 nihilist           | 1   
 nihilists          | 2   
@@ -5609,8 +5616,8 @@ nunnery            | 1
 nurse              | 1   
 nursing            | 1   
 nuts               | 2   
-n’êtes             | 1   
 o                  | 17  
+o’clock            | 42  
 oasis              | 1   
 oath               | 4   
 oaths              | 3   
@@ -5681,13 +5688,13 @@ offering           | 2
 offers             | 1   
 office             | 50  
 officer            | 19  
-officers           | 6   
 officer’s          | 1   
+officers           | 6   
 offices            | 3   
 official           | 17  
+official’s         | 1   
 officially         | 3   
 officials          | 2   
-official’s         | 1   
 often              | 41  
 oftener            | 1   
 oh                 | 158 
@@ -5704,9 +5711,9 @@ omniscient         | 1
 on                 | 1474
 once               | 348 
 one                | 612 
+one’s              | 27  
 ones               | 24  
 oneself            | 9   
-one’s              | 27  
 onion              | 1   
 only               | 455 
 oozed              | 1   
@@ -5753,9 +5760,9 @@ orphans            | 10
 ostrich            | 2   
 ostrov             | 5   
 other              | 187 
+other’s            | 3   
 others             | 41  
 otherwise          | 5   
-other’s            | 3   
 ought              | 58  
 oughtn’t           | 2   
 ounces             | 1   
@@ -5824,7 +5831,6 @@ owl                | 5
 own                | 177 
 owner              | 4   
 owning             | 1   
-o’clock            | 42  
 p                  | 1   
 pace               | 2   
 paced              | 4   
@@ -5938,9 +5944,9 @@ path               | 8
 paths              | 1   
 patience           | 7   
 patient            | 15  
+patient’s          | 1   
 patiently          | 1   
 patients           | 5   
-patient’s          | 1   
 patriarchal        | 1   
 patronage          | 1   
 patroness          | 1   
@@ -5973,8 +5979,8 @@ peacefully         | 1
 pearls             | 1   
 peas               | 1   
 peasant            | 19  
-peasants           | 13  
 peasant’s          | 2   
+peasants           | 13  
 pecking            | 1   
 peculiar           | 23  
 peculiarities      | 1   
@@ -6010,8 +6016,8 @@ pension            | 15
 pensive            | 1   
 peony              | 1   
 people             | 164 
-peoples            | 1   
 people’s           | 4   
+peoples            | 1   
 pepper             | 1   
 per                | 5   
 perceive           | 4   
@@ -6060,12 +6066,12 @@ persisted          | 8
 persistent         | 6   
 persistently       | 6   
 person             | 48  
+person’s           | 1   
 personage          | 4   
 personages         | 4   
 personal           | 14  
 personally         | 7   
 persons            | 18  
-person’s           | 1   
 perspiration       | 5   
 perspired          | 1   
 persuade           | 7   
@@ -6252,8 +6258,8 @@ porfiry            | 193
 porfiry’s          | 13  
 pork               | 1   
 porter             | 47  
-porters            | 15  
 porter’s           | 6   
+porters            | 15  
 portly             | 1   
 portrait           | 4   
 pose               | 1   
@@ -6402,8 +6408,8 @@ printing           | 1
 prints             | 1   
 prison             | 34  
 prisoner           | 5   
-prisoners          | 6   
 prisoner’s         | 1   
+prisoners          | 6   
 prisons            | 1   
 privacy            | 1   
 private            | 6   
@@ -6675,12 +6681,12 @@ raskolnikov        | 725
 raskolnikov’s      | 60  
 raspberries        | 1   
 raspberry          | 2   
+rat’s              | 1   
 rate               | 10  
 rather             | 84  
 rational           | 5   
 rats               | 1   
 rattle             | 1   
-rat’s              | 1   
 rave               | 5   
 raving             | 5   
 ray                | 1   
@@ -6689,8 +6695,8 @@ razor              | 1
 razors             | 1   
 razsudkin          | 1   
 razumihin          | 324 
-razumihins         | 1   
 razumihin’s        | 23  
+razumihins         | 1   
 re                 | 2   
 reach              | 7   
 reached            | 37  
@@ -6712,9 +6718,9 @@ reality            | 7
 really             | 131 
 reap               | 1   
 reason             | 51  
+reason’s           | 1   
 reasoning          | 5   
 reasons            | 10  
-reason’s           | 1   
 reassure           | 3   
 reassured          | 5   
 reaumur            | 1   
@@ -7084,6 +7090,8 @@ rodionovitch       | 1
 rodya              | 124 
 rodya’s            | 3   
 rogue              | 5   
+rôle               | 3   
+rôles              | 1   
 roll               | 1   
 rolled             | 2   
 rolling            | 3   
@@ -7095,8 +7103,8 @@ romantic           | 4
 romeo              | 3   
 roof               | 1   
 room               | 284 
-rooms              | 38  
 room’s             | 1   
+rooms              | 38  
 root               | 1   
 rooted             | 5   
 roots              | 1   
@@ -7157,9 +7165,8 @@ rusty              | 1
 rut                | 3   
 ruthlessly         | 1   
 ryazan             | 1   
-rôle               | 3   
-rôles              | 1   
 s                  | 1   
+s’en               | 2   
 sabre              | 1   
 sack               | 2   
 sacking            | 1   
@@ -7248,10 +7255,10 @@ schegolskoy        | 1
 schiller           | 6   
 schilleresque      | 1   
 schleswig          | 1   
+schönsten          | 1   
 school             | 16  
 schoolboy          | 2   
 schwach            | 1   
-schönsten          | 1   
 science            | 7   
 scientific         | 5   
 scoffers           | 1   
@@ -7262,9 +7269,9 @@ score              | 5
 scornful           | 1   
 scornfully         | 1   
 scoundrel          | 15  
+scoundrel’s        | 1   
 scoundrelly        | 2   
 scoundrels         | 5   
-scoundrel’s        | 1   
 scowl              | 2   
 scowled            | 3   
 scowling           | 4   
@@ -7442,8 +7449,8 @@ shamefaced         | 3
 shameful           | 11  
 shameless          | 4   
 shamelessly        | 1   
-shanties           | 1   
 shan’t             | 11  
+shanties           | 1   
 shape              | 3   
 shaped             | 1   
 shapes             | 1   
@@ -7464,6 +7471,9 @@ shaven             | 6
 shawl              | 15  
 shawls             | 4   
 she                | 1644
+she’d              | 9   
+she’ll             | 13  
+she’s              | 29  
 shed               | 13  
 shedding           | 2   
 sheds              | 1   
@@ -7475,9 +7485,6 @@ shell              | 2
 shells             | 1   
 shelopaev          | 1   
 shelter            | 1   
-she’d              | 9   
-she’ll             | 13  
-she’s              | 29  
 shh                | 1   
 shifting           | 1   
 shil’s             | 1   
@@ -7623,8 +7630,8 @@ sipped             | 2
 sipping            | 3   
 sir                | 58  
 sister             | 123 
-sisters            | 2   
 sister’s           | 9   
+sisters            | 2   
 sistine            | 1   
 sit                | 73  
 sits               | 5   
@@ -7774,9 +7781,9 @@ sofya              | 76
 sojourning         | 1   
 sold               | 9   
 soldier            | 3   
+soldier’s          | 1   
 soldierly          | 1   
 soldiers           | 1   
-soldier’s          | 1   
 sole               | 1   
 solely             | 9   
 solemnity          | 2   
@@ -7803,11 +7810,11 @@ someway            | 1
 somewhat           | 25  
 somewhere          | 44  
 son                | 16  
+son’s              | 3   
 song               | 11  
 songs              | 1   
 sonia              | 370 
 sonia’s            | 32  
-son’s              | 3   
 soon               | 103 
 sooner             | 10  
 soothe             | 2   
@@ -8126,8 +8133,8 @@ stuck              | 8
 stud               | 1   
 studded            | 1   
 student            | 41  
-students           | 6   
 student’s          | 3   
+students           | 6   
 studied            | 2   
 studies            | 5   
 studiously         | 1   
@@ -8280,8 +8287,8 @@ suspicious         | 15
 suspiciously       | 5   
 suspiciousness     | 1   
 svidrigaïlov       | 193 
-svidrigaïlovs      | 4   
 svidrigaïlov’s     | 14  
+svidrigaïlovs      | 4   
 svirbey            | 1   
 swallow            | 1   
 swallowed          | 2   
@@ -8331,7 +8338,6 @@ symptom            | 1
 system             | 7   
 systematic         | 1   
 systems            | 1   
-s’en               | 2   
 t                  | 7   
 table              | 122 
 tablecloth         | 1   
@@ -8340,8 +8346,8 @@ tacitly            | 1
 tactics            | 1   
 tail               | 4   
 tailor             | 2   
-tailors            | 3   
 tailor’s           | 1   
+tailors            | 3   
 take               | 194 
 taken              | 79  
 takes              | 5   
@@ -8431,6 +8437,7 @@ test               | 2
 testament          | 3   
 testifies          | 1   
 testimony          | 2   
+tête               | 2   
 text               | 1   
 tfoo               | 3   
 than               | 178 
@@ -8452,15 +8459,16 @@ theme              | 3
 themes             | 1   
 themselves         | 27  
 then               | 471 
+théorie            | 1   
 theories           | 5   
 theory             | 21  
 there              | 728 
-thereafter         | 1   
-thereby            | 2   
-therefore          | 15  
 there’d            | 1   
 there’ll           | 2   
 there’s            | 80  
+thereafter         | 1   
+thereby            | 2   
+therefore          | 15  
 these              | 114 
 they               | 749 
 they’d             | 8   
@@ -8543,7 +8551,6 @@ thunderstorm       | 1
 thunderstruck      | 1   
 thus               | 1   
 thy                | 6   
-théorie            | 1   
 ticket             | 4   
 tickets            | 2   
 ticking            | 1   
@@ -8779,7 +8786,6 @@ typhus             | 1
 tyranny            | 1   
 tyrant             | 1   
 tyrolese           | 1   
-tête               | 2   
 u                  | 16  
 ugh                | 3   
 ugliness           | 1   
@@ -8810,9 +8816,9 @@ uncertainty        | 3
 unchildish         | 2   
 unchildlike        | 1   
 uncle              | 10  
+uncle’s            | 1   
 uncleanliness      | 1   
 uncleanness        | 1   
-uncle’s            | 1   
 uncomfortable      | 1   
 unconcealed        | 1   
 unconscious        | 12  
@@ -9054,6 +9060,7 @@ verb               | 1
 verbal             | 1   
 verdict            | 2   
 verging            | 1   
+vérité             | 1   
 verse              | 3   
 versed             | 1   
 version            | 1   
@@ -9110,8 +9117,8 @@ visitations        | 1
 visited            | 9   
 visiting           | 5   
 visitor            | 29  
-visitors           | 9   
 visitor’s          | 3   
+visitors           | 9   
 visits             | 2   
 vital              | 3   
 vive               | 1   
@@ -9136,7 +9143,6 @@ vrazumihin         | 2
 vulgar             | 3   
 vulgarise          | 1   
 vulgarity          | 2   
-vérité             | 1   
 wadded             | 2   
 wade               | 1   
 wading             | 1   
@@ -9188,6 +9194,7 @@ warned             | 2
 warning            | 1   
 warrant            | 1   
 was                | 2805
+wäsche             | 2   
 wash               | 4   
 washed             | 10  
 washing            | 12  
@@ -9213,6 +9220,9 @@ waxed              | 1
 way                | 257 
 ways               | 15  
 we                 | 414 
+we’d               | 3   
+we’ll              | 16  
+we’ve              | 14  
 weak               | 26  
 weakened           | 1   
 weaker             | 1   
@@ -9255,24 +9265,21 @@ weren’t            | 6
 wet                | 14  
 wetted             | 3   
 wetting            | 1   
-we’d               | 3   
-we’ll              | 16  
-we’ve              | 14  
 whales             | 1   
 what               | 1154
+what’s             | 76  
 whatever           | 17  
 whatsoever         | 1   
-what’s             | 76  
 wheel              | 1   
 wheeled            | 1   
 wheels             | 3   
 when               | 437 
-whenever           | 1   
 when’s             | 1   
+whenever           | 1   
 where              | 203 
+where’s            | 2   
 whereabouts        | 1   
 wherever           | 4   
-where’s            | 2   
 whether            | 75  
 which              | 332 
 while              | 103 
@@ -9298,23 +9305,23 @@ whistling          | 1
 white              | 36  
 whitish            | 1   
 who                | 393 
+who’ll             | 1   
+who’s              | 5   
+who’ve             | 1   
 whoever            | 1   
 whole              | 121 
 wholly             | 1   
 whom               | 74  
 whose              | 20  
 whosoever          | 1   
-who’ll             | 1   
-who’s              | 5   
-who’ve             | 1   
 why                | 445 
 wicked             | 6   
 wide               | 28  
 wider              | 1   
 widow              | 14  
+widow’s            | 1   
 widower            | 2   
 widows             | 1   
-widow’s            | 1   
 widths             | 1   
 wife               | 47  
 wife’s             | 2   
@@ -9372,11 +9379,12 @@ wives              | 2
 woes               | 1   
 woke               | 13  
 woman              | 178 
-womanish           | 5   
 woman’s            | 25  
+womanish           | 5   
 women              | 39  
 women’s            | 1   
 won                | 4   
+won’t              | 128 
 wonder             | 23  
 wondered           | 15  
 wonderful          | 5   
@@ -9384,7 +9392,6 @@ wonderfully        | 2
 wondering          | 12  
 wonderingly        | 1   
 wonders            | 1   
-won’t              | 128 
 wood               | 22  
 wooden             | 12  
 woollen            | 2   
@@ -9454,7 +9461,6 @@ wrongly            | 1
 wrongs             | 1   
 wrote              | 20  
 wrung              | 7   
-wäsche             | 2   
 x                  | 7   
 y                  | 2   
 yard               | 27  
@@ -9465,8 +9471,8 @@ yawning            | 2
 ye                 | 10  
 yea                | 1   
 year               | 33  
-years              | 91  
 year’s             | 3   
+years              | 91  
 yegorovna          | 1   
 yelled             | 3   
 yellow             | 27  
@@ -9479,6 +9485,10 @@ yielded            | 1
 yielding           | 1   
 yonder             | 2   
 you                | 3834
+you’d              | 28  
+you’ll             | 52  
+you’re             | 55  
+you’ve             | 75  
 young              | 112 
 younger            | 16  
 youngest           | 3   
@@ -9489,10 +9499,6 @@ yourself           | 128
 yourselves         | 5   
 youth              | 7   
 youthful           | 6   
-you’d              | 28  
-you’ll             | 52  
-you’re             | 55  
-you’ve             | 75  
 yushin             | 1   
 yusupov            | 3   
 zaharovitch        | 10  
@@ -9507,15 +9513,11 @@ zeus               | 1
 zigzags            | 1   
 zimmerman’s        | 1   
 zossimov           | 87  
-à                  | 2   
-æsthetic           | 1   
-æsthetically       | 1   
-æsthetics          | 1   
-éternelle          | 1   
 
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 3826
-Número de comparações: 3240075
-Número de rotações: 6972
+Tempo total (ms): 3068
+Número de comparações: 3139505
+Número de rotações: 5788
+Tamanho da estrutura (kB): 668.18

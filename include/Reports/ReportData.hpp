@@ -60,7 +60,7 @@ struct ReportData {
    */
   size_t maxKeyLength;
 
-  size_t memoryUsage;
+  float memoryUsage;
 };
 
 #endif

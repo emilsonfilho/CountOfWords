@@ -22,6 +22,7 @@ void ReportWriter::exportReport(const ReportData &reportData, std::ostream &out,
   out << "Arquivo Analisado: " << reportData.filename << '\n';
   out << "Estrutura de Dados: " << reportData.dictionaryType << '\n';
   out << "Data de execução: " << Timer::getCurrentDateTime() << '\n';
+  out << "Quantidade de palavras: " << reportData.totalWordsProcessed << '\n';
 
   out << std::endl;
 

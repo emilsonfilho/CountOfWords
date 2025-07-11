@@ -30,7 +30,7 @@ WordFrequencyAnalyzer::analyze(IDictionary<LexicalStr, size_t> *dictionary,
   report.buildTime = timer.duration();
   report.totalWordsProcessed = wordsCount;
   report.filename = fileProcessor.path;
-  report.memoryUsage = std::round(dictionary->getMemoryUsage() / 1024);
+  report.memoryUsage = dictionary->getMemoryUsage() / 1024.0f;
 
   return report;
 }

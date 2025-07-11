@@ -3,7 +3,8 @@ Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/gpt.txt
 Estrutura de Dados: Árvore Rubro-Negra
-Data de execução: segunda, 07 de julho de 2025 - 17:02:21
+Data de execução: sexta, 11 de julho de 2025 - 08:10:45
+Quantidade de palavras: 126
 
 ================================================================================
 Tabela de Frequências
@@ -17,6 +18,7 @@ ainda            | 1
 antes            | 1
 ao               | 1
 arquivos         | 1
+às               | 1
 atom             | 1
 bom              | 1
 carinho          | 2
@@ -41,8 +43,8 @@ editor           | 1
 ele              | 5
 em               | 1
 emilson          | 1
-entende          | 1
 então            | 1
+entende          | 1
 escrito          | 1
 estava           | 3
 estruturas       | 1
@@ -62,10 +64,10 @@ mesmo            | 1
 minecraft        | 1
 misterioso       | 1
 na               | 1
+não              | 3
 navegador        | 1
 normal           | 1
 notebook         | 1
-não              | 3
 o                | 1
 ok               | 1
 os               | 1
@@ -85,9 +87,9 @@ se               | 1
 segundas         | 1
 seu              | 1
 shaders          | 1
+só               | 2
 sou              | 1
 superaquecimento | 1
-só               | 2
 tela             | 1
 tempo            | 1
 texto            | 1
@@ -105,11 +107,11 @@ usa              | 1
 vez              | 2
 vi               | 1
 você             | 1
-às               | 1
 
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 0
-Número de comparações: 1285
-Número de rotações: 71
+Tempo total (ms): 10
+Número de comparações: 1201
+Número de rotações: 58
+Tamanho da estrutura (kB): 6.82031
