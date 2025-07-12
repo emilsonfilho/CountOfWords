@@ -3,7 +3,7 @@ Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/crime_and_punishment.txt
 Estrutura de Dados: Árvore Rubro-Negra
-Data de execução: sexta, 11 de julho de 2025 - 08:05:27
+Data de execução: sábado, 12 de julho de 2025 - 12:45:56
 Quantidade de palavras: 204263
 
 ================================================================================
@@ -9517,7 +9517,7 @@ zossimov           | 87
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 3068
+Tempo total (ms): 3069
 Número de comparações: 3139505
 Número de rotações: 5788
 Tamanho da estrutura (kB): 668.18

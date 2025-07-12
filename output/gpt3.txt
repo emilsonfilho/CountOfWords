@@ -3,7 +3,8 @@ Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/gpt3.txt
 Estrutura de Dados: Árvore Rubro-Negra
-Data de execução: segunda, 07 de julho de 2025 - 17:05:44
+Data de execução: sábado, 12 de julho de 2025 - 12:46:49
+Quantidade de palavras: 74
 
 ================================================================================
 Tabela de Frequências
@@ -42,11 +43,11 @@ insisti        | 1
 já             | 1
 luz            | 1
 manhã          | 1
+máquina        | 1
 mesma          | 1
 missão         | 1
-máquina        | 1
-no             | 1
 não            | 1
+no             | 1
 o              | 2
 os             | 1
 pedir          | 1
@@ -65,13 +66,14 @@ ti             | 1
 tive           | 1
 toda           | 1
 todos          | 1
-tristeza       | 1
 três           | 1
+tristeza       | 1
 vingando       | 1
 
 ================================================================================
 Métricas de Desempenho
 ================================================================================
-Tempo total (ms): 0
-Número de comparações: 731
-Número de rotações: 50
+Tempo total (ms): 5
+Número de comparações: 665
+Número de rotações: 36
+Tamanho da estrutura (kB): 4.14844

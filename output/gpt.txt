@@ -2,8 +2,8 @@
 Count of Words: Data Structure Edition - Output Report
 ================================================================================
 Arquivo Analisado: input/gpt.txt
-Estrutura de Dados: Árvore Rubro-Negra
-Data de execução: sexta, 11 de julho de 2025 - 08:10:45
+Estrutura de Dados: Árvore AVL
+Data de execução: sábado, 12 de julho de 2025 - 12:47:10
 Quantidade de palavras: 126
 
 ================================================================================
@@ -112,6 +112,6 @@ você             | 1
 Métricas de Desempenho
 ================================================================================
 Tempo total (ms): 10
-Número de comparações: 1201
-Número de rotações: 58
-Tamanho da estrutura (kB): 6.82031
+Número de comparações: 969
+Número de rotações: 61
+Tamanho da estrutura (kB): 6.0625
